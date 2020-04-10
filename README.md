@@ -1,3 +1,5 @@
-# Schach
+# Documentation `chess-game`
 
-Bitte hier eine sinnvolle Dokumentation ergänzen!
+To get detailed information about this project please jump into `/docs` directory!
+
+
