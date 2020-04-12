@@ -177,6 +177,5 @@ public class Board {
         } else {
             System.out.println("No Piece found @" + getSquare(startingPos).getDenotation());
         }
-        printBoard();
     }
 }
