@@ -1,9 +1,12 @@
 package schach;
 
+/**
+ * Class Board representing the chess board
+ */
 public class Board {
 
     /**
-     * Matrix of Squares representing the hhess board
+     * Matrix of Squares representing the chess board
      */
     private Square[][] squareMatrix = new Square[8][8];
 
@@ -163,6 +166,12 @@ public class Board {
         return null;
     }
 
+    /**
+     * Moving a piece from a certain square to a certain square
+     * @param startingPos denotation of the square which the piece to be moved is occupying
+     * @param targetPos denotation of the square which the piece is supposed to be moved to
+     */
+    // @todo Check if target suqare is already occupied
     public void movePiece(String startingPos, String targetPos){
         if (getSquare(startingPos).isOccupied()){
             getSquare(startingPos).getOccupier().move(getSquare(targetPos));

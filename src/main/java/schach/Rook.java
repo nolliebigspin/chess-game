@@ -1,5 +1,8 @@
 package schach;
 
+/**
+ * Class Rook representing the chess piece rook
+ */
 public class Rook extends Piece {
 
     public Rook(Square position, boolean isWhite) {

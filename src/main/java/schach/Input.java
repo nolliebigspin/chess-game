@@ -2,6 +2,9 @@ package schach;
 
 import java.util.Scanner;
 
+/**
+ * Class Input that controls the Input and updates the board
+ */
 public class Input {
     private String currentInputLine;
     private String startingPos;
@@ -9,10 +12,17 @@ public class Input {
     private boolean valide = false;
     private Board board;
 
+    /**
+     * Constructor
+     * @param board to be updated
+     */
     public Input(Board board){
         this.board = board;
     }
 
+    /**
+     * Routine that reads the input, validates it and updates the board
+     */
     public void inOutRoutine(){
         boolean running = true;
         while (running){
@@ -26,6 +36,9 @@ public class Input {
         }
     }
 
+    /**
+     * reads input via scanner class
+     */
     public void readInput(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("please enter your move: ");

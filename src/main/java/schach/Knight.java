@@ -1,5 +1,8 @@
 package schach;
 
+/**
+ * Class Knight representing the chess piece knight
+ */
 public class Knight extends Piece {
 
     public Knight(Square position, boolean isWhite) {

@@ -1,5 +1,8 @@
 package schach;
 
+/**
+ * main Class with main-method
+ */
 public class Main {
     public static void main(String[] args) {
         System.out.println("This is a chess game!");

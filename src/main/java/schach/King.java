@@ -1,5 +1,8 @@
 package schach;
 
+/**
+ * Class King representing the chess piece king
+ */
 public class King extends Piece {
     public King(Square position, boolean isWhite) {
         super(position, isWhite);

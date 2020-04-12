@@ -1,5 +1,8 @@
 package schach;
 
+/**
+ * Class Bishop representing the chess piece bishop
+ */
 public class Bishop extends Piece {
 
     public Bishop(Square position, boolean isWhite) {
