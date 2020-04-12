@@ -119,20 +119,19 @@ public class Board {
     public void printBoard(){
         int x = 8;
         for (int i = 0; i < 8; i++){
-            System.out.print(x + " ");
+            System.out.print(""+ x);
             for (int j = 0; j < 8; j++){
-                System.out.print(" ");
+                System.out.print("\t");
                 if (squareMatrix[i][j].isOccupied()){
                     System.out.print(squareMatrix[i][j].getOccupier().print());
                 } else {
-                    System.out.print("  ");
+                    System.out.print(" ");
                 }
-                System.out.print(" ");
             }
             System.out.println("");
             x--;
         }
-        System.out.println("   a   b   c   d   e   f   g   h \n");
+        System.out.println("\t a \t b \t c \t d \t e \t f \t g \t h");
 
     }
 
