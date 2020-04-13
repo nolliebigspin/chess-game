@@ -16,7 +16,6 @@ public class Board {
     public Board(){
         initMatrix();
         initLineUp();
-        //printMatrix();
     }
 
     /**
@@ -27,39 +26,9 @@ public class Board {
         int x = 8;
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                String denonation = ""  + resolveIntToChar(j+1) + x;
-                this.squareMatrix[i][j] = new Square(denonation);
+                this.squareMatrix[i][j] = new Square(j+1, x);
             }
             x--;
-        }
-    }
-
-    /**
-     * Method to help the initialization of the Matrix.
-     * Converts a int to a char (0=a, 1=b, ..., 7=h)
-     * @param i int to be converted
-     * @return the converted char
-     */
-    private char resolveIntToChar(int i){
-        switch (i){
-            case 1:
-                return 'a';
-            case 2:
-                return 'b';
-            case 3:
-                return 'c';
-            case 4:
-                return 'd';
-            case 5:
-                return 'e';
-            case 6:
-                return 'f';
-            case 7:
-                return 'g';
-            case 8:
-                return 'h';
-            default:
-                return 'x';
         }
     }
 
@@ -132,7 +101,6 @@ public class Board {
             x--;
         }
         System.out.println("\t a \t b \t c \t d \t e \t f \t g \t h");
-
     }
 
     /**
@@ -170,4 +138,5 @@ public class Board {
         }
         getSquare(startingPos).getOccupier().move(getSquare(targetPos));
     }
+
 }
