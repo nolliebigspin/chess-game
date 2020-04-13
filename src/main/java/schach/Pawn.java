@@ -1,11 +1,11 @@
 package schach;
 
 /**
- * Class Peasant representing the chess piece peasant
+ * Class Pawn representing the chess piece peasant
  */
-public class Peasant extends Piece{
+public class Pawn extends Piece{
 
-    public Peasant(Square position, boolean isWhite) {
+    public Pawn(Square position, boolean isWhite) {
         super(position, isWhite);
     }
 

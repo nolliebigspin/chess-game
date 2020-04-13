@@ -67,14 +67,14 @@ public class Board {
      * Initializes all pieces and places them on the board in the starting linup
      */
     private void initLineUp(){
-        Peasant wP1 = new Peasant(getSquare("a2"), true);
-        Peasant wP2 = new Peasant(getSquare("b2"), true);
-        Peasant wP3 = new Peasant(getSquare("c2"), true);
-        Peasant wP4 = new Peasant(getSquare("d2"), true);
-        Peasant wP5 = new Peasant(getSquare("e2"), true);
-        Peasant wP6 = new Peasant(getSquare("f2"), true);
-        Peasant wP7 = new Peasant(getSquare("g2"), true);
-        Peasant wP8 = new Peasant(getSquare("h2"), true);
+        Pawn wP1 = new Pawn(getSquare("a2"), true);
+        Pawn wP2 = new Pawn(getSquare("b2"), true);
+        Pawn wP3 = new Pawn(getSquare("c2"), true);
+        Pawn wP4 = new Pawn(getSquare("d2"), true);
+        Pawn wP5 = new Pawn(getSquare("e2"), true);
+        Pawn wP6 = new Pawn(getSquare("f2"), true);
+        Pawn wP7 = new Pawn(getSquare("g2"), true);
+        Pawn wP8 = new Pawn(getSquare("h2"), true);
 
         Rook wR1 = new Rook(getSquare("a1"), true);
         Rook wR2 = new Rook(getSquare("h1"), true);
@@ -89,14 +89,14 @@ public class Board {
         King wK = new King(getSquare("e1"), true);
 
 
-        Peasant bP1 = new Peasant(getSquare("a7"), false);
-        Peasant bP2 = new Peasant(getSquare("b7"), false);
-        Peasant bP3 = new Peasant(getSquare("c7"), false);
-        Peasant bP4 = new Peasant(getSquare("d7"), false);
-        Peasant bP5 = new Peasant(getSquare("e7"), false);
-        Peasant bP6 = new Peasant(getSquare("f7"), false);
-        Peasant bP7 = new Peasant(getSquare("g7"), false);
-        Peasant bP8 = new Peasant(getSquare("h7"), false);
+        Pawn bP1 = new Pawn(getSquare("a7"), false);
+        Pawn bP2 = new Pawn(getSquare("b7"), false);
+        Pawn bP3 = new Pawn(getSquare("c7"), false);
+        Pawn bP4 = new Pawn(getSquare("d7"), false);
+        Pawn bP5 = new Pawn(getSquare("e7"), false);
+        Pawn bP6 = new Pawn(getSquare("f7"), false);
+        Pawn bP7 = new Pawn(getSquare("g7"), false);
+        Pawn bP8 = new Pawn(getSquare("h7"), false);
 
         Rook bR1 = new Rook(getSquare("a8"), false);
         Rook bR2 = new Rook(getSquare("h8"), false);
@@ -157,31 +157,17 @@ public class Board {
      * @param startingPos denotation of the square which the piece to be moved is occupying
      * @param targetPos denotation of the square which the piece is supposed to be moved to
      */
-    // @todo Check if target square is already occupied
-    public void movePiece(String startingPos, String targetPos){
-        if (!getSquare(startingPos).isOccupied()){
+    // TODO Check if target square is already occupied
+    public void movePiece(String startingPos, String targetPos) {
+        if (!getSquare(startingPos).isOccupied()) {
             System.out.println("!Invalid Move: No Piece found!");
             return;
         }
         if (getSquare(targetPos).isOccupied()
-                && getSquare(startingPos).getOccupier().isWhite == getSquare(targetPos).getOccupier().isWhite){
+                && getSquare(startingPos).getOccupier().isWhite == getSquare(targetPos).getOccupier().isWhite) {
             System.out.println("!Invalid Move: Square already occupied");
             return;
         }
         getSquare(startingPos).getOccupier().move(getSquare(targetPos));
     }
-
-    /**
-     * prints the matrix with the correct denotation
-     * used for debugging
-     * not used atm
-     */
-    /**public void printMatrix(){
-     for (int i = 0; i<8; i++){
-     for (int j = 0; j < 8; j++){
-     System.out.print(squareMatrix[i][j].getDenotation() + " " ); // + " = " +  i + j + "| "
-     }
-     System.out.print("\n");
-     }
-     }*/
 }
