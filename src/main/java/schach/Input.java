@@ -9,7 +9,7 @@ public class Input {
     private String currentInputLine;
     private String startingPos;
     private String targetPos;
-    private boolean valide = false;
+    private boolean valid;
     private Board board;
 
     /**
@@ -18,6 +18,7 @@ public class Input {
      */
     public Input(Board board){
         this.board = board;
+        this.valid = false;
     }
 
     /**
@@ -28,18 +29,18 @@ public class Input {
         while (running){
             readInput();
             validate();
-            if (valide){
+            if (valid){
                 board.movePiece(startingPos, targetPos);
                 board.printBoard();
             }
-            valide = false;
+            valid = false;
         }
     }
 
     /**
      * reads input via scanner class
      */
-    public void readInput(){
+    private void readInput(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("please enter your move: ");
         this.currentInputLine = scanner.nextLine();
@@ -74,7 +75,7 @@ public class Input {
         }
         this.startingPos = "" + currentInputLine.charAt(0) + currentInputLine.charAt(1);
         this.targetPos = "" + currentInputLine.charAt(3) + currentInputLine.charAt(4);
-        this.valide = true;
+        this.valid = true;
     }
 }
 
