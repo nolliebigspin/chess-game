@@ -1,0 +1,86 @@
+@startuml
+
+skinparam Monochrome true
+skinparam classAttributeIconSize 0
+
+class Piece{
+    # position: Square
+    # isWhite: boolean
+    {method} +Piece(position: Square, isWhite: boolean): void
+    +getPosition(): Square
+    {method} +move(target: Square): void
+    {abstract} +print(): String
+}
+
+class Rook{
+    +print(): String
+}
+
+class Peasant{
+    +print(): String
+}
+
+class Knight{
+    +print(): String
+}
+
+class Bishop{
+    +print(): String
+}
+
+class Queen{
+    +print(): String
+}
+
+class King{
+    +print(): String
+}
+
+class Square{
+    -occupied: boolean
+    -denotation: String
+    -occupier: Piece
+    {method} +Square(denotation: Square): void
+    {method} +setOccupied(occupied: boolean): void
+    +isOccupied(): boolean
+    +getDenotation(): String
+    {method} +setOccupier(occupier: Piece): void
+    +getOccupier(): Piece
+}
+
+class Board{
+    {field}-squareMatrix: Square[][]
+    +Board(): void
+    -initMatrix(): void
+    {method} -resolveIntToChar(i: Integer): char
+    -initLineUp(): void
+    +printBoard(): void
+    {method} +getSquare(denotation: String): Square
+    {method} +movePiece(startingPos: String, targetPos: String): void
+}
+
+class Input{
+    -currentInputLine: String
+    -startingPos: String
+    -targetPos: String
+    -valid: boolean
+    -board: Board
+    {method} +Input(board: Board): void
+    +inOutRoutine(): void
+    -readInput(): void
+    -validate(): void
+}
+
+Piece <|-- Peasant
+Piece <|-- Rook
+Piece <|-- Knight
+Piece <|-- Bishop
+Piece <|-- Queen
+Piece <|-- King
+
+Square "1" -- "0..1" Piece
+Square "64" <-- Board
+Input --> Board
+
+
+@enduml
