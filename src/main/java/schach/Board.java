@@ -66,7 +66,7 @@ public class Board {
     /**
      * Initializes all pieces and places them on the board in the starting linup
      */
-    public void initLineUp(){
+    private void initLineUp(){
         Peasant wP1 = new Peasant(getSquare("a2"), true);
         Peasant wP2 = new Peasant(getSquare("b2"), true);
         Peasant wP3 = new Peasant(getSquare("c2"), true);
@@ -136,23 +136,10 @@ public class Board {
     }
 
     /**
-     * prints the matrix with the correct denotation
-     * used for debugging
-     * not used atm
-     */
-    public void printMatrix(){
-        for (int i = 0; i<8; i++){
-            for (int j = 0; j < 8; j++){
-                System.out.print(squareMatrix[i][j].getDenotation() + " " ); // + " = " +  i + j + "| "
-            }
-            System.out.print("\n");
-        }
-    }
-
-    /**
      * converts input string denotation to the belonging Square-Object
      * @param denotation denotes a square on the chess board
      * @return the square indicated by the denotation
+     * @// TODO: 13.04.2020 rename 
      */
     public Square getSquare(String denotation){
         for (int i = 0; i < 8; i++){
@@ -170,12 +157,31 @@ public class Board {
      * @param startingPos denotation of the square which the piece to be moved is occupying
      * @param targetPos denotation of the square which the piece is supposed to be moved to
      */
-    // @todo Check if target suqare is already occupied
+    // @todo Check if target square is already occupied
     public void movePiece(String startingPos, String targetPos){
-        if (getSquare(startingPos).isOccupied()){
-            getSquare(startingPos).getOccupier().move(getSquare(targetPos));
-        } else {
-            System.out.println("No Piece found @" + getSquare(startingPos).getDenotation());
+        if (!getSquare(startingPos).isOccupied()){
+            System.out.println("!Invalid Move: No Piece found!");
+            return;
         }
+        if (getSquare(targetPos).isOccupied()
+                && getSquare(startingPos).getOccupier().isWhite == getSquare(targetPos).getOccupier().isWhite){
+            System.out.println("!Invalid Move: Square already occupied");
+            return;
+        }
+        getSquare(startingPos).getOccupier().move(getSquare(targetPos));
     }
+
+    /**
+     * prints the matrix with the correct denotation
+     * used for debugging
+     * not used atm
+     */
+    /**public void printMatrix(){
+     for (int i = 0; i<8; i++){
+     for (int j = 0; j < 8; j++){
+     System.out.print(squareMatrix[i][j].getDenotation() + " " ); // + " = " +  i + j + "| "
+     }
+     System.out.print("\n");
+     }
+     }*/
 }
