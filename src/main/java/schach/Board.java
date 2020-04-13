@@ -139,7 +139,7 @@ public class Board {
      * converts input string denotation to the belonging Square-Object
      * @param denotation denotes a square on the chess board
      * @return the square indicated by the denotation
-     * @// TODO: 13.04.2020 rename 
+     * // TODO: 13.04.2020 rename
      */
     public Square getSquare(String denotation){
         for (int i = 0; i < 8; i++){

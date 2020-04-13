@@ -48,7 +48,7 @@ public class Input {
 
     /**
      * Validates the input
-     * @todo validate for type xx-xxQ
+     * TODO validate for type xx-xxQ
      */
     private void validate(){
         String validLetter = "abcdefgh";
