@@ -1,10 +1,8 @@
 # Chess-Game
 
-## Introduction
+## [Javadoc](./javadoc/index.html)
 
-## chess field
+## [Introduction](./content/text/introduction.md)
 
-## diagrams
-
-![](./Diagrams/ClassDiagram.svg)
+## [Diagrams](./content/diagrams/index.md)
  
