@@ -1,5 +1,8 @@
-# Documentation `chess-game`
+# Chess-Game
 
-To get detailed information about this project please jump into `/docs` directory!
+## Javadoc
+To read javadoc please navigate into `./docs/javadoc` and open `ìndex.html` in your favorite browser.
 
+## [Introduction](./docs/content/text/introduction.md)
 
+## [Diagrams](./docs/content/diagrams/index.md)
