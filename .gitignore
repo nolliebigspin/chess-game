@@ -1,4 +1,4 @@
 .idea
 *.iml
 target/
-/docs/Diagrams/plantuml.jar
+/docs/content/diagrams/plantuml.jar

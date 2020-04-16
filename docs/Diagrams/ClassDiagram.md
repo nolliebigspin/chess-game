@@ -1,1 +1,0 @@
-![Class Diagram](ClassDiagram.svg)
