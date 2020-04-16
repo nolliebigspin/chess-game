@@ -93,4 +93,12 @@ public class Square {
         return this.occupier;
     }
 
+    public int getColumn(){
+        return this.column;
+    }
+
+    public int getRow(){
+        return this.row;
+    }
+
 }
