@@ -51,6 +51,11 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
+
+    }
+
+    protected void refuseMove(){
+        System.out.println("!Move not allowed");
     }
 
 }

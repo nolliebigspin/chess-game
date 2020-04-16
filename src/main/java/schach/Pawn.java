@@ -19,10 +19,24 @@ public class Pawn extends Piece{
         }
     }
 
-    /**@Override
+    @Override
     public void move(Square target){
         if (isWhite){
-            if (target.get)
+            //Starting move: jump 2 rows ahead
+            if (position.getRow() == 2 && target.getRow() == 4 && position.getColumn() == target.getColumn()){
+                acceptMove(target);
+            }
+            //Default move: jump 1 row ahead
+            else if (((target.getRow() - position.getRow()) == 1) && target.getColumn() == position.getColumn()){
+                acceptMove(target);
+            }
+            //Attack move: jumps 1 square diagonally and
+            else if (((target.getRow() - position.getRow()) == 1) && (target.getColumn()-position.getColumn() == Math.abs(1)) && (target.isOccupied())){
+                acceptMove(target);
+            }
+            else {
+                refuseMove();
+            }
         }
-    }*/
+    }
 }
