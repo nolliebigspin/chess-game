@@ -1,2 +1,2 @@
 ## Class Diagram
-![](./svg/ClassDiagram.svg)
+![](image/ClassDiagram.svg)
