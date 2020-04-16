@@ -18,4 +18,11 @@ public class Pawn extends Piece{
             return "\u265F";
         }
     }
+
+    /**@Override
+    public void move(Square target){
+        if (isWhite){
+            if (target.get)
+        }
+    }*/
 }

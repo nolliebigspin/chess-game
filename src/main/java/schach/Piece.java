@@ -46,6 +46,12 @@ public abstract class Piece {
         position.setOccupier(this);
     }
 
+    protected void acceptMove(Square target){
+        position.setOccupied(false);
+        this.position = target;
+        position.setOccupied(true);
+        position.setOccupier(this);
+    }
 
 }
 
