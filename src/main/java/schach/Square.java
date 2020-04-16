@@ -5,20 +5,36 @@ package schach;
  */
 public class Square {
 
+    /**
+     * Indicates if there is a piece occupying the square
+     */
     private boolean occupied;
+
+    /**
+     * Denotation of the square (e1, h6, c4, ...)
+     */
     private String denotation;
+
+    /**
+     * The currently occupying piece
+     */
     private Piece occupier;
+
+    /**
+     * Integer representation of the column the square is part of (a=1, b=2, ...)
+     */
     private int column;
+
+    /**
+     * Integer representation of the row the square is part of
+     */
     private int row;
 
     /**
-     * Constructor
-     * @param denotation labes the square in the typical chess denonation (e2, a6, etc.)
+     * Constructor using the row and column to instantiate the denotation
+     * @param column
+     * @param row
      */
-    public Square(String denotation){
-        this.denotation = denotation;
-    }
-
     public Square(int column, int row){
         this.column = column;
         this.row = row;
