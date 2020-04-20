@@ -19,8 +19,7 @@ public class Board {
     }
 
     /**
-     * Initializing the matrix by creating Square typ objects and label them with the
-     * typical chess denotation (a1, a2, ..., b1, b2,..)
+     * Initializing the matrix by creating Square typ objects
      */
     private void initMatrix(){
         int x = 8;

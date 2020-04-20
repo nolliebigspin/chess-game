@@ -4,7 +4,15 @@ package schach.model;
  * abstract class representing a chess piece
  */
 public abstract class Piece {
+
+    /**
+     * The Square the Piece is currently occupying
+     */
     protected Square position;
+
+    /**
+     * Boolean to indicate the color of the Piece
+     */
     protected boolean isWhite;
 
     /**
@@ -35,17 +43,16 @@ public abstract class Piece {
     public abstract String print();
 
     /**
-     * repositions the piece to a target square
-     * @param target Square the piece is supposed to be moved to
+     * abstract Method to move the Piece
+     * @param target Square the Piece should be moved to
      */
-    public void move(Square target){
-        position.setOccupied(false); // Old square is not occupied anymore (boolean), still has an occupier @todo remove occupier?
+    public abstract void move(Square target);
 
-        this.position = target;
-        position.setOccupied(true);
-        position.setOccupier(this);
-    }
-
+    /**
+     * allows the move to the target square
+     * updates the position square of the Piece
+     * @param target Square the Piece will be moved to
+     */
     protected void acceptMove(Square target){
         position.setOccupied(false);
         this.position = target;
@@ -54,6 +61,9 @@ public abstract class Piece {
 
     }
 
+    /**
+     * Refuses the move and print Error Message
+     */
     protected void refuseMove(){
         System.out.println("!Move not allowed");
     }

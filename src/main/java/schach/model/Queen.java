@@ -18,5 +18,10 @@ public class Queen extends Piece {
             return "\u265B";
         }
     }
+
+    @Override
+    public void move(Square target) {
+
+    }
 }
 

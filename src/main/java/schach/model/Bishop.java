@@ -18,5 +18,10 @@ public class Bishop extends Piece {
             return "\u265D";
         }
     }
+
+    @Override
+    public void move(Square target) {
+
+    }
 }
 

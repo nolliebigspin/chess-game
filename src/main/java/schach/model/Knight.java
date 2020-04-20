@@ -18,5 +18,10 @@ public class Knight extends Piece {
             return "\u265E";
         }
     }
+
+    @Override
+    public void move(Square target) {
+
+    }
 }
 

@@ -17,4 +17,9 @@ public class King extends Piece {
             return "\u265A";
         }
     }
+
+    @Override
+    public void move(Square target) {
+
+    }
 }
