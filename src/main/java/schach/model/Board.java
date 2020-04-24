@@ -13,7 +13,7 @@ public class Board {
     /**
      * Constructor, initializes the Square Matrix and the start Linup
      */
-    public Board(){
+    public Board() {
         initMatrix();
         initLineUp();
     }
@@ -22,11 +22,11 @@ public class Board {
      * Initializing the matrix by creating Square typ objects and label them with the
      * typical chess denotation (a1, a2, ..., b1, b2,..)
      */
-    private void initMatrix(){
+    private void initMatrix() {
         int x = 8;
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                this.squareMatrix[i][j] = new Square(j+1, x);
+                this.squareMatrix[i][j] = new Square(j + 1, x);
             }
             x--;
         }
@@ -85,13 +85,13 @@ public class Board {
     /**
      * prints the current setup of the board
      */
-    public void printBoard(){
+    public void printBoard() {
         int x = 8;
-        for (int i = 0; i < 8; i++){
-            System.out.print(""+ x);
-            for (int j = 0; j < 8; j++){
+        for (int i = 0; i < 8; i++) {
+            System.out.print("" + x);
+            for (int j = 0; j < 8; j++) {
                 System.out.print("\t");
-                if (squareMatrix[i][j].isOccupied()){
+                if (squareMatrix[i][j].isOccupied()) {
                     System.out.print(squareMatrix[i][j].getOccupier().print());
                 } else {
                     System.out.print(" ");
@@ -109,10 +109,10 @@ public class Board {
      * @return the square indicated by the denotation
      * // TODO: 13.04.2020 rename
      */
-    public Square getSquare(String denotation){
+    public Square getSquare(String denotation) {
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                if (this.squareMatrix[i][j].getDenotation().equals(denotation)){
+                if (this.squareMatrix[i][j].getDenotation().equals(denotation)) {
                     return squareMatrix[i][j];
                 }
             }

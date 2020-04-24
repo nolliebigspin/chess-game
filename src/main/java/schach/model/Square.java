@@ -35,7 +35,7 @@ public class Square {
      * @param column
      * @param row
      */
-    public Square(int column, int row){
+    public Square(int column, int row) {
         this.column = column;
         this.row = row;
         this.denotation = "" + resolveIntToChar(column) + row;
@@ -46,8 +46,8 @@ public class Square {
      * @param i int to be converted
      * @return the converted char
      */
-    private char resolveIntToChar(int i){
-        switch (i){
+    private char resolveIntToChar(int i) {
+        switch (i) {
             case 1:
                 return 'a';
             case 2:

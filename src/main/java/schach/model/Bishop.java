@@ -14,7 +14,7 @@ public class Bishop extends Piece {
         if (super.isWhite){
             return "\u2657";
         }
-        else{
+        else {
             return "\u265D";
         }
     }

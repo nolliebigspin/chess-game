@@ -11,10 +11,10 @@ public class Queen extends Piece {
 
     @Override
     public String print() {
-        if (super.isWhite){
+        if (super.isWhite) {
             return "\u2655";
         }
-        else{
+        else {
             return "\u265B";
         }
     }

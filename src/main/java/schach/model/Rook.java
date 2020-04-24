@@ -11,10 +11,10 @@ public class Rook extends Piece {
 
     @Override
     public String print() {
-        if (super.isWhite){
+        if (super.isWhite) {
             return "\u2656";
         }
-        else{
+        else {
             return "\u265C";
         }
     }

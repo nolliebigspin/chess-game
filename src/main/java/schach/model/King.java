@@ -10,10 +10,10 @@ public class King extends Piece {
 
     @Override
     public String print() {
-        if (super.isWhite){
+        if (super.isWhite) {
             return "\u2654";
         }
-        else{
+        else {
             return "\u265A";
         }
     }

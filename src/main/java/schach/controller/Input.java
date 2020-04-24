@@ -18,7 +18,7 @@ public class Input {
      * Constructor
      * @param board to be updated
      */
-    public Input(Board board){
+    public Input(Board board) {
         this.board = board;
         this.valid = false;
     }
@@ -26,12 +26,12 @@ public class Input {
     /**
      * Routine that reads the input, validates it and updates the board
      */
-    public void inOutRoutine(){
+    public void inOutRoutine() {
         boolean running = true;
-        while (running){
+        while (running) {
             readInput();
             validate();
-            if (valid){
+            if (valid) {
                 board.movePiece(startingPos, targetPos);
                 board.printBoard();
             }
@@ -42,7 +42,7 @@ public class Input {
     /**
      * reads input via scanner class
      */
-    private void readInput(){
+    private void readInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("please enter your move: ");
         this.currentInputLine = scanner.nextLine();
@@ -52,7 +52,7 @@ public class Input {
      * Validates the input
      * TODO validate for type xx-xxQ
      */
-    private void validate(){
+    private void validate() {
         String validLetter = "abcdefgh";
         String validInteger = "12345678";
         //Exception if string to short
@@ -61,17 +61,17 @@ public class Input {
             return;
         }
         //Exception if string not: xx-xx
-        if (!(currentInputLine.charAt(2) == '-')){
+        if (!(currentInputLine.charAt(2) == '-')) {
             System.out.println("!Invalide Move");
             return;
         }
         //Exception if no correct letter (a...h)
-        if (validLetter.indexOf(currentInputLine.charAt(0)) == -1 || validLetter.indexOf(currentInputLine.charAt(3)) == -1){
+        if (validLetter.indexOf(currentInputLine.charAt(0)) == -1 || validLetter.indexOf(currentInputLine.charAt(3)) == -1) {
             System.out.println("!Invalide Move");
             return;
         }
         //Exception if no correct number (1...8)
-        if (validInteger.indexOf(currentInputLine.charAt(1) ) == -1 || validInteger.indexOf(currentInputLine.charAt(4) ) == -1){
+        if (validInteger.indexOf(currentInputLine.charAt(1) ) == -1 || validInteger.indexOf(currentInputLine.charAt(4) ) == -1) {
             System.out.println("!Invalide Move");
             return;
         }

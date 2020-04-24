@@ -13,7 +13,7 @@ public abstract class Piece {
      * @param position denotation of the square the piece will be initiated on
      * @param isWhite true if it is a piece of the white set, false if black
      */
-    public Piece (Square position, boolean isWhite){
+    public Piece (Square position, boolean isWhite) {
         this.position = position;
         this.isWhite = isWhite;
         position.setOccupied(true);
@@ -38,7 +38,7 @@ public abstract class Piece {
      * repositions the piece to a target square
      * @param target Square the piece is supposed to be moved to
      */
-    public void move(Square target){
+    public void move(Square target) {
         position.setOccupied(false); // Old square is not occupied anymore (boolean), still has an occupier @todo remove occupier?
 
         this.position = target;
@@ -46,7 +46,7 @@ public abstract class Piece {
         position.setOccupier(this);
     }
 
-    protected void acceptMove(Square target){
+    protected void acceptMove(Square target) {
         position.setOccupied(false);
         this.position = target;
         position.setOccupied(true);
