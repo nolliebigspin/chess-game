@@ -18,5 +18,9 @@ public class Rook extends Piece {
             return "\u265C";
         }
     }
-}
 
+    @Override
+    public void move(Square target) {
+
+    }
+}

@@ -49,7 +49,11 @@ public class Pawn extends Piece {
             }
             // Default move: jump 1 row ahead
             else if (((target.getRow() - position.getRow()) == -1) && target.getColumn() == position.getColumn()) {
-                acceptMove(target);
+                if (target.isOccupied()) {
+                    refuseMove();
+                } else {
+                    acceptMove(target);
+                }
             }
             // Attack move: jumps 1 square diagonally if occupied by opposite color
             else if (((target.getRow() - position.getRow()) == -1) && (target.getColumn()-position.getColumn() == Math.abs(1)) && (target.isOccupied())) {
