@@ -5,8 +5,8 @@ package schach.model;
  */
 public class Queen extends Piece {
 
-    public Queen(Square position, boolean isWhite) {
-        super(position, isWhite);
+    public Queen(Square position, boolean isWhite, Board board) {
+        super(position, isWhite, board);
     }
 
     @Override
@@ -17,6 +17,11 @@ public class Queen extends Piece {
         else{
             return "\u265B";
         }
+    }
+
+    @Override
+    public void updateLegals() {
+
     }
 
     @Override

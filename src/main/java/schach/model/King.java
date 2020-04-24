@@ -4,8 +4,8 @@ package schach.model;
  * Class King representing the chess piece king
  */
 public class King extends Piece {
-    public King(Square position, boolean isWhite) {
-        super(position, isWhite);
+    public King(Square position, boolean isWhite, Board board) {
+        super(position, isWhite, board);
     }
 
     @Override
@@ -16,6 +16,11 @@ public class King extends Piece {
         else{
             return "\u265A";
         }
+    }
+
+    @Override
+    public void updateLegals() {
+
     }
 
     @Override
