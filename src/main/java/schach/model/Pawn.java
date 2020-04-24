@@ -35,7 +35,7 @@ public class Pawn extends Piece {
                 }
             }
             // Attack move: jumps 1 square diagonally if occupied by opposite color
-            else if (((target.getRow() - position.getRow()) == 1) && (target.getColumn()-position.getColumn() == Math.abs(1)) && (target.isOccupied())) {
+            else if (((target.getRow() - position.getRow()) == 1) && (target.getColumn() - position.getColumn() == Math.abs(1)) && (target.isOccupied())) {
                 acceptMove(target);
             }
             else {

@@ -21,6 +21,20 @@ public class Rook extends Piece {
 
     @Override
     public void move(Square target) {
+        if (isWhite) {
+            if (target.getRow() - position.getRow() == 0 || target.getColumn() - position.getColumn() == 0) {
+                acceptMove(target);
+            } else {
+                refuseMove();
+            }
+        }
 
+        if (!isWhite) {
+            if (target.getRow() - position.getRow() == 0 || target.getColumn() - position.getColumn() == 0) {
+                acceptMove(target);
+            } else {
+                refuseMove();
+            }
+        }
     }
 }
