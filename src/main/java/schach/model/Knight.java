@@ -5,8 +5,8 @@ package schach.model;
  */
 public class Knight extends Piece {
 
-    public Knight(Square position, boolean isWhite) {
-        super(position, isWhite);
+    public Knight(Square position, boolean isWhite, Board board) {
+        super(position, isWhite, board);
     }
 
     @Override
@@ -17,6 +17,16 @@ public class Knight extends Piece {
         else {
             return "\u265E";
         }
+    }
+
+    @Override
+    public void updateLegals() {
+
+    }
+
+    @Override
+    public void move(Square target) {
+
     }
 }
 

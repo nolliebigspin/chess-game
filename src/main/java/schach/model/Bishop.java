@@ -5,8 +5,8 @@ package schach.model;
  */
 public class Bishop extends Piece {
 
-    public Bishop(Square position, boolean isWhite) {
-        super(position, isWhite);
+    public Bishop(Square position, boolean isWhite, Board board) {
+        super(position, isWhite, board);
     }
 
     @Override
@@ -17,6 +17,16 @@ public class Bishop extends Piece {
         else {
             return "\u265D";
         }
+    }
+
+    @Override
+    public void updateLegals() {
+
+    }
+
+    @Override
+    public void move(Square target) {
+
     }
 }
 

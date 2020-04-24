@@ -1,12 +1,16 @@
 package schach.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class Pawn representing the chess piece peasant
  */
 public class Pawn extends Piece {
 
-    public Pawn(Square position, boolean isWhite) {
-        super(position, isWhite);
+    public Pawn(Square position, boolean isWhite, Board board) {
+        super(position, isWhite, board);
+        updateLegals();
     }
 
     @Override
@@ -20,48 +24,68 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void move(Square target) {
+    protected void updateLegals() {
+        legalNextSquares.clear();
+        //column integer value of square the Pawn is currently occupying
+        int column = position.getColumn();
+
+        //row integer value of square the Pawn is currently occupying
+        int row = position.getRow();
+
+        int startingRow;
+        int secondRow;
+        int oneUp;
+        int right;
+        int left;
+        boolean oppositeIsWhite;
+
         if (isWhite){
-            // Starting move: jump 2 rows ahead
-            if (position.getRow() == 2 && target.getRow() == 4 && position.getColumn() == target.getColumn()) {
-                acceptMove(target);
+            startingRow = 2;
+            secondRow = 4;
+            oneUp = 1;
+            right = 1;
+            left = -1;
+            oppositeIsWhite = false;
+        }
+        else {
+            startingRow = 7;
+            secondRow = 5;
+            oneUp = -1;
+            right = -1;
+            left = 1;
+            oppositeIsWhite = true;
+        }
+
+        if (row < 8){
+
+            Square ahead = board.getSquare(column, row + oneUp);
+            Square aheadTwice = board.getSquare(column, secondRow);
+
+            if (row == startingRow && !ahead.isOccupied() && !aheadTwice.isOccupied()){
+                legalNextSquares.add(aheadTwice);
             }
-            // Default move: jump 1 row ahead
-            else if (((target.getRow() - position.getRow()) == 1) && target.getColumn() == position.getColumn()) {
-                if (target.isOccupied()) {
-                    refuseMove();
-                } else {
-                    acceptMove(target);
+
+            if (!ahead.isOccupied()){
+                legalNextSquares.add(ahead);
+            }
+
+            if ((column > 1 && isWhite) || (column < 8 && !isWhite)){
+                Square aheadLeft = board.getSquare(column + left, row + oneUp);
+
+                if (aheadLeft.isOccupied() && aheadLeft.getOccupier().isWhite == oppositeIsWhite){
+                    legalNextSquares.add(aheadLeft);
                 }
             }
-            // Attack move: jumps 1 square diagonally if occupied by opposite color
-            else if (((target.getRow() - position.getRow()) == 1) && (target.getColumn() - position.getColumn() == Math.abs(1)) && (target.isOccupied())) {
-                acceptMove(target);
-            }
-            else {
-                refuseMove();
-            }
-        }
-        if (!isWhite) {
-            // Starting move: jump 2 rows ahead
-            if (position.getRow() == 7 && target.getRow() == 5 && position.getColumn() == target.getColumn()) {
-                acceptMove(target);
-            }
-            // Default move: jump 1 row ahead
-            else if (((target.getRow() - position.getRow()) == -1) && target.getColumn() == position.getColumn()) {
-                if (target.isOccupied()) {
-                    refuseMove();
-                } else {
-                    acceptMove(target);
+
+            if ((column < 8 && isWhite) || (column > 1 && !isWhite)){
+                Square aheadRight = board.getSquare(column + right, row + oneUp);
+
+                if (aheadRight.isOccupied() && aheadRight.getOccupier().isWhite == oppositeIsWhite) {
+                    legalNextSquares.add(aheadRight);
                 }
             }
-            // Attack move: jumps 1 square diagonally if occupied by opposite color
-            else if (((target.getRow() - position.getRow()) == -1) && (target.getColumn()-position.getColumn() == Math.abs(1)) && (target.isOccupied())) {
-                acceptMove(target);
-            }
-            else {
-                refuseMove();
-            }
         }
+
     }
+
 }
