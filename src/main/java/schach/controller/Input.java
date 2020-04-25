@@ -55,24 +55,25 @@ public class Input {
     private void validate() {
         String validLetter = "abcdefgh";
         String validInteger = "12345678";
+        String invalidOut = "!Invalid Move";
         //Exception if string to short
         if (currentInputLine.length() != 5){
-            System.out.println("!Invalide Move");
+            System.out.println(invalidOut);
             return;
         }
         //Exception if string not: xx-xx
         if (!(currentInputLine.charAt(2) == '-')) {
-            System.out.println("!Invalide Move");
+            System.out.println(invalidOut);
             return;
         }
         //Exception if no correct letter (a...h)
         if (validLetter.indexOf(currentInputLine.charAt(0)) == -1 || validLetter.indexOf(currentInputLine.charAt(3)) == -1) {
-            System.out.println("!Invalide Move");
+            System.out.println(invalidOut);
             return;
         }
         //Exception if no correct number (1...8)
         if (validInteger.indexOf(currentInputLine.charAt(1) ) == -1 || validInteger.indexOf(currentInputLine.charAt(4) ) == -1) {
-            System.out.println("!Invalide Move");
+            System.out.println(invalidOut);
             return;
         }
         this.startingPos = "" + currentInputLine.charAt(0) + currentInputLine.charAt(1);

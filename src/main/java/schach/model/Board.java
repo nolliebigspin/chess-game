@@ -95,7 +95,7 @@ public class Board {
                     System.out.print(" ");
                 }
             }
-            System.out.println("");
+            System.out.print("\n");
             x--;
         }
         System.out.println("\t a \t b \t c \t d \t e \t f \t g \t h");

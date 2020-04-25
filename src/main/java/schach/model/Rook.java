@@ -5,6 +5,12 @@ package schach.model;
  */
 public class Rook extends Piece {
 
+    /**
+     * Constructor defining the initial position, color and board of the rook piece
+     * @param position the Square it will be placed on initially
+     * @param isWhite true if white, false if black
+     * @param board the board the Bishop will be placed on
+     */
     public Rook(Square position, boolean isWhite, Board board) {
         super(position, isWhite, board);
     }
@@ -34,7 +40,7 @@ public class Rook extends Piece {
             Square nextForward = board.getSquare(position.getColumn(), position.getRow() + i);
             if (!(nextForward.isOccupied())){
                 legalNextSquares.add(nextForward);
-            } else if (nextForward.isOccupied() && (nextForward.getOccupier().isWhite == oppositeIsWhite)){
+            } else if (nextForward.isOccupied() && nextForward.getOccupier().isWhite == oppositeIsWhite){
                 legalNextSquares.add(nextForward);
                 break;
             }
@@ -49,7 +55,7 @@ public class Rook extends Piece {
             if (!(nextBackward.isOccupied())){
                 legalNextSquares.add(nextBackward);
             }
-            else if (nextBackward.isOccupied() && (nextBackward.getOccupier().isWhite == oppositeIsWhite)){
+            else if (nextBackward.isOccupied() && nextBackward.getOccupier().isWhite == oppositeIsWhite){
                 legalNextSquares.add(nextBackward);
                 break;
             }
@@ -64,7 +70,7 @@ public class Rook extends Piece {
             if (!(nextRight.isOccupied())){
                 legalNextSquares.add(nextRight);
             }
-            else if (nextRight.isOccupied() && (nextRight.getOccupier().isWhite == oppositeIsWhite)){
+            else if (nextRight.isOccupied() && nextRight.getOccupier().isWhite == oppositeIsWhite){
                 legalNextSquares.add(nextRight);
                 break;
             }
@@ -79,7 +85,7 @@ public class Rook extends Piece {
             if (!(nextLeft.isOccupied())){
                 legalNextSquares.add(nextLeft);
             }
-            else if (nextLeft.isOccupied() && (nextLeft.getOccupier().isWhite == oppositeIsWhite)){
+            else if (nextLeft.isOccupied() && nextLeft.getOccupier().isWhite == oppositeIsWhite){
                 legalNextSquares.add(nextLeft);
                 break;
             }

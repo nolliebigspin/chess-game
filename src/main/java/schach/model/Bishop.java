@@ -5,6 +5,12 @@ package schach.model;
  */
 public class Bishop extends Piece {
 
+    /**
+     * Constructor defining the position, color and board
+     * @param position the Square the Bishop will be placed on initially
+     * @param isWhite true if white, false if black
+     * @param board the board the Bishop will be placed on
+     */
     public Bishop(Square position, boolean isWhite, Board board) {
         super(position, isWhite, board);
     }

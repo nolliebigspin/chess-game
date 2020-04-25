@@ -1,13 +1,16 @@
 package schach.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Class Pawn representing the chess piece peasant
  */
 public class Pawn extends Piece {
 
+    /**
+     * Constructor defining the initial position, color and board of the pawn piece
+     * @param position the Square it will be placed on initially
+     * @param isWhite true if white, false if black
+     * @param board the board the Bishop will be placed on
+     */
     public Pawn(Square position, boolean isWhite, Board board) {
         super(position, isWhite, board);
         updateLegals();
@@ -69,7 +72,7 @@ public class Pawn extends Piece {
                 legalNextSquares.add(ahead);
             }
 
-            if ((column > 1 && isWhite) || (column < 8 && !isWhite)){
+            if (column > 1 && isWhite || column < 8 && !isWhite){
                 Square aheadLeft = board.getSquare(column + left, row + oneUp);
 
                 if (aheadLeft.isOccupied() && aheadLeft.getOccupier().isWhite == oppositeIsWhite){
@@ -77,7 +80,7 @@ public class Pawn extends Piece {
                 }
             }
 
-            if ((column < 8 && isWhite) || (column > 1 && !isWhite)){
+            if (column < 8 && isWhite || column > 1 && !isWhite){
                 Square aheadRight = board.getSquare(column + right, row + oneUp);
 
                 if (aheadRight.isOccupied() && aheadRight.getOccupier().isWhite == oppositeIsWhite) {

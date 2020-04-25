@@ -32,8 +32,8 @@ public class Square {
 
     /**
      * Constructor using the row and column to instantiate the denotation
-     * @param column
-     * @param row
+     * @param column the integer representation of the column the square is part of
+     * @param row the integer representation of the row the square is part of
      */
     public Square(int column, int row) {
         this.column = column;
