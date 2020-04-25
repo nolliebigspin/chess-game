@@ -36,6 +36,10 @@ public class Rook extends Piece {
 
     }
 
+    /**
+     * checks which squares ahead (for white, black: behind) the rook can be legally moved to
+     * and adds them to the list of valid squares
+     */
     private void checkForward(){
 
         boolean oppositeIsWhite;
@@ -46,7 +50,6 @@ public class Rook extends Piece {
             oppositeIsWhite = true;
         }
 
-        //Forward (white), backwards (black)
         for (int i = 1 ; i <= 8 - position.getRow(); i++){
             Square nextForward = board.getSquare(position.getColumn(), position.getRow() + i);
             if (!(nextForward.isOccupied())){
@@ -61,6 +64,10 @@ public class Rook extends Piece {
         }
     }
 
+    /**
+     * checks which squares behind (for white, black: ahead) the rook can be legally moved to
+     * and adds them to the list of valid squares
+     */
     private void checkBackward(){
 
         boolean oppositeIsWhite;
@@ -71,7 +78,6 @@ public class Rook extends Piece {
             oppositeIsWhite = true;
         }
 
-        //backward (white), forward (black)
         for (int i = 1; i < position.getRow(); i++){
             Square nextBackward = board.getSquare(position.getColumn(), position.getRow() - i);
             if (!(nextBackward.isOccupied())){
@@ -87,6 +93,10 @@ public class Rook extends Piece {
         }
     }
 
+    /**
+     * checks which squares to the right (for white, black: to the left) the rook can be legally moved to
+     * and adds them to the list of valid squares
+     */
     private void checkRight(){
 
         boolean oppositeIsWhite;
@@ -97,7 +107,6 @@ public class Rook extends Piece {
             oppositeIsWhite = true;
         }
 
-        //right (white), left (black)
         for (int i = 1; i <= 8 - position.getColumn(); i++){
             Square nextRight = board.getSquare(position.getColumn() + i, position.getRow());
             if (!(nextRight.isOccupied())){
@@ -113,6 +122,10 @@ public class Rook extends Piece {
         }
     }
 
+    /**
+     * checks which squares to the left (for white, black: to the right) the rook can be legally moved to
+     * and adds them to the list of valid squares
+     */
     private void checkLeft(){
 
         boolean oppositeIsWhite;
