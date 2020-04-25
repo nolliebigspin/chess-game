@@ -33,6 +33,7 @@ public abstract class Piece {
      * the square the piece is position on is marked and gets the Piece Object passed
      * @param position denotation of the square the piece will be initiated on
      * @param isWhite true if it is a piece of the white set, false if black
+     * @param board the board the piece will be played on
      */
 
     public Piece (Square position, boolean isWhite, Board board){

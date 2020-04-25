@@ -1,1 +1,4 @@
 schach
+schach.controller
+schach.model
+schach.view
