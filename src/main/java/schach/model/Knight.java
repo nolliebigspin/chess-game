@@ -27,6 +27,8 @@ public class Knight extends Piece {
 
     @Override
     public void updateLegals() {
+        legalNextSquares.clear();
+
         checkForwardLeft();
         checkForwardRight();
         checkRightForward();
@@ -38,7 +40,20 @@ public class Knight extends Piece {
     }
 
     private void checkForwardLeft() {
+        boolean oppositeIsWhite;
+        Square nextForwardLeft = board.getSquare(position.getColumn() + 2, position.getRow() - 1);
 
+        if (isWhite){
+            oppositeIsWhite = false;
+        } else {
+            oppositeIsWhite = true;
+        }
+
+        if (!nextForwardLeft.isOccupied()) {
+            legalNextSquares.add(nextForwardLeft);
+        } else if (nextForwardLeft.isOccupied() && nextForwardLeft.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextForwardLeft);
+        }
     }
 
     private void checkForwardRight() {
