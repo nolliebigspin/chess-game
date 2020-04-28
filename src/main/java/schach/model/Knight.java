@@ -61,36 +61,72 @@ public class Knight extends Piece {
     }
 
     private void checkForwardRight(boolean oppositeIsWhite) {
-        Square nextSqare = board.getSquare(position.getColumn() + 2, position.getRow() + 1);
+        Square nextSquare = board.getSquare(position.getColumn() + 2, position.getRow() + 1);
 
-        if (!nextSqare.isOccupied()) {
-            legalNextSquares.add(nextSqare);
-        } else if (nextSqare.isOccupied() && nextSqare.getOccupier().isWhite == oppositeIsWhite) {
-            legalNextSquares.add(nextSqare);
+        if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextSquare);
         }
     }
 
     private void checkRightForward(boolean oppositeIsWhite) {
+        Square nextSquare = board.getSquare(position.getColumn() + 1, position.getRow() + 2);
 
+        if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextSquare);
+        }
     }
 
     private void checkRightBackward(boolean oppositeIsWhite) {
+        Square nextSquare = board.getSquare(position.getColumn() - 1, position.getRow() + 2);
 
+        if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextSquare);
+        }
     }
 
     private void checkBackwardRight(boolean oppositeIsWhite) {
+        Square nextSquare = board.getSquare(position.getColumn() - 2, position.getRow() + 1);
 
+        if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextSquare);
+        }
     }
 
     private void checkBackwardLeft(boolean oppositeIsWhite) {
+        Square nextSquare = board.getSquare(position.getColumn() - 2, position.getRow() - 1);
 
+        if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextSquare);
+        }
     }
 
     private void checkLeftBackward(boolean oppositeIsWhite) {
+        Square nextSquare = board.getSquare(position.getColumn() - 1, position.getRow() - 2);
 
+        if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextSquare);
+        }
     }
 
     private void checkLeftForward(boolean oppositeIsWhite) {
+        Square nextSquare = board.getSquare(position.getColumn() + 1, position.getRow() - 2);
 
+        if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextSquare);
+        }
     }
 }
