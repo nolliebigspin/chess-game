@@ -27,27 +27,31 @@ public class Knight extends Piece {
 
     @Override
     public void updateLegals() {
+        boolean oppositeIsWhite = checkIsWhite();
         legalNextSquares.clear();
 
-        checkForwardLeft();
-        checkForwardRight();
-        checkRightForward();
-        checkRightBackward();
-        checkBackwardRight();
-        checkBackwardLeft();
-        checkLeftBackward();
-        checkLeftForward();
+        checkForwardLeft(oppositeIsWhite);
+        checkForwardRight(oppositeIsWhite);
+        checkRightForward(oppositeIsWhite);
+        checkRightBackward(oppositeIsWhite);
+        checkBackwardRight(oppositeIsWhite);
+        checkBackwardLeft(oppositeIsWhite);
+        checkLeftBackward(oppositeIsWhite);
+        checkLeftForward(oppositeIsWhite);
     }
 
-    private void checkForwardLeft() {
+    private boolean checkIsWhite() {
         boolean oppositeIsWhite;
-        Square nextForwardLeft = board.getSquare(position.getColumn() + 2, position.getRow() - 1);
-
         if (isWhite){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
         }
+        return oppositeIsWhite;
+    }
+
+    private void checkForwardLeft(boolean oppositeIsWhite) {
+        Square nextForwardLeft = board.getSquare(position.getColumn() + 2, position.getRow() - 1);
 
         if (!nextForwardLeft.isOccupied()) {
             legalNextSquares.add(nextForwardLeft);
@@ -56,31 +60,37 @@ public class Knight extends Piece {
         }
     }
 
-    private void checkForwardRight() {
+    private void checkForwardRight(boolean oppositeIsWhite) {
+        Square nextForwardLeft = board.getSquare(position.getColumn() + 2, position.getRow() + 1);
+
+        if (!nextForwardLeft.isOccupied()) {
+            legalNextSquares.add(nextForwardLeft);
+        } else if (nextForwardLeft.isOccupied() && nextForwardLeft.getOccupier().isWhite == oppositeIsWhite) {
+            legalNextSquares.add(nextForwardLeft);
+        }
+    }
+
+    private void checkRightForward(boolean oppositeIsWhite) {
 
     }
 
-    private void checkRightForward() {
+    private void checkRightBackward(boolean oppositeIsWhite) {
 
     }
 
-    private void checkRightBackward() {
+    private void checkBackwardRight(boolean oppositeIsWhite) {
 
     }
 
-    private void checkBackwardRight() {
+    private void checkBackwardLeft(boolean oppositeIsWhite) {
 
     }
 
-    private void checkBackwardLeft() {
+    private void checkLeftBackward(boolean oppositeIsWhite) {
 
     }
 
-    private void checkLeftBackward() {
-
-    }
-
-    private void checkLeftForward() {
+    private void checkLeftForward(boolean oppositeIsWhite) {
 
     }
 }
