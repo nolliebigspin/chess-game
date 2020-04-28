@@ -33,11 +33,17 @@ public class Bishop extends Piece {
         int row = this.position.getRow();
 
         checkForwardRight(column, row);
-
         checkForwardLeft(column, row);
-
+        checkBehindRight(column, row);
+        checkBehindLeft(column,row);
     }
 
+    /**
+     * checks if squares diagonally (white: forward-right, black: backwards-left) are valid
+     * if so adds them to list of valid squares
+     * @param column current column position of the bishop
+     * @param row current row position of the bsihop
+     */
     private void checkForwardRight(int column, int row){
 
         boolean oppositeIsWhite;
@@ -63,6 +69,12 @@ public class Bishop extends Piece {
 
     }
 
+    /**
+     * checks if squares diagonally (white: forward-left, black: backwards-right) are valid
+     * if so adds them to list of valid squares
+     * @param column current column position of the bishop
+     * @param row current row position of the bsihop
+     */
     private void checkForwardLeft(int column, int row){
 
         boolean oppositeIsWhite;
@@ -87,5 +99,68 @@ public class Bishop extends Piece {
         }
 
     }
+
+    /**
+     * checks if squares diagonally (white: backwards-right, black: forward-left) are valid
+     * if so adds them to list of valid squares
+     * @param column current column position of the bishop
+     * @param row current row position of the bsihop
+     */
+    private void checkBehindRight(int column, int row){
+
+        boolean oppositeIsWhite;
+
+        if (isWhite){
+            oppositeIsWhite = false;
+        } else {
+            oppositeIsWhite = true;
+        }
+
+        for (int i = 1; i <= 8 - column && i < row; i++){
+            Square nextBehindRight = board.getSquare(column + i, row - i);
+            if (!(nextBehindRight.isOccupied())){
+                legalNextSquares.add(nextBehindRight);
+            } else if (nextBehindRight.isOccupied() && nextBehindRight.getOccupier().isWhite == oppositeIsWhite){
+                legalNextSquares.add(nextBehindRight);
+                break;
+            }
+            else {
+                break;
+            }
+        }
+
+    }
+
+    /**
+     * checks if squares diagonally (white: backwards-left, black: forward-right) are valid
+     * if so adds them to list of valid squares
+     * @param column current column position of the bishop
+     * @param row current row position of the bsihop
+     */
+    private void checkBehindLeft(int column, int row){
+
+        boolean oppositeIsWhite;
+
+        if (isWhite){
+            oppositeIsWhite = false;
+        } else {
+            oppositeIsWhite = true;
+        }
+
+        for (int i = 1; i < column && i < row; i++){
+            Square nextBehindRight = board.getSquare(column - i, row - i);
+            if (!(nextBehindRight.isOccupied())){
+                legalNextSquares.add(nextBehindRight);
+            } else if (nextBehindRight.isOccupied() && nextBehindRight.getOccupier().isWhite == oppositeIsWhite){
+                legalNextSquares.add(nextBehindRight);
+                break;
+            }
+            else {
+                break;
+            }
+        }
+
+    }
+
 }
 
