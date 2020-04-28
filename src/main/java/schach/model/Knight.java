@@ -55,15 +55,28 @@ public class Knight extends Piece {
     }
 
     /**
+     * checks if a next Square is out of Board matrix
+     * @param nextSquare the Square which is checked
+     * @return boolean if Square is in bounds or out of bounds
+     */
+    private boolean checkIsOutOfBounds(Square nextSquare) {
+        boolean isOutOfBounds = false;
+        if (nextSquare.getRow() < 1 || nextSquare.getRow() > 8 || nextSquare.getColumn() < 1 || nextSquare.getColumn() > 8) {
+            isOutOfBounds = true;
+        }
+        return isOutOfBounds;
+    }
+
+    /**
      * checks if the next Square ForwardLeft is reachable or if it's occupied by your own color
      * @param oppositeIsWhite if the color of the opponent is white or not
      */
     private void checkForwardLeft(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 2, position.getRow() - 1);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
@@ -75,9 +88,9 @@ public class Knight extends Piece {
     private void checkForwardRight(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 2, position.getRow() + 1);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
@@ -89,9 +102,9 @@ public class Knight extends Piece {
     private void checkRightForward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 1, position.getRow() + 2);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
@@ -103,9 +116,9 @@ public class Knight extends Piece {
     private void checkRightBackward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 1, position.getRow() + 2);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
@@ -117,9 +130,9 @@ public class Knight extends Piece {
     private void checkBackwardRight(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 2, position.getRow() + 1);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
@@ -131,9 +144,9 @@ public class Knight extends Piece {
     private void checkBackwardLeft(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 2, position.getRow() - 1);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
@@ -145,9 +158,9 @@ public class Knight extends Piece {
     private void checkLeftBackward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 1, position.getRow() - 2);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
@@ -159,9 +172,9 @@ public class Knight extends Piece {
     private void checkLeftForward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 1, position.getRow() - 2);
 
-        if (!nextSquare.isOccupied()) {
+        if (!nextSquare.isOccupied() && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
-        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+        } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite && !checkIsOutOfBounds(nextSquare)) {
             legalNextSquares.add(nextSquare);
         }
     }
