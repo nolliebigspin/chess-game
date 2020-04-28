@@ -42,6 +42,13 @@ public class Queen extends Piece {
         checkBackwardsLeft(column, row, oppositeWhite);
     }
 
+    /**
+     * Check which squares ahead (black: behind) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkForwards(int column, int row, boolean oppositeIsWhite){
         for (int i = 1 ; i <= 8 - row; i++){
             Square nextForward = board.getSquare(column, row + i);
@@ -57,6 +64,13 @@ public class Queen extends Piece {
         }
     }
 
+    /**
+     * Check which squares behind (black: ahead) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkBackwards(int column, int row, boolean oppositeIsWhite){
         for (int i = 1; i < row; i++){
             Square nextBackward = board.getSquare(column, row - i);
@@ -73,6 +87,13 @@ public class Queen extends Piece {
         }
     }
 
+    /**
+     * Check which squares to the left (black: right) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkLeft(int column, int row, boolean oppositeIsWhite){
         for (int i = 1; i < column; i++){
             Square nextLeft = board.getSquare(column - i, row);
@@ -89,6 +110,13 @@ public class Queen extends Piece {
         }
     }
 
+    /**
+     * Check which squares to the right (black: left) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkRight(int column, int row, boolean oppositeIsWhite){
         for (int i = 1; i <= 8 - column; i++){
             Square nextRight = board.getSquare(column + i, row);
@@ -105,6 +133,13 @@ public class Queen extends Piece {
         }
     }
 
+    /**
+     * Check which squares diagonally forwards to the right (black: backwards-left) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkForwardsRight(int column, int row, boolean oppositeIsWhite){
         for (int i = 1; i <= 8 - column && i <= 8 - row; i++){
             Square nextForwardRight = board.getSquare(column + i, row + i);
@@ -120,6 +155,13 @@ public class Queen extends Piece {
         }
     }
 
+    /**
+     * Check which squares diagonally forwards to the left (black: backwards-right) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkForwardsLeft(int column, int row, boolean oppositeIsWhite){
         for (int i = 1; i < column && i <= 8 - row; i++){
             Square nextForwardLeft = board.getSquare(column - i, row + i);
@@ -135,6 +177,13 @@ public class Queen extends Piece {
         }
     }
 
+    /**
+     * Check which squares diagonally backwards to the right (black: forwards-left) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkBackwardsRight(int column, int row, boolean oppositeIsWhite){
         for (int i = 1; i <= 8 - column && i < row; i++){
             Square nextBehindRight = board.getSquare(column + i, row - i);
@@ -151,6 +200,13 @@ public class Queen extends Piece {
 
     }
 
+    /**
+     * Check which squares diagonally backwards to the left (black: forwards-right) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
     private void checkBackwardsLeft(int column, int row, boolean oppositeIsWhite){
         for (int i = 1; i < column && i < row; i++){
             Square nextBehindRight = board.getSquare(column - i, row - i);
