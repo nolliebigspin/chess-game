@@ -27,7 +27,14 @@ public class Knight extends Piece {
 
     @Override
     public void updateLegals() {
-
+        checkForwardLeft();
+        checkForwardRight();
+        checkRightForward();
+        checkRightBackward();
+        checkBackwardRight();
+        checkBackwardLeft();
+        checkLeftBackward();
+        checkLeftForward();
     }
 
     private void checkForwardLeft() {
