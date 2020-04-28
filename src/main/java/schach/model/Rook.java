@@ -33,7 +33,6 @@ public class Rook extends Piece {
         checkBackward();
         checkRight();
         checkLeft();
-
     }
 
     /**

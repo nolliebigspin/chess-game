@@ -30,9 +30,35 @@ public class Knight extends Piece {
 
     }
 
-    @Override
-    public void move(Square target) {
+    private void checkForwardLeft() {
+
+    }
+
+    private void checkForwardRight() {
+
+    }
+
+    private void checkRightForward() {
+
+    }
+
+    private void checkRightBackward() {
+
+    }
+
+    private void checkBackwardRight() {
+
+    }
+
+    private void checkBackwardLeft() {
+
+    }
+
+    private void checkLeftBackward() {
+
+    }
+
+    private void checkLeftForward() {
 
     }
 }
-
