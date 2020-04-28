@@ -40,6 +40,10 @@ public class Knight extends Piece {
         checkLeftForward(oppositeIsWhite);
     }
 
+    /**
+     * checks if color of opposite player is white
+     * @return opposite isWhite
+     */
     private boolean checkIsWhite() {
         boolean oppositeIsWhite;
         if (isWhite){
@@ -50,6 +54,10 @@ public class Knight extends Piece {
         return oppositeIsWhite;
     }
 
+    /**
+     * checks if the next Square ForwardLeft is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkForwardLeft(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 2, position.getRow() - 1);
 
@@ -60,6 +68,10 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+     * checks if the next Square ForwardRight is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkForwardRight(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 2, position.getRow() + 1);
 
@@ -70,6 +82,10 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+     * checks if the next Square RightForward is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkRightForward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 1, position.getRow() + 2);
 
@@ -80,6 +96,10 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+     * checks if the next Square RightBackward is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkRightBackward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 1, position.getRow() + 2);
 
@@ -90,6 +110,10 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+     * checks if the next Square BackwardRight is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkBackwardRight(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 2, position.getRow() + 1);
 
@@ -100,6 +124,10 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+     * checks if the next Square BackwardLeft is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkBackwardLeft(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 2, position.getRow() - 1);
 
@@ -110,6 +138,10 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+     * checks if the next Square LeftBackward is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkLeftBackward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() - 1, position.getRow() - 2);
 
@@ -120,6 +152,10 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+     * checks if the next Square LeftForward is reachable or if it's occupied by your own color
+     * @param oppositeIsWhite if the color of the opponent is white or not
+     */
     private void checkLeftForward(boolean oppositeIsWhite) {
         Square nextSquare = board.getSquare(position.getColumn() + 1, position.getRow() - 2);
 
