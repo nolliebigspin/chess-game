@@ -70,8 +70,8 @@ public abstract class Piece {
      */
     public void move(Square target){
         updateLegals();
-        for (int i = 0; i < legalNextSquares.size(); i++){
-            if (legalNextSquares.get(i) == target){
+        for (Square square: legalNextSquares){
+            if (square == target){
                 acceptMove(target);
                 return;
             }
