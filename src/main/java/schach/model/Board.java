@@ -11,7 +11,7 @@ public class Board {
     private Square[][] squareMatrix = new Square[8][8];
 
     /**
-     * Constructor, initializes the Square Matrix and the start Linup
+     * Constructor, initializes the Square Matrix and the start Lineup
      */
     public Board() {
         initMatrix();
@@ -31,7 +31,7 @@ public class Board {
     }
 
     /**
-     * Initializes all pieces and places them on the board in the starting linup
+     * Initializes all pieces and places them on the board in the starting lineup
      */
     private void initLineUp(){
         Pawn wP1 = new Pawn(squareByDenotation("a2"), true, this);

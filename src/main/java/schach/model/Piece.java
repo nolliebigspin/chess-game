@@ -30,10 +30,10 @@ public abstract class Piece {
 
     /**
      * Constructor of Piece
-     * the square the piece is position on is marked and gets the Piece Object passed
-     * @param position denotation of the square the piece will be initiated on
+     * the square where the piece is placed, marked and gets the Piece Object passed
+     * @param position denotation of the square where the piece will be initiated on
      * @param isWhite true if it is a piece of the white set, false if black
-     * @param board the board the piece will be played on
+     * @param board the board where the piece will be played on
      */
 
     public Piece (Square position, boolean isWhite, Board board){
@@ -65,8 +65,8 @@ public abstract class Piece {
 
     /**
      * abstract Method to move the Piece
-     * checks if given square is in the list of valid squares
-     * @param target Square the Piece should be moved to
+     * checks if a given square is in the list of valid squares
+     * @param target is the target square where the piece is moved to
      */
     public void move(Square target){
         updateLegals();
@@ -93,10 +93,10 @@ public abstract class Piece {
     }
 
     /**
-     * Refuses the move and print Error Message
+     * Refuses invalid moves and prints Error Message
      */
     protected void refuseMove(){
-        System.out.println("!Move not allowed");
+        System.out.println("!Move is invalid");
     }
 
     /**
