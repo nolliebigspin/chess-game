@@ -27,11 +27,20 @@ public class King extends Piece {
 
     @Override
     public void updateLegals() {
-
+        legalNextSquares.clear();
+        boolean oppositeIsWhite = !isWhite;
+        int row = position.getRow();
+        int column = position.getColumn();
     }
 
-    @Override
-    public void move(Square target) {
-
+    private void checkUpDown(int column, int row, boolean oppositeIsWhite){
+        if (row <= 8){
+            Square toTheRight = board.getSquare(column, row);
+            if (toTheRight.isOccupied())
+            }
+        }
     }
+
+
+
 }
