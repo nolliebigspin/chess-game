@@ -27,7 +27,106 @@ public class King extends Piece {
 
     @Override
     public void updateLegals() {
+        legalNextSquares.clear();
+        boolean oppositeIsWhite = !isWhite;
+        int row = position.getRow();
+        int column = position.getColumn();
 
+        checkForward(column, row, oppositeIsWhite);
+        checkBackward(column, row, oppositeIsWhite);
+        checkLeft(column, row, oppositeIsWhite);
+        checkRight(column, row, oppositeIsWhite);
+        checkForwardRight(column, row, oppositeIsWhite);
+        checkBackwardRight(column, row, oppositeIsWhite);
+        checkBackwardLeft(column, row, oppositeIsWhite);
+        checkForwardLeft(column, row, oppositeIsWhite);
     }
 
+    private void checkForward(int column, int row, boolean oppositeIsWhite) {
+        if (row < 8) {
+            Square nextSquare = board.getSquare(column, row + 1);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
+
+    private void checkBackward(int column, int row, boolean oppositeIsWhite) {
+        if (row > 8) {
+            Square nextSquare = board.getSquare(column, row - 1);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
+
+    private void checkLeft(int column, int row, boolean oppositeIsWhite) {
+        if (column > 1) {
+            Square nextSquare = board.getSquare(column - 1, row);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
+
+    private void checkRight(int column, int row, boolean oppositeIsWhite) {
+        if (column < 8) {
+            Square nextSquare = board.getSquare(column + 1, column);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
+
+    private void checkForwardRight(int column, int row, boolean oppositeIsWhite) {
+        if (row < 8 && column < 8) {
+            Square nextSquare = board.getSquare(column + 1, row + 1);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
+
+    private void checkBackwardRight(int column, int row, boolean oppositeIsWhite) {
+        if (column < 8 && row > 1){
+            Square nextSquare = board.getSquare(column + 1, row - 1);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
+
+    private void checkBackwardLeft(int column, int row, boolean oppositeIsWhite) {
+        if (column > 1 && row > 1) {
+            Square nextSquare = board.getSquare(column - 1, row - 1);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
+
+    private void checkForwardLeft(int column, int row, boolean oppositeIsWhite) {
+        if (column > 1 && row < 8) {
+            Square nextSquare = board.getSquare(column - 1, row + 1);
+            if (!nextSquare.isOccupied()) {
+                legalNextSquares.add(nextSquare);
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+                legalNextSquares.add(nextSquare);
+            }
+        }
+    }
 }
