@@ -85,7 +85,7 @@ public class Board {
      * @param squareDenotation the denotation of the position square the piece should be placed on
      * @param isWhite true if added piece should be white, flase if black
      */
-    private void addPiece(String piece, String squareDenotation, boolean isWhite){
+    public void addPiece(String piece, String squareDenotation, boolean isWhite){
         Square position = squareByDenotation(squareDenotation);
         if (position.isOccupied()){
             System.out.println("Position already occupied");

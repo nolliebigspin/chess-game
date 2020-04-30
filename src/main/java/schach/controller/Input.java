@@ -55,6 +55,64 @@ public class Input {
         }
     }
 
+    private void individualLineUp(){
+        boolean running = true;
+        while (running){
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter piece, like: 'pawn e2 black' ");
+            String input = scanner.nextLine();
+            if (validatePieceInput(input)){
+                String[] inputArray = input.split(" ");
+                board.addPiece(inputArray[0], inputArray[1], inputArray[2]);
+            }
+
+
+        }
+    }
+
+    private boolean validatePieceInput(String input){
+        String[] inputArray = input.split(" ");
+        if (inputArray.length != 3);
+        String[] legalPieceName = {"pawn", "rook", "bishop", "knight", "queen", "king"};
+        boolean valid = false;
+        for (String string: legalPieceName){
+            if (inputArray[0].equals(string)){
+                valid = true;
+            }
+        }
+        if (!validateDenotation(inputArray[1])){
+            return false;
+        }
+        if (!(inputArray[2].equals("white") && inputArray[2].equals("black"))){
+            return false;
+        }
+        return valid;
+    }
+
+    /**
+     * validates if a given string is a correct denotation
+     * @param denotation string that should be validated
+     * @return true if valid, false if incorrect
+     */
+    private boolean validateDenotation(String denotation){
+        String legalLetters = "abcdefgh";
+        String legalNumbers = "12345678";
+        boolean valid = false;
+        if (denotation.length() != 2){
+            return false;
+        }
+        char letter = denotation.charAt(0);
+        char number = denotation.charAt(1);
+        if (legalLetters.indexOf(letter) == - 1){
+            return false;
+        }
+        if (legalNumbers.indexOf(number) == - 1){
+            return false;
+        }
+        return true;
+    }
+
+
     /**
      * reads input via scanner class
      */
