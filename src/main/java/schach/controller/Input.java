@@ -29,6 +29,10 @@ public class Input {
     public void inOutRoutine() {
         boolean running = true;
         while (running) {
+            if (startingLineUpWanted()){
+                board.initLineUp();
+            }
+            board.printBoard();
             readInput();
             validate();
             if (valid) {
@@ -36,6 +40,18 @@ public class Input {
                 board.printBoard();
             }
             valid = false;
+        }
+    }
+
+    private boolean startingLineUpWanted(){
+        System.out.println("StartingLineup? (y/n)");
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.nextLine().equals("y")){
+            return true;
+        } else if (scanner.nextLine().equals("n")) {
+            return false;
+        } else {
+            return startingLineUpWanted();
         }
     }
 
