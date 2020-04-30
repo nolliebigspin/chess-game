@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Queen.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">schach$BoardTest.exec</a> &gt; <a href="index.source.html" class="el_package">schach.model</a> &gt; <span class="el_source">Queen.java</span></div><h1>Queen.java</h1><pre class="source lang-java linenums">package schach.model;
+
+/**
+ * Class Queen representing the chess piece queen
+ */
+public class Queen extends Piece {
+
+    /**
+     * Constructor defining the initial position, color and board of the queen piece
+     * @param position the Square it will be placed on initially
+     * @param isWhite true if white, false if black
+     * @param board the board the Bishop will be placed on
+     */
+    public Queen(Square position, boolean isWhite, Board board) {
+<span class="fc" id="L15">        super(position, isWhite, board);</span>
+<span class="fc" id="L16">    }</span>
+
+    @Override
+    public String print() {
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        if (super.isWhite) {</span>
+<span class="nc" id="L21">            return &quot;\u2655&quot;;</span>
+        }
+        else {
+<span class="nc" id="L24">            return &quot;\u265B&quot;;</span>
+        }
+    }
+
+    @Override
+    public void updateLegals() {
+<span class="nc" id="L30">        legalNextSquares.clear();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        boolean oppositeWhite = !isWhite;</span>
+<span class="nc" id="L32">        int column = position.getColumn();</span>
+<span class="nc" id="L33">        int row = position.getRow();</span>
+
+<span class="nc" id="L35">        checkForwards(column, row, oppositeWhite);</span>
+<span class="nc" id="L36">        checkBackwards(column, row, oppositeWhite);</span>
+<span class="nc" id="L37">        checkRight(column, row, oppositeWhite);</span>
+<span class="nc" id="L38">        checkLeft(column, row, oppositeWhite);</span>
+<span class="nc" id="L39">        checkForwardsRight(column, row, oppositeWhite);</span>
+<span class="nc" id="L40">        checkForwardsLeft(column, row, oppositeWhite);</span>
+<span class="nc" id="L41">        checkBackwardsRight(column, row, oppositeWhite);</span>
+<span class="nc" id="L42">        checkBackwardsLeft(column, row, oppositeWhite);</span>
+<span class="nc" id="L43">    }</span>
+
+    /**
+     * Check which squares ahead (black: behind) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkForwards(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        for (int i = 1 ; i &lt;= 8 - row; i++){</span>
+<span class="nc" id="L54">            Square nextForward = board.getSquare(column, row + i);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (!(nextForward.isOccupied())){</span>
+<span class="nc" id="L56">                legalNextSquares.add(nextForward);</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">            } else if (nextForward.isOccupied() &amp;&amp; nextForward.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L58">                legalNextSquares.add(nextForward);</span>
+<span class="nc" id="L59">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+<span class="nc" id="L65">    }</span>
+
+    /**
+     * Check which squares behind (black: ahead) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkBackwards(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        for (int i = 1; i &lt; row; i++){</span>
+<span class="nc" id="L76">            Square nextBackward = board.getSquare(column, row - i);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (!(nextBackward.isOccupied())){</span>
+<span class="nc" id="L78">                legalNextSquares.add(nextBackward);</span>
+            }
+<span class="nc bnc" id="L80" title="All 4 branches missed.">            else if (nextBackward.isOccupied() &amp;&amp; nextBackward.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L81">                legalNextSquares.add(nextBackward);</span>
+<span class="nc" id="L82">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+<span class="nc" id="L88">    }</span>
+
+    /**
+     * Check which squares to the left (black: right) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkLeft(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        for (int i = 1; i &lt; column; i++){</span>
+<span class="nc" id="L99">            Square nextLeft = board.getSquare(column - i, row);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (!(nextLeft.isOccupied())){</span>
+<span class="nc" id="L101">                legalNextSquares.add(nextLeft);</span>
+            }
+<span class="nc bnc" id="L103" title="All 4 branches missed.">            else if (nextLeft.isOccupied() &amp;&amp; nextLeft.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L104">                legalNextSquares.add(nextLeft);</span>
+<span class="nc" id="L105">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+<span class="nc" id="L111">    }</span>
+
+    /**
+     * Check which squares to the right (black: left) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkRight(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        for (int i = 1; i &lt;= 8 - column; i++){</span>
+<span class="nc" id="L122">            Square nextRight = board.getSquare(column + i, row);</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">            if (!(nextRight.isOccupied())){</span>
+<span class="nc" id="L124">                legalNextSquares.add(nextRight);</span>
+            }
+<span class="nc bnc" id="L126" title="All 4 branches missed.">            else if (nextRight.isOccupied() &amp;&amp; nextRight.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L127">                legalNextSquares.add(nextRight);</span>
+<span class="nc" id="L128">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+<span class="nc" id="L134">    }</span>
+
+    /**
+     * Check which squares diagonally forwards to the right (black: backwards-left) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkForwardsRight(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L144" title="All 4 branches missed.">        for (int i = 1; i &lt;= 8 - column &amp;&amp; i &lt;= 8 - row; i++){</span>
+<span class="nc" id="L145">            Square nextForwardRight = board.getSquare(column + i, row + i);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if (!(nextForwardRight.isOccupied())){</span>
+<span class="nc" id="L147">                legalNextSquares.add(nextForwardRight);</span>
+<span class="nc bnc" id="L148" title="All 4 branches missed.">            } else if (nextForwardRight.isOccupied() &amp;&amp; nextForwardRight.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L149">                legalNextSquares.add(nextForwardRight);</span>
+<span class="nc" id="L150">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+<span class="nc" id="L156">    }</span>
+
+    /**
+     * Check which squares diagonally forwards to the left (black: backwards-right) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkForwardsLeft(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L166" title="All 4 branches missed.">        for (int i = 1; i &lt; column &amp;&amp; i &lt;= 8 - row; i++){</span>
+<span class="nc" id="L167">            Square nextForwardLeft = board.getSquare(column - i, row + i);</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">            if (!(nextForwardLeft.isOccupied())){</span>
+<span class="nc" id="L169">                legalNextSquares.add(nextForwardLeft);</span>
+<span class="nc bnc" id="L170" title="All 4 branches missed.">            } else if (nextForwardLeft.isOccupied() &amp;&amp; nextForwardLeft.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L171">                legalNextSquares.add(nextForwardLeft);</span>
+<span class="nc" id="L172">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+<span class="nc" id="L178">    }</span>
+
+    /**
+     * Check which squares diagonally backwards to the right (black: forwards-left) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkBackwardsRight(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L188" title="All 4 branches missed.">        for (int i = 1; i &lt;= 8 - column &amp;&amp; i &lt; row; i++){</span>
+<span class="nc" id="L189">            Square nextBehindRight = board.getSquare(column + i, row - i);</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">            if (!(nextBehindRight.isOccupied())){</span>
+<span class="nc" id="L191">                legalNextSquares.add(nextBehindRight);</span>
+<span class="nc bnc" id="L192" title="All 4 branches missed.">            } else if (nextBehindRight.isOccupied() &amp;&amp; nextBehindRight.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L193">                legalNextSquares.add(nextBehindRight);</span>
+<span class="nc" id="L194">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+
+<span class="nc" id="L201">    }</span>
+
+    /**
+     * Check which squares diagonally backwards to the left (black: forwards-right) the queen could occupy by a legal move
+     * and adds the squares to the list of legal squares
+     * @param column the current column position of the queen
+     * @param row the current row position of the queen
+     * @param oppositeIsWhite true if this queen is black, false if this queen is white
+     */
+    private void checkBackwardsLeft(int column, int row, boolean oppositeIsWhite){
+<span class="nc bnc" id="L211" title="All 4 branches missed.">        for (int i = 1; i &lt; column &amp;&amp; i &lt; row; i++){</span>
+<span class="nc" id="L212">            Square nextBehindRight = board.getSquare(column - i, row - i);</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">            if (!(nextBehindRight.isOccupied())){</span>
+<span class="nc" id="L214">                legalNextSquares.add(nextBehindRight);</span>
+<span class="nc bnc" id="L215" title="All 4 branches missed.">            } else if (nextBehindRight.isOccupied() &amp;&amp; nextBehindRight.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L216">                legalNextSquares.add(nextBehindRight);</span>
+<span class="nc" id="L217">                break;</span>
+            }
+            else {
+                break;
+            }
+        }
+
+<span class="nc" id="L224">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
