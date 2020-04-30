@@ -27,7 +27,6 @@ public class Pawn extends Piece {
 
     @Override
     protected void updateLegals() {
-
         legalNextSquares.clear();
 
         //column integer value of square the Pawn is currently occupying
@@ -41,7 +40,6 @@ public class Pawn extends Piece {
             checkUpRight(column, row);
             checkUpLeft(column, row);
         }
-
     }
 
     /**
@@ -50,8 +48,7 @@ public class Pawn extends Piece {
      * @param column integer representation of the column the pawn is currently occupying
      * @param row integer representation of the row the pawn is currently occupying
      */
-    private void checkAhead(int column, int row){
-
+    private void checkAhead(int column, int row) {
         int startingRow;
         int secondRow;
         int oneUp;
@@ -115,17 +112,15 @@ public class Pawn extends Piece {
      * @param row integer representation of the row the pawn is currently occupying
      */
     private void checkUpLeft(int column, int row) {
-
         int oneUp;
         int left;
         boolean oppositeIsWhite;
 
-        if (isWhite){
+        if (isWhite) {
             oneUp = 1;
             left = -1;
             oppositeIsWhite = false;
-        }
-        else {
+        } else {
             oneUp = -1;
             left = 1;
             oppositeIsWhite = true;
@@ -139,5 +134,4 @@ public class Pawn extends Piece {
             }
         }
     }
-
 }
