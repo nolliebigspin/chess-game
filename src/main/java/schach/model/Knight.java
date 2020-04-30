@@ -27,7 +27,7 @@ public class Knight extends Piece {
 
     @Override
     public void updateLegals() {
-        boolean oppositeIsWhite = checkIsWhite();
+        boolean oppositeIsWhite = !isWhite;
         legalNextSquares.clear();
 
         checkForwardLeft(oppositeIsWhite);
@@ -38,20 +38,6 @@ public class Knight extends Piece {
         checkBackwardLeft(oppositeIsWhite);
         checkLeftBackward(oppositeIsWhite);
         checkLeftForward(oppositeIsWhite);
-    }
-
-    /**
-     * checks if color of opposite player is white
-     * @return opposite isWhite
-     */
-    private boolean checkIsWhite() {
-        boolean oppositeIsWhite;
-        if (isWhite){
-            oppositeIsWhite = false;
-        } else {
-            oppositeIsWhite = true;
-        }
-        return oppositeIsWhite;
     }
 
     /**
