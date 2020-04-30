@@ -90,7 +90,7 @@ public abstract class Piece {
         position.setOccupied(true);
         position.setOccupier(this);
         if (this instanceof Pawn) {
-            if (checkPromotion(this.position.getColumn())){
+            if (checkPromotion(this.position.getColumn())) {
 
             }
         }
