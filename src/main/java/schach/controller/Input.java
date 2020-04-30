@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class Input {
     private String currentInputLine;
+    private String promotionInputLine;
     private String startingPos;
     private String targetPos;
     private boolean valid;
@@ -46,6 +47,12 @@ public class Input {
         Scanner scanner = new Scanner(System.in);
         System.out.println("please enter your move: ");
         this.currentInputLine = scanner.nextLine();
+    }
+
+    private void readIputPromotion() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Promotion! Enter Q, R, B, or N to promote your pawn.");
+        this.promotionInputLine = scanner.nextLine();
     }
 
     /**

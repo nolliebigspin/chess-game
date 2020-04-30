@@ -89,6 +89,11 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
+        if (this instanceof Pawn) {
+            if (checkPromotion(this.position.getColumn())){
+
+            }
+        }
         updateLegals();
     }
 
@@ -106,6 +111,14 @@ public abstract class Piece {
     public void printLegals(){
         for (int i = 0; i < legalNextSquares.size(); i++){
             System.out.println(legalNextSquares.get(i).getDenotation());
+        }
+    }
+
+    private boolean checkPromotion(int column) {
+        if (column == 8 || column == 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

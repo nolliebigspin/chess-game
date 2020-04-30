@@ -28,11 +28,7 @@ public class Pawn extends Piece {
     @Override
     protected void updateLegals() {
         legalNextSquares.clear();
-
-        //column integer value of square the Pawn is currently occupying
         int column = position.getColumn();
-
-        //row integer value of square the Pawn is currently occupying
         int row = position.getRow();
 
         if (row < 8 && row > 1) {
