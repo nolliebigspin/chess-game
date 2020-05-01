@@ -38,7 +38,7 @@ class BoardTest {
         Board testBoard = new Board();
         testBoard.addPiece("rook", "c1", false);
         testBoard.printBoard();
-        
+        :
     }
 
     @Test
