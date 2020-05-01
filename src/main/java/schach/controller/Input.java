@@ -2,6 +2,7 @@ package schach.controller;
 
 import schach.model.Board;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -29,8 +30,11 @@ public class Input {
     public void inOutRoutine() {
         boolean running = true;
         while (running) {
-            if (startingLineUpWanted()){
+            System.out.println("StartingLineup? (y/n)");
+            if (yesNoInput()){
                 board.initLineUp();
+            } else {
+                individualLineUp();
             }
             board.printBoard();
             readInput();
@@ -43,55 +47,61 @@ public class Input {
         }
     }
 
-    private boolean startingLineUpWanted(){
-        System.out.println("StartingLineup? (y/n)");
+    private boolean yesNoInput(){
         Scanner scanner = new Scanner(System.in);
-        if (scanner.nextLine().equals("y")){
+        String input = scanner.nextLine();
+        if (input.equals("y")){
             return true;
-        } else if (scanner.nextLine().equals("n")) {
+        } else if (input.equals("n")) {
             return false;
         } else {
-            return startingLineUpWanted();
+            return yesNoInput();
         }
     }
 
     private void individualLineUp(){
         boolean running = true;
         while (running){
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter piece, like: 'pawn e2 black' ");
-            String input = scanner.nextLine();
-            if (validatePieceInput(input)){
-                String[] inputArray = input.split(" ");
-                boolean isWhite;
-                if (inputArray[2].equals("white")){
-                    isWhite = true;
-                } else {
-                    isWhite = false;
-                }
-                board.addPiece(inputArray[0], inputArray[1], isWhite);
+            String[] input = validatePieceInput();
+            boolean isWhite;
+            if (input[2].equals("white")){
+                isWhite = true;
+            } else {
+                isWhite = false;
             }
-
+            board.addPiece(input[0], input[1], isWhite);
+            board.printBoard();
+            System.out.println("add another piece (y/n)");
+            if (!yesNoInput()){
+                running = false;
+            }
         }
+
     }
 
-    private boolean validatePieceInput(String input){
+    private String[] validatePieceInput(){
+        System.out.print("Enter piece, like: 'pawn e2 black' ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
         String[] inputArray = input.split(" ");
-        if (inputArray.length != 3);
+        if (inputArray.length != 3){
+            System.out.println("invalid input 1");
+            validatePieceInput();
+        }
         String[] legalPieceName = {"pawn", "rook", "bishop", "knight", "queen", "king"};
-        boolean valid = false;
-        for (String string: legalPieceName){
-            if (inputArray[0].equals(string)){
-                valid = true;
-            }
+        if (!Arrays.asList(legalPieceName).contains(inputArray[0])){
+            System.out.println("invalid input 2");
+            validatePieceInput();
         }
         if (!validateDenotation(inputArray[1])){
-            return false;
+            System.out.println("invalid input 3");
+            validatePieceInput();
         }
-        if (!(inputArray[2].equals("white") && inputArray[2].equals("black"))){
-            return false;
+        if (!(inputArray[2].equals("white") || inputArray[2].equals("black"))){
+            System.out.println("invalid input 4");
+            validatePieceInput();
         }
-        return valid;
+        return inputArray;
     }
 
     /**
