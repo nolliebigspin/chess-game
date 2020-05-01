@@ -34,11 +34,11 @@ class BoardTest {
 
 
     @Test
-    void printBoardTest() {
+    void printBoardTest()throws Exception {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "b1", true);
+        testBoard.addPiece("rook", "c1", false);
         testBoard.printBoard();
-        assertE
+        
     }
 
     @Test
