@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -38,11 +40,22 @@ class BoardTest {
         Board testBoard = new Board();
         testBoard.addPiece("rook", "c1", false);
         testBoard.printBoard();
-
+        ByteArrayOutputStream out= new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        System.out.print(" ");
+        assertEquals(" ", out.toString());
     }
+
+
 
     @Test
     void squareByDenotationTest() {
+        Board testBoard = new Board();
+        testBoard.addPiece("bishop", "d1", false);
+        Square[][] squareMatrixTest = new Square[4][1];
+        Bishop bishopTest = new Bishop(squareMatrixTest,false,testBoard);
+
+        assertSame(Square.get,testBoard.squareByDenotation("d1"));
     }
 
     @Test

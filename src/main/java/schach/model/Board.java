@@ -5,6 +5,10 @@ package schach.model;
  */
 public class Board {
 
+    public Square[][] getSquareMatrix() {
+        return squareMatrix;
+    }
+
     /**
      * Matrix of Squares representing the chess board
      */
