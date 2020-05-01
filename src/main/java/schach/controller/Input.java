@@ -63,9 +63,14 @@ public class Input {
             String input = scanner.nextLine();
             if (validatePieceInput(input)){
                 String[] inputArray = input.split(" ");
-                board.addPiece(inputArray[0], inputArray[1], inputArray[2]);
+                boolean isWhite;
+                if (inputArray[2].equals("white")){
+                    isWhite = true;
+                } else {
+                    isWhite = false;
+                }
+                board.addPiece(inputArray[0], inputArray[1], isWhite);
             }
-
 
         }
     }
