@@ -29,15 +29,15 @@ public class Input {
      * Routine that reads the input, validates it and updates the board
      */
     public void inOutRoutine() {
+        System.out.println("StartingLineup? (y/n)");
+        if (yesNoInput()){
+            board.initLineUp();
+        } else {
+            individualLineUp();
+        }
+        board.printBoard();
         boolean running = true;
         while (running) {
-            System.out.println("StartingLineup? (y/n)");
-            if (yesNoInput()){
-                board.initLineUp();
-            } else {
-                individualLineUp();
-            }
-            board.printBoard();
             readInput();
             validate();
             if (valid) {
