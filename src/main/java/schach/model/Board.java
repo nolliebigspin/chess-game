@@ -159,7 +159,7 @@ public class Board {
      * @param row the integer value of the row of the wanted square
      * @return Square that is represented by the given coordinates
      */
-    public Square getSquare(int column, int row){
+    public  Square getSquare(int column, int row){
         return squareMatrix[column-1][row-1];
     }
 
