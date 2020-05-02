@@ -12,10 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
 
 
-    @BeforeEach
-    void setUp() throws Exception {
-        Board TestBoard = new Board();
-    }
+
 
     @Test
     void testOccupancy() {
@@ -48,16 +45,15 @@ class BoardTest {
 
 
 
-    @Test
-    void squareByDenotationTest() {
-        Board testBoard = new Board();
-        testBoard.addPiece("bishop", "d1", false);
-        Square[][] squareMatrixTest = new Square[4][1];
-        Bishop bishopTest = new Bishop(squareMatrixTest,false,testBoard);
+   // @Test
+   // void squareByDenotationTest() {
+    //     Board testBoard = new Board();
+   //    testBoard.addPiece("bishop", "d1", false);
+   //    Square bishop = new Square(4,1);
+   //    Bishop bishopTest = new Bishop(bishop,false, testBoard);
+    //    assertSame(bishopTest.,testBoard.);
 
-        assertSame(Square.get,testBoard.squareByDenotation("d1"));
-    }
-
+    // }
     @Test
     void getSquareTest() {
     }
