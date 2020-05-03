@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Pawn.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">schach$BoardTest.exec</a> &gt; <a href="index.source.html" class="el_package">schach.model</a> &gt; <span class="el_source">Pawn.java</span></div><h1>Pawn.java</h1><pre class="source lang-java linenums">package schach.model;
+
+/**
+ * Class Pawn representing the chess piece peasant
+ */
+public class Pawn extends Piece {
+
+    /**
+     * Constructor defining the initial position, color and board of the pawn piece
+     * @param position the Square it will be placed on initially
+     * @param isWhite true if white, false if black
+     * @param board the board the Bishop will be placed on
+     */
+    public Pawn(Square position, boolean isWhite, Board board) {
+<span class="nc" id="L15">        super(position, isWhite, board);</span>
+<span class="nc" id="L16">        updateLegals();</span>
+<span class="nc" id="L17">    }</span>
+
+    @Override
+    public String print() {
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        if (super.isWhite) {</span>
+<span class="nc" id="L22">            return &quot;\u2659&quot;;</span>
+        }
+        else {
+<span class="nc" id="L25">            return &quot;\u265F&quot;;</span>
+        }
+    }
+
+    @Override
+    protected void updateLegals() {
+
+<span class="nc" id="L32">        legalNextSquares.clear();</span>
+
+        //column integer value of square the Pawn is currently occupying
+<span class="nc" id="L35">        int column = position.getColumn();</span>
+
+        //row integer value of square the Pawn is currently occupying
+<span class="nc" id="L38">        int row = position.getRow();</span>
+
+<span class="nc bnc" id="L40" title="All 4 branches missed.">        if (row &lt; 8 &amp;&amp; row &gt; 1){</span>
+<span class="nc" id="L41">            checkAhead(column, row);</span>
+<span class="nc" id="L42">            checkUpRight(column, row);</span>
+<span class="nc" id="L43">            checkUpLeft(column, row);</span>
+        }
+
+<span class="nc" id="L46">    }</span>
+
+    /**
+     * checks if starting move (2 squares ahead) and basic move (1 square ahead) are valid
+     * if so adds it to list of valid squares
+     * @param column integer representation of the column the pawn is currently occupying
+     * @param row integer representation of the row the pawn is currently occupying
+     */
+    private void checkAhead(int column, int row){
+
+        int startingRow;
+        int secondRow;
+        int oneUp;
+
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (isWhite){</span>
+<span class="nc" id="L61">            startingRow = 2;</span>
+<span class="nc" id="L62">            secondRow = 4;</span>
+<span class="nc" id="L63">            oneUp = 1;</span>
+        }
+        else {
+<span class="nc" id="L66">            startingRow = 7;</span>
+<span class="nc" id="L67">            secondRow = 5;</span>
+<span class="nc" id="L68">            oneUp = -1;</span>
+        }
+
+<span class="nc" id="L71">        Square ahead = board.getSquare(column, row + oneUp);</span>
+<span class="nc" id="L72">        Square aheadTwice = board.getSquare(column, secondRow);</span>
+
+<span class="nc bnc" id="L74" title="All 6 branches missed.">        if (row == startingRow &amp;&amp; !ahead.isOccupied() &amp;&amp; !aheadTwice.isOccupied()){</span>
+<span class="nc" id="L75">            legalNextSquares.add(aheadTwice);</span>
+        }
+
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (!ahead.isOccupied()){</span>
+<span class="nc" id="L79">            legalNextSquares.add(ahead);</span>
+        }
+<span class="nc" id="L81">    }</span>
+
+    /**
+     * checks if attack move (one diagonally to the right) is valid
+     * if so adds it to list of valid squares
+     * @param column integer representation of the column the pawn is currently occupying
+     * @param row integer representation of the row the pawn is currently occupying
+     */
+    private void checkUpRight(int column, int row){
+
+        int oneUp;
+        int right;
+        boolean oppositeIsWhite;
+
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (isWhite){</span>
+<span class="nc" id="L96">            oneUp = 1;</span>
+<span class="nc" id="L97">            right = 1;</span>
+<span class="nc" id="L98">            oppositeIsWhite = false;</span>
+        }
+        else {
+<span class="nc" id="L101">            oneUp = -1;</span>
+<span class="nc" id="L102">            right = -1;</span>
+<span class="nc" id="L103">            oppositeIsWhite = true;</span>
+        }
+
+<span class="nc bnc" id="L106" title="All 8 branches missed.">        if (column &lt; 8 &amp;&amp; isWhite || column &gt; 1 &amp;&amp; !isWhite){</span>
+<span class="nc" id="L107">            Square aheadRight = board.getSquare(column + right, row + oneUp);</span>
+
+<span class="nc bnc" id="L109" title="All 4 branches missed.">            if (aheadRight.isOccupied() &amp;&amp; aheadRight.getOccupier().isWhite == oppositeIsWhite) {</span>
+<span class="nc" id="L110">                legalNextSquares.add(aheadRight);</span>
+            }
+        }
+<span class="nc" id="L113">    }</span>
+
+    /**
+     * checks if attack move (one diagonally to the left) is valid
+     * if so adds it to list of valid squares
+     * @param column integer representation of the column the pawn is currently occupying
+     * @param row integer representation of the row the pawn is currently occupying
+     */
+    private void checkUpLeft(int column, int row){
+
+        int oneUp;
+        int left;
+        boolean oppositeIsWhite;
+
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (isWhite){</span>
+<span class="nc" id="L128">            oneUp = 1;</span>
+<span class="nc" id="L129">            left = -1;</span>
+<span class="nc" id="L130">            oppositeIsWhite = false;</span>
+        }
+        else {
+<span class="nc" id="L133">            oneUp = -1;</span>
+<span class="nc" id="L134">            left = 1;</span>
+<span class="nc" id="L135">            oppositeIsWhite = true;</span>
+        }
+
+<span class="nc bnc" id="L138" title="All 8 branches missed.">        if (column &gt; 1 &amp;&amp; isWhite || column &lt; 8 &amp;&amp; !isWhite){</span>
+<span class="nc" id="L139">            Square aheadLeft = board.getSquare(column + left, row + oneUp);</span>
+
+<span class="nc bnc" id="L141" title="All 4 branches missed.">            if (aheadLeft.isOccupied() &amp;&amp; aheadLeft.getOccupier().isWhite == oppositeIsWhite){</span>
+<span class="nc" id="L142">                legalNextSquares.add(aheadLeft);</span>
+            }
+        }
+<span class="nc" id="L145">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

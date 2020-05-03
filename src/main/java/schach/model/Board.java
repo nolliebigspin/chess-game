@@ -15,7 +15,6 @@ public class Board {
      */
     public Board() {
         initMatrix();
-        initLineUp();
     }
 
     /**
@@ -33,7 +32,7 @@ public class Board {
     /**
      * Initializes all pieces and places them on the board in the starting lineup
      */
-    private void initLineUp(){
+    public void initLineUp(){
         Pawn wP1 = new Pawn(squareByDenotation("a2"), true, this);
         Pawn wP2 = new Pawn(squareByDenotation("b2"), true, this);
         Pawn wP3 = new Pawn(squareByDenotation("c2"), true, this);
@@ -81,6 +80,43 @@ public class Board {
     }
 
     /**
+     * Adds a wanted piece to a given position to the board
+     * @param piece the piece entered in lowercase
+     * @param squareDenotation the denotation of the position square the piece should be placed on
+     * @param isWhite true if added piece should be white, flase if black
+     */
+    public void addPiece(String piece, String squareDenotation, boolean isWhite){
+        Square position = squareByDenotation(squareDenotation);
+        if (position.isOccupied()){
+            System.out.println("Position already occupied");
+            return;
+        }
+        Piece p;
+        switch (piece){
+            case "pawn":
+                p = new Pawn(position, isWhite, this);
+                break;
+            case "rook":
+                p = new Rook(position, isWhite, this);
+                break;
+            case "knight":
+                p = new Knight(position, isWhite, this);
+                break;
+            case "bishop":
+                p = new Bishop(position, isWhite, this);
+                break;
+            case "queen":
+                p = new Queen(position, isWhite, this);
+                break;
+            case "king":
+                p = new King(position, isWhite, this);
+                break;
+            default:
+                System.out.println("no valid piece: " + piece);
+        }
+    }
+
+    /**
      * prints the current setup of the board
      */
     public void printBoard() {
@@ -123,7 +159,7 @@ public class Board {
      * @param row the integer value of the row of the wanted square
      * @return Square that is represented by the given coordinates
      */
-    public Square getSquare(int column, int row){
+    public  Square getSquare(int column, int row){
         return squareMatrix[column-1][row-1];
     }
 
