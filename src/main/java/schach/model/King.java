@@ -77,7 +77,7 @@ public class King extends Piece {
 
     private void checkRight(int column, int row, boolean oppositeIsWhite) {
         if (column < 8) {
-            Square nextSquare = board.getSquare(column + 1, column);
+            Square nextSquare = board.getSquare(column + 1, row);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
