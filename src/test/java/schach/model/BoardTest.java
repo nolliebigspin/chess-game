@@ -1,5 +1,7 @@
 package schach.model;
 
+
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,20 +47,39 @@ class BoardTest {
 
 
 
-   // @Test
-   // void squareByDenotationTest() {
+  //  @Test
+  //  void squareByDenotationTest() {
     //     Board testBoard = new Board();
-   //    testBoard.addPiece("bishop", "d1", false);
-   //    Square bishop = new Square(4,1);
-   //    Bishop bishopTest = new Bishop(bishop,false, testBoard);
-    //    assertSame(bishopTest.,testBoard.);
+  //   testBoard.addPiece("bishop", "d1", false);
+  //   Square bishop = new Square(4,1);
+  //   Bishop bishopTest = new Bishop(bishop,false, testBoard);
+    //   assertSame(bishopTest,testBoard);
 
     // }
-    @Test
-    void getSquareTest() {
-    }
+    // @Test
+    //  void getSquareTest() {
+    //    Board testBoard = new Board();
+    //    Square[][] squareMatrixTest = new Square[7][7];
+    //  assertEquals(squareMatrixTest,testBoard.getSquare(8,8));
 
-    @Test
-    void movePieceTest() {
-    }
+    // }
+
+    // @Test
+    // void movePieceTest() throws java.lang.Exception {
+    //   Board testBoard = new Board();
+    //   testBoard.addPiece("pawn", "a2", true);
+    //   testBoard.movePiece("c1","c2");
+    //   ByteArrayOutputStream out= new ByteArrayOutputStream();
+    //   System.setOut(new PrintStream(out));
+    //   testBoard.movePiece("c1","c2");
+    //  assertEquals("!Invalid Move: No Piece found!", out.toString());
+        //assertSame( "!Invalid Move: No Piece found!",res);
+    // }
+
+
 }
+
+
+
+
+
