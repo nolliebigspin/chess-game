@@ -48,12 +48,13 @@ public class King extends Piece {
         refuseMove();
     }
 
-    @Override
     /**
      * allows the move to the target square
      * updates the position square of the Piece
+     * checks additionally if casteling is executed and moves the rook
      * @param target Square the Piece will be moved to
      */
+    @Override
     protected void acceptMove(Square target){
         if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
             rookCasteling(true);
@@ -68,6 +69,9 @@ public class King extends Piece {
         updateLegals();
     }
 
+    /**
+     * Updates the list of legal squares
+     */
     @Override
     public void updateLegals() {
         legalNextSquares.clear();
@@ -192,6 +196,10 @@ public class King extends Piece {
         }
     }
 
+    /**
+     * checks if casteling on the long side (queen side) is legal
+     * @return true if casteling long is legal, false if not
+     */
     private boolean castelingLongValid(){
         String rookPosition;
         String queenPosition;
@@ -212,7 +220,7 @@ public class King extends Piece {
         Square qSquare = board.squareByDenotation(queenPosition);
         Square bSquare = board.squareByDenotation(bishopPosition);
         Square kSquare = board.squareByDenotation(knightPosition);
-        // checks if rook square is occupied
+        // checks if rook square is occupied && if King was moved already
         if (!rSquare.isOccupied() && !neverMoved){
             return false;
         }
@@ -236,6 +244,10 @@ public class King extends Piece {
         return true;
     }
 
+    /**
+     * checks if casteling on the short side (not queen side) is legal
+     * @return true if casteling short is legal, false if not
+     */
     private boolean castelingShortValid(){
         String rookPosition;
         String bishopPosition;
@@ -276,6 +288,10 @@ public class King extends Piece {
         return true;
     }
 
+    /**
+     * Moves the rook to its position during casteling
+     * @param isLongCasteling true if its long casteling, false if its short side casteling
+     */
     private void rookCasteling(boolean isLongCasteling){
         int startColumn;
         int targetColumn;
