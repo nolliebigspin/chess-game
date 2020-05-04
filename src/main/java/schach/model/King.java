@@ -276,9 +276,6 @@ public class King extends Piece {
         return true;
     }
 
-
-
-
     private void rookCasteling(boolean isLongCasteling){
         int startColumn;
         int targetColumn;
