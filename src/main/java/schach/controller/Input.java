@@ -151,7 +151,7 @@ public class Input {
         this.currentInputLine = scanner.nextLine();
     }
 
-    private void readIputPromotion() {
+    public void readInputPromotion() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Promotion! Enter Q, R, B, or N to promote your pawn.");
         this.promotionInputLine = scanner.nextLine();
