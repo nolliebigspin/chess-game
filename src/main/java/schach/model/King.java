@@ -58,6 +58,9 @@ public class King extends Piece {
         if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
             rookCasteling(true);
         }
+        if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castelingShortValid()) {
+            rookCasteling(false);
+        }
         position.setOccupied(false);
         this.position = target;
         position.setOccupied(true);
@@ -89,6 +92,16 @@ public class King extends Piece {
             }
             legalNextSquares.add(bishopPos);
         }
+        if (castelingShortValid()){
+            Square knightPos;
+            if (isWhite){
+                knightPos = board.squareByDenotation("g1");
+            } else {
+                knightPos = board.squareByDenotation("g8");
+            }
+            legalNextSquares.add(knightPos);
+        }
+
     }
 
     private void checkForward(int column, int row, boolean oppositeIsWhite) {
@@ -222,6 +235,49 @@ public class King extends Piece {
         }
         return true;
     }
+
+    private boolean castelingShortValid(){
+        String rookPosition;
+        String bishopPosition;
+        String knightPosition;
+        if (isWhite){
+            rookPosition = "h1";
+            bishopPosition = "f1";
+            knightPosition = "g1";
+        } else {
+            rookPosition = "h8";
+            bishopPosition = "f8";
+            knightPosition = "g8";
+        }
+        Square rSquare = board.squareByDenotation(rookPosition);
+        Square bSquare = board.squareByDenotation(bishopPosition);
+        Square kSquare = board.squareByDenotation(knightPosition);
+        // checks if rook square is occupied
+        if (!rSquare.isOccupied() && !neverMoved){
+            return false;
+        }
+        // checks if piece on rook square is rook
+        if (!(rSquare.getOccupier() instanceof Rook)){
+            return false;
+        }
+        Rook rook = (Rook) rSquare.getOccupier();
+        // checks if rook was never moved
+        if (!rook.isNeverMoved()){
+            return false;
+        }
+        // checks if squares in between are occupied
+        if (kSquare.isOccupied() || bSquare.isOccupied() ){
+            return false;
+        }
+        // checks if squares where king has to move over are under attack
+        if (board.isUnderAttack(knightPosition, !isWhite) || board.isUnderAttack(bishopPosition, !isWhite)){
+            return false;
+        }
+        return true;
+    }
+
+
+
 
     private void rookCasteling(boolean isLongCasteling){
         int startColumn;
