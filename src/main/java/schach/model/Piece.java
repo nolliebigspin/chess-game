@@ -112,8 +112,8 @@ public abstract class Piece {
      * //TODO delete
      */
     public void printLegals(){
-        for (int i = 0; i < legalNextSquares.size(); i++){
-            System.out.println(legalNextSquares.get(i).getDenotation());
+        for (Square square: legalNextSquares){
+            System.out.println(square.getDenotation());
         }
     }
 }
