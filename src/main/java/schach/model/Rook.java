@@ -6,6 +6,11 @@ package schach.model;
 public class Rook extends Piece {
 
     /**
+     * indicates if king is still in its starting position
+     */
+    private boolean neverMoved;
+
+    /**
      * Constructor defining the initial position, color and board of the rook piece
      * @param position the Square it will be placed on initially
      * @param isWhite true if white, false if black
@@ -13,6 +18,7 @@ public class Rook extends Piece {
      */
     public Rook(Square position, boolean isWhite, Board board) {
         super(position, isWhite, board);
+        this.neverMoved = true;
     }
 
     @Override
@@ -23,6 +29,23 @@ public class Rook extends Piece {
         else {
             return "\u265C";
         }
+    }
+
+    /**
+     * Same method as in the piece interface, but sets boolean neverMoved to false
+     * @param target is the target square where the piece is moved to
+     */
+    @Override
+    public void move(Square target){
+        updateLegals();
+        for (Square square: legalNextSquares){
+            if (square == target){
+                acceptMove(target);
+                neverMoved = false;
+                return;
+            }
+        }
+        refuseMove();
     }
 
     @Override
@@ -149,6 +172,10 @@ public class Rook extends Piece {
                 break;
             }
         }
+    }
+
+    public boolean isNeverMoved(){
+        return neverMoved;
     }
 
 }

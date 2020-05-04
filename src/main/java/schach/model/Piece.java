@@ -35,7 +35,6 @@ public abstract class Piece {
      * @param isWhite true if it is a piece of the white set, false if black
      * @param board the board where the piece will be played on
      */
-
     public Piece (Square position, boolean isWhite, Board board){
         this.position = position;
         this.isWhite = isWhite;
@@ -105,12 +104,21 @@ public abstract class Piece {
     }
 
     /**
+     * getter for list of legal squares
+     * @return
+     */
+    public List<Square> getLegalSquares(){
+        return legalNextSquares;
+    }
+
+
+    /**
      * debug Method
      * //TODO delete
      */
     public void printLegals(){
-        for (int i = 0; i < legalNextSquares.size(); i++){
-            System.out.println(legalNextSquares.get(i).getDenotation());
+        for (Square square: legalNextSquares){
+            System.out.println(square.getDenotation());
         }
     }
 

@@ -1,5 +1,7 @@
 .idea
 *.iml
 target/
-/docs/content/diagrams/plantuml.jar
-/docs/Diagrams/
+docs/content/diagrams/plantuml.jar
+docs/Diagrams/
+jacoco-resources/
+schach.model/
