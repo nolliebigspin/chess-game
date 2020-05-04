@@ -63,6 +63,9 @@ public class King extends Piece {
         checkBackwardRight(column, row, oppositeIsWhite);
         checkBackwardLeft(column, row, oppositeIsWhite);
         checkForwardLeft(column, row, oppositeIsWhite);
+        if (neverMoved){
+            checkCastelingLong();
+        }
     }
 
     private void checkForward(int column, int row, boolean oppositeIsWhite) {
@@ -151,5 +154,38 @@ public class King extends Piece {
                 legalNextSquares.add(nextSquare);
             }
         }
+    }
+
+    private  void checkCastelingLong(){
+        Square rSquare;
+        Square qSquare;
+        Square bSquare;
+        Square kSquare;
+        if (isWhite){
+            rSquare = board.squareByDenotation("a1");
+            kSquare = board.squareByDenotation("b1");
+            bSquare = board.squareByDenotation("c1");
+            qSquare = board.squareByDenotation("d1");
+        } else {
+            rSquare = board.squareByDenotation("a8");
+            kSquare = board.squareByDenotation("b8");
+            bSquare = board.squareByDenotation("c8");
+            qSquare = board.squareByDenotation("d8");
+        }
+        if (!rSquare.isOccupied()){
+            return;
+        }
+        if (!(rSquare.getOccupier() instanceof Rook)){
+            return;
+        }
+        Rook rook = (Rook) rSquare.getOccupier();
+        if (!rook.isNeverMoved()){
+            return;
+        }
+        if (kSquare.isOccupied() || bSquare.isOccupied() || qSquare.isOccupied()){
+            return;
+        }
+
+
     }
 }

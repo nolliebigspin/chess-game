@@ -1,5 +1,8 @@
 package schach.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class Board representing the chess board
  */
@@ -181,5 +184,19 @@ public class Board {
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
     }
+
+    private ArrayList<Piece> allActivePieces(boolean isWhite){
+        ArrayList<Piece> pieces = new ArrayList<>();
+        for (Square[] squareArray: squareMatrix){
+            for (Square square: squareArray){
+                if (square.isOccupied() && square.getOccupier().isWhite == isWhite){
+                    pieces.add(square.getOccupier());
+                }
+            }
+        }
+        return pieces;
+    }
+
+    private ArrayList<Square> underAttack
 
 }

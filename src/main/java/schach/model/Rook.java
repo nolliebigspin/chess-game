@@ -174,4 +174,8 @@ public class Rook extends Piece {
         }
     }
 
+    public boolean isNeverMoved(){
+        return neverMoved;
+    }
+
 }
