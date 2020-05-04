@@ -55,7 +55,9 @@ public class King extends Piece {
      * @param target Square the Piece will be moved to
      */
     protected void acceptMove(Square target){
-        if
+        if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
+            rookCasteling(true);
+        }
         position.setOccupied(false);
         this.position = target;
         position.setOccupied(true);
@@ -219,5 +221,27 @@ public class King extends Piece {
             return false;
         }
         return true;
+    }
+
+    private void rookCasteling(boolean isLongCasteling){
+        int startColumn;
+        int targetColumn;
+        int row;
+        if (isLongCasteling){
+            startColumn = 1;
+            targetColumn = 4;
+        } else {
+            startColumn = 8;
+            targetColumn = 6;
+        }
+        if (isWhite){
+            row = 1;
+        } else {
+            row = 8;
+        }
+        Square rookStart = board.getSquare(startColumn, row);
+        Square rookTarget = board.getSquare(targetColumn, row);
+        Piece rook = rookStart.getOccupier();
+        rook.acceptMove(rookTarget);
     }
 }
