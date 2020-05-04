@@ -99,6 +99,11 @@ public abstract class Piece {
         System.out.println("!Move is invalid");
     }
 
+    public List<Square> getLegalSquares(){
+        return legalNextSquares;
+    }
+
+
     /**
      * debug Method
      * //TODO delete
