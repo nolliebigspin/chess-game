@@ -49,6 +49,21 @@ public class King extends Piece {
     }
 
     @Override
+    /**
+     * allows the move to the target square
+     * updates the position square of the Piece
+     * @param target Square the Piece will be moved to
+     */
+    protected void acceptMove(Square target){
+        if
+        position.setOccupied(false);
+        this.position = target;
+        position.setOccupied(true);
+        position.setOccupier(this);
+        updateLegals();
+    }
+
+    @Override
     public void updateLegals() {
         legalNextSquares.clear();
         boolean oppositeIsWhite = !isWhite;
@@ -63,8 +78,14 @@ public class King extends Piece {
         checkBackwardRight(column, row, oppositeIsWhite);
         checkBackwardLeft(column, row, oppositeIsWhite);
         checkForwardLeft(column, row, oppositeIsWhite);
-        if (neverMoved){
-            checkCastelingLong();
+        if (castelingLongValid()){
+            Square bishopPos;
+            if (isWhite){
+                bishopPos = board.squareByDenotation("c1");
+            } else {
+                bishopPos = board.squareByDenotation("c8");
+            }
+            legalNextSquares.add(bishopPos);
         }
     }
 
@@ -156,36 +177,47 @@ public class King extends Piece {
         }
     }
 
-    private  void checkCastelingLong(){
-        Square rSquare;
-        Square qSquare;
-        Square bSquare;
-        Square kSquare;
+    private boolean castelingLongValid(){
+        String rookPosition;
+        String queenPosition;
+        String bishopPosition;
+        String knightPosition;
         if (isWhite){
-            rSquare = board.squareByDenotation("a1");
-            kSquare = board.squareByDenotation("b1");
-            bSquare = board.squareByDenotation("c1");
-            qSquare = board.squareByDenotation("d1");
+            rookPosition = "a1";
+            queenPosition = "d1";
+            bishopPosition = "c1";
+            knightPosition = "b1";
         } else {
-            rSquare = board.squareByDenotation("a8");
-            kSquare = board.squareByDenotation("b8");
-            bSquare = board.squareByDenotation("c8");
-            qSquare = board.squareByDenotation("d8");
+            rookPosition = "a8";
+            queenPosition = "d8";
+            bishopPosition = "c8";
+            knightPosition = "b8";
         }
-        if (!rSquare.isOccupied()){
-            return;
+        Square rSquare = board.squareByDenotation(rookPosition);
+        Square qSquare = board.squareByDenotation(queenPosition);
+        Square bSquare = board.squareByDenotation(bishopPosition);
+        Square kSquare = board.squareByDenotation(knightPosition);
+        // checks if rook square is occupied
+        if (!rSquare.isOccupied() && !neverMoved){
+            return false;
         }
+        // checks if piece on rook square is rook
         if (!(rSquare.getOccupier() instanceof Rook)){
-            return;
+            return false;
         }
         Rook rook = (Rook) rSquare.getOccupier();
+        // checks if rook was never moved
         if (!rook.isNeverMoved()){
-            return;
+            return false;
         }
+        // checks if squares in between are occupied
         if (kSquare.isOccupied() || bSquare.isOccupied() || qSquare.isOccupied()){
-            return;
+            return false;
         }
-
-
+        // checks if squares where king has to move over are under attack
+        if (board.isUnderAttack(queenPosition, !isWhite) || board.isUnderAttack(bishopPosition, !isWhite)){
+            return false;
+        }
+        return true;
     }
 }
