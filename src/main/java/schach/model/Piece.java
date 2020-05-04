@@ -35,7 +35,6 @@ public abstract class Piece {
      * @param isWhite true if it is a piece of the white set, false if black
      * @param board the board where the piece will be played on
      */
-
     public Piece (Square position, boolean isWhite, Board board){
         this.position = position;
         this.isWhite = isWhite;
@@ -98,6 +97,15 @@ public abstract class Piece {
     protected void refuseMove(){
         System.out.println("!Move is invalid");
     }
+
+    /**
+     * getter for list of legal squares
+     * @return
+     */
+    public List<Square> getLegalSquares(){
+        return legalNextSquares;
+    }
+
 
     /**
      * debug Method

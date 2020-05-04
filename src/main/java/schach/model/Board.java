@@ -1,5 +1,8 @@
 package schach.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class Board representing the chess board
  */
@@ -182,4 +185,68 @@ public class Board {
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
     }
 
+    /**
+     * Returns all pieces currently active on the board of a given color
+     * @param isWhite true for all white pieces, false for all black pieces
+     * @return List of all active pieces of a color
+     */
+    private List<Piece> allActivePieces(boolean isWhite){
+        List<Piece> pieces = new ArrayList<>();
+        for (Square[] squareArray: squareMatrix){
+            for (Square square: squareArray){
+                if (square.isOccupied() && square.getOccupier().isWhite == isWhite){
+                    pieces.add(square.getOccupier());
+                }
+            }
+        }
+        return pieces;
+    }
+
+    /**
+     * Lists all squares that are currently under attack by a color
+     * @param isWhite true for all squares attacked by white, false for attacked by black
+     * @return ArrayList of attacked squares
+     */
+    private List<Square> attackedSquares(boolean isWhite){
+        List<Piece> allPieces = allActivePieces(isWhite);
+        List<Square> attacked = new ArrayList<>();
+        for (Piece piece: allPieces){
+            piece.updateLegals();
+            attacked.addAll(piece.getLegalSquares());
+        }
+        return attacked;
+    }
+
+    /**
+     * checks if a given square is under attack by a given color
+     * @param denotation denotation of square which should be checked
+     * @param oppositeIsWhite true if opposite color is white, false if black
+     * @return true if square is under attack, false if not
+     */
+    public boolean isUnderAttack(String denotation, boolean oppositeIsWhite){
+        List<Square> attacked = attackedSquares(oppositeIsWhite);
+        for (Square square: attacked){
+            if (square.getDenotation().equals(denotation)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * debug
+     * TODO delete
+     */
+    public void printAttacked() {
+        System.out.println("Under attack by white:");
+        List<Square> whites = attackedSquares(true);
+        for (Square square : whites) {
+            System.out.println(square.getDenotation());
+        }
+        System.out.println("\n Under attack by black:");
+        List<Square> blacks = attackedSquares(false);
+        for (Square square : blacks) {
+            System.out.println(square.getDenotation());
+        }
+    }
 }
