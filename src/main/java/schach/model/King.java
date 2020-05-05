@@ -57,7 +57,7 @@ public class King extends Piece {
     @Override
     protected void acceptMove(Square target){
         if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
-            target.getOccupier().setBeaten();
+            board.addToCemetery(target.getOccupier());
         }
         if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
             rookCasteling(true);

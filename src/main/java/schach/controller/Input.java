@@ -38,6 +38,9 @@ public class Input {
         boolean running = true;
         while (running) {
             readInput();
+            if (currentInputLine.equals("beaten")){
+                board.printBeaten();
+            }
             validate();
             if (valid) {
                 board.movePiece(startingPos, targetPos);

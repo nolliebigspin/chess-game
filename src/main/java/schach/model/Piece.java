@@ -51,14 +51,6 @@ public abstract class Piece {
         return this.position;
     }
 
-    public boolean isBeaten(){
-        return isBeaten;
-    }
-
-    public void setBeaten(){
-        this.isBeaten = true;
-    }
-
     /**
      * abstract Method to print the piece
      * @return String that represents the piece
@@ -116,7 +108,6 @@ public abstract class Piece {
     public List<Square> getLegalSquares(){
         return legalNextSquares;
     }
-
 
     /**
      * debug Method
