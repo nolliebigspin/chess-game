@@ -137,9 +137,9 @@ public class Input {
         return true;
     }
 
-
     /**
-     * reads input via scanner class
+     * reads the input and returns it
+     * @return the string of the input line
      */
     private String readInput() {
         Scanner scanner = new Scanner(System.in);
@@ -148,7 +148,9 @@ public class Input {
     }
 
     /**
-     * Validates the input for a move command
+     * validates if the give input is a legal move command
+     * @param input String that should be validated
+     * @return true if String is valid move command, false if not
      */
     private boolean validMoveInput(String input) {
         String invalidOut = "!Invalid Move";
