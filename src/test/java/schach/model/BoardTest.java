@@ -2,11 +2,10 @@ package schach.model;
 
 
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 
+import javax.lang.model.type.NullType;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,6 +21,7 @@ class BoardTest {
         testBoard.addPiece("queen", "a1", false);
 
         assertTrue(testBoard.squareByDenotation("a1").isOccupied());
+        assertFalse(testBoard.squareByDenotation("b5").isOccupied());
     }
 
     @Test
@@ -47,22 +47,22 @@ class BoardTest {
 
 
 
-  //  @Test
-  //  void squareByDenotationTest() {
+    @Test
+    void squareByDenotationTest() {
+        Board testBoard = new Board();
+
+        assertNull(testBoard.squareByDenotation("a10"));
+        assertNotNull(testBoard.squareByDenotation("a7"));
+
+    }
+
+    //  @Test
+    // void getSquareTest() {
     //     Board testBoard = new Board();
-  //   testBoard.addPiece("bishop", "d1", false);
-  //   Square bishop = new Square(4,1);
-  //   Bishop bishopTest = new Bishop(bishop,false, testBoard);
-    //   assertSame(bishopTest,testBoard);
+    //     testBoard.addPiece("bishop", "d1", false);
+    //    assertEquals(testBoard.squareByDenotation("d1")getOccupier().getPosition(),testBoard.getSquare(4,1).);
 
-    // }
-    // @Test
-    //  void getSquareTest() {
-    //    Board testBoard = new Board();
-    //    Square[][] squareMatrixTest = new Square[7][7];
-    //  assertEquals(squareMatrixTest,testBoard.getSquare(8,8));
-
-    // }
+    //}
 
     // @Test
     // void movePieceTest() throws java.lang.Exception {
