@@ -51,6 +51,14 @@ public abstract class Piece {
         return this.position;
     }
 
+    public boolean isBeaten(){
+        return isBeaten;
+    }
+
+    public void setBeaten(){
+        this.isBeaten = true;
+    }
+
     /**
      * abstract Method to print the piece
      * @return String that represents the piece
@@ -84,6 +92,9 @@ public abstract class Piece {
      * @param target Square the Piece will be moved to
      */
     protected void acceptMove(Square target){
+        if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
+            board.addToCemetery(target.getOccupier());
+        }
         position.setOccupied(false);
         this.position = target;
         position.setOccupied(true);

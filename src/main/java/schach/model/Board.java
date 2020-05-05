@@ -13,6 +13,8 @@ public class Board {
      */
     private Square[][] squareMatrix = new Square[8][8];
 
+    private List<Piece> cemetery = new ArrayList<>();
+
     /**
      * Constructor, initializes the Square Matrix and the start Lineup
      */
@@ -230,6 +232,16 @@ public class Board {
             }
         }
         return false;
+    }
+
+    public void addToCemetery(Piece piece){
+        cemetery.add(piece);
+    }
+
+    public void printBeaten(){
+        for (Piece piece: cemetery){
+            System.out.println(piece.print());
+        }
     }
 
     /**
