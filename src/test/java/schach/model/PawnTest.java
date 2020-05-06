@@ -82,7 +82,21 @@ class PawnTest {
 //   assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
 //       testBoard.squareByDenotation("d5").getOccupier().getLegalNextSquares();
 //   });
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ }
 
 
 
