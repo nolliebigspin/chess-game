@@ -84,6 +84,9 @@ public abstract class Piece {
      * @param target Square the Piece will be moved to
      */
     protected void acceptMove(Square target){
+        if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
+            board.addToCemetery(target.getOccupier());
+        }
         position.setOccupied(false);
         this.position = target;
         position.setOccupied(true);
@@ -110,7 +113,6 @@ public abstract class Piece {
     public List<Square> getLegalSquares(){
         return legalNextSquares;
     }
-
 
     /**
      * debug Method

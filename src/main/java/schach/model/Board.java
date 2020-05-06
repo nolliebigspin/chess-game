@@ -14,6 +14,11 @@ public class Board {
     private Square[][] squareMatrix = new Square[8][8];
 
     /**
+     * List of pieces that are beaten, no longer activ on board
+     */
+    private List<Piece> cemetery = new ArrayList<>();
+
+    /**
      * Constructor, initializes the Square Matrix and the start Lineup
      */
     public Board() {
@@ -170,7 +175,6 @@ public class Board {
      * @param startingPos denotation of the square which the piece to be moved is occupying
      * @param targetPos denotation of the square which the piece is supposed to be moved to
      */
-    // TODO Check if target square is already occupied
     public void movePiece(String startingPos, String targetPos) {
         if (!squareByDenotation(startingPos).isOccupied()) {
             System.out.println("!Invalid Move: No Piece found!");
@@ -230,6 +234,26 @@ public class Board {
             }
         }
         return false;
+    }
+
+    /**
+     * Adds a given piece to the cemetery, the list of beaten pieces
+     * @param piece that should be added
+     */
+    public void addToCemetery(Piece piece){
+        cemetery.add(piece);
+    }
+
+    /**
+     * prints the list of beaten piece, by printing every beaten pieces unicode
+     */
+    public void printBeaten(){
+        if (cemetery.size() == 0){
+            System.out.println("no pieces beaten yet");
+        }
+        for (Piece piece: cemetery){
+            System.out.println(piece.print());
+        }
     }
 
     /**
