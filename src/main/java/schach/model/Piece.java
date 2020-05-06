@@ -1,6 +1,10 @@
 package schach.model;
 
 import schach.controller.Input;
+import schach.model.Queen;
+import schach.model.Rook;
+import schach.model.Bishop;
+import schach.model.Knight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +99,7 @@ public abstract class Piece {
         position.setOccupier(this);
         if (this instanceof Pawn) {
             if (checkPromotion(this.position.getColumn())) {
-               doPromotion(Input.readInputPromotion(), this.position);
+               doPromotion(Input.readInputPromotion(), this.position, position.getOccupier());
             }
         }
         updateLegals();
@@ -133,20 +137,24 @@ public abstract class Piece {
             return false;
         }
     }
-
-    private void doPromotion(String prom, Square pos) {
+// Square position, boolean isWhite, Board board)
+    private void doPromotion(String prom, Square pos, Piece piece) {
         switch (prom) {
             case "Q":
-                System.out.println("Queen");
+                Queen queenProm = new Queen(pos, piece.isWhite, piece.board);
+                System.out.println("Your pawn was promoted to a Queen!");
                 break;
             case "R":
-                System.out.println("Rook");
+                Queen rookProm = new Queen(pos, piece.isWhite, piece.board);
+                System.out.println("Your pawn was promoted to a Rook!");
                 break;
             case "B":
-                System.out.println("Bishop");
+                Queen bishopProm = new Queen(pos, piece.isWhite, piece.board);
+                System.out.println("Your pawn was promoted to a Bishop!");
                 break;
             case "N":
-                System.out.println("Knight");
+                Queen knightProm = new Queen(pos, piece.isWhite, piece.board);
+                System.out.println("Your pawn was promoted to a Knight!");
                 break;
         }
     }
