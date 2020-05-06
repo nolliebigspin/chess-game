@@ -146,9 +146,10 @@ public class Input {
         return scanner.nextLine();
     }
 
-    public void readInputPromotion() {
+    public static String readInputPromotion() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Promotion! Enter Q, R, B, or N to promote your pawn.");
+        return scanner.nextLine();
     }
 
     /**

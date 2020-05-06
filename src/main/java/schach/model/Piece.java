@@ -1,5 +1,7 @@
 package schach.model;
 
+import schach.controller.Input;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +95,7 @@ public abstract class Piece {
         position.setOccupier(this);
         if (this instanceof Pawn) {
             if (checkPromotion(this.position.getColumn())) {
-
+               doPromotion(Input.readInputPromotion(), this.position);
             }
         }
         updateLegals();
@@ -129,6 +131,23 @@ public abstract class Piece {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void doPromotion(String prom, Square pos) {
+        switch (prom) {
+            case "Q":
+                System.out.println("Queen");
+                break;
+            case "R":
+                System.out.println("Rook");
+                break;
+            case "B":
+                System.out.println("Bishop");
+                break;
+            case "N":
+                System.out.println("Knight");
+                break;
         }
     }
 }
