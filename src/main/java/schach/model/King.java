@@ -33,6 +33,7 @@ public class King extends Piece {
 
     /**
      * Same method as in the piece interface, but sets boolean neverMoved to false
+     * and checks for casteling
      * @param target is the target square where the piece is moved to
      */
     @Override
@@ -40,36 +41,18 @@ public class King extends Piece {
         updateLegals();
         for (Square square: legalNextSquares){
             if (square == target){
+                if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
+                    rookCasteling(true);
+                }
+                if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castelingShortValid()) {
+                    rookCasteling(false);
+                }
                 acceptMove(target);
                 neverMoved = false;
                 return;
             }
         }
         refuseMove();
-    }
-
-    /**
-     * allows the move to the target square
-     * updates the position square of the Piece
-     * checks additionally if casteling is executed and moves the rook
-     * @param target Square the Piece will be moved to
-     */
-    @Override
-    protected void acceptMove(Square target){
-        if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
-            board.addToCemetery(target.getOccupier());
-        }
-        if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
-            rookCasteling(true);
-        }
-        if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castelingShortValid()) {
-            rookCasteling(false);
-        }
-        position.setOccupied(false);
-        this.position = target;
-        position.setOccupied(true);
-        position.setOccupier(this);
-        updateLegals();
     }
 
     /**
