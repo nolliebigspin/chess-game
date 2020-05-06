@@ -2,7 +2,6 @@ package schach.controller;
 
 import schach.model.Board;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -10,10 +9,7 @@ import java.util.Scanner;
  * Class Input that controls the Input and updates the board
  */
 public class Input {
-    private String currentInputLine;
-    private String startingPos;
-    private String targetPos;
-    private boolean valid;
+
     private Board board;
 
     /**
@@ -22,7 +18,6 @@ public class Input {
      */
     public Input(Board board) {
         this.board = board;
-        this.valid = false;
     }
 
     /**
@@ -38,13 +33,14 @@ public class Input {
         board.printBoard();
         boolean running = true;
         while (running) {
-            readInput();
-            validate();
-            if (valid) {
-                board.movePiece(startingPos, targetPos);
+            String input = readInput();
+            if (input.equals("beaten")){
+                board.printBeaten();
+            } else if (validMoveInput(input)) {
+                String[] denotations = input.split("-");
+                board.movePiece(denotations[0], denotations[1]);
                 board.printBoard();
             }
-            valid = false;
         }
     }
 
@@ -141,47 +137,39 @@ public class Input {
         return true;
     }
 
-
     /**
-     * reads input via scanner class
+     * reads the input and returns it
+     * @return the string of the input line
      */
-    private void readInput() {
+    private String readInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("please enter your move: ");
-        this.currentInputLine = scanner.nextLine();
+        return scanner.nextLine();
     }
 
     /**
-     * Validates the input for a move command
-     * TODO use validDenotation Method
+     * validates if the give input is a legal move command
+     * @param input String that should be validated
+     * @return true if String is valid move command, false if not
      */
-    private void validate() {
-        String validLetter = "abcdefgh";
-        String validInteger = "12345678";
+    private boolean validMoveInput(String input) {
         String invalidOut = "!Invalid Move";
         //Exception if string to short
-        if (currentInputLine.length() != 5){
+        if (input.length() != 5){
             System.out.println(invalidOut);
-            return;
+            return false;
         }
         //Exception if string not: xx-xx
-        if (!(currentInputLine.charAt(2) == '-')) {
+        if (!(input.charAt(2) == '-')) {
             System.out.println(invalidOut);
-            return;
+            return false;
         }
-        //Exception if no correct letter (a...h)
-        if (validLetter.indexOf(currentInputLine.charAt(0)) == -1 || validLetter.indexOf(currentInputLine.charAt(3)) == -1) {
+        String[] inputArray = input.split("-");
+        if (!validDenotation(inputArray[0]) || !validDenotation(inputArray[1])){
             System.out.println(invalidOut);
-            return;
+            return false;
         }
-        //Exception if no correct number (1...8)
-        if (validInteger.indexOf(currentInputLine.charAt(1) ) == -1 || validInteger.indexOf(currentInputLine.charAt(4) ) == -1) {
-            System.out.println(invalidOut);
-            return;
-        }
-        this.startingPos = "" + currentInputLine.charAt(0) + currentInputLine.charAt(1);
-        this.targetPos = "" + currentInputLine.charAt(3) + currentInputLine.charAt(4);
-        this.valid = true;
+        return true;
     }
 }
 
