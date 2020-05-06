@@ -23,6 +23,10 @@ public abstract class Piece {
      */
     protected Board board;
 
+    public List<Square> getLegalNextSquares() {
+        return legalNextSquares;
+    }
+
     /**
      * List of Squares that the Square could be moved to by a legal move
      */

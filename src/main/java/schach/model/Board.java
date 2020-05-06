@@ -180,10 +180,11 @@ public class Board {
         }
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().isWhite == squareByDenotation(targetPos).getOccupier().isWhite) {
-            System.out.println("!Invalid Move: Square already occupied");
+            System.out.println("!Invalid Move: Square is already occupied");
             return;
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
+
     }
 
 }
