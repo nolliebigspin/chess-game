@@ -36,7 +36,12 @@ public class Input {
             String input = readInput();
             if (input.equals("beaten")){
                 board.printBeaten();
-            } else if (validMoveInput(input)) {
+            } else if (input.indexOf("undo") != -1){    //TODO delete, debug
+                String[] arrayIn = input.split(" ");
+                board.undo(arrayIn[1]);
+                board.printBoard();
+            }
+            else if (validMoveInput(input)) {
                 String[] denotations = input.split("-");
                 board.movePiece(denotations[0], denotations[1]);
                 board.printBoard();

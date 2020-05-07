@@ -193,7 +193,7 @@ public class Board {
      * @param isWhite true for all white pieces, false for all black pieces
      * @return List of all active pieces of a color
      */
-    private List<Piece> allActivePieces(boolean isWhite){
+    public List<Piece> allActivePieces(boolean isWhite){
         List<Piece> pieces = new ArrayList<>();
         for (Square[] squareArray: squareMatrix){
             for (Square square: squareArray){
@@ -286,5 +286,14 @@ public class Board {
         for (Square square : blacks) {
             System.out.println(square.getDenotation());
         }
+    }
+
+    /**
+     * debug
+     * TODO delete
+     */
+    public void undo(String denotation){
+        Piece piece = squareByDenotation(denotation).getOccupier();
+        piece.undoMove();
     }
 }
