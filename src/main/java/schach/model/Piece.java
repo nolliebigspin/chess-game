@@ -125,32 +125,36 @@ public abstract class Piece {
         }
     }
 
-    private boolean checkPromotion(int column) {
-        if (column == 8 || column == 1) {
-            return true;
-        } else {
-            return false;
+    /**
+     * The promotion of the pawn is done in this method
+     * @param prom String for Piece which the pawn promotes to
+     * @param pos Position on Board where the promoted pawn stands
+     */
+    public void doPromotion(String prom, Square pos) {
+        if(this.isWhite && pos.getRow() != 8 && !(this instanceof Pawn)) {
+            return;
+        } else if (!this.isWhite && pos.getRow() != 1 && !(this instanceof Pawn)) {
+            return;
         }
-    }
-// Square position, boolean isWhite, Board board)
-    private void doPromotion(String prom, Square pos, Piece piece) {
         switch (prom) {
             case "Q":
-                Queen queenProm = new Queen(pos, piece.isWhite, piece.board);
+                Queen queenProm = new Queen(pos, this.isWhite, this.board);
                 System.out.println("Your pawn was promoted to a Queen!");
                 break;
             case "R":
-                Queen rookProm = new Queen(pos, piece.isWhite, piece.board);
+                Rook rookProm = new Rook(pos, this.isWhite, this.board);
                 System.out.println("Your pawn was promoted to a Rook!");
                 break;
             case "B":
-                Queen bishopProm = new Queen(pos, piece.isWhite, piece.board);
+                Bishop bishopProm = new Bishop(pos, this.isWhite, this.board);
                 System.out.println("Your pawn was promoted to a Bishop!");
                 break;
             case "N":
-                Queen knightProm = new Queen(pos, piece.isWhite, piece.board);
+                Knight knightProm = new Knight(pos, this.isWhite, this.board);
                 System.out.println("Your pawn was promoted to a Knight!");
                 break;
+            default: System.out.println("Wrong promotion!");
+
         }
     }
 }

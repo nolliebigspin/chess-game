@@ -38,8 +38,11 @@ public class Input {
             if (input.equals("beaten")){
                 board.printBeaten();
             } else if (validMoveInput(input)) {
-                String[] denotations = input.split("-");
-                board.movePiece(denotations[0], denotations[1]);
+                board.movePiece(input.substring(0,2), input.substring(3,5));
+                if (input.length() == 6) {
+                    //input.substring(5)
+                    board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
+                }
                 board.printBoard();
             }
         }
@@ -182,20 +185,12 @@ public class Input {
             System.out.println(invalidOut);
             return false;
         }
-        //String[] inputArray = input.split("-");
-        List<String> arrList = new ArrayList<String>();
-        String pos = input.substring(0,1);
-        String tar = input.substring(3,4);
-        arrList.add(pos);
-        arrList.add(tar);
         if (input.length() == 6) {
-            String prom = input.substring(5);
-            arrList.add(prom);
-            if (!validPromotion(prom)) {
+            if (!validPromotion(input.substring(5))) {
                 return false;
             }
         }
-        if (!validDenotation(arrList.get(0)) || !validDenotation(arrList.get(1))) {
+        if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {
             System.out.println(invalidOut);
             return false;
         }
