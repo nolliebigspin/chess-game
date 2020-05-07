@@ -1,5 +1,8 @@
 package schach.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class Pawn representing the chess piece peasant
  */
@@ -142,6 +145,27 @@ public class Pawn extends Piece {
                 legalNextSquares.add(aheadLeft);
             }
         }
+    }
+
+    /**
+     * Gets all squares the pawn can make a attack move to
+     * @return list of attacked squares
+     */
+    public List<Square> getAttackedSquares(){
+        List<Square> attacked = new ArrayList<>();
+        int column = this.position.getColumn();
+        int row = this.position.getRow();
+        int plusOne = 1;
+        if (!isWhite){
+            plusOne = - 1;
+        }
+        if (column > 1){
+            attacked.add(board.getSquare(column - 1, row + plusOne ));
+        }
+        if (column < 8){
+            attacked.add(board.getSquare(column + 1, row + plusOne));
+        }
+        return attacked;
     }
 
 }
