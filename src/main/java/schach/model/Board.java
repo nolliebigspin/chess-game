@@ -215,18 +215,8 @@ public class Board {
         List<Square> attacked = new ArrayList<>();
         for (Piece piece: allPieces){
             if (piece instanceof Pawn){
-                int column = piece.getPosition().getColumn();
-                int row = piece.getPosition().getRow();
-                int plusOne = 1;
-                if (!attackerIsWhite){
-                    plusOne = - 1;
-                }
-                if (column > 1){
-                    attacked.add(getSquare(column - 1, row + plusOne));
-                }
-                if (column < 8){
-                    attacked.add(getSquare(column + 1, row + plusOne));
-                }
+                Pawn pawn = (Pawn) piece;
+                attacked.addAll(pawn.getAttackedSquares());
             } else {
                 piece.updateLegals();
                 attacked.addAll(piece.getLegalSquares());
