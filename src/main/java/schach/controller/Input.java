@@ -2,7 +2,9 @@ package schach.controller;
 
 import schach.model.Board;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -137,6 +139,23 @@ public class Input {
     }
 
     /**
+     *
+     * @param prom
+     * @return
+     */
+    private boolean validPromotion(String prom) {
+        if (prom.length() != 1){
+            return false;
+        }
+        char letter = prom.charAt(0);
+        String[] legalLetters = {"Q", "R", "B", "N"};
+        if (!Arrays.asList(legalLetters).contains(String.valueOf(letter))) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * reads the input and returns it
      * @return the string of the input line
      */
@@ -154,7 +173,7 @@ public class Input {
     private boolean validMoveInput(String input) {
         String invalidOut = "!Invalid Move";
         //Exception if string to short
-        if (input.length() != 5){
+        if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
             return false;
         }
@@ -163,8 +182,20 @@ public class Input {
             System.out.println(invalidOut);
             return false;
         }
-        String[] inputArray = input.split("-");
-        if (!validDenotation(inputArray[0]) || !validDenotation(inputArray[1])){
+        //String[] inputArray = input.split("-");
+        List<String> arrList = new ArrayList<String>();
+        String pos = input.substring(0,1);
+        String tar = input.substring(3,4);
+        arrList.add(pos);
+        arrList.add(tar);
+        if (input.length() == 6) {
+            String prom = input.substring(5);
+            arrList.add(prom);
+            if (!validPromotion(prom)) {
+                return false;
+            }
+        }
+        if (!validDenotation(arrList.get(0)) || !validDenotation(arrList.get(1))) {
             System.out.println(invalidOut);
             return false;
         }
