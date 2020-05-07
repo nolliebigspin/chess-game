@@ -131,7 +131,56 @@ class PawnTest {
         assertEquals(legals,Actual);
     }
 
+    // Test up left scenario for a white pawn
+    @Test
+    void UpdateLegalsTestCheckUpLeft1() {
+        Board testBoard = new Board();
+        testBoard.addPiece("pawn", "g3", true);
+        testBoard.addPiece("pawn", "g4", true);
+        testBoard.addPiece("pawn", "f4", false);
+        Pawn whiteEats = new Pawn(testBoard.getSquare(7,3),true,testBoard);
+        int oneUp = 1;
+        int left = -1;
+        Square aheadLeft = testBoard.getSquare(7 + left, 3 + oneUp);
+        List<Square> legalNextSquaresTest = new ArrayList<Square>();
+        legalNextSquaresTest.add(aheadLeft);
+        // checks occupancy of the square up left for a possible enemy
+        assertEquals(legalNextSquaresTest,testBoard.squareByDenotation("g3").getOccupier().getLegalNextSquares());
+        List<Square> Actual =whiteEats.legalNextSquares;
+        Square enemy = testBoard.getSquare(6 , 4);
+        List<Square> legals = new ArrayList<Square>();
+        legals.add(enemy);
+        // test the CheckUpLeft method
+        assertEquals(legals,Actual);
+    }
 
+
+    // Test up left scenario with a possible move forward for a black pawn
+    @Test
+    void UpdateLegalsTestCheckUpLeft2() {
+        Board testBoard = new Board();
+        testBoard.addPiece("pawn", "a5", false);
+        testBoard.addPiece("pawn", "a4", false);
+        testBoard.addPiece("pawn", "b3", true);
+        Pawn whiteEats = new Pawn(testBoard.getSquare(1,4),false,testBoard);
+        int oneUp = -1;
+        int left = 1;
+        Square aheadLeft = testBoard.getSquare(1 + left, 4 + oneUp);
+        Square ahead = testBoard.getSquare(1 , 3);
+        List<Square> legalNextSquaresTest = new ArrayList<Square>();
+        legalNextSquaresTest.add(ahead);
+        legalNextSquaresTest.add(aheadLeft);
+        // checks occupancy of the square up left for a possible enemy
+         assertEquals(legalNextSquaresTest,testBoard.squareByDenotation("a4").getOccupier().getLegalNextSquares());
+        List<Square> Actual =whiteEats.legalNextSquares;
+        Square enemy = testBoard.getSquare(2 , 3);
+        Square empty = testBoard.getSquare(1 , 3);
+        List<Square> legals = new ArrayList<Square>();
+        legals.add(empty);
+        legals.add(enemy);
+        // test the CheckUpLeft method
+         assertEquals(legals,Actual);
+    }
 
 
 
