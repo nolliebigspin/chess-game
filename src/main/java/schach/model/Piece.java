@@ -29,6 +29,16 @@ public abstract class Piece {
     protected List<Square> legalNextSquares = new ArrayList<Square>();
 
     /**
+     * Square the piece was occupying in before a move
+     */
+    private Square previousPos;
+
+    /**
+     * Piece that got beaten by the move of this piece
+     */
+    private Piece beatenPiece;
+
+    /**
      * Constructor of Piece
      * the square where the piece is placed, marked and gets the Piece Object passed
      * @param position denotation of the square where the piece will be initiated on
@@ -83,11 +93,14 @@ public abstract class Piece {
      * updates the position square of the Piece
      * @param target Square the Piece will be moved to
      */
-    protected void acceptMove(Square target){
+    public void acceptMove(Square target){
+        previousPos = this.position;
         if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
+            beatenPiece = target.getOccupier();
             board.addToCemetery(target.getOccupier());
         }
         position.setOccupied(false);
+        position.setOccupier(null);
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
@@ -103,7 +116,7 @@ public abstract class Piece {
 
     /**
      * getter for list of legal squares
-     * @return
+     * @return the list of legal squares
      */
     public List<Square> getLegalSquares(){
         return legalNextSquares;
@@ -116,6 +129,30 @@ public abstract class Piece {
     public void printLegals(){
         for (Square square: legalNextSquares){
             System.out.println(square.getDenotation());
+        }
+    }
+
+    /**
+     * getter for color of the piece
+     * @return true if white, false if black
+     */
+    public boolean isWhite(){
+        return isWhite;
+    }
+
+    /**
+     * Undoes the last move of the piece
+     */
+    public void undoMove(){
+        Square newPos = position;
+        position.setOccupied(false);
+        position.setOccupier(null);
+        this.position = previousPos;
+        position.setOccupied(true);
+        position.setOccupier(this);
+        if (beatenPiece != null){
+            newPos.setOccupied(true);
+            newPos.setOccupier(beatenPiece);
         }
     }
 }
