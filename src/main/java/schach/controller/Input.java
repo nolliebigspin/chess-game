@@ -142,9 +142,9 @@ public class Input {
     }
 
     /**
-     *
-     * @param prom
-     * @return
+     * validates if the given last character of the input is a correct piece for promotion
+     * @param prom String that the pawn should be promoted to
+     * @return boolean if the letter is legal character for promotion
      */
     private boolean validPromotion(String prom) {
         if (prom.length() != 1){

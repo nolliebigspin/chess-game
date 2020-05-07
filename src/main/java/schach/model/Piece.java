@@ -126,7 +126,7 @@ public abstract class Piece {
     }
 
     /**
-     * The promotion of the pawn is done in this method
+     * This method does the promotion for a pawn
      * @param prom String for Piece which the pawn promotes to
      * @param pos Position on Board where the promoted pawn stands
      */
