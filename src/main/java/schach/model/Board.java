@@ -207,15 +207,30 @@ public class Board {
 
     /**
      * Lists all squares that are currently under attack by a color
-     * @param isWhite true for all squares attacked by white, false for attacked by black
+     * @param attackerIsWhite true for all squares attacked by white, false for attacked by black
      * @return ArrayList of attacked squares
      */
-    private List<Square> attackedSquares(boolean isWhite){
-        List<Piece> allPieces = allActivePieces(isWhite);
+    public List<Square> attackedSquares(boolean attackerIsWhite){
+        List<Piece> allPieces = allActivePieces(attackerIsWhite);
         List<Square> attacked = new ArrayList<>();
         for (Piece piece: allPieces){
-            piece.updateLegals();
-            attacked.addAll(piece.getLegalSquares());
+            if (piece instanceof Pawn){
+                int column = piece.getPosition().getColumn();
+                int row = piece.getPosition().getRow();
+                int plusOne = 1;
+                if (!attackerIsWhite){
+                    plusOne = - 1;
+                }
+                if (column > 1){
+                    attacked.add(getSquare(column - 1, row + plusOne));
+                }
+                if (column < 8){
+                    attacked.add(getSquare(column + 1, row + plusOne));
+                }
+            } else {
+                piece.updateLegals();
+                attacked.addAll(piece.getLegalSquares());
+            }
         }
         return attacked;
     }

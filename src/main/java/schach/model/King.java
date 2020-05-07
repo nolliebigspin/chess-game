@@ -1,5 +1,7 @@
 package schach.model;
 
+import java.util.List;
+
 /**
  * Class King representing the chess piece king
  */
@@ -39,6 +41,7 @@ public class King extends Piece {
     @Override
     public void move(Square target){
         updateLegals();
+        filterAttacked();
         for (Square square: legalNextSquares){
             if (square == target){
                 if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
@@ -298,5 +301,12 @@ public class King extends Piece {
         Square rookTarget = board.getSquare(targetColumn, row);
         Piece rook = rookStart.getOccupier();
         rook.acceptMove(rookTarget);
+    }
+
+    private void filterAttacked(){
+        List<Square> attacked = board.attackedSquares(!isWhite);
+        for (Square square: attacked){
+            legalNextSquares.remove(square);
+        }
     }
 }
