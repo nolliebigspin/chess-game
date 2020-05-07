@@ -146,12 +146,6 @@ public class Input {
         return scanner.nextLine();
     }
 
-    public static String readInputPromotion() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Promotion! Enter Q, R, B, or N to promote your pawn.");
-        return scanner.nextLine();
-    }
-
     /**
      * validates if the give input is a legal move command
      * @param input String that should be validated

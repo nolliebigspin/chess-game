@@ -97,11 +97,6 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
-        if (this instanceof Pawn) {
-            if (checkPromotion(this.position.getColumn())) {
-               doPromotion(Input.readInputPromotion(), this.position, position.getOccupier());
-            }
-        }
         updateLegals();
     }
 
