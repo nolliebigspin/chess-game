@@ -80,8 +80,9 @@ public abstract class Piece {
     public void move(Square target){
         boolean inList = false;
         updateLegals();
+        // if check: updates legal Squares, so only moves are possible to resolve check
         if (board.getCheckRuler().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
-            legalNextSquares =
+            legalNextSquares = board.getCheckRuler().legalsToResolveCheck(this);
         }
         for (Square square: legalNextSquares){
             if (square == target){

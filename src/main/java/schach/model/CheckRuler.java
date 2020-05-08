@@ -92,12 +92,27 @@ public class CheckRuler {
         return  settingCheck;
     }
 
+    /**
+     * returns a list of squares that a given piece could move to to resolve a check situation
+     * @param piece Piece that is checked for possible 'resolve squares'
+     * @return List of squares that could resolve a check situation
+     */
     public List<Square> legalsToResolveCheck(Piece piece){
         Piece attacker = attackersSettingCheck(piece.isWhite).get(0);
-        List<Square> legals = new ArrayList<>();
+        List<Square> inBetweens = inBetweenSquares(piece.isWhite);
+        List<Square> newLegals = new ArrayList<>();
+        List<Square> legals = piece.getLegalSquares();
         if (piece.getLegalSquares().contains(attacker.getPosition())){
-            legals.add(attacker.getPosition());
+            newLegals.add(attacker.getPosition());
         }
+        if (inBetweens.size() > 0){
+            for (Square betweenSquare: inBetweens){
+                if (legals.contains(betweenSquare)){
+                    newLegals.add(betweenSquare);
+                }
+            }
+        }
+        return newLegals;
     }
 
     public boolean isCheckMate(boolean kingIsWhite){
@@ -142,6 +157,11 @@ public class CheckRuler {
         return newLegas;
     }
 
+    /**
+     * Returns squares that are in the line of the attacker and the king
+     * @param kingIsWhite
+     * @return
+     */
     private List<Square> inBetweenSquares(boolean kingIsWhite){
         Piece attacker = attackersSettingCheck(kingIsWhite).get(0);
         if (attacker instanceof Rook){
