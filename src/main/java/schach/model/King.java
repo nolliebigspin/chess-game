@@ -41,7 +41,6 @@ public class King extends Piece {
     @Override
     public void move(Square target){
         updateLegals();
-        filterAttacked();
         for (Square square: legalNextSquares){
             if (square == target){
                 if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
@@ -94,6 +93,7 @@ public class King extends Piece {
             }
             legalNextSquares.add(knightPos);
         }
+        filterAttacked();
 
     }
 
