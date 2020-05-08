@@ -69,6 +69,7 @@ public class Pawn extends Piece {
         if (!ahead.isOccupied()) {
             legalNextSquares.add(ahead);
         }
+
     }
 
     /**
