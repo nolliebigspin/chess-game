@@ -123,7 +123,7 @@ public class King extends Piece {
     }
 
     private void checkBackward(int column, int row, boolean oppositeIsWhite) {
-        if (row > 8) {
+        if (row > 1) {
             Square nextSquare = board.getSquare(column, row - 1);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
