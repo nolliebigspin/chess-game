@@ -1,15 +1,17 @@
 package schach.controller;
 
 import schach.model.Board;
+import schach.model.Square;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * Class Input that controls the Input and updates the board
  */
 public class Input {
-
     private Board board;
 
     /**
@@ -37,8 +39,11 @@ public class Input {
             if (input.equals("beaten")){
                 board.printBeaten();
             } else if (validMoveInput(input)) {
-                String[] denotations = input.split("-");
-                board.movePiece(denotations[0], denotations[1]);
+                board.movePiece(input.substring(0,2), input.substring(3,5));
+                // calling promotion method for piece if target Square is occupied
+                if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
+                    board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
+                }
                 board.printBoard();
             }
         }
@@ -138,6 +143,23 @@ public class Input {
     }
 
     /**
+     * validates if the given last character of the input is a correct piece for promotion
+     * @param prom String that the pawn should be promoted to
+     * @return boolean if the letter is legal character for promotion
+     */
+    private boolean validPromotion(String prom) {
+        if (prom.length() != 1){
+            return false;
+        }
+        char letter = prom.charAt(0);
+        String[] legalLetters = {"Q", "R", "B", "N"};
+        if (!Arrays.asList(legalLetters).contains(String.valueOf(letter))) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * reads the input and returns it
      * @return the string of the input line
      */
@@ -155,7 +177,7 @@ public class Input {
     private boolean validMoveInput(String input) {
         String invalidOut = "!Invalid Move";
         //Exception if string to short
-        if (input.length() != 5){
+        if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
             return false;
         }
@@ -164,8 +186,12 @@ public class Input {
             System.out.println(invalidOut);
             return false;
         }
-        String[] inputArray = input.split("-");
-        if (!validDenotation(inputArray[0]) || !validDenotation(inputArray[1])){
+        if (input.length() == 6) {
+            if (!validPromotion(input.substring(5))) {
+                return false;
+            }
+        }
+        if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {
             System.out.println(invalidOut);
             return false;
         }

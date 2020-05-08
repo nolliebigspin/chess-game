@@ -20,29 +20,22 @@ public class Pawn extends Piece {
     public String print() {
         if (super.isWhite) {
             return "\u2659";
-        }
-        else {
+        } else {
             return "\u265F";
         }
     }
 
     @Override
     protected void updateLegals() {
-
         legalNextSquares.clear();
-
-        //column integer value of square the Pawn is currently occupying
         int column = position.getColumn();
-
-        //row integer value of square the Pawn is currently occupying
         int row = position.getRow();
 
-        if (row < 8 && row > 1){
+        if (row < 8 && row > 1) {
             checkAhead(column, row);
             checkUpRight(column, row);
             checkUpLeft(column, row);
         }
-
     }
 
     /**
@@ -51,18 +44,16 @@ public class Pawn extends Piece {
      * @param column integer representation of the column the pawn is currently occupying
      * @param row integer representation of the row the pawn is currently occupying
      */
-    private void checkAhead(int column, int row){
-
+    private void checkAhead(int column, int row) {
         int startingRow;
         int secondRow;
         int oneUp;
 
-        if (isWhite){
+        if (isWhite) {
             startingRow = 2;
             secondRow = 4;
             oneUp = 1;
-        }
-        else {
+        } else {
             startingRow = 7;
             secondRow = 5;
             oneUp = -1;
@@ -71,11 +62,11 @@ public class Pawn extends Piece {
         Square ahead = board.getSquare(column, row + oneUp);
         Square aheadTwice = board.getSquare(column, secondRow);
 
-        if (row == startingRow && !ahead.isOccupied() && !aheadTwice.isOccupied()){
+        if (row == startingRow && !ahead.isOccupied() && !aheadTwice.isOccupied()) {
             legalNextSquares.add(aheadTwice);
         }
 
-        if (!ahead.isOccupied()){
+        if (!ahead.isOccupied()) {
             legalNextSquares.add(ahead);
         }
     }
@@ -86,24 +77,22 @@ public class Pawn extends Piece {
      * @param column integer representation of the column the pawn is currently occupying
      * @param row integer representation of the row the pawn is currently occupying
      */
-    private void checkUpRight(int column, int row){
-
+    private void checkUpRight(int column, int row) {
         int oneUp;
         int right;
         boolean oppositeIsWhite;
 
-        if (isWhite){
+        if (isWhite) {
             oneUp = 1;
             right = 1;
             oppositeIsWhite = false;
-        }
-        else {
+        } else {
             oneUp = -1;
             right = -1;
             oppositeIsWhite = true;
         }
 
-        if (column < 8 && isWhite || column > 1 && !isWhite){
+        if (column < 8 && isWhite || column > 1 && !isWhite) {
             Square aheadRight = board.getSquare(column + right, row + oneUp);
 
             if (aheadRight.isOccupied() && aheadRight.getOccupier().isWhite == oppositeIsWhite) {
@@ -118,30 +107,27 @@ public class Pawn extends Piece {
      * @param column integer representation of the column the pawn is currently occupying
      * @param row integer representation of the row the pawn is currently occupying
      */
-    private void checkUpLeft(int column, int row){
-
+    private void checkUpLeft(int column, int row) {
         int oneUp;
         int left;
         boolean oppositeIsWhite;
 
-        if (isWhite){
+        if (isWhite) {
             oneUp = 1;
             left = -1;
             oppositeIsWhite = false;
-        }
-        else {
+        } else {
             oneUp = -1;
             left = 1;
             oppositeIsWhite = true;
         }
 
-        if (column > 1 && isWhite || column < 8 && !isWhite){
+        if (column > 1 && isWhite || column < 8 && !isWhite) {
             Square aheadLeft = board.getSquare(column + left, row + oneUp);
 
-            if (aheadLeft.isOccupied() && aheadLeft.getOccupier().isWhite == oppositeIsWhite){
+            if (aheadLeft.isOccupied() && aheadLeft.getOccupier().isWhite == oppositeIsWhite) {
                 legalNextSquares.add(aheadLeft);
             }
         }
     }
-
 }

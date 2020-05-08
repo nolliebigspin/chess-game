@@ -1,5 +1,11 @@
 package schach.model;
 
+import schach.controller.Input;
+import schach.model.Queen;
+import schach.model.Rook;
+import schach.model.Bishop;
+import schach.model.Knight;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +122,36 @@ public abstract class Piece {
     public void printLegals(){
         for (Square square: legalNextSquares){
             System.out.println(square.getDenotation());
+        }
+    }
+
+    /**
+     * This method does the promotion for a pawn
+     * @param prom String for Piece which the pawn promotes to
+     * @param pos Position on Board where the promoted pawn stands
+     */
+    public void doPromotion(String prom, Square pos) {
+        if (this.isWhite && pos.getRow() != 8 || !(this instanceof Pawn)) {
+            System.out.println("ZZZ");
+            return;
+        } else if (!this.isWhite && pos.getRow() != 1 || !(this instanceof Pawn)) {
+            System.out.println("XXX");
+            return;
+        }
+        switch (prom) {
+            case "Q":
+                Queen queenProm = new Queen(pos, this.isWhite, this.board);
+                break;
+            case "R":
+                Rook rookProm = new Rook(pos, this.isWhite, this.board);
+                break;
+            case "B":
+                Bishop bishopProm = new Bishop(pos, this.isWhite, this.board);
+                break;
+            case "N":
+                Knight knightProm = new Knight(pos, this.isWhite, this.board);
+                break;
+            default:
         }
     }
 }
