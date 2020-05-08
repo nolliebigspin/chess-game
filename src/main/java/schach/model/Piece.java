@@ -132,10 +132,8 @@ public abstract class Piece {
      */
     public void doPromotion(String prom, Square pos) {
         if (this.isWhite && pos.getRow() != 8 || !(this instanceof Pawn)) {
-            System.out.println("ZZZ");
             return;
         } else if (!this.isWhite && pos.getRow() != 1 || !(this instanceof Pawn)) {
-            System.out.println("XXX");
             return;
         }
         switch (prom) {
