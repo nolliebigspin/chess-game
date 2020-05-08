@@ -78,14 +78,19 @@ public abstract class Piece {
      * @param target is the target square where the piece is moved to
      */
     public void move(Square target){
+        boolean inList = false;
         updateLegals();
         for (Square square: legalNextSquares){
             if (square == target){
-                acceptMove(target);
-                return;
+                inList = true;
+                break;
             }
         }
-        refuseMove();
+        if (inList && !board.getCheckRuler().inCheckIfMoved(this, target)){
+            acceptMove(target);
+        } else {
+            refuseMove();
+        }
     }
 
     /**
@@ -104,7 +109,7 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
-        updateLegals();
+        //updateLegals(); //TODO maybe delete, redundant?
     }
 
     /**

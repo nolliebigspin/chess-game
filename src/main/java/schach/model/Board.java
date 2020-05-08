@@ -18,11 +18,17 @@ public class Board {
      */
     private List<Piece> cemetery = new ArrayList<>();
 
+    private CheckRuler checkRuler;
+
     /**
      * Constructor, initializes the Square Matrix and the start Lineup
      */
     public Board() {
         initMatrix();
+    }
+
+    public CheckRuler getCheckRuler(){
+        return checkRuler;
     }
 
     /**
@@ -84,7 +90,8 @@ public class Board {
         new Queen(squareByDenotation("d8"), false, this);
         new King(squareByDenotation("e8"), false, this);
 
-
+        //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THER MUST BE KINGS)
+        this.checkRuler = new CheckRuler(this);
     }
 
     /**
