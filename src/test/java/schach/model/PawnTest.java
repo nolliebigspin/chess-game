@@ -184,13 +184,36 @@ class PawnTest {
 
 
 
+    // test the print method
+    // white pawn
+    @Test
+    void printTestWhite() {
+        Board testBoard = new Board();
+        testBoard.addPiece("pawn", "a2", true);
+        String actual = testBoard.squareByDenotation("a2").getOccupier().print();
+        String expected = "\u2659";
+        assertEquals(expected, actual);
+    }
+
+
+    // black pawn
+    @Test
+    void printTestBlack() {
+        Board testBoard = new Board();
+        testBoard.addPiece("pawn", "a3", false);
+        String actual = testBoard.squareByDenotation("a3").getOccupier().print();
+        String expected = "\u265F";
+        assertEquals(expected, actual);
+    }
+
+
+}
 
 
 
 
 
 
- }
 
 
 
