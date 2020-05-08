@@ -18,9 +18,13 @@ public class Board {
     private Square[][] squareMatrix = new Square[8][8];
 
     /**
-     * List of pieces that are beaten, no longer activ on board
+     * List of pieces that are beaten, no longer available on the board
      */
     private List<Piece> cemetery = new ArrayList<>();
+
+    public List<Piece> getCemetery() {
+        return cemetery;
+    }
 
     /**
      * Constructor, initializes the Square Matrix and the start Lineup

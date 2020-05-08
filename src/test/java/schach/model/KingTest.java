@@ -93,6 +93,20 @@ class KingTest {
         assertEquals(legals,Actual);
     }
 
+    @Test
+    void acceptMoveTestScenario1() {
+        Board testBoard = new Board();
+        testBoard.addPiece("king", "d3", false);
+        King k = new King(testBoard.getSquare(4,3),false,testBoard);
+        testBoard.addPiece("rook", "d2", true);
+        List<Piece> cemetery = new ArrayList<>();
+        Rook r = new Rook(testBoard.getSquare(4,2),true,testBoard);
+        cemetery.add(testBoard.squareByDenotation("d2").getOccupier());
+        k.move(testBoard.getSquare(4,2));
+        // makes sure that the rook is added to the cemetery after being eaten by the king
+        assertEquals(cemetery,testBoard.getCemetery());
+
+    }
 
 
 

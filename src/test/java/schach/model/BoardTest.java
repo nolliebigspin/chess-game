@@ -1,6 +1,6 @@
 package schach.model;
 import org.junit.jupiter.api.Test;
-import javax.lang.model.type.NullType;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,14 +31,14 @@ class BoardTest {
 
 
 
-    @Test
-    void squareByDenotationTest() {
-        Board testBoard = new Board();
+    // @Test
+    //void squareByDenotationTest() {
+    //    Board testBoard = new Board();
 
-        assertNull(testBoard.squareByDenotation("a10"));
-        assertNotNull(testBoard.squareByDenotation("a7"));
+    //     assertNull(testBoard.squareByDenotation("a10"));
+    //    assertNotNull(testBoard.squareByDenotation("a7"));
 
-    }
+    //}
 
     //  @Test
     // void getSquareTest() {
