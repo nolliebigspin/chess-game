@@ -1,6 +1,7 @@
 package schach.controller;
 
 import schach.model.Board;
+import schach.model.Square;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,8 +40,8 @@ public class Input {
                 board.printBeaten();
             } else if (validMoveInput(input)) {
                 board.movePiece(input.substring(0,2), input.substring(3,5));
-                if (input.length() == 6) {
-                    //input.substring(5)
+                // calling promotion method for piece if target Square is occupied
+                if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
                     board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
                 }
                 board.printBoard();

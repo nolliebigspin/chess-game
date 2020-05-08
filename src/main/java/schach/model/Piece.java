@@ -131,30 +131,27 @@ public abstract class Piece {
      * @param pos Position on Board where the promoted pawn stands
      */
     public void doPromotion(String prom, Square pos) {
-        if(this.isWhite && pos.getRow() != 8 && !(this instanceof Pawn)) {
+        if (this.isWhite && pos.getRow() != 8 || !(this instanceof Pawn)) {
+            System.out.println("ZZZ");
             return;
-        } else if (!this.isWhite && pos.getRow() != 1 && !(this instanceof Pawn)) {
+        } else if (!this.isWhite && pos.getRow() != 1 || !(this instanceof Pawn)) {
+            System.out.println("XXX");
             return;
         }
         switch (prom) {
             case "Q":
                 Queen queenProm = new Queen(pos, this.isWhite, this.board);
-                System.out.println("Your pawn was promoted to a Queen!");
                 break;
             case "R":
                 Rook rookProm = new Rook(pos, this.isWhite, this.board);
-                System.out.println("Your pawn was promoted to a Rook!");
                 break;
             case "B":
                 Bishop bishopProm = new Bishop(pos, this.isWhite, this.board);
-                System.out.println("Your pawn was promoted to a Bishop!");
                 break;
             case "N":
                 Knight knightProm = new Knight(pos, this.isWhite, this.board);
-                System.out.println("Your pawn was promoted to a Knight!");
                 break;
-            default: System.out.println("Wrong promotion!");
-
+            default:
         }
     }
 }
