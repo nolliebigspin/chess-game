@@ -80,6 +80,9 @@ public abstract class Piece {
     public void move(Square target){
         boolean inList = false;
         updateLegals();
+        if (board.getCheckRuler().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
+            legalNextSquares =
+        }
         for (Square square: legalNextSquares){
             if (square == target){
                 inList = true;

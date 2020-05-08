@@ -115,7 +115,42 @@ public class CheckRuler {
         }
     }
 
-    private boolean canResolveCheck(Piece piece){
+    private boolean canResolveCheckByAttacking(Piece piece){
+        Piece attacker = attackersSettingCheck(piece.isWhite).get(0);
+        if (piece.getLegalSquares().contains(attacker.getPosition())){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private List<Square> resolveCheckByMoving(Piece piece){
+        List<Square> legals = piece.getLegalSquares();
+        List<Square> newLegas = new ArrayList<>();
+        List<Square> betweens = inBetweenSquares(piece.isWhite);
+        Piece attacker = attackersSettingCheck(piece.isWhite).get(0);
+        if (attacker instanceof Pawn || attacker instanceof Knight || attacker instanceof King){
+            return newLegas;
+        } else if (betweens.size() != 0){
+            for (Square betweenSquare: betweens){
+                if (legals.contains(betweenSquare)){
+                    newLegas.add(betweenSquare);
+                }
+            }
+            return newLegas;
+        }
+        return newLegas;
+    }
+
+    private List<Square> inBetweenSquares(boolean kingIsWhite){
+        Piece attacker = attackersSettingCheck(kingIsWhite).get(0);
+        if (attacker instanceof Rook){
+            return inBetweenSquaresRook(kingIsWhite);
+        }
+        if (attacker instanceof )
+    }
+
+    private List<Square> inBetweenSquaresRook(boolean kingIsWhite){
 
     }
 
