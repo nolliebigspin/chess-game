@@ -176,6 +176,7 @@ public class Board {
      * @param targetPos denotation of the square which the piece is supposed to be moved to
      */
     public void movePiece(String startingPos, String targetPos) {
+        updateAllLegalSquares();
         if (!squareByDenotation(startingPos).isOccupied()) {
             System.out.println("!Invalid Move: No Piece found!");
             return;
@@ -186,6 +187,7 @@ public class Board {
             return;
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
+        updateAllLegalSquares();
     }
 
     /**
@@ -205,6 +207,14 @@ public class Board {
         return pieces;
     }
 
+    public void updateAllLegalSquares(){
+        List<Piece> pieces = allActivePieces(true);
+        pieces.addAll(allActivePieces(false));
+        for (Piece piece: pieces){
+            piece.updateLegals();
+        }
+    }
+
     /**
      * Lists all squares that are currently under attack by a color
      * @param attackerIsWhite true for all squares attacked by white, false for attacked by black
@@ -218,7 +228,6 @@ public class Board {
                 Pawn pawn = (Pawn) piece;
                 attacked.addAll(pawn.getAttackedSquares());
             } else {
-                piece.updateLegals();
                 attacked.addAll(piece.getLegalSquares());
             }
         }
