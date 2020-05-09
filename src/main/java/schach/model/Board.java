@@ -10,10 +10,6 @@ import java.util.List;
  */
 public class Board {
 
-    public Square[][] getSquareMatrix() {
-        return squareMatrix;
-    }
-
     /**
      * Matrix of Squares representing the chess board
      */
