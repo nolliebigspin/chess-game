@@ -74,8 +74,8 @@ public class Check {
     public boolean inCheckIfMoved(Piece movingPiece, Square target){
         movingPiece.acceptMove(target);
         board.updateAllLegalSquares();
-        List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.isWhite());
-        boolean inCheck = kingInCheck(movingPiece.isWhite(), currentlyAttacked);
+        List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.getIsWhite());
+        boolean inCheck = kingInCheck(movingPiece.getIsWhite(), currentlyAttacked);
         movingPiece.undoMove();
         board.updateAllLegalSquares();
         return inCheck;
@@ -88,7 +88,7 @@ public class Check {
      */
     public boolean attackingKing(Piece attacker){
         Piece king;
-        if (attacker.isWhite()){
+        if (attacker.getIsWhite()){
             king = blackKing;
         } else {
             king = whiteKing;
@@ -127,8 +127,8 @@ public class Check {
      * @return List of squares that could resolve a check situation
      */
     public List<Square> legalsToResolveCheck(Piece piece){
-        Piece attacker = attackersSettingCheck(piece.isWhite()).get(0);
-        List<Square> inBetweens = inBetweenSquares(piece.isWhite());
+        Piece attacker = attackersSettingCheck(piece.getIsWhite()).get(0);
+        List<Square> inBetweens = inBetweenSquares(piece.getIsWhite());
         List<Square> newLegals = new ArrayList<>();
         List<Square> legals = piece.getLegalNextSquares();
         if (piece.getLegalNextSquares().contains(attacker.getPosition())){
