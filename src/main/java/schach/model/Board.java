@@ -261,7 +261,7 @@ public class Board {
                 Pawn pawn = (Pawn) piece;
                 attacked.addAll(pawn.getAttackedSquares());
             } else {
-                attacked.addAll(piece.getLegalSquares());
+                attacked.addAll(piece.getLegalNextSquares());
             }
         }
         return attacked;

@@ -99,7 +99,7 @@ public class Check {
             Pawn pawn = (Pawn) attacker;
             legals = pawn.getAttackedSquares();
         } else {
-            legals = attacker.getLegalSquares();
+            legals = attacker.getLegalNextSquares();
         }
         return legals.contains(kingPos);
 
@@ -130,8 +130,8 @@ public class Check {
         Piece attacker = attackersSettingCheck(piece.isWhite()).get(0);
         List<Square> inBetweens = inBetweenSquares(piece.isWhite());
         List<Square> newLegals = new ArrayList<>();
-        List<Square> legals = piece.getLegalSquares();
-        if (piece.getLegalSquares().contains(attacker.getPosition())){
+        List<Square> legals = piece.getLegalNextSquares();
+        if (piece.getLegalNextSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
         }
         if (!inBetweens.isEmpty()){
@@ -154,7 +154,7 @@ public class Check {
         if (!kingIsWhite){
             king = blackKing;
         }
-        boolean cantMove = king.getLegalSquares().size() == 0;
+        boolean cantMove = king.getLegalNextSquares().size() == 0;
         boolean doubleCheck = attackersSettingCheck(kingIsWhite).size() > 1;
         boolean onlyKing = board.allActivePieces(kingIsWhite).size() == 1;
         boolean noOneCanHelp = noOneCanHelp(kingIsWhite);
@@ -174,7 +174,7 @@ public class Check {
     private boolean noOneCanHelp(boolean isWhite){
         List<Piece> pieces = board.allActivePieces(isWhite);
         for (Piece p: pieces){
-            if (!p.getLegalSquares().isEmpty()){
+            if (!p.getLegalNextSquares().isEmpty()){
                 return false;
             }
         }

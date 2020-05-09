@@ -23,10 +23,6 @@ public abstract class Piece {
      */
     protected Board board;
 
-    public List<Square> getLegalNextSquares() {
-        return legalNextSquares;
-    }
-
     /**
      * List of Squares that the Square could be moved to by a legal move
      */
@@ -126,7 +122,7 @@ public abstract class Piece {
      * getter for list of legal squares
      * @return the list of legal squares
      */
-    public List<Square> getLegalSquares(){
+    public List<Square> getLegalNextSquares(){
         return legalNextSquares;
     }
 
