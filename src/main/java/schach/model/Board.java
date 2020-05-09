@@ -47,6 +47,13 @@ public class Board {
      * Initializes all pieces and places them on the board in the starting lineup
      */
     public void initLineUp(){
+        //TODO delete
+        boolean t = true;
+        if (t){
+            checkLineUp();
+            return;
+        }
+
         new Pawn(squareByDenotation("a2"), true, this);
         new Pawn(squareByDenotation("b2"), true, this);
         new Pawn(squareByDenotation("c2"), true, this);
@@ -92,6 +99,8 @@ public class Board {
 
         //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THER MUST BE KINGS)
         this.checkRuler = new CheckRuler(this);
+
+        updateAllLegalSquares();
     }
 
     /**
@@ -195,6 +204,7 @@ public class Board {
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
         updateAllLegalSquares();
+        printAttacked();
     }
 
     /**
@@ -301,5 +311,20 @@ public class Board {
     public void undo(String denotation){
         Piece piece = squareByDenotation(denotation).getOccupier();
         piece.undoMove();
+    }
+
+    /**
+     * debug
+     * TODO delete
+     */
+    private void checkLineUp(){
+        new King(squareByDenotation("h1"), true, this);
+        new Rook(squareByDenotation("e1"), false, this);
+        new Rook(squareByDenotation("e2"), false, this);
+        new Knight(squareByDenotation("f1"), false, this);
+        new King(squareByDenotation("a8"), false, this);
+        new Knight(squareByDenotation("h8"),true, this);
+        this.checkRuler = new CheckRuler(this);
+        updateAllLegalSquares();
     }
 }

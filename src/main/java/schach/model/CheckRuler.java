@@ -105,6 +105,7 @@ public class CheckRuler {
         if (piece.getLegalSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
         }
+        /**
         if (inBetweens.size() > 0){
             for (Square betweenSquare: inBetweens){
                 if (legals.contains(betweenSquare)){
@@ -112,6 +113,7 @@ public class CheckRuler {
                 }
             }
         }
+         */
         return newLegals;
     }
 
@@ -122,12 +124,19 @@ public class CheckRuler {
         }
         boolean cantMove = (king.getLegalSquares().size() == 0);
         boolean doubleCheck = (attackersSettingCheck(kingIsWhite).size() > 1);
+        System.out.println(cantMove);
+        System.out.println(doubleCheck);
+        for (Square square: king.getLegalSquares()){
+            System.out.println(square.getDenotation());
+        }
         if (!cantMove){
             return false;
         }
         if (doubleCheck && cantMove){
             return true;
         }
+        //TODO imlement rest
+        return false;
     }
 
     private boolean canResolveCheckByAttacking(Piece piece){
@@ -167,11 +176,14 @@ public class CheckRuler {
         if (attacker instanceof Rook){
             return inBetweenSquaresRook(kingIsWhite);
         }
-        if (attacker instanceof )
+        if (attacker instanceof Rook){
+            return inBetweenSquaresRook(kingIsWhite);
+        }
+        return null;
     }
 
     private List<Square> inBetweenSquaresRook(boolean kingIsWhite){
-
+        return null;
     }
 
     private void setLegalsNull(Piece piece){
