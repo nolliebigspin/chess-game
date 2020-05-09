@@ -57,13 +57,6 @@ public class Board {
      */
     public void initLineUp(){
 
-        //TODO DELETE : DEBUG
-        boolean t = true;
-        while (t){
-            checkLineUp();
-            return;
-        }
-
         new Pawn(squareByDenotation("a2"), true, this);
         new Pawn(squareByDenotation("b2"), true, this);
         new Pawn(squareByDenotation("c2"), true, this);

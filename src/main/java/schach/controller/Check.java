@@ -160,9 +160,9 @@ public class Check {
         if (!kingIsWhite){
             king = blackKing;
         }
-        boolean cantMove = (king.getLegalSquares().size() == 0);
-        boolean doubleCheck = (attackersSettingCheck(kingIsWhite).size() > 1);
-        boolean onlyKing = (board.allActivePieces(kingIsWhite).size() == 1);
+        boolean cantMove = king.getLegalSquares().size() == 0;
+        boolean doubleCheck = attackersSettingCheck(kingIsWhite).size() > 1;
+        boolean onlyKing = board.allActivePieces(kingIsWhite).size() == 1;
         boolean noOneCanHelp = noOneCanHelp(kingIsWhite);
         if (!cantMove){
             return false;
