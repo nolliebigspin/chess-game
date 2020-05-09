@@ -27,7 +27,13 @@ public class Knight extends Piece {
 
     @Override
     public void updateLegals() {
+        if (board.getCheck().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
+            return;
+        }
+
         legalNextSquares.clear();
+
         boolean oppositeIsWhite = !isWhite;
         int row = position.getRow();
         int column = position.getColumn();

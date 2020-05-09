@@ -13,6 +13,7 @@ public class Main {
         Board board = new Board();
         board.printBoard();
         Input input = new Input(board);
+
         input.inOutRoutine();
     }
 }

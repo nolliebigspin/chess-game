@@ -1,5 +1,7 @@
 package schach.model;
 
+import java.util.List;
+
 /**
  * Class King representing the chess piece king
  */
@@ -33,13 +35,19 @@ public class King extends Piece {
 
     /**
      * Same method as in the piece interface, but sets boolean neverMoved to false
+     * and checks for casteling
      * @param target is the target square where the piece is moved to
      */
     @Override
     public void move(Square target){
-        updateLegals();
         for (Square square: legalNextSquares){
             if (square == target){
+                if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
+                    rookCasteling(true);
+                }
+                if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castelingShortValid()) {
+                    rookCasteling(false);
+                }
                 acceptMove(target);
                 neverMoved = false;
                 return;
@@ -49,35 +57,12 @@ public class King extends Piece {
     }
 
     /**
-     * allows the move to the target square
-     * updates the position square of the Piece
-     * checks additionally if casteling is executed and moves the rook
-     * @param target Square the Piece will be moved to
-     */
-    @Override
-    protected void acceptMove(Square target){
-        if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
-            board.addToCemetery(target.getOccupier());
-        }
-        if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
-            rookCasteling(true);
-        }
-        if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castelingShortValid()) {
-            rookCasteling(false);
-        }
-        position.setOccupied(false);
-        this.position = target;
-        position.setOccupied(true);
-        position.setOccupier(this);
-        updateLegals();
-    }
-
-    /**
      * Updates the list of legal squares
      */
     @Override
     public void updateLegals() {
         legalNextSquares.clear();
+
         boolean oppositeIsWhite = !isWhite;
         int row = position.getRow();
         int column = position.getColumn();
@@ -108,6 +93,7 @@ public class King extends Piece {
             }
             legalNextSquares.add(knightPos);
         }
+        filterAttacked();
 
     }
 
@@ -315,5 +301,12 @@ public class King extends Piece {
         Square rookTarget = board.getSquare(targetColumn, row);
         Piece rook = rookStart.getOccupier();
         rook.acceptMove(rookTarget);
+    }
+
+    private void filterAttacked(){
+        List<Square> attacked = board.attackedSquares(!isWhite);
+        for (Square square: attacked){
+            legalNextSquares.remove(square);
+        }
     }
 }

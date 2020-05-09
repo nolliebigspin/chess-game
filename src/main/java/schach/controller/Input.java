@@ -1,17 +1,15 @@
 package schach.controller;
 
 import schach.model.Board;
-import schach.model.Square;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
  * Class Input that controls the Input and updates the board
  */
 public class Input {
+
     private Board board;
 
     /**
@@ -38,6 +36,10 @@ public class Input {
             String input = readInput();
             if (input.equals("beaten")){
                 board.printBeaten();
+            } else if (input.indexOf("undo") != -1){    //TODO delete, debug
+                String[] arrayIn = input.split(" ");
+                board.undo(arrayIn[1]);
+                board.printBoard();
             } else if (validMoveInput(input)) {
                 board.movePiece(input.substring(0,2), input.substring(3,5));
                 // calling promotion method for piece if target Square is occupied
@@ -45,6 +47,11 @@ public class Input {
                     board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
                 }
                 board.printBoard();
+            }
+            if (board.getCheck().isCheckMate(true)
+                    || board.getCheck().isCheckMate(false)){
+                running = false;
+                System.out.println("CHECKMATE!");
             }
         }
     }
