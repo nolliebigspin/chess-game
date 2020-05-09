@@ -5,14 +5,30 @@ import schach.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class Check contains methods and information to search for and keep control of check- and checkmate situations
+ */
 public class Check {
 
+    /**
+     * the board the game is played on
+     */
     Board board;
 
+    /**
+     * the piece representing the white king on the board
+     */
     Piece whiteKing;
 
+    /**
+     * the piece representing the black king on the board
+     */
     Piece blackKing;
 
+    /**
+     * Constructor initializing the fields
+     * @param board the board
+     */
     public Check(Board board){
         this.board = board;
         this.whiteKing = searchKing(true);
@@ -21,7 +37,7 @@ public class Check {
 
     /**
      * Searches the king of a given color on the board
-     * @param isWhite ture if wanted king is white, false if black
+     * @param isWhite true if wanted king is white, false if black
      * @return Piece King of wanted color, null if no king of given color found
      */
     private Piece searchKing(boolean isWhite){

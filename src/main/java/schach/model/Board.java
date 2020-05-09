@@ -20,6 +20,9 @@ public class Board {
      */
     private List<Piece> cemetery = new ArrayList<>();
 
+    /**
+     * Check class to check for check-situation on the board
+     */
     private Check check;
 
     /**
@@ -224,6 +227,9 @@ public class Board {
         return pieces;
     }
 
+    /**
+     * Updates the list of legal squares of every active piece
+     */
     public void updateAllLegalSquares(){
         List<Piece> pieces = allActivePieces(true);
         pieces.addAll(allActivePieces(false));
