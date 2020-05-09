@@ -40,7 +40,6 @@ public class King extends Piece {
      */
     @Override
     public void move(Square target){
-        updateLegals();
         for (Square square: legalNextSquares){
             if (square == target){
                 if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
@@ -62,11 +61,6 @@ public class King extends Piece {
      */
     @Override
     public void updateLegals() {
-        if (board.getCheck().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
-            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
-            return;
-        }
-
         legalNextSquares.clear();
 
         boolean oppositeIsWhite = !isWhite;

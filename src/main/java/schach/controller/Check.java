@@ -134,6 +134,12 @@ public class Check {
         if (piece.getLegalSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
         }
+        //TODO DELETE DEBUG
+        System.out.println("called by: " + piece.print());
+        System.out.println(attacker.print());
+        for (Square s: inBetweens){
+            System.out.println(s.getDenotation());
+        }
         if (!inBetweens.isEmpty()){
             for (Square betweenSquare: inBetweens){
                 if (legals.contains(betweenSquare)){
@@ -216,7 +222,7 @@ public class Check {
                     Square square = board.getSquare(kingPos.getColumn(), kingPos.getRow() + i);
                     list.add(square);
                 }
-            } else if (rowDif > 0){
+            } else { //rowDif > 0
                 for (int i = 1; i < difference; i++){
                     Square square = board.getSquare(kingPos.getColumn(), kingPos.getRow() - i);
                     list.add(square);
@@ -231,7 +237,7 @@ public class Check {
                     Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow());
                     list.add(square);
                 }
-            } else if (colDif > 0){
+            } else {// colDif > 0
                 for (int i = 1; i < difference; i++){
                     Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() );
                     list.add(square);
@@ -248,34 +254,41 @@ public class Check {
         int rowDif = kingPos.getRow() - attackPos.getRow();
         int colDif = kingPos.getColumn() - attackPos.getColumn();
         int difference = Math.abs(colDif);
-        if (colDif < 0 && rowDif < 0){
-            for (int i = 1; i < difference; i++){
-                Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() + i);
-                list.add(square);
+        if (colDif < 0){
+            if (rowDif < 0){
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() + i);
+                    list.add(square);
+                }
+            } else { //rowDif > 0
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() - i);
+                    list.add(square);
+                }
             }
-        }
-        else if (colDif < 0 && rowDif > 0){
-            for (int i = 1; i < difference; i++){
-                Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() - i);
-                list.add(square);
-            }
-        }
-        else if (colDif > 0 && rowDif > 0){
-            for (int i = 1; i < difference; i++){
-                Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() - i);
-                list.add(square);
-            }
-        }
-        else if (colDif > 0 && rowDif < 0){
-            for (int i = 1; i < difference; i++){
-                Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() + i);
-                list.add(square);
+        } else { //colDif > 0
+            if (rowDif > 0){
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() - i);
+                    list.add(square);
+                }
+            } else { //rowDif < 0
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() + i);
+                    list.add(square);
+                }
             }
         }
         return list;
     }
 
     private List<Square> inBetweenSquaresQueen(Piece attacker, Piece king){
+        List<Square> list = inBetweenSquaresRook(attacker, king);
+        if (list.isEmpty()){
+            list.addAll(inBetweenSquaresBishop(attacker, king));
+        }
+        return list;
+        /**
         List<Square> list = new ArrayList<>();
         Square attackPos = attacker.getPosition();
         Square kingPos = king.getPosition();
@@ -336,6 +349,7 @@ public class Check {
             }
         }
         return list;
+         */
     }
 
 

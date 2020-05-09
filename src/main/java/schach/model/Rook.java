@@ -37,7 +37,6 @@ public class Rook extends Piece {
      */
     @Override
     public void move(Square target){
-        updateLegals();
         for (Square square: legalNextSquares){
             if (square == target){
                 acceptMove(target);

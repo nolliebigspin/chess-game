@@ -57,6 +57,13 @@ public class Board {
      */
     public void initLineUp(){
 
+        //TODO DELETE : DEBUG
+        boolean t = true;
+        while (t){
+            checkLineUp();
+            return;
+        }
+
         new Pawn(squareByDenotation("a2"), true, this);
         new Pawn(squareByDenotation("b2"), true, this);
         new Pawn(squareByDenotation("c2"), true, this);
@@ -341,12 +348,10 @@ public class Board {
      * TODO delete
      */
     private void checkLineUp(){
-        new King(squareByDenotation("h1"), true, this);
-        new Rook(squareByDenotation("f2"), false, this);
+        new King(squareByDenotation("d1"), true, this);
         new King(squareByDenotation("a8"), false, this);
-        new Rook(squareByDenotation("e2"), false, this);
-        new Queen(squareByDenotation("a1"), false, this);
-        new Queen(squareByDenotation("b1"),true, this);
+        new Queen(squareByDenotation("d4"), false, this);
+        new Knight(squareByDenotation("h8"), true, this);
         this.check = new Check(this);
         updateAllLegalSquares();
     }
