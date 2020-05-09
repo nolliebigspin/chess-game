@@ -1,9 +1,11 @@
-package schach.model;
+package schach.controller;
+
+import schach.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckRuler {
+public class Check {
 
     Board board;
 
@@ -11,7 +13,7 @@ public class CheckRuler {
 
     Piece blackKing;
 
-    public CheckRuler(Board board){
+    public Check(Board board){
         this.board = board;
         this.whiteKing = searchKing(true);
         this.blackKing = searchKing(false);
@@ -70,7 +72,7 @@ public class CheckRuler {
      */
     public boolean attackingKing(Piece attacker){
         Piece king;
-        if (attacker.isWhite){
+        if (attacker.isWhite()){
             king = blackKing;
         } else {
             king = whiteKing;
@@ -109,8 +111,8 @@ public class CheckRuler {
      * @return List of squares that could resolve a check situation
      */
     public List<Square> legalsToResolveCheck(Piece piece){
-        Piece attacker = attackersSettingCheck(piece.isWhite).get(0);
-        List<Square> inBetweens = inBetweenSquares(piece.isWhite);
+        Piece attacker = attackersSettingCheck(piece.isWhite()).get(0);
+        List<Square> inBetweens = inBetweenSquares(piece.isWhite());
         List<Square> newLegals = new ArrayList<>();
         List<Square> legals = piece.getLegalSquares();
         if (piece.getLegalSquares().contains(attacker.getPosition())){

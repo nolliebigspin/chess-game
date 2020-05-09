@@ -28,8 +28,8 @@ public class Queen extends Piece {
     @Override
     public void updateLegals() {
 
-        if (board.getCheckRuler().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
-            legalNextSquares = board.getCheckRuler().legalsToResolveCheck(this);
+        if (board.getCheck().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
             return;
         }
 

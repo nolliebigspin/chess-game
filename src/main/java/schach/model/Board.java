@@ -1,5 +1,7 @@
 package schach.model;
 
+import schach.controller.Check;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class Board {
      */
     private List<Piece> cemetery = new ArrayList<>();
 
-    private CheckRuler checkRuler;
+    private Check check;
 
     /**
      * Constructor, initializes the Square Matrix and the start Lineup
@@ -27,8 +29,12 @@ public class Board {
         initMatrix();
     }
 
-    public CheckRuler getCheckRuler(){
-        return checkRuler;
+    /**
+     * Getter for the Check
+     * @return the check
+     */
+    public Check getCheck(){
+        return check;
     }
 
     /**
@@ -92,7 +98,7 @@ public class Board {
         new King(squareByDenotation("e8"), false, this);
 
         //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THERE MUST BE KINGS)
-        this.checkRuler = new CheckRuler(this);
+        this.check = new Check(this);
 
         updateAllLegalSquares();
     }
@@ -335,7 +341,7 @@ public class Board {
         new Rook(squareByDenotation("e2"), false, this);
         new Queen(squareByDenotation("a1"), false, this);
         new Queen(squareByDenotation("b1"),true, this);
-        this.checkRuler = new CheckRuler(this);
+        this.check = new Check(this);
         updateAllLegalSquares();
     }
 }

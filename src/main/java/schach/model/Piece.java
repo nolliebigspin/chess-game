@@ -81,8 +81,8 @@ public abstract class Piece {
         boolean inList = false;
         updateLegals();
         // if check: updates legal Squares, so only moves are possible to resolve check
-        if (board.getCheckRuler().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
-            legalNextSquares = board.getCheckRuler().legalsToResolveCheck(this);
+        if (board.getCheck().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
         }
         for (Square square: legalNextSquares){
             if (square == target){
@@ -90,7 +90,7 @@ public abstract class Piece {
                 break;
             }
         }
-        if (inList && !board.getCheckRuler().inCheckIfMoved(this, target)){
+        if (inList && !board.getCheck().inCheckIfMoved(this, target)){
             acceptMove(target);
         } else {
             refuseMove();

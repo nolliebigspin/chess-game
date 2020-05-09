@@ -46,8 +46,8 @@ public class Input {
                 board.movePiece(denotations[0], denotations[1]);
                 board.printBoard();
             }
-            if (board.getCheckRuler().isCheckMate(true)
-                    || board.getCheckRuler().isCheckMate(false)){
+            if (board.getCheck().isCheckMate(true)
+                    || board.getCheck().isCheckMate(false)){
                 running = false;
                 System.out.println("CHECKMATE!");
             }
