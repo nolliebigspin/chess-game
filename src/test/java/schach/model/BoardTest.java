@@ -1,6 +1,5 @@
 package schach.model;
 import org.junit.jupiter.api.Test;
-import javax.lang.model.type.NullType;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
