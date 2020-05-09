@@ -149,16 +149,16 @@ public abstract class Piece {
         }
         switch (prom) {
             case "Q":
-                Queen queenProm = new Queen(pos, this.isWhite, this.board);
+                new Queen(pos, this.isWhite, this.board);
                 break;
             case "R":
-                Rook rookProm = new Rook(pos, this.isWhite, this.board);
+                new Rook(pos, this.isWhite, this.board);
                 break;
             case "B":
-                Bishop bishopProm = new Bishop(pos, this.isWhite, this.board);
+                new Bishop(pos, this.isWhite, this.board);
                 break;
             case "N":
-                Knight knightProm = new Knight(pos, this.isWhite, this.board);
+                new Knight(pos, this.isWhite, this.board);
                 break;
             default:
         }
