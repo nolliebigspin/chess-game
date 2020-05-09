@@ -16,7 +16,6 @@ public class Pawn extends Piece {
      */
     public Pawn(Square position, boolean isWhite, Board board) {
         super(position, isWhite, board);
-        updateLegals();
     }
 
     @Override
@@ -31,6 +30,11 @@ public class Pawn extends Piece {
 
     @Override
     protected void updateLegals() {
+
+        if (board.getCheckRuler().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
+            legalNextSquares = board.getCheckRuler().legalsToResolveCheck(this);
+            return;
+        }
 
         legalNextSquares.clear();
 

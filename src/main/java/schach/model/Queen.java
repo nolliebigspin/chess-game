@@ -27,6 +27,12 @@ public class Queen extends Piece {
 
     @Override
     public void updateLegals() {
+
+        if (board.getCheckRuler().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
+            legalNextSquares = board.getCheckRuler().legalsToResolveCheck(this);
+            return;
+        }
+
         legalNextSquares.clear();
         boolean oppositeWhite = !isWhite;
         int column = position.getColumn();

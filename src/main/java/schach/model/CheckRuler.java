@@ -1,7 +1,5 @@
 package schach.model;
 
-import schach.model.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +42,6 @@ public class CheckRuler {
     }
 
     public boolean inCheckIfMoved(Piece movingPiece, Square target){
-        Square startingPos = movingPiece.getPosition();
         movingPiece.acceptMove(target);
         board.updateAllLegalSquares();
         List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.isWhite());
@@ -105,7 +102,6 @@ public class CheckRuler {
         if (piece.getLegalSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
         }
-        /**
         if (inBetweens.size() > 0){
             for (Square betweenSquare: inBetweens){
                 if (legals.contains(betweenSquare)){
@@ -113,7 +109,6 @@ public class CheckRuler {
                 }
             }
         }
-         */
         return newLegals;
     }
 
@@ -124,46 +119,31 @@ public class CheckRuler {
         }
         boolean cantMove = (king.getLegalSquares().size() == 0);
         boolean doubleCheck = (attackersSettingCheck(kingIsWhite).size() > 1);
-        System.out.println(cantMove);
-        System.out.println(doubleCheck);
-        for (Square square: king.getLegalSquares()){
-            System.out.println(square.getDenotation());
-        }
+        boolean onlyKing = (board.allActivePieces(kingIsWhite).size() == 1);
+        boolean noOneCanHelp = noOneCanHelp(kingIsWhite);
         if (!cantMove){
             return false;
         }
         if (doubleCheck && cantMove){
             return true;
         }
-        //TODO imlement rest
+        if (cantMove && onlyKing){
+            return true;
+        }
+        if (cantMove && noOneCanHelp){
+            return true;
+        }
         return false;
     }
 
-    private boolean canResolveCheckByAttacking(Piece piece){
-        Piece attacker = attackersSettingCheck(piece.isWhite).get(0);
-        if (piece.getLegalSquares().contains(attacker.getPosition())){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private List<Square> resolveCheckByMoving(Piece piece){
-        List<Square> legals = piece.getLegalSquares();
-        List<Square> newLegas = new ArrayList<>();
-        List<Square> betweens = inBetweenSquares(piece.isWhite);
-        Piece attacker = attackersSettingCheck(piece.isWhite).get(0);
-        if (attacker instanceof Pawn || attacker instanceof Knight || attacker instanceof King){
-            return newLegas;
-        } else if (betweens.size() != 0){
-            for (Square betweenSquare: betweens){
-                if (legals.contains(betweenSquare)){
-                    newLegas.add(betweenSquare);
-                }
+    private boolean noOneCanHelp(boolean isWhite){
+        List<Piece> pieces = board.allActivePieces(isWhite);
+        for (Piece p: pieces){
+            if (!p.getLegalSquares().isEmpty()){
+                return false;
             }
-            return newLegas;
         }
-        return newLegas;
+        return true;
     }
 
     /**
@@ -173,21 +153,155 @@ public class CheckRuler {
      */
     private List<Square> inBetweenSquares(boolean kingIsWhite){
         Piece attacker = attackersSettingCheck(kingIsWhite).get(0);
-        if (attacker instanceof Rook){
-            return inBetweenSquaresRook(kingIsWhite);
+        Piece king = whiteKing;
+        if (!kingIsWhite){
+            king = blackKing;
         }
         if (attacker instanceof Rook){
-            return inBetweenSquaresRook(kingIsWhite);
+            return inBetweenSquaresRook(attacker, king);
+        } else if (attacker instanceof Bishop){
+            return inBetweenSquaresBishop(attacker, king);
+        } else if (attacker instanceof Queen){
+            return inBetweenSquaresQueen(attacker, king);
         }
         return null;
     }
 
-    private List<Square> inBetweenSquaresRook(boolean kingIsWhite){
-        return null;
+    private List<Square> inBetweenSquaresRook(Piece attacker, Piece king){
+        List<Square> list = new ArrayList<>();
+        Square attackPos = attacker.getPosition();
+        Square kingPos = king.getPosition();
+        int rowDif = kingPos.getRow() - attackPos.getRow();
+        int colDif = kingPos.getColumn() - attackPos.getColumn();
+        // adding if in same column
+        if (colDif == 0){
+            int difference = Math.abs(rowDif);
+            if (rowDif < 0){
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn(), kingPos.getRow() + i);
+                    list.add(square);
+                }
+            } else if (rowDif > 0){
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn(), kingPos.getRow() - i);
+                    list.add(square);
+                }
+            }
+        }
+        //adding if in same row
+        else if (rowDif == 0){
+            int difference = Math.abs(colDif);
+            if (colDif < 0){
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow());
+                    list.add(square);
+                }
+            } else if (colDif > 0){
+                for (int i = 1; i < difference; i++){
+                    Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() );
+                    list.add(square);
+                }
+            }
+        }
+        return list;
     }
 
-    private void setLegalsNull(Piece piece){
-
+    private List<Square> inBetweenSquaresBishop(Piece attacker, Piece king){
+        List<Square> list = new ArrayList<>();
+        Square attackPos = attacker.getPosition();
+        Square kingPos = king.getPosition();
+        int rowDif = kingPos.getRow() - attackPos.getRow();
+        int colDif = kingPos.getColumn() - attackPos.getColumn();
+        int difference = Math.abs(colDif);
+        if (colDif < 0 && rowDif < 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() + i);
+                list.add(square);
+            }
+        }
+        else if (colDif < 0 && rowDif > 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() - i);
+                list.add(square);
+            }
+        }
+        else if (colDif > 0 && rowDif > 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() - i);
+                list.add(square);
+            }
+        }
+        else if (colDif > 0 && rowDif < 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() + i);
+                list.add(square);
+            }
+        }
+        return list;
     }
+
+    private List<Square> inBetweenSquaresQueen(Piece attacker, Piece king){
+        List<Square> list = new ArrayList<>();
+        Square attackPos = attacker.getPosition();
+        Square kingPos = king.getPosition();
+        int rowDif = kingPos.getRow() - attackPos.getRow();
+        int colDif = kingPos.getColumn() - attackPos.getColumn();
+        int difference = Math.abs(colDif);
+        if (colDif < 0 && rowDif < 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() + i);
+                list.add(square);
+            }
+        }
+        else if (colDif < 0 && rowDif > 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow() - i);
+                list.add(square);
+            }
+        }
+        else if (colDif > 0 && rowDif > 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() - i);
+                list.add(square);
+            }
+        }
+        else if (colDif > 0 && rowDif < 0){
+            for (int i = 1; i < difference; i++){
+                Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() + i);
+                list.add(square);
+            }
+        }
+        else if (colDif == 0){
+            int difference1 = Math.abs(rowDif);
+            if (rowDif < 0){
+                for (int i = 1; i < difference1; i++){
+                    Square square = board.getSquare(kingPos.getColumn(), kingPos.getRow() + i);
+                    list.add(square);
+                }
+            } else if (rowDif > 0){
+                for (int i = 1; i < difference1; i++){
+                    Square square = board.getSquare(kingPos.getColumn(), kingPos.getRow() - i);
+                    list.add(square);
+                }
+            }
+        }
+        //adding if in same row
+        else if (rowDif == 0){
+            int difference1 = Math.abs(colDif);
+            if (colDif < 0){
+                for (int i = 1; i < difference1; i++){
+                    Square square = board.getSquare(kingPos.getColumn() + i, kingPos.getRow());
+                    list.add(square);
+                }
+            } else if (colDif > 0){
+                for (int i = 1; i < difference1; i++){
+                    Square square = board.getSquare(kingPos.getColumn() - i, kingPos.getRow() );
+                    list.add(square);
+                }
+            }
+        }
+        return list;
+    }
+
 
 }

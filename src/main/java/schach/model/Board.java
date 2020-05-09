@@ -47,12 +47,6 @@ public class Board {
      * Initializes all pieces and places them on the board in the starting lineup
      */
     public void initLineUp(){
-        //TODO delete
-        boolean t = true;
-        if (t){
-            checkLineUp();
-            return;
-        }
 
         new Pawn(squareByDenotation("a2"), true, this);
         new Pawn(squareByDenotation("b2"), true, this);
@@ -97,7 +91,7 @@ public class Board {
         new Queen(squareByDenotation("d8"), false, this);
         new King(squareByDenotation("e8"), false, this);
 
-        //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THER MUST BE KINGS)
+        //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THERE MUST BE KINGS)
         this.checkRuler = new CheckRuler(this);
 
         updateAllLegalSquares();
@@ -204,7 +198,7 @@ public class Board {
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
         updateAllLegalSquares();
-        printAttacked();
+        //updateAllLegalSquares();  //Necessary because king has to filter again, after all moved: TODO FIX! DONE?
     }
 
     /**
@@ -229,6 +223,11 @@ public class Board {
         pieces.addAll(allActivePieces(false));
         for (Piece piece: pieces){
             piece.updateLegals();
+        }
+        for (Piece p : pieces){
+            if (p instanceof King){
+                p.updateLegals();
+            }
         }
     }
 
@@ -308,6 +307,18 @@ public class Board {
      * debug
      * TODO delete
      */
+    public void printLegals(){
+        List<Piece> all = allActivePieces(true);
+        all.addAll(allActivePieces(false));
+        for (Piece piece: all){
+            piece.printLegals();
+        }
+    }
+
+    /**
+     * debug
+     * TODO delete
+     */
     public void undo(String denotation){
         Piece piece = squareByDenotation(denotation).getOccupier();
         piece.undoMove();
@@ -319,11 +330,11 @@ public class Board {
      */
     private void checkLineUp(){
         new King(squareByDenotation("h1"), true, this);
-        new Rook(squareByDenotation("e1"), false, this);
-        new Rook(squareByDenotation("e2"), false, this);
-        new Knight(squareByDenotation("f1"), false, this);
+        new Rook(squareByDenotation("f2"), false, this);
         new King(squareByDenotation("a8"), false, this);
-        new Knight(squareByDenotation("h8"),true, this);
+        new Rook(squareByDenotation("e2"), false, this);
+        new Queen(squareByDenotation("a1"), false, this);
+        new Queen(squareByDenotation("b1"),true, this);
         this.checkRuler = new CheckRuler(this);
         updateAllLegalSquares();
     }
