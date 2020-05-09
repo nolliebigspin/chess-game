@@ -168,7 +168,7 @@ public abstract class Piece {
      * getter for color of the piece
      * @return true if white, false if black
      */
-    public boolean isWhite(){
+    public boolean getIsWhite(){
         return isWhite;
     }
 
