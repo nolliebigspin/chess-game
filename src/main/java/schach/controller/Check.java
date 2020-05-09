@@ -134,12 +134,6 @@ public class Check {
         if (piece.getLegalSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
         }
-        //TODO DELETE DEBUG
-        System.out.println("called by: " + piece.print());
-        System.out.println(attacker.print());
-        for (Square s: inBetweens){
-            System.out.println(s.getDenotation());
-        }
         if (!inBetweens.isEmpty()){
             for (Square betweenSquare: inBetweens){
                 if (legals.contains(betweenSquare)){
