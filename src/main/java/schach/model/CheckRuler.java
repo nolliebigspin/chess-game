@@ -17,6 +17,11 @@ public class CheckRuler {
         this.blackKing = searchKing(false);
     }
 
+    /**
+     * Searches the king of a given color on the board
+     * @param isWhite ture if wanted king is white, false if black
+     * @return Piece King of wanted color, null if no king of given color found
+     */
     private Piece searchKing(boolean isWhite){
         List<Piece> pieces = board.allActivePieces(isWhite);
         for (Piece piece: pieces){
@@ -27,35 +32,42 @@ public class CheckRuler {
         return null;
     }
 
+    /**
+     * Checks if king of a given color is attacked in a given situation
+     * @param isWhite true if king is white, false if black
+     * @param currentlyAttackedSquares List of squares that are under attack in the given situation
+     * @return true if king is in check, false if not
+     */
     public boolean kingInCheck(boolean isWhite, List<Square> currentlyAttackedSquares){
-        Piece king;
+        Piece king = blackKing;
         if (isWhite){
             king = whiteKing;
-        } else {
-            king = blackKing;
         }
-        if (currentlyAttackedSquares.contains(king.getPosition())){
-            return true;
-        } else {
-            return false;
-        }
+        return currentlyAttackedSquares.contains(king.getPosition());
     }
 
+    /**
+     * Checks wherever the own king would be in a check-situation
+     * if a given piece would be moved to a given target square
+     * @param movingPiece the piece that would be moved
+     * @param target the square the piece would be moved to
+     * @return true if Piece would allow the king to be in a check-situatio, false if move is safe for king
+     */
     public boolean inCheckIfMoved(Piece movingPiece, Square target){
         movingPiece.acceptMove(target);
         board.updateAllLegalSquares();
         List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.isWhite());
-        boolean inCheck;
-        if (kingInCheck(movingPiece.isWhite(), currentlyAttacked)){
-            inCheck = true;
-        } else {
-            inCheck = false;
-        }
+        boolean inCheck = kingInCheck(movingPiece.isWhite(), currentlyAttacked);
         movingPiece.undoMove();
         board.updateAllLegalSquares();
         return inCheck;
     }
 
+    /**
+     * Checks if a given piece is attaking the king of the opposite color
+     * @param attacker the piece that should be checked
+     * @return true if piece is attacking the king, false if not
+     */
     public boolean attackingKing(Piece attacker){
         Piece king;
         if (attacker.isWhite){
@@ -71,13 +83,15 @@ public class CheckRuler {
         } else {
             legals = attacker.getLegalSquares();
         }
-        if (legals.contains(kingPos)){
-            return true;
-        } else {
-            return false;
-        }
+        return legals.contains(kingPos);
+
     }
 
+    /**
+     * Lists all pieces attacking the king of given color
+     * @param kingIsWhite true if king is white, false if black
+     * @return ArrayList of Pieces attacking the king
+     */
     public List<Piece> attackersSettingCheck(boolean kingIsWhite){
         List<Piece> allEnemies = board.allActivePieces(!kingIsWhite);
         List<Piece> settingCheck = new ArrayList<>();
@@ -102,7 +116,7 @@ public class CheckRuler {
         if (piece.getLegalSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
         }
-        if (inBetweens.size() > 0){
+        if (!inBetweens.isEmpty()){
             for (Square betweenSquare: inBetweens){
                 if (legals.contains(betweenSquare)){
                     newLegals.add(betweenSquare);
@@ -112,6 +126,11 @@ public class CheckRuler {
         return newLegals;
     }
 
+    /**
+     * Checks if the King of a given color is 'checkmate'
+     * @param kingIsWhite true if king is white, false if king is black
+     * @return true if king is checkmate, false if not
+     */
     public boolean isCheckMate(boolean kingIsWhite){
         Piece king = whiteKing;
         if (!kingIsWhite){
@@ -123,19 +142,17 @@ public class CheckRuler {
         boolean noOneCanHelp = noOneCanHelp(kingIsWhite);
         if (!cantMove){
             return false;
-        }
-        if (doubleCheck && cantMove){
-            return true;
-        }
-        if (cantMove && onlyKing){
-            return true;
-        }
-        if (cantMove && noOneCanHelp){
+        } else if (doubleCheck || onlyKing || noOneCanHelp){
             return true;
         }
         return false;
     }
 
+    /**
+     * Checks if any piece the given color could resolve the checksituation
+     * @param isWhite if pieces are white, false if black
+     * @return true if no pieces can help/resolve the check-situation, false if pices could resolve
+     */
     private boolean noOneCanHelp(boolean isWhite){
         List<Piece> pieces = board.allActivePieces(isWhite);
         for (Piece p: pieces){
@@ -148,8 +165,8 @@ public class CheckRuler {
 
     /**
      * Returns squares that are in the line of the attacker and the king
-     * @param kingIsWhite
-     * @return
+     * @param kingIsWhite if attacked King is white, false if black
+     * @return List of squares that are in between, empty list if none found
      */
     private List<Square> inBetweenSquares(boolean kingIsWhite){
         Piece attacker = attackersSettingCheck(kingIsWhite).get(0);
@@ -164,7 +181,7 @@ public class CheckRuler {
         } else if (attacker instanceof Queen){
             return inBetweenSquaresQueen(attacker, king);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     private List<Square> inBetweenSquaresRook(Piece attacker, Piece king){
