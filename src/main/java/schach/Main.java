@@ -11,7 +11,6 @@ public class Main {
         System.out.println("This is a chess game!");
         System.out.println("Please enter if you want to play against another human or against our artificial intelligence?");
         Board board = new Board();
-        board.printBoard();
         Input input = new Input(board);
 
         input.inOutRoutine();
