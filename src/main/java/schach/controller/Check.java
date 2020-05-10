@@ -196,7 +196,7 @@ public class Check {
      * @param kingIsWhite if attacked King is white, false if black
      * @return List of squares that are in between, empty list if none found
      */
-    private List<Square> inBetweenSquares(boolean kingIsWhite){
+    protected List<Square> inBetweenSquares(boolean kingIsWhite){
         Piece attacker = attackersSettingCheck(kingIsWhite).get(0);
         Piece king = whiteKing;
         if (!kingIsWhite){
