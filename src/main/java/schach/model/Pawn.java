@@ -30,7 +30,7 @@ public class Pawn extends Piece {
     @Override
     protected void updateLegals() {
 
-        if (board.getCheck().kingInCheck(isWhite, board.attackedSquares(!isWhite))){
+        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
             legalNextSquares = board.getCheck().legalsToResolveCheck(this);
             return;
         }

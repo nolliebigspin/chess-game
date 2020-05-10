@@ -48,7 +48,7 @@ public class Check {
      * @param isWhite true if wanted king is white, false if black
      * @return Piece King of wanted color, null if no king of given color found
      */
-    private Piece searchKing(boolean isWhite){
+    protected Piece searchKing(boolean isWhite){
         List<Piece> pieces = board.allActivePieces(isWhite);
         for (Piece piece: pieces){
             if (piece instanceof King){
@@ -61,10 +61,12 @@ public class Check {
     /**
      * Checks if king of a given color is attacked in a given situation
      * @param isWhite true if king is white, false if black
-     * @param currentlyAttackedSquares List of squares that are under attack in the given situation
+     * //@param currentlyAttackedSquares List of squares that are under attack in the given situation
      * @return true if king is in check, false if not
+     * TODO resolve parameter (does it work that way?)
      */
-    public boolean kingInCheck(boolean isWhite, List<Square> currentlyAttackedSquares){
+    public boolean kingInCheck(boolean isWhite/**, List<Square> currentlyAttackedSquares*/){
+        List<Square> currentlyAttackedSquares = board.attackedSquares(!isWhite);
         Piece king = blackKing;
         if (isWhite){
             king = whiteKing;
@@ -82,8 +84,8 @@ public class Check {
     public boolean inCheckIfMoved(Piece movingPiece, Square target){
         movingPiece.acceptMove(target);
         board.updateAllLegalSquares();
-        List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.getIsWhite());
-        boolean inCheck = kingInCheck(movingPiece.getIsWhite(), currentlyAttacked);
+        //List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.getIsWhite());
+        boolean inCheck = kingInCheck(movingPiece.getIsWhite()/**TODO delete: , currentlyAttacked*/);
         movingPiece.undoMove();
         board.updateAllLegalSquares();
         return inCheck;
