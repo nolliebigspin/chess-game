@@ -39,6 +39,7 @@ class InputTest {
         assertFalse(input.validMoveInput("e2e6e5"));
         assertFalse(input.validMoveInput("e4h7"));
         assertFalse(input.validMoveInput("e7-a3g"));
+        assertFalse(input.validMoveInput("af-f4"));
     }
 
     @Test
