@@ -188,12 +188,19 @@ class CheckTest {
     public void testInBewtweenRookRow(){
         lineUp(" white-king-a1, white-rook-c4, black-king-f4");
         assertEquals(2, check.inBetweenSquares(false).size());
-        board.printBoard();
 
         initBoard();
         lineUp(" white-king-c3, black-rook-h3, black-king-a8");
         assertEquals(4, check.inBetweenSquares(true).size());
-        board.printBoard();
+    }
+
+    /**
+     * Test inBetweenSquaresBishop List contains the right suqares
+     */
+    @Test
+    public void testInBetweenBishop(){
+        lineUp("black-king-a8, white-king-d5, black-bishop-g2");
+        assertEquals(2, check.inBetweenSquares(true).size());
     }
 
     /**

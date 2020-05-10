@@ -129,7 +129,7 @@ public class Input {
      * @param denotation string that should be validated
      * @return true if valid, false if incorrect
      */
-    private boolean validDenotation(String denotation){
+    protected boolean validDenotation(String denotation){
         if (denotation.length() != 2){
             return false;
         }
@@ -154,7 +154,7 @@ public class Input {
      * @param prom String that the pawn should be promoted to
      * @return boolean if the letter is legal character for promotion
      */
-    private boolean validPromotion(String prom) {
+    protected boolean validPromotion(String prom) {
         if (prom.length() != 1){
             return false;
         }
@@ -181,7 +181,7 @@ public class Input {
      * @param input String that should be validated
      * @return true if String is valid move command, false if not
      */
-    private boolean validMoveInput(String input) {
+    protected boolean validMoveInput(String input) {
         String invalidOut = "!Invalid Move";
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
