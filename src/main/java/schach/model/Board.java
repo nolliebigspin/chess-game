@@ -104,7 +104,7 @@ public class Board {
     public void addPiece(String piece, String squareDenotation, boolean isWhite){
         Square position = squareByDenotation(squareDenotation);
         if (position.isOccupied()){
-            System.out.println("The given position is either occupied or it's an invalid backward move!");
+            System.out.print("The given position is either occupied or it's an invalid backward move!");
             return;
         }
         switch (piece){
@@ -127,7 +127,7 @@ public class Board {
                 new King(position, isWhite, this);
                 break;
             default:
-                System.out.println("no valid piece: " + piece);
+                System.out.print("no valid piece: " + piece);
         }
     }
 
@@ -281,4 +281,21 @@ public class Board {
             System.out.println(square.getDenotation());
         }
     }
+
+
+
+    public List<Piece> getActiveWhitePieces() {
+        return allActivePieces(true);
+    }
+
+    public List<Piece> getActiveBlackPieces() {
+        return allActivePieces(false);
+    }
+    public List<Square> getSquaresAttackedWhite() {
+        return attackedSquares(true);
+    }
+    public List<Square> getSquaresAttackedBlack() {
+        return attackedSquares(false);
+    }
+
 }
