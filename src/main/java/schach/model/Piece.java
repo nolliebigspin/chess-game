@@ -174,6 +174,7 @@ public abstract class Piece {
 
     /**
      * Undoes the last move of the piece
+     * TODO delete possible beaten from cemetery
      */
     public void undoMove(){
         Square newPos = position;

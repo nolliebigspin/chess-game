@@ -3,6 +3,7 @@ package schach.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import schach.model.*;
+import schach.controller.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -200,8 +201,8 @@ class CheckTest {
      */
     @Test
     public void testlegalsToResolveCheck(){
-        lineUp(" white-king-a1, white-rook-c4, black-king-f4, white-queen-e5");
-        board.printBoard();
+        lineUp(" white-king-a8, white-rook-c2, black-king-f3, black-queen-e5");
+        board.movePiece("c2", "c3");
         Piece queen = board.squareByDenotation("e5").getOccupier();
         Square c3 = board.squareByDenotation("c3");
         Square e3 = board.squareByDenotation("e3");
@@ -209,6 +210,36 @@ class CheckTest {
         expList.add(c3);
         expList.add(e3);
         assertTrue(check.legalsToResolveCheck(queen).containsAll(expList));
+    }
+
+    /**
+     * test checkmate if king can still move
+     */
+    @Test
+    public void testCheckMateCanMove(){
+        lineUp(" white-king-a1, white-queen-c1, white-bishop-c4, black-knight-c8, white-knight-d3, black-pawn-f5, black-king-f6, white-rook-g2");
+        assertFalse(check.isCheckMate(false));
+        board.movePiece("c1", "b2");
+        assertFalse(check.isCheckMate(false));
+
+        initBoard();
+        lineUp(" white-king-a1, white-queen-c1, white-bishop-c4, black-knight-c8, white-knight-d3, black-pawn-f5, black-king-f6, white-rook-g2");
+        assertFalse(check.isCheckMate(false));
+        board.movePiece("c8","e7");
+        board.movePiece("c1", "b2");
+        assertTrue(check.isCheckMate(false));
+
+    }
+
+    /**
+     * test checkmate for double check situations
+     */
+    @Test
+    public void testCheckMateCoubleCheck(){
+        lineUp(" white-king-a1, black-queen-e5, black-knight-d4, black-rook-b4, black-king-h8, white-rook-c7, white-bishop-a2");
+        assertFalse(check.isCheckMate(true));
+        board.movePiece("d4", "c2");
+        assertTrue(check.isCheckMate(true));
     }
 
     /**
