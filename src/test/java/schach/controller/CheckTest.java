@@ -112,7 +112,12 @@ class CheckTest {
 
     @Test
     public void testInCheckIfMoved(){
-        lineUp(" black-king-a1, ");
+        lineUp(" black-king-a8, white-king-c2, white-rook-e4, black-queen-g8");
+        Piece rook = board.squareByDenotation("e4").getOccupier();
+        Square target = board.squareByDenotation("d4");
+        assertFalse(check.inCheckIfMoved(rook, target));
+        board.movePiece("g8","h7");
+        assertTrue(check.inCheckIfMoved(rook, target));
     }
 
 
