@@ -15,19 +15,6 @@ class PieceTest {
 
 
     @Test
-    void getLegalNextSquares() {
-    }
-
-
-    @Test
-    void print() {
-    }
-
-    @Test
-    void updateLegals() {
-    }
-
-    @Test
     void move() {
         Board testBoard = new Board();
         testBoard.addPiece("king", "a1", true);

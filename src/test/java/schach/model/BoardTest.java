@@ -18,16 +18,6 @@ class BoardTest {
 
 
 
-    @Test
-    void printBoardTest()throws Exception {
-        Board testBoard = new Board();
-        testBoard.addPiece("rook", "c1", false);
-        testBoard.printBoard();
-        ByteArrayOutputStream out= new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-        System.out.print(" ");
-        // assertEquals(" ", out.toString());
-    }
 
 
 
