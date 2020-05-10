@@ -51,7 +51,7 @@ public class King extends Piece {
     /**
      * allows the move to the target square
      * updates the position square of the Piece
-     * checks additionally if casteling is executed and moves the rook
+     * checks additionally if castling is executed and moves the rook
      * @param target Square the Piece will be moved to
      */
     @Override
@@ -59,11 +59,11 @@ public class King extends Piece {
         if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
             board.addToCemetery(target.getOccupier());
         }
-        if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castelingLongValid()){
-            rookCasteling(true);
+        if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castlingLongValid()){
+            rookCastling(true);
         }
-        if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castelingShortValid()) {
-            rookCasteling(false);
+        if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castlingShortValid()) {
+            rookCastling(false);
         }
         position.setOccupied(false);
         this.position = target;
@@ -90,7 +90,7 @@ public class King extends Piece {
         checkBackwardRight(column, row, oppositeIsWhite);
         checkBackwardLeft(column, row, oppositeIsWhite);
         checkForwardLeft(column, row, oppositeIsWhite);
-        if (castelingLongValid()){
+        if (castlingLongValid()){
             Square bishopPos;
             if (isWhite){
                 bishopPos = board.squareByDenotation("c1");
@@ -99,7 +99,7 @@ public class King extends Piece {
             }
             legalNextSquares.add(bishopPos);
         }
-        if (castelingShortValid()){
+        if (castlingShortValid()){
             Square knightPos;
             if (isWhite){
                 knightPos = board.squareByDenotation("g1");
@@ -200,10 +200,10 @@ public class King extends Piece {
     }
 
     /**
-     * checks if casteling on the long side (queen side) is legal
-     * @return true if casteling long is legal, false if not
+     * checks if castling on the long side (queen side) is legal
+     * @return true if castling long is legal, false if not
      */
-    private boolean castelingLongValid(){
+    private boolean castlingLongValid(){
         String rookPosition;
         String queenPosition;
         String bishopPosition;
@@ -248,10 +248,10 @@ public class King extends Piece {
     }
 
     /**
-     * checks if casteling on the short side (not queen side) is legal
-     * @return true if casteling short is legal, false if not
+     * checks if castling on the short side (not queen side) is legal
+     * @return true if castling short is legal, false if not
      */
-    private boolean castelingShortValid(){
+    private boolean castlingShortValid(){
         String rookPosition;
         String bishopPosition;
         String knightPosition;
@@ -292,14 +292,14 @@ public class King extends Piece {
     }
 
     /**
-     * Moves the rook to its position during casteling
-     * @param isLongCasteling true if its long casteling, false if its short side casteling
+     * Moves the rook to its position during castling
+     * @param isLongCastling true if its long castling, false if its short side castling
      */
-    private void rookCasteling(boolean isLongCasteling){
+    private void rookCastling(boolean isLongCastling){
         int startColumn;
         int targetColumn;
         int row;
-        if (isLongCasteling){
+        if (isLongCastling){
             startColumn = 1;
             targetColumn = 4;
         } else {

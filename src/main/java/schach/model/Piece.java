@@ -108,7 +108,7 @@ public abstract class Piece {
      * Refuses invalid moves and prints Error Message
      */
     protected void refuseMove(){
-        System.out.println("!Move is invalid");
+        System.out.print("!Move is invalid");
     }
 
     /**
@@ -125,7 +125,7 @@ public abstract class Piece {
      */
     public void printLegals(){
         for (Square square: legalNextSquares){
-            System.out.println(square.getDenotation());
+            System.out.print(square.getDenotation());
         }
     }
 
