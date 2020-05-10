@@ -187,11 +187,29 @@ class CheckTest {
     public void testInBewtweenRookRow(){
         lineUp(" white-king-a1, white-rook-c4, black-king-f4");
         assertEquals(2, check.inBetweenSquares(false).size());
+        board.printBoard();
 
         initBoard();
-        lineUp()
+        lineUp(" white-king-c3, black-rook-h3, black-king-a8");
+        assertEquals(4, check.inBetweenSquares(true).size());
+        board.printBoard();
     }
 
+    /**
+     * test if list of squares to resolve check is correct
+     */
+    @Test
+    public void testlegalsToResolveCheck(){
+        lineUp(" white-king-a1, white-rook-c4, black-king-f4, white-queen-e5");
+        board.printBoard();
+        Piece queen = board.squareByDenotation("e5").getOccupier();
+        Square c3 = board.squareByDenotation("c3");
+        Square e3 = board.squareByDenotation("e3");
+        List<Square> expList = new ArrayList<>();
+        expList.add(c3);
+        expList.add(e3);
+        assertTrue(check.legalsToResolveCheck(queen).containsAll(expList));
+    }
 
     /**
      * Method that simplifies the Board lineup;
