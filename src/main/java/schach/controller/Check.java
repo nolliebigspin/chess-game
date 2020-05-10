@@ -36,6 +36,14 @@ public class Check {
     }
 
     /**
+     * Searches for Kings on the board and saves them in the class fields
+     */
+    public void updateKings(){
+        this.whiteKing = searchKing(true);
+        this.blackKing = searchKing(false);
+    }
+
+    /**
      * Searches the king of a given color on the board
      * @param isWhite true if wanted king is white, false if black
      * @return Piece King of wanted color, null if no king of given color found

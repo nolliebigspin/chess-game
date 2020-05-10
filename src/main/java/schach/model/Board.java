@@ -30,6 +30,7 @@ public class Board {
      */
     public Board() {
         initMatrix();
+        this.check = new Check(this);
     }
 
     /**
@@ -101,7 +102,7 @@ public class Board {
         new King(squareByDenotation("e8"), false, this);
 
         //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THERE MUST BE KINGS)
-        this.check = new Check(this);
+        check.updateKings();
 
         updateAllLegalSquares();
     }
@@ -140,6 +141,7 @@ public class Board {
             default:
                 System.out.println("no valid piece: " + piece);
         }
+        check.updateKings();
     }
 
     /**
