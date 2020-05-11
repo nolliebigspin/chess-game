@@ -44,6 +44,7 @@ class PieceTest {
         List<Square> legalNextSquares = new ArrayList<Square>();
         legalNextSquares.add(testBoard.getSquare(1,7));
         p.updateLegals();
+        legalNextSquares.add(testBoard.getSquare(1,8));
         assertEquals(legalNextSquares,p.getLegalNextSquares());
 
     }

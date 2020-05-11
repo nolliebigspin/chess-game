@@ -1,5 +1,7 @@
 package schach.model;
 
+import schach.controller.Input;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,6 +110,7 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
+        Input.currentMove++;
         //updateLegals(); //TODO maybe delete, redundant?
     }
 
@@ -186,6 +189,15 @@ public abstract class Piece {
         if (beatenPiece != null){
             newPos.setOccupied(true);
             newPos.setOccupier(beatenPiece);
+            board.removeFromCemetery(beatenPiece);
         }
     }
+    /**
+     * getter for isWhite
+     * @return true/false
+     */
+    public boolean isWhite() {
+        return this.isWhite;
+    }
 }
+

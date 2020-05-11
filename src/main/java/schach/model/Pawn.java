@@ -29,20 +29,19 @@ public class Pawn extends Piece {
 
     @Override
     protected void updateLegals() {
-
-        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
-            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
-            return;
-        }
-
         legalNextSquares.clear();
+
         int column = position.getColumn();
         int row = position.getRow();
-
         if (row < 8 && row > 1) {
             checkAhead(column, row);
             checkUpRight(column, row);
             checkUpLeft(column, row);
+        }
+
+        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
+            return;
         }
     }
 

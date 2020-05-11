@@ -77,6 +77,33 @@ class InputTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     *
+     */
+    @Test
+    public void testCheckTurn(){
+        lineUp(" white-king-e1, black-king-e8");
+        assertTrue(input.checkTurn("e1-e2", 0));
+        assertFalse(input.checkTurn("e8-e7", 0));
+        assertTrue(input.checkTurn("e8-e7", 1));
+        assertFalse(input.checkTurn("a1-a7", 2));
+    }
+
+
+    /**
+     * Method that simplifies the Board lineup;
+     * @param input lineup in a certain string format
+     */
+    private void lineUp(String input){
+        String[] commands = input.split(",");
+        for (String s: commands){
+            String[] denot = s.split("-");
+            boolean b = denot[0].equals(" white");
+            board.addPiece(denot[1], denot[2],b);
+        }
+        board.updateAllLegalSquares();
+    }
+
 
 
 }

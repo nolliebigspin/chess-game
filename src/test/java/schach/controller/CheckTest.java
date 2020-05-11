@@ -272,4 +272,43 @@ class CheckTest {
     }
 
 
+    /**
+     //DEBUG TODO DELETE
+     @Test
+     public void testFindAttackerForNewLegas(){
+     lineUp(" black-pawn-a7, white-queen-d6, black-queen-d8, white-king-e1, black-king-e8");
+     Piece bQueen = board.squareByDenotation("d8").getOccupier();
+     board.printBoard();
+     board.movePiece("d6", "e7");
+     board.printBoard();
+     assertEquals(1, check.legalsToResolveCheck(bQueen).size());
+     }
+     @Test
+     public void testPawnAttackingAttacker(){
+     lineUp(" black-pawn-f7, white-queen-d6, black-queen-d8, white-king-e1, black-king-e8");
+     Piece blackPawn = board.squareByDenotation("f7").getOccupier();
+     Piece wQueen = board.squareByDenotation("d6").getOccupier();
+     Piece bQueen = board.squareByDenotation("d8").getOccupier();
+     board.printBoard();
+     blackPawn.printLegals();
+     board.movePiece("d6", "e6");
+     board.printBoard();
+     blackPawn.printLegals();
+     assertEquals(1, check.attackersSettingCheck(false).size());
+     assertEquals(wQueen, check.attackersSettingCheck(false).get(0));
+     assertTrue(check.attackingKing(wQueen));
+     assertEquals(1, check.legalsToResolveCheck(blackPawn).size());
+     }
+     @Test
+     public void testagain(){
+     lineUp(" black-pawn-c7, white-queen-d6, black-queen-d8, white-king-e1, black-king-e8, black-bishop-c8");
+     Piece bBis = board.squareByDenotation("c8").getOccupier();
+     Piece wQueen = board.squareByDenotation("d6").getOccupier();
+     Piece bQueen = board.squareByDenotation("d8").getOccupier();
+     board.printBoard();
+     board.movePiece("d6", "d7");
+     board.printBoard();
+     assertEquals(1, check.legalsToResolveCheck(bQueen).size());
+     }
+     */
 }

@@ -203,12 +203,12 @@ public class Board {
     public void movePiece(String startingPos, String targetPos) {
         updateAllLegalSquares();
         if (!squareByDenotation(startingPos).isOccupied()) {
-            System.out.println("!Invalid Move: No Piece found!");
+            System.out.println("!Invalid Move");
             return;
         }
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().isWhite == squareByDenotation(targetPos).getOccupier().isWhite) {
-            System.out.println("!Invalid Move: Square is already occupied");
+            System.out.println("!Invalid Move");
             return;
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
@@ -291,6 +291,10 @@ public class Board {
      */
     public void addToCemetery(Piece piece){
         cemetery.add(piece);
+    }
+
+    public void removeFromCemetery(Piece piece){
+        cemetery.remove(piece);
     }
 
     /**
