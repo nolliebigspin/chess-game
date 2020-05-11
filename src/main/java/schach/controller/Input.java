@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class Input {
 
     private Board board;
+    private Multiplayer multiplayer;
+    public static int currentMove;
 
     /**
      * Constructor
@@ -18,6 +20,8 @@ public class Input {
      */
     public Input(Board board) {
         this.board = board;
+        Input.currentMove = 0;
+        this.multiplayer = new Multiplayer(true);// Human
     }
 
     /**
@@ -144,6 +148,24 @@ public class Input {
         String[] legalNumbers = {"1", "2", "3", "4", "5", "6", "7", "8"};
         if (!Arrays.asList(legalNumbers).contains(String.valueOf(number))){
             return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkTurn(String command) {
+        if(this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite()) {
+            // White Piece
+            if(!this.multiplayer.isWhiteTurn(Input.currentMove)) {
+                System.out.println("Not White Turn");
+                return false;
+            }
+        }else {
+            //Black Piece
+            if(this.multiplayer.isWhiteTurn(Input.currentMove)) {
+                System.out.println("Not Black Turn");
+                return false;
+            }
         }
 
         return true;
