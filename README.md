@@ -2,6 +2,8 @@
 
 ## [Introduction](./docs/content/text/introduction.md)
 
+## [Manual](./manual.pdf)
+
 ## [Storycards](./storycards.pdf)
 
 ## [Requirements analysis](./requirements-analysis.pdf )
