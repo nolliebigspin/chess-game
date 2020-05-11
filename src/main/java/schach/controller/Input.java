@@ -35,7 +35,7 @@ public class Input {
             String input = readInput();
             if (input.equals("beaten")){
                 board.printBeaten();
-            } else if (validMoveInput(input) && checkTurn(input)) {
+            } else if (validMoveInput(input) && checkTurn(input, currentMove)) {
                 board.movePiece(input.substring(0,2), input.substring(3,5));
                 // calling promotion method for piece if target Square is occupied
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
@@ -81,7 +81,7 @@ public class Input {
         return true;
     }
 
-    public boolean checkTurn(String command) {
+    public boolean checkTurn(String command, int currentMove) {
         if  (this.board.squareByDenotation(command.substring(0, 2)).isOccupied()) {
             if (this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 == 0) {
                 return true;
