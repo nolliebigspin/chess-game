@@ -3,29 +3,21 @@ package schach.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import schach.model.*;
+import schach.controller.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Test class that test the check rules and operations
- */
 class CheckTest {
 
-    /**
-     * Board the check rules should be tested on
-     */
     Board board;
 
-    /**
-     * check rule class that should be tested
-     */
     Check check;
 
     @BeforeEach
-    private void initBoard(){
+    public void initBoard(){
         this.board = new Board();
         this.check = board.getCheck();
     }

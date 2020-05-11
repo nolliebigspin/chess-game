@@ -252,36 +252,6 @@ class RookTest {
     }
 
 
-
-    @Test
-    void RookNeverMoved() {
-        Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", true);
-        Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
-        assertTrue(r.isNeverMoved());
-    }
-
-    @Test
-    void RookNeverMoved2() {
-        Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", true);
-        Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
-        assertTrue(r.isNeverMoved());
-        r.move(testBoard.getSquare(1,2));
-        assertFalse(r.isNeverMoved());
-        r.move(testBoard.getSquare(1,1));
-        assertFalse(r.isNeverMoved());
-    }
-    @Test
-    void RookHasMoved() {
-        Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", true);
-        Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
-        r.move(testBoard.getSquare(1,2));
-        assertFalse(r.isNeverMoved());
-
-
-    }
 }
 
 
