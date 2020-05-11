@@ -37,14 +37,13 @@ class PieceTest {
     @Test
     void getLegalSquares() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a6", true);
+        testBoard.addPiece("pawn", "a5", true);
         testBoard.addPiece("king", "b2", true);
         testBoard.addPiece("king", "g7", false);
-        Pawn p = new Pawn(testBoard.getSquare(1,6),true,testBoard);
+        Pawn p = new Pawn(testBoard.getSquare(1,5),true,testBoard);
         List<Square> legalNextSquares = new ArrayList<Square>();
-        legalNextSquares.add(testBoard.getSquare(1,7));
+        legalNextSquares.add(testBoard.getSquare(1,6));
         p.updateLegals();
-        legalNextSquares.add(testBoard.getSquare(1,8));
         assertEquals(legalNextSquares,p.getLegalNextSquares());
 
     }
