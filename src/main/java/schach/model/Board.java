@@ -289,6 +289,10 @@ public class Board {
         cemetery.add(piece);
     }
 
+    public void removeFromCemetery(Piece piece){
+        cemetery.remove(piece);
+    }
+
     /**
      * prints the list of beaten piece, by printing every beaten pieces unicode
      */

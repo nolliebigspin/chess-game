@@ -186,6 +186,7 @@ public abstract class Piece {
         if (beatenPiece != null){
             newPos.setOccupied(true);
             newPos.setOccupier(beatenPiece);
+            board.removeFromCemetery(beatenPiece);
         }
     }
 }
