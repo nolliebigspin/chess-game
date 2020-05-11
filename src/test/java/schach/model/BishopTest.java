@@ -19,6 +19,8 @@ class BishopTest {
         testBoard.addPiece("pawn", "c4", true);
         testBoard.addPiece("pawn", "c2", true);
         testBoard.addPiece("pawn", "e2", true);
+        testBoard.addPiece("king", "h8", true);
+        testBoard.addPiece("king", "a8", false);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -41,6 +43,8 @@ class BishopTest {
         testBoard.addPiece("pawn", "c4", true);
         testBoard.addPiece("pawn", "c2", true);
         testBoard.addPiece("pawn", "e2", true);
+        testBoard.addPiece("king", "h8", true);
+        testBoard.addPiece("king", "a8", false);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -64,6 +68,8 @@ class BishopTest {
         testBoard.addPiece("pawn", "e4", true);
         testBoard.addPiece("pawn", "c2", true);
         testBoard.addPiece("pawn", "e2", true);
+        testBoard.addPiece("king", "h8", true);
+        testBoard.addPiece("king", "a8", false);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -87,6 +93,7 @@ class BishopTest {
         testBoard.addPiece("bishop", "c4", true);
         testBoard.addPiece("pawn", "e4", true);
         testBoard.addPiece("king", "c2", false);
+        testBoard.addPiece("king", "h8", true);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -110,6 +117,7 @@ class BishopTest {
         testBoard.addPiece("bishop", "c4", true);
         testBoard.addPiece("pawn", "e4", true);
         testBoard.addPiece("king", "c2", true);
+        testBoard.addPiece("king", "h8", false);
         testBoard.addPiece("queen", "e2", true);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),false,testBoard);
         b1.updateLegals();

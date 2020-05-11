@@ -18,6 +18,7 @@ class KnightTest {
         testBoard.addPiece("pawn", "c2", false);
         testBoard.addPiece("king", "e6", false);
         testBoard.addPiece("queen", "e2", false);
+        testBoard.addPiece("king", "h8", true);
         Knight Knight1 = new Knight(testBoard.getSquare(4,4),true,testBoard);
         Knight1.updateLegals();
         List<Square> Actual =Knight1.getLegalNextSquares();
@@ -49,6 +50,7 @@ class KnightTest {
         testBoard.addPiece("bishop", "b5", false);
         testBoard.addPiece("pawn", "b3", false);
         testBoard.addPiece("king", "f5", false);
+        testBoard.addPiece("king", "c8", true);
         testBoard.addPiece("queen", "f3", false);
         Knight Knight1 = new Knight(testBoard.getSquare(4,4),true,testBoard);
         Knight1.updateLegals();
@@ -84,6 +86,7 @@ class KnightTest {
         testBoard.addPiece("pawn", "b3", true);
         testBoard.addPiece("king", "f5", true);
         testBoard.addPiece("queen", "f3", true);
+        testBoard.addPiece("king", "c8", false);
         Knight Knight1 = new Knight(testBoard.getSquare(4,4),false,testBoard);
         Knight1.updateLegals();
         List<Square> Actual =Knight1.getLegalNextSquares();

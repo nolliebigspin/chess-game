@@ -28,7 +28,7 @@ class BoardTest {
         final PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
         testBoard.addPiece("pawn", "a1", true);
-        assertEquals("The given position is either occupied or it's an invalid backward move!\n", outContent.toString());
+        assertEquals("The given position is either occupied or it's an invalid backward move!\r\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -40,7 +40,7 @@ class BoardTest {
         final PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
         testBoard.addPiece("pawn", "a1", true);
-        assertEquals("The given position is either occupied or it's an invalid backward move!\n", outContent.toString());
+        assertEquals("The given position is either occupied or it's an invalid backward move!\r\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -80,57 +80,16 @@ class BoardTest {
     }
 
     @Test
-    void whitePiecesUnderAttack(){
-        Board testBoard = new Board();
-        testBoard.addPiece("rook", "c2", true);
-        testBoard.addPiece("bishop", "d3", true);
-        testBoard.addPiece("pawn", "b2", true);
-        testBoard.addPiece("pawn", "c3", true);
-        testBoard.addPiece("pawn", "e2", true);
-        testBoard.addPiece("pawn", "c4", true);
-        testBoard.addPiece("pawn", "d2", true);
-        testBoard.addPiece("queen", "c1", false);
-        testBoard.addPiece("pawn", "e4", false);
-        List<Square> blackUnderAttack = new ArrayList<>();
-        blackUnderAttack.add(testBoard.getSquare(2,4));
-        blackUnderAttack.add(testBoard.getSquare(2,3));
-        blackUnderAttack.add(testBoard.getSquare(3,1));
-        blackUnderAttack.add(testBoard.getSquare(3,5));
-        blackUnderAttack.add(testBoard.getSquare(5,4));
-        blackUnderAttack.add(testBoard.getSquare(5,3));
-        assertEquals(blackUnderAttack,testBoard.getSquaresAttackedWhite());
-
-    }
-
-
-    @Test
-    void BlackPiecesUnderAttack(){
-        Board testBoard = new Board();
-        testBoard.addPiece("rook", "c2", true);
-        testBoard.addPiece("bishop", "d3", true);
-        testBoard.addPiece("pawn", "b2", true);
-        testBoard.addPiece("pawn", "c3", true);
-        testBoard.addPiece("pawn", "e2", true);
-        testBoard.addPiece("pawn", "c4", true);
-        testBoard.addPiece("pawn", "d2", true);
-        testBoard.addPiece("queen", "c1", false);
-        testBoard.addPiece("pawn", "d1", false);
-        testBoard.addPiece("pawn", "b1", false);
-        List<Square> blackUnderAttack = new ArrayList<>();
-        blackUnderAttack.add(testBoard.getSquare(3,2));
-        blackUnderAttack.add(testBoard.getSquare(4,2));
-        blackUnderAttack.add(testBoard.getSquare(2,2));
-        assertEquals(blackUnderAttack,testBoard.getSquaresAttackedBlack());
-
-    }
-
-    @Test
     void blackIsUnderAttackTest(){
         Board testBoard = new Board();
         testBoard.addPiece("rook", "c2", true);
         testBoard.addPiece("rook", "c7", false);
+        testBoard.addPiece("king", "g4", true);
+        testBoard.addPiece("king", "h5", false);
         Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
         Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
+        r1.updateLegals();
+        r2.updateLegals();
         assertTrue(testBoard.isUnderAttack("c2",false));
 
     }
@@ -140,8 +99,12 @@ class BoardTest {
         Board testBoard = new Board();
         testBoard.addPiece("rook", "c2", true);
         testBoard.addPiece("rook", "c7", false);
+        testBoard.addPiece("king", "g4", true);
+        testBoard.addPiece("king", "h5", false);
         Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
         Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
+        r1.updateLegals();
+        r2.updateLegals();
         assertTrue(testBoard.isUnderAttack("c7",true));
 
     }
@@ -166,7 +129,7 @@ class BoardTest {
         testBoard.addPiece("rook", "c2", true);
         testBoard.addPiece("pawn", "c7", false);
         testBoard.printBeaten();
-        assertEquals("no pieces beaten yet\n", outContent.toString());
+        assertEquals("no pieces beaten yet\r\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -178,11 +141,14 @@ class BoardTest {
         Board testBoard = new Board();
         testBoard.addPiece("rook", "c2", true);
         testBoard.addPiece("rook", "c7", false);
+        testBoard.addPiece("king", "g4", true);
+        testBoard.addPiece("king", "h5", false);
         Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
         Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
+        r1.updateLegals();
         r1.move(testBoard.getSquare(3,7));
         testBoard.printBeaten();
-        assertEquals("\u265C\n", outContent.toString());
+        assertEquals("\u265C\r\n", outContent.toString());
         System.setOut(originalOut);
 
     }
@@ -194,12 +160,7 @@ class BoardTest {
 
     }
 
-    //@Test
-    //void printMatrixTest(){
-      //  Board testBoard = new Board();
-       // Square[][] squareMatrix = new Square[8][8];
-    //    assertArrayEquals(squareMatrix,testBoard.getSquareMatrix());
-    //}
+
     @Test
     void initLineUpTest(){
         Board testBoard = new Board();
@@ -220,7 +181,49 @@ class BoardTest {
     }
 
 
-}
+    //@Test
+    //void movePieceTest(){
+        //final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        //final PrintStream originalOut = System.out;
+        //System.setOut(new PrintStream(outContent));
+        //Board testBoard = new Board();
+        //testBoard.addPiece("pawn", "c2", true);
+        //testBoard.addPiece("pawn", "c1", true);
+        //testBoard.addPiece("king", "g4", true);
+        //testBoard.addPiece("king", "h5", false);
+        //Pawn p2 = new Pawn(testBoard.getSquare(3,2),true,testBoard);
+        //Pawn p1 = new Pawn(testBoard.getSquare(3,1),true,testBoard);
+        //p1.updateLegals();
+        //p2.updateLegals();
+        //p1.move(testBoard.getSquare(3,2));
+        //assertEquals("!Invalid Move: Square is already occupied\r\n", outContent.toString());
+       // System.setOut(originalOut);
+       //}
+
+      @Test
+      void PrintLegalsTest(){
+      final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+      final PrintStream originalOut = System.out;
+      System.setOut(new PrintStream(outContent));
+      Board testBoard = new Board();
+      testBoard.addPiece("pawn", "c3", true);
+      testBoard.addPiece("king", "g4", true);
+      testBoard.addPiece("king", "h5", false);
+      Pawn p1 = new Pawn(testBoard.getSquare(3,3),true,testBoard);
+      p1.updateLegals();
+      testBoard.printLegals();
+      assertEquals("c4", outContent.toString());
+       System.setOut(originalOut);
+    }
+
+    }
+
+
+
+
+
+
+
 
 
 

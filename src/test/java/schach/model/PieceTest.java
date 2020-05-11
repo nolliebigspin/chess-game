@@ -13,37 +13,38 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PieceTest {
 
-
+    // moving a piece on the board
     @Test
     void move() {
         Board testBoard = new Board();
         testBoard.addPiece("king", "a1", true);
+        testBoard.addPiece("king", "g7", false);
         testBoard.addPiece("pawn", "b3", true);
         King k = new King(testBoard.getSquare(1,1),true,testBoard);
+        k.updateLegals();
+        // makes sure that the piece is there
+        assertEquals(testBoard.squareByDenotation("a1").getOccupier(), k);
+        //move the piece
         k.move(testBoard.getSquare(2,2));
+        k.updateLegals();
+        //assert that the piece is now on the new location
         assertEquals(testBoard.squareByDenotation("b2").getOccupier(), k);
+        //assert that the old location is empty
         assertFalse(testBoard.squareByDenotation("a1").isOccupied());
 
-        //assertEquals(testBoard.getSquare(2,2),k.move(testBoard.getSquare(2,2)));
-
-    }
-
-    @Test
-    void acceptMove() {
-    }
-
-    @Test
-    void refuseMove() {
     }
 
     @Test
     void getLegalSquares() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a7", true);
-        Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
+        testBoard.addPiece("pawn", "a6", true);
+        testBoard.addPiece("king", "b2", true);
+        testBoard.addPiece("king", "g7", false);
+        Pawn p = new Pawn(testBoard.getSquare(1,6),true,testBoard);
         List<Square> legalNextSquares = new ArrayList<Square>();
-        legalNextSquares.add(testBoard.getSquare(1,8));
-        assertEquals(legalNextSquares,p.getLegalSquares());
+        legalNextSquares.add(testBoard.getSquare(1,7));
+        p.updateLegals();
+        assertEquals(legalNextSquares,p.getLegalNextSquares());
 
     }
 
@@ -51,16 +52,18 @@ class PieceTest {
     void printLegals() {
         Board testBoard = new Board();
         testBoard.addPiece("pawn", "a7", true);
+        testBoard.addPiece("king", "b2", true);
+        testBoard.addPiece("king", "g7", false);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         final PrintStream originalOut = System.out;
         final PrintStream originalErr = System.err;
+        p.updateLegals();
         System.setOut(new PrintStream(outContent));
         p.printLegals();
         assertEquals("a8", outContent.toString());
         System.setOut(originalOut);
-
 
     }
 
@@ -70,9 +73,7 @@ class PieceTest {
         testBoard.addPiece("pawn", "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         assertNotNull(testBoard.squareByDenotation("a7").getOccupier());
-        testBoard.printBoard();
         p.doPromotion("Q",testBoard.getSquare(1,7));
-        testBoard.printBoard();
         String actual = testBoard.squareByDenotation("a7").getOccupier().print();
         String expected = "\u2659";
         assertEquals(expected, actual);
@@ -85,9 +86,7 @@ class PieceTest {
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         p.move(testBoard.getSquare(1,8));
         //assertNull(testBoard.squareByDenotation("a7").getOccupier());
-        testBoard.printBoard();
         p.doPromotion("Q",testBoard.getSquare(1,8));
-        testBoard.printBoard();
         String actual = testBoard.squareByDenotation("a8").getOccupier().print();
         String expected = "\u2655";
         assertEquals(expected, actual);
@@ -99,9 +98,7 @@ class PieceTest {
         testBoard.addPiece("pawn", "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         p.move(testBoard.getSquare(1,8));
-        testBoard.printBoard();
         p.doPromotion("R",testBoard.getSquare(1,8));
-        testBoard.printBoard();
         String actual = testBoard.squareByDenotation("a8").getOccupier().print();
         String expected = "\u2656";
         assertEquals(expected, actual);
@@ -113,9 +110,7 @@ class PieceTest {
         testBoard.addPiece("pawn", "a2", false);
         Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
         p.move(testBoard.getSquare(1,1));
-        testBoard.printBoard();
         p.doPromotion("N",testBoard.getSquare(1,1));
-        testBoard.printBoard();
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265E";
         assertEquals(expected, actual);
@@ -127,9 +122,7 @@ class PieceTest {
         testBoard.addPiece("pawn", "a2", false);
         Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
         p.move(testBoard.getSquare(1,1));
-        testBoard.printBoard();
         p.doPromotion("B",testBoard.getSquare(1,1));
-        testBoard.printBoard();
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265D";
         assertEquals(expected, actual);
@@ -143,9 +136,14 @@ class PieceTest {
         System.setOut(new PrintStream(outContent));
         Board testBoard = new Board();
         testBoard.addPiece("pawn", "a3", true);
+        testBoard.addPiece("king", "a8", true);
+        testBoard.addPiece("king", "h1", false);
         Pawn p = new Pawn(testBoard.getSquare(1,3),true,testBoard);
+        p.updateLegals();
+
         p.move(testBoard.getSquare(1,2));
-        assertEquals("!Move is invalid\n", outContent.toString());
+        //p.updateLegals();
+        assertEquals("!Move is invalid\r\n", outContent.toString());
         System.setOut(originalOut);
     }
 

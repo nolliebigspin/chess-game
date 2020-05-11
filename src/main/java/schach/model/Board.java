@@ -305,22 +305,6 @@ public class Board {
         }
     }
 
-    /**
-     * debug
-     * TODO delete
-     */
-    public void printAttacked() {
-        System.out.println("Under attack by white:");
-        List<Square> whites = attackedSquares(true);
-        for (Square square : whites) {
-            System.out.println(square.getDenotation());
-        }
-        System.out.println("\n Under attack by black:");
-        List<Square> blacks = attackedSquares(false);
-        for (Square square : blacks) {
-            System.out.println(square.getDenotation());
-        }
-    }
 
     /**
      * debug
@@ -334,32 +318,11 @@ public class Board {
         }
     }
 
-    /**
-     * debug
-     * TODO delete
-     */
-    public void undo(String denotation){
-        Piece piece = squareByDenotation(denotation).getOccupier();
-        piece.undoMove();
-    }
 
-    /**
-     * debug
-     * TODO delete
-     */
-    private void checkLineUp(){
-        new King(squareByDenotation("d1"), true, this);
-        new King(squareByDenotation("a8"), false, this);
-        new Queen(squareByDenotation("d4"), false, this);
-        new Knight(squareByDenotation("h8"), true, this);
-        this.check = new Check(this);
-        updateAllLegalSquares();
-    }
 
     public List<Piece> getActiveWhitePieces() {
         return allActivePieces(true);
     }
-
     public List<Piece> getActiveBlackPieces() {
         return allActivePieces(false);
     }

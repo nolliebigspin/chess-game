@@ -13,14 +13,15 @@ class QueenTest {
     void scenario1() {
         Board testBoard = new Board();
         testBoard.addPiece("queen", "e5", false);
+        testBoard.addPiece("king", "e1", false);
         testBoard.addPiece("bishop", "f4", true);
         testBoard.addPiece("pawn", "f5", true);
         testBoard.addPiece("king", "f6", true);
-        testBoard.addPiece("queen", "d4", true);
+        testBoard.addPiece("pawn", "d4", true);
         testBoard.addPiece("bishop", "d5", true);
         testBoard.addPiece("pawn", "d6", true);
-        testBoard.addPiece("king", "e4", true);
-        testBoard.addPiece("queen", "e6", true);
+        testBoard.addPiece("pawn", "e4", true);
+        testBoard.addPiece("pawn", "e6", true);
         Queen q1 = new Queen(testBoard.getSquare(5,5),false,testBoard);
         q1.updateLegals();
         List<Square> Actual =q1.getLegalNextSquares();
@@ -51,14 +52,15 @@ class QueenTest {
     void scenario2() {
         Board testBoard = new Board();
         testBoard.addPiece("queen", "e5", false);
+        testBoard.addPiece("king", "h8", false);
         testBoard.addPiece("bishop", "g7", true);
         testBoard.addPiece("pawn", "g5", true);
         testBoard.addPiece("king", "g3", true);
-        testBoard.addPiece("queen", "c7", true);
+        testBoard.addPiece("pawn", "c7", true);
         testBoard.addPiece("bishop", "c5", true);
         testBoard.addPiece("pawn", "c3", true);
-        testBoard.addPiece("king", "e7", true);
-        testBoard.addPiece("queen", "e3", true);
+        testBoard.addPiece("pawn", "e7", true);
+        testBoard.addPiece("pawn", "e3", true);
         Queen q1 = new Queen(testBoard.getSquare(5,5),false,testBoard);
         q1.updateLegals();
         List<Square> Actual =q1.getLegalNextSquares();

@@ -175,7 +175,7 @@ class CheckTest {
      * Test inBetweenSquaresRook List contains the right squares for rook and king in the same col
      */
     @Test
-    public void testInBewtweenRookCol(){
+    public void testInBetweenRookCol(){
         lineUp(" black-king-a8, white-king-e6, black-rook-e3");
         List<Square> between = check.inBetweenSquares(true);
         assertEquals(2, between.size());
@@ -193,7 +193,7 @@ class CheckTest {
      * Test inBetweenSquaresRook List contains the right squares for rook and king in the same row
      */
     @Test
-    public void testInBewtweenRookRow(){
+    public void testInBetweenRookRow(){
         lineUp(" white-king-a1, white-rook-c4, black-king-f4");
         assertEquals(2, check.inBetweenSquares(false).size());
 
@@ -250,7 +250,7 @@ class CheckTest {
      * test checkmate for double check situations
      */
     @Test
-    public void testCheckMateCoubleCheck(){
+    public void testCheckMateDoubleCheck(){
         lineUp(" white-king-a1, black-queen-e5, black-knight-d4, black-rook-b4, black-king-h8, white-rook-c7, white-bishop-a2");
         assertFalse(check.isCheckMate(true));
         board.movePiece("d4", "c2");
@@ -264,9 +264,9 @@ class CheckTest {
     private void lineUp(String input){
         String[] commands = input.split(",");
         for (String s: commands){
-            String[] denot = s.split("-");
-            boolean b = denot[0].equals(" white");
-            board.addPiece(denot[1], denot[2],b);
+            String[] denote = s.split("-");
+            boolean b = denote[0].equals(" white");
+            board.addPiece(denote[1], denote[2],b);
         }
         board.updateAllLegalSquares();
     }
