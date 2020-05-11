@@ -8,11 +8,18 @@ import schach.model.Board;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Welcome :) ");
-        System.out.println("White starts first!");
-        Board board = new Board();
-        Input input = new Input(board);
+        try{
+            if (args[0].equals("--no-gui")){
+                System.out.println("Welcome :) ");
+                System.out.println("White starts first!");
+                Board board = new Board();
+                Input input = new Input(board);
 
-        input.inOutRoutine();
+                input.inOutRoutine();
+            }
+        }
+        catch (Exception e){
+            System.out.println("No GUI implemented yet, please add argument: --no-gui");
+        }
     }
 }
