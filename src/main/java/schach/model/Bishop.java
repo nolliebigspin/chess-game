@@ -27,11 +27,6 @@ public class Bishop extends Piece {
 
     @Override
     public void updateLegals() {
-        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
-            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
-            return;
-        }
-
         legalNextSquares.clear();
 
         int column = this.position.getColumn();
@@ -41,6 +36,11 @@ public class Bishop extends Piece {
         checkForwardLeft(column, row);
         checkBehindRight(column, row);
         checkBehindLeft(column,row);
+
+        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
+            return;
+        }
     }
 
     /**

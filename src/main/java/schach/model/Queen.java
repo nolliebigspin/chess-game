@@ -28,11 +28,6 @@ public class Queen extends Piece {
     @Override
     public void updateLegals() {
 
-        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
-            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
-            return;
-        }
-
         legalNextSquares.clear();
         boolean oppositeWhite = !isWhite;
         int column = position.getColumn();
@@ -46,6 +41,11 @@ public class Queen extends Piece {
         checkForwardsLeft(column, row, oppositeWhite);
         checkBackwardsRight(column, row, oppositeWhite);
         checkBackwardsLeft(column, row, oppositeWhite);
+
+        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
+            return;
+        }
     }
 
     /**

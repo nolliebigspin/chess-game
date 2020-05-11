@@ -128,7 +128,7 @@ public class Check {
                 settingCheck.add(piece);
             }
         }
-        return  settingCheck;
+        return settingCheck;
     }
 
     /**
@@ -141,6 +141,10 @@ public class Check {
         List<Square> inBetweens = inBetweenSquares(piece.getIsWhite());
         List<Square> newLegals = new ArrayList<>();
         List<Square> legals = piece.getLegalNextSquares();
+        if (piece instanceof Pawn){
+            Pawn pawn = (Pawn) piece;
+            legals.addAll(pawn.getAttackedSquares());
+        }
         if (piece.getLegalNextSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
         }

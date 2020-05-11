@@ -49,17 +49,17 @@ public class Rook extends Piece {
 
     @Override
     public void updateLegals() {
-        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
-            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
-            return;
-        }
-
         legalNextSquares.clear();
 
         checkForward();
         checkBackward();
         checkRight();
         checkLeft();
+
+        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
+            return;
+        }
     }
 
     /**
