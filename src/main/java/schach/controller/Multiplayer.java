@@ -31,36 +31,29 @@ public class Multiplayer {
     /**
      * If Human vc Human, it will return true
      * If Human vc CPU, it will return false
-     * @return {@link isMultiplayerMode}
+     * @return if human vs AI or human vs human
      */
-    public boolean isMuliplayerMode() {
+    public boolean getMuliplayerMode() {
         return muliplayerMode;
     }
 
     /**
      * setter for multiplayer Mode
-     * @param muliplayerMode {@value Boolean}
+     * @param muliplayerMode sets the multiplayer Mode
      */
     public void setMuliplayerMode(boolean muliplayerMode) {
         this.muliplayerMode = muliplayerMode;
     }
 
     /**
-     * Reverse the player
-     */
-    public void switchPlayer() {
-        this.whiteTurn = !this.whiteTurn;
-    }
-
-    /**
      * This Function will accept an integer Value: the even numbers refers to White Player
      * the odd numbers refers to black player
-     * @param movementCount {@value Integer}
+     * @param movementCount counter for plays
      * @return isWhite as boolean
      */
     public boolean isWhiteTurn(int movementCount) {
         boolean whiteTurn = false;
-        if(movementCount %2 ==0) {
+        if(movementCount % 2 == 0) {
             whiteTurn = true;
         }
         return whiteTurn;

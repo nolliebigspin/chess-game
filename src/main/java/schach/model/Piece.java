@@ -110,7 +110,7 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
-        Input.currentMove ++;
+        Input.currentMove++;
         //updateLegals(); //TODO maybe delete, redundant?
     }
 

@@ -20,8 +20,8 @@ public class Input {
      */
     public Input(Board board) {
         this.board = board;
-        Input.currentMove = 0;
-        this.multiplayer = new Multiplayer(true);// Human
+        currentMove = 0;
+        this.multiplayer = new Multiplayer(true); // Human
     }
 
     /**
@@ -35,7 +35,7 @@ public class Input {
             String input = readInput();
             if (input.equals("beaten")){
                 board.printBeaten();
-            } else if (validMoveInput(input)) {
+            } else if (validMoveInput(input) && checkTurn(input)) {
                 board.movePiece(input.substring(0,2), input.substring(3,5));
                 // calling promotion method for piece if target Square is occupied
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
@@ -44,9 +44,9 @@ public class Input {
                     } catch (Exception e) {
                         System.out.println("Promotion not possible!");
                     }
-
                 }
                 board.printBoard();
+                currentMove++;
             }
             if (board.getCheck().isCheckMate(true)
                     || board.getCheck().isCheckMate(false)){
@@ -82,21 +82,15 @@ public class Input {
     }
 
     public boolean checkTurn(String command) {
-        if(this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite()) {
-            // White Piece
-            if(!this.multiplayer.isWhiteTurn(Input.currentMove)) {
-                System.out.println("Not White Turn");
-                return false;
+        if  (this.board.squareByDenotation(command.substring(0, 2)).isOccupied()) {
+            if (this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 == 0) {
+                return true;
+            } else if (!this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 != 0) {
+                return true;
             }
-        }else {
-            //Black Piece
-            if(this.multiplayer.isWhiteTurn(Input.currentMove)) {
-                System.out.println("Not Black Turn");
-                return false;
-            }
-        }
-
-        return true;
+        };
+        System.out.println("It's not your turn!");
+        return false;
     }
 
     /**
