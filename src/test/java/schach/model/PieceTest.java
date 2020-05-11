@@ -43,7 +43,7 @@ class PieceTest {
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         List<Square> legalNextSquares = new ArrayList<Square>();
         legalNextSquares.add(testBoard.getSquare(1,8));
-        assertEquals(legalNextSquares,p.getLegalSquares());
+        assertEquals(legalNextSquares,p.getLegalNextSquares());
 
     }
 
