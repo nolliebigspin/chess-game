@@ -132,7 +132,7 @@ public abstract class Piece {
      */
     public void printLegals(){
         for (Square square: legalNextSquares){
-            System.out.println(square.getDenotation());
+            System.out.print(square.getDenotation());
         }
     }
 

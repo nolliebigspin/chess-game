@@ -16,9 +16,13 @@ public class Board {
     private Square[][] squareMatrix = new Square[8][8];
 
     /**
-     * List of pieces that are beaten, no longer activ on board
+     * List of pieces that are beaten, no longer available on the board
      */
     private List<Piece> cemetery = new ArrayList<>();
+
+    public List<Piece> getCemetery() {
+        return cemetery;
+    }
 
     /**
      * Check class to check for check-situation on the board
@@ -116,7 +120,7 @@ public class Board {
     public void addPiece(String piece, String squareDenotation, boolean isWhite){
         Square position = squareByDenotation(squareDenotation);
         if (position.isOccupied()){
-            System.out.println("Position already occupied");
+            System.out.println("The given position is either occupied or it's an invalid backward move!");
             return;
         }
         switch (piece){
@@ -139,7 +143,7 @@ public class Board {
                 new King(position, isWhite, this);
                 break;
             default:
-                System.out.println("no valid piece: " + piece);
+                System.out.print("no valid piece: " + piece);
         }
         check.updateKings();
     }
@@ -354,5 +358,19 @@ public class Board {
         new Knight(squareByDenotation("h8"), true, this);
         this.check = new Check(this);
         updateAllLegalSquares();
+    }
+
+    public List<Piece> getActiveWhitePieces() {
+        return allActivePieces(true);
+    }
+
+    public List<Piece> getActiveBlackPieces() {
+        return allActivePieces(false);
+    }
+    public List<Square> getSquaresAttackedWhite() {
+        return attackedSquares(true);
+    }
+    public List<Square> getSquaresAttackedBlack() {
+        return attackedSquares(false);
     }
 }
