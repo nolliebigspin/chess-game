@@ -108,7 +108,7 @@ public abstract class Piece {
      * Refuses invalid moves and prints Error Message
      */
     protected void refuseMove(){
-        System.out.print("!Move is invalid");
+        System.out.println("!Move is invalid");
     }
 
     /**

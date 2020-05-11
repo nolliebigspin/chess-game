@@ -104,7 +104,7 @@ public class Board {
     public void addPiece(String piece, String squareDenotation, boolean isWhite){
         Square position = squareByDenotation(squareDenotation);
         if (position.isOccupied()){
-            System.out.print("The given position is either occupied or it's an invalid backward move!");
+            System.out.println("The given position is either occupied or it's an invalid backward move!");
             return;
         }
         switch (piece){

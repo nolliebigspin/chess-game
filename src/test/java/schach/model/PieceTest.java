@@ -139,15 +139,13 @@ class PieceTest {
     @Test
     void refuseMoveTest() {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         final PrintStream originalOut = System.out;
-        final PrintStream originalErr = System.err;
         System.setOut(new PrintStream(outContent));
         Board testBoard = new Board();
         testBoard.addPiece("pawn", "a3", true);
         Pawn p = new Pawn(testBoard.getSquare(1,3),true,testBoard);
         p.move(testBoard.getSquare(1,2));
-        assertEquals("!Move is invalid", outContent.toString());
+        assertEquals("!Move is invalid\n", outContent.toString());
         System.setOut(originalOut);
     }
 

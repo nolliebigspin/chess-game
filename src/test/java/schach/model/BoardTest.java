@@ -26,12 +26,10 @@ class BoardTest {
         Board testBoard = new Board();
         testBoard.addPiece("queen", "a1", false);
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         final PrintStream originalOut = System.out;
-        final PrintStream originalErr = System.err;
         System.setOut(new PrintStream(outContent));
         testBoard.addPiece("pawn", "a1", true);
-        assertEquals("The given position is either occupied or it's an invalid backward move!", outContent.toString());
+        assertEquals("The given position is either occupied or it's an invalid backward move!\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -40,12 +38,10 @@ class BoardTest {
         Board testBoard = new Board();
         testBoard.addPiece("queen", "a1", false);
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         final PrintStream originalOut = System.out;
-        final PrintStream originalErr = System.err;
         System.setOut(new PrintStream(outContent));
         testBoard.addPiece("pawn", "a1", true);
-        assertEquals("The given position is either occupied or it's an invalid backward move!", outContent.toString());
+        assertEquals("The given position is either occupied or it's an invalid backward move!\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -133,7 +129,7 @@ class BoardTest {
     void blackIsUnderAttackTest(){
         Board testBoard = new Board();
         testBoard.addPiece("rook", "c2", true);
-        testBoard.addPiece("pawn", "c7", false);
+        testBoard.addPiece("rook", "c7", false);
         Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
         Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
         assertTrue(testBoard.isUnderAttack("c2",false));
@@ -144,41 +140,85 @@ class BoardTest {
     void whiteIsUnderAttackTest(){
         Board testBoard = new Board();
         testBoard.addPiece("rook", "c2", true);
-        testBoard.addPiece("pawn", "c7", false);
+        testBoard.addPiece("rook", "c7", false);
         Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
         Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
         assertTrue(testBoard.isUnderAttack("c7",true));
 
     }
 
-    // @Test
-    //void squareByDenotationTest() {
-    //    Board testBoard = new Board();
+    @Test
+    void whiteIsNotUnderAttackTest(){
+        Board testBoard = new Board();
+        testBoard.addPiece("rook", "c2", true);
+        testBoard.addPiece("rook", "b7", false);
+        Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
+        Rook r2 = new Rook(testBoard.getSquare(2,7),false,testBoard);
+        assertFalse(testBoard.isUnderAttack("b7",true));
 
-    //     assertNull(testBoard.squareByDenotation("a10"));
-    //    assertNotNull(testBoard.squareByDenotation("a7"));
+    }
 
+    @Test
+    void beatenTestEmpty(){
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        final PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        Board testBoard = new Board();
+        testBoard.addPiece("rook", "c2", true);
+        testBoard.addPiece("pawn", "c7", false);
+        testBoard.printBeaten();
+        assertEquals("no pieces beaten yet\n", outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void beatenTes(){
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        final PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        Board testBoard = new Board();
+        testBoard.addPiece("rook", "c2", true);
+        testBoard.addPiece("rook", "c7", false);
+        Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
+        Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
+        r1.move(testBoard.getSquare(3,7));
+        testBoard.printBeaten();
+        assertEquals("\u265C\n", outContent.toString());
+        System.setOut(originalOut);
+
+    }
+
+    @Test
+    void squareByDenotationNull(){
+        Board testBoard = new Board();
+        assertNull(testBoard.squareByDenotation("a9"));
+
+    }
+
+    //@Test
+    //void printMatrixTest(){
+      //  Board testBoard = new Board();
+       // Square[][] squareMatrix = new Square[8][8];
+    //    assertArrayEquals(squareMatrix,testBoard.getSquareMatrix());
     //}
+    @Test
+    void initLineUpTest(){
+        Board testBoard = new Board();
+        testBoard.initLineUp();
+        assertTrue(testBoard.squareByDenotation("a1").getOccupier().isWhite);
+    }
 
-    //  @Test
-    // void getSquareTest() {
-    //     Board testBoard = new Board();
-    //     testBoard.addPiece("bishop", "d1", false);
-    //    assertEquals(testBoard.squareByDenotation("d1")getOccupier().getPosition(),testBoard.getSquare(4,1).);
+    @Test
+    void addWrongPieceTest(){
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        final PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        Board testBoard = new Board();
+        testBoard.addPiece("jackass", "c2", true);
+        assertEquals("no valid piece: jackass", outContent.toString());
+        System.setOut(originalOut);
 
-    //}
-
-    // @Test
-    // void movePieceTest() throws java.lang.Exception {
-    //   Board testBoard = new Board();
-    //   testBoard.addPiece("pawn", "a2", true);
-    //   testBoard.movePiece("c1","c2");
-    //   ByteArrayOutputStream out= new ByteArrayOutputStream();
-    //   System.setOut(new PrintStream(out));
-    //   testBoard.movePiece("c1","c2");
-    //  assertEquals("!Invalid Move: No Piece found!", out.toString());
-        //assertSame( "!Invalid Move: No Piece found!",res);
-    // }
+    }
 
 
 }
