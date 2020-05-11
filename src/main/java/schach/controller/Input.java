@@ -93,7 +93,7 @@ public class Input {
      * reads the input and returns it
      * @return the string of the input line
      */
-    private String readInput() {
+    protected String readInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("please enter your move: ");
         return scanner.nextLine();
