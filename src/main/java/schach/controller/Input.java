@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class Input {
 
     private Board board;
-    private Multiplayer multiplayer;
     public int currentMove;
 
     /**
@@ -22,7 +21,6 @@ public class Input {
     public Input(Board board) {
         this.board = board;
         currentMove = 0;
-        this.multiplayer = new Multiplayer(true); // Human
     }
 
     /**
@@ -91,6 +89,12 @@ public class Input {
         return true;
     }
 
+    /**
+     * Checks if it is the turn of the color that wants to move a piece
+     * @param command the denotation of the square the piece that should be moved is on
+     * @param currentMove the current move count
+     * @return true if it is the turn of the color that wants to move, false if not
+     */
     public boolean checkTurn(String command, int currentMove) {
         if  (this.board.squareByDenotation(command.substring(0, 2)).isOccupied()) {
             if (this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 == 0) {
