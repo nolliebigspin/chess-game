@@ -173,14 +173,6 @@ public abstract class Piece {
     }
 
     /**
-     * getter for color of the piece
-     * @return true if white, false if black
-     */
-    public boolean getIsWhite(){
-        return white;
-    }
-
-    /**
      * Undoes the last move of the piece
      * TODO delete possible beaten from cemetery
      */

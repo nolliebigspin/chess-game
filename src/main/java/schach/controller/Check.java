@@ -85,7 +85,7 @@ public class Check {
         movingPiece.acceptMove(target);
         board.updateAllLegalSquares();
         //List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.getIsWhite());
-        boolean inCheck = kingInCheck(movingPiece.getIsWhite()/**TODO delete: , currentlyAttacked*/);
+        boolean inCheck = kingInCheck(movingPiece.isWhite()/**TODO delete: , currentlyAttacked*/);
         movingPiece.undoMove();
         board.updateAllLegalSquares();
         return inCheck;
@@ -98,7 +98,7 @@ public class Check {
      */
     public boolean attackingKing(Piece attacker){
         Piece king;
-        if (attacker.getIsWhite()){
+        if (attacker.isWhite()){
             king = blackKing;
         } else {
             king = whiteKing;
@@ -137,8 +137,8 @@ public class Check {
      * @return List of squares that could resolve a check situation
      */
     public List<Square> legalsToResolveCheck(Piece piece){
-        Piece attacker = attackersSettingCheck(piece.getIsWhite()).get(0);
-        List<Square> inBetweens = inBetweenSquares(piece.getIsWhite());
+        Piece attacker = attackersSettingCheck(piece.isWhite()).get(0);
+        List<Square> inBetweens = inBetweenSquares(piece.isWhite());
         List<Square> newLegals = new ArrayList<>();
         List<Square> legals = piece.getLegalNextSquares();
         if (piece instanceof Pawn){
