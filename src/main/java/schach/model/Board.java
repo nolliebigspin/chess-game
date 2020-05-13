@@ -212,7 +212,7 @@ public class Board {
         }
          */
         if (squareByDenotation(targetPos).isOccupied()
-                && squareByDenotation(startingPos).getOccupier().isWhite == squareByDenotation(targetPos).getOccupier().isWhite) {
+                && squareByDenotation(startingPos).getOccupier().white == squareByDenotation(targetPos).getOccupier().white) {
             System.out.println("!Invalid Move");
             return;
         }
@@ -231,7 +231,7 @@ public class Board {
         List<Piece> pieces = new ArrayList<>();
         for (Square[] squareArray: squareMatrix){
             for (Square square: squareArray){
-                if (square.isOccupied() && square.getOccupier().isWhite == isWhite){
+                if (square.isOccupied() && square.getOccupier().white == isWhite){
                     pieces.add(square.getOccupier());
                 }
             }
@@ -332,20 +332,4 @@ public class Board {
     }
 
 
-    /**
-     * @TODO pls delete those methods and update tests
-     */
-
-    public List<Piece> getActiveWhitePieces() {
-        return allActivePieces(true);
-    }
-    public List<Piece> getActiveBlackPieces() {
-        return allActivePieces(false);
-    }
-    public List<Square> getSquaresAttackedWhite() {
-        return attackedSquares(true);
-    }
-    public List<Square> getSquaresAttackedBlack() {
-        return attackedSquares(false);
-    }
 }

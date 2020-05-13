@@ -58,7 +58,7 @@ class BoardTest {
     void testIsWhite(){
         Board testBoard = new Board();
         testBoard.addPiece(queen, "a1", false);
-        assertFalse(testBoard.squareByDenotation("a1").getOccupier().isWhite);
+        assertFalse(testBoard.squareByDenotation("a1").getOccupier().white);
         testBoard.printBoard();
 
     }
@@ -72,7 +72,7 @@ class BoardTest {
         List<Piece> blackPieces = new ArrayList<>();
         blackPieces.add(testBoard.squareByDenotation("a1").getOccupier());
         blackPieces.add(testBoard.squareByDenotation("b2").getOccupier());
-        assertEquals(blackPieces,testBoard.getActiveBlackPieces());
+        assertEquals(blackPieces,testBoard.allActivePieces(false));
 
     }
 
@@ -84,7 +84,7 @@ class BoardTest {
         List<Piece> whitePieces = new ArrayList<>();
         whitePieces.add(testBoard.squareByDenotation("c5").getOccupier());
         whitePieces.add(testBoard.squareByDenotation("h8").getOccupier());
-        assertEquals(whitePieces,testBoard.getActiveWhitePieces());
+        assertEquals(whitePieces,testBoard.allActivePieces(true));
 
     }
 
@@ -174,7 +174,7 @@ class BoardTest {
     void initLineUpTest(){
         Board testBoard = new Board();
         testBoard.initLineUp();
-        assertTrue(testBoard.squareByDenotation("a1").getOccupier().isWhite);
+        assertTrue(testBoard.squareByDenotation("a1").getOccupier().white);
     }
 
     @Test
