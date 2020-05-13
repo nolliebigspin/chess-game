@@ -1,6 +1,5 @@
 package schach.model;
 
-import schach.controller.Input;
 
 import java.util.ArrayList;
 import java.util.List;

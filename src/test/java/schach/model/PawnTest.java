@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the concrete piece Class Pawn
+ */
 class PawnTest {
 
     @Test

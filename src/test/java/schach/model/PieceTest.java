@@ -1,6 +1,5 @@
 package schach.model;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
@@ -11,6 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the abstract class Piece
+ */
 class PieceTest {
 
     // moving a piece on the board

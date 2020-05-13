@@ -20,10 +20,6 @@ public class Board {
      */
     private List<Piece> cemetery = new ArrayList<>();
 
-    public List<Piece> getCemetery() {
-        return cemetery;
-    }
-
     /**
      * Check class to check for check-situation on the board
      */
@@ -35,6 +31,14 @@ public class Board {
     public Board() {
         initMatrix();
         this.check = new Check(this);
+    }
+
+    /**
+     * TODO maybe delete
+     * @return
+     */
+    public List<Piece> getCemetery() {
+        return cemetery;
     }
 
     /**
@@ -294,6 +298,10 @@ public class Board {
         cemetery.add(piece);
     }
 
+    /**
+     * Removes a given piece from the cemetry, the list of beaten pieces
+     * @param piece that should be removed
+     */
     public void removeFromCemetery(Piece piece){
         cemetery.remove(piece);
     }

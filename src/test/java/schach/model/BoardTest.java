@@ -7,6 +7,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test Class for the Board class
+ */
 class BoardTest {
 
     @Test

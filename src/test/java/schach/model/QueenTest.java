@@ -7,6 +7,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the concrete piece Class Queen
+ */
 class QueenTest {
 
     @Test
