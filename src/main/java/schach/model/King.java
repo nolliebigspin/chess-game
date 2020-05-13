@@ -251,10 +251,7 @@ public class King extends Piece {
             return false;
         }
         // checks if squares where king has to move over are under attack
-        if (board.isUnderAttack(queenPosition, !isWhite) || board.isUnderAttack(bishopPosition, !isWhite)){
-            return false;
-        }
-        return true;
+        return !board.isUnderAttack(queenPosition, !isWhite) && !board.isUnderAttack(bishopPosition, !isWhite);
     }
 
     /**
@@ -295,10 +292,7 @@ public class King extends Piece {
             return false;
         }
         // checks if squares where king has to move over are under attack
-        if (board.isUnderAttack(knightPosition, !isWhite) || board.isUnderAttack(bishopPosition, !isWhite)){
-            return false;
-        }
-        return true;
+        return !board.isUnderAttack(knightPosition, !isWhite) && !board.isUnderAttack(bishopPosition, !isWhite);
     }
 
     /**

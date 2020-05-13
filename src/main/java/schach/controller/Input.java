@@ -82,11 +82,7 @@ public class Input {
         }
 
         String[] legalNumbers = {"1", "2", "3", "4", "5", "6", "7", "8"};
-        if (!Arrays.asList(legalNumbers).contains(String.valueOf(number))){
-            return false;
-        }
-
-        return true;
+        return Arrays.asList(legalNumbers).contains(String.valueOf(number));
     }
 
     /**
@@ -121,10 +117,7 @@ public class Input {
         }
         char letter = prom.charAt(0);
         String[] legalLetters = {"Q", "R", "B", "N"};
-        if (!Arrays.asList(legalLetters).contains(String.valueOf(letter))) {
-            return false;
-        }
-        return true;
+        return Arrays.asList(legalLetters).contains(String.valueOf(letter));
     }
 
     /**
