@@ -9,13 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class PawnTest {
 
+    private String pawn = "pawn";
+    private String king = "king";
+
     @Test
     void UpdateLegalsTestCheckAhead1() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a2", true);
+        testBoard.addPiece(pawn, "a2", true);
         Pawn p = new Pawn(testBoard.getSquare(1,2),true,testBoard);
-        testBoard.addPiece("king", "a8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(king, "a8", true);
+        testBoard.addPiece(king, "h8", false);
         p.updateLegals();
         int oneUp = 1;
         int secondRow = 4;
@@ -30,9 +33,9 @@ class PawnTest {
     @Test
     void UpdateLegalsTestCheckAhead2() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "b3", true);
-        testBoard.addPiece("king", "a8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(pawn, "b3", true);
+        testBoard.addPiece(king, "a8", true);
+        testBoard.addPiece(king, "h8", false);
         Pawn p = new Pawn(testBoard.getSquare(2,3),true,testBoard);
         p.updateLegals();
         int oneUp = 1;
@@ -46,10 +49,10 @@ class PawnTest {
     @Test
     void UpdateLegalsTestCheckAhead5() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a7", false);
+        testBoard.addPiece(pawn, "a7", false);
         Pawn p = new Pawn(testBoard.getSquare(1,7),false,testBoard);
-        testBoard.addPiece("king", "c8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(king, "c8", true);
+        testBoard.addPiece(king, "h8", false);
         p.updateLegals();
         int oneUp = -1;
         int secondRow = 5;
@@ -65,10 +68,10 @@ class PawnTest {
     @Test
     void UpdateLegalsTestCheckAhead6() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "d5", false);
+        testBoard.addPiece(pawn, "d5", false);
         Pawn p = new Pawn(testBoard.getSquare(4,5),false,testBoard);
-        testBoard.addPiece("king", "c8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(king, "c8", true);
+        testBoard.addPiece(king, "h8", false);
         p.updateLegals();
         int oneUp = -1;
         Square ahead = testBoard.getSquare(4, 5 + oneUp);
@@ -81,11 +84,11 @@ class PawnTest {
     @Test
     void UpdateLegalsTestCheckUpRight1() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "f5", true);
-        testBoard.addPiece("pawn", "f6", true);
-        testBoard.addPiece("pawn", "g6", false);
-        testBoard.addPiece("king", "c8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(pawn, "f5", true);
+        testBoard.addPiece(pawn, "f6", true);
+        testBoard.addPiece(pawn, "g6", false);
+        testBoard.addPiece(king, "c8", true);
+        testBoard.addPiece(king, "h8", false);
         Pawn whiteEats = new Pawn(testBoard.getSquare(6,5),true,testBoard);
         whiteEats.updateLegals();
         int oneUp = 1;
@@ -108,11 +111,11 @@ class PawnTest {
     @Test
     void UpdateLegalsTestCheckUpRight2() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "f7", false);
-        testBoard.addPiece("pawn", "f6", false);
-        testBoard.addPiece("pawn", "e6", true);
-        testBoard.addPiece("king", "c8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(pawn, "f7", false);
+        testBoard.addPiece(pawn, "f6", false);
+        testBoard.addPiece(pawn, "e6", true);
+        testBoard.addPiece(king, "c8", true);
+        testBoard.addPiece(king, "h8", false);
         Pawn whiteEats = new Pawn(testBoard.getSquare(6,7),false,testBoard);
         whiteEats.updateLegals();
         int oneUp = -1;
@@ -134,11 +137,11 @@ class PawnTest {
     @Test
     void UpdateLegalsTestCheckUpLeft1() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "g3", true);
-        testBoard.addPiece("pawn", "g4", true);
-        testBoard.addPiece("pawn", "f4", false);
-        testBoard.addPiece("king", "c8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(pawn, "g3", true);
+        testBoard.addPiece(pawn, "g4", true);
+        testBoard.addPiece(pawn, "f4", false);
+        testBoard.addPiece(king, "c8", true);
+        testBoard.addPiece(king, "h8", false);
         Pawn whiteEats = new Pawn(testBoard.getSquare(7,3),true,testBoard);
         whiteEats.updateLegals();
         int oneUp = 1;
@@ -161,11 +164,11 @@ class PawnTest {
     @Test
     void UpdateLegalsTestCheckUpLeft2() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a5", false);
-        testBoard.addPiece("pawn", "a4", false);
-        testBoard.addPiece("pawn", "b3", true);
-        testBoard.addPiece("king", "c8", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(pawn, "a5", false);
+        testBoard.addPiece(pawn, "a4", false);
+        testBoard.addPiece(pawn, "b3", true);
+        testBoard.addPiece(king, "c8", true);
+        testBoard.addPiece(king, "h8", false);
         Pawn whiteEats = new Pawn(testBoard.getSquare(1,4),false,testBoard);
         whiteEats.updateLegals();
         int oneUp = -1;
@@ -194,7 +197,7 @@ class PawnTest {
     @Test
     void printTestWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a2", true);
+        testBoard.addPiece(pawn, "a2", true);
         String actual = testBoard.squareByDenotation("a2").getOccupier().print();
         String expected = "\u2659";
         assertEquals(expected, actual);
@@ -205,7 +208,7 @@ class PawnTest {
     @Test
     void printTestBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a3", false);
+        testBoard.addPiece(pawn, "a3", false);
         String actual = testBoard.squareByDenotation("a3").getOccupier().print();
         String expected = "\u265F";
         assertEquals(expected, actual);

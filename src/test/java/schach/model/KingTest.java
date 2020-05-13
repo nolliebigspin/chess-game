@@ -12,12 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class KingTest {
 
+    private String pawn = "pawn";
+    private String king = "king";
+    private String rook = "rook";
+
     // test the print method
     // white king
     @Test
     void printTestWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "a1", true);
+        testBoard.addPiece(king, "a1", true);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u2654";
         assertEquals(expected, actual);
@@ -28,7 +32,7 @@ class KingTest {
     @Test
     void printTestBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "a1", false);
+        testBoard.addPiece(king, "a1", false);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265A";
         assertEquals(expected, actual);
@@ -38,7 +42,7 @@ class KingTest {
     @Test
     void scenario1() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "d3", false);
+        testBoard.addPiece(king, "d3", false);
 
         King k = new King(testBoard.getSquare(4,3),false,testBoard);
         k.updateLegals();
@@ -69,7 +73,7 @@ class KingTest {
     @Test
     void scenario2() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "d3", false);
+        testBoard.addPiece(king, "d3", false);
 
         King k = new King(testBoard.getSquare(4,3),false,testBoard);
         k.updateLegals();
@@ -99,8 +103,8 @@ class KingTest {
     @Test
     void scenario3() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "d3", false);
-        testBoard.addPiece("king", "h8", true);
+        testBoard.addPiece(king, "d3", false);
+        testBoard.addPiece(king, "h8", true);
         King k = new King(testBoard.getSquare(4,3),false,testBoard);
         k.updateLegals();
         List<Square> Actual =k.getLegalNextSquares();
@@ -130,11 +134,11 @@ class KingTest {
     @Test
     void checkTheCemetery() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "d3", false);
+        testBoard.addPiece(king, "d3", false);
         King k = new King(testBoard.getSquare(4,3),false,testBoard);
-        testBoard.addPiece("rook", "d2", true);
+        testBoard.addPiece(rook, "d2", true);
         List<Piece> cemetery = new ArrayList<>();
-        Rook r = new Rook(testBoard.getSquare(4,2),true,testBoard);
+        new Rook(testBoard.getSquare(4,2),true,testBoard);
         cemetery.add(testBoard.squareByDenotation("d2").getOccupier());
         k.updateLegals();
         k.move(testBoard.getSquare(4,2));
@@ -148,21 +152,17 @@ class KingTest {
     @Test
     void rookCastlingLongWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "e1", true);
-        King k = new King(testBoard.getSquare(5,1),true,testBoard);
-        testBoard.addPiece("rook", "a1", true);
+        testBoard.addPiece(king, "e1", true);
+        new King(testBoard.getSquare(5,1),true,testBoard);
+        testBoard.addPiece(rook, "a1", true);
         Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
 
-            int rowWhite=1;
-            int rowBlack=8;
-            int startColumnLong = 1;
-            int targetColumnLong = 4;
-            int  startColumn = 8;
-            int targetColumn = 6;
+        int startColumnLong = 1;
+        int targetColumnLong = 4;
 
         Square rookStart = testBoard.getSquare(startColumnLong , 1);
         Square rookTarget = testBoard.getSquare(targetColumnLong, 1);
-        Piece rook = rookStart.getOccupier();
+        rookStart.getOccupier();
         r.acceptMove(rookTarget);
 
     }
@@ -170,15 +170,15 @@ class KingTest {
     @Test
     void scenariowhatever() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "d3", false);
-        testBoard.addPiece("pawn", "f4", true);
-        testBoard.addPiece("pawn", "f5", true);
-        testBoard.addPiece("pawn", "f6", true);
-        testBoard.addPiece("pawn", "d4", true);
-        testBoard.addPiece("pawn", "d5", true);
-        testBoard.addPiece("pawn", "d6", true);
-        testBoard.addPiece("pawn", "e4", true);
-        testBoard.addPiece("pawn", "e6", true);
+        testBoard.addPiece(king, "d3", false);
+        testBoard.addPiece(pawn, "f4", true);
+        testBoard.addPiece(pawn, "f5", true);
+        testBoard.addPiece(pawn, "f6", true);
+        testBoard.addPiece(pawn, "d4", true);
+        testBoard.addPiece(pawn, "d5", true);
+        testBoard.addPiece(pawn, "d6", true);
+        testBoard.addPiece(pawn, "e4", true);
+        testBoard.addPiece(pawn, "e6", true);
         King k = new King(testBoard.getSquare(4,3),false,testBoard);
         k.updateLegals();
         List<Square> Actual =k.getLegalNextSquares();
@@ -207,15 +207,15 @@ class KingTest {
     @Test
     void scenariowhatever2() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "e5", true);
-        testBoard.addPiece("pawn", "f4", false);
-        testBoard.addPiece("pawn", "f5", false);
-        testBoard.addPiece("pawn", "f6", false);
-        testBoard.addPiece("pawn", "d4", false);
-        testBoard.addPiece("pawn", "d5", false);
-        testBoard.addPiece("pawn", "d6", false);
-        testBoard.addPiece("pawn", "e4", false);
-        testBoard.addPiece("pawn", "e6", false);
+        testBoard.addPiece(king, "e5", true);
+        testBoard.addPiece(pawn, "f4", false);
+        testBoard.addPiece(pawn, "f5", false);
+        testBoard.addPiece(pawn, "f6", false);
+        testBoard.addPiece(pawn, "d4", false);
+        testBoard.addPiece(pawn, "d5", false);
+        testBoard.addPiece(pawn, "d6", false);
+        testBoard.addPiece(pawn, "e4", false);
+        testBoard.addPiece(pawn, "e6", false);
         King k = new King(testBoard.getSquare(5,5),true,testBoard);
         k.updateLegals();
         List<Square> Actual =k.getLegalNextSquares();
