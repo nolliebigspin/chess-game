@@ -41,6 +41,11 @@ public abstract class Piece {
     private Piece beatenPiece;
 
     /**
+     * Boolean noting if the move was accepted or not
+     */
+    private boolean validMove;
+
+    /**
      * Constructor of Piece
      * the square where the piece is placed, marked and gets the Piece Object passed
      * @param position denotation of the square where the piece will be initiated on
@@ -110,7 +115,7 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
-        Input.currentMove++;
+        validMove = true;
         //updateLegals(); //TODO maybe delete, redundant?
     }
 
@@ -118,6 +123,7 @@ public abstract class Piece {
      * Refuses invalid moves and prints Error Message
      */
     protected void refuseMove(){
+        validMove = false;
         System.out.println("!Move is invalid");
     }
 
@@ -198,6 +204,14 @@ public abstract class Piece {
      */
     public boolean isWhite() {
         return this.isWhite;
+    }
+
+    /**
+     * getter for validMove()
+     * @return true if move was accepted, false if move was refused
+     */
+    public boolean isValidMove(){
+        return validMove;
     }
 }
 

@@ -105,7 +105,6 @@ public class Board {
         new Queen(squareByDenotation("d8"), false, this);
         new King(squareByDenotation("e8"), false, this);
 
-        //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THERE MUST BE KINGS)
         check.updateKings();
 
         updateAllLegalSquares();
@@ -202,10 +201,12 @@ public class Board {
      */
     public void movePiece(String startingPos, String targetPos) {
         updateAllLegalSquares();
+        /** redundant because of checkTurn() method in input @TODO delete
         if (!squareByDenotation(startingPos).isOccupied()) {
             System.out.println("!Invalid Move");
             return;
         }
+         */
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().isWhite == squareByDenotation(targetPos).getOccupier().isWhite) {
             System.out.println("!Invalid Move");
@@ -323,6 +324,9 @@ public class Board {
     }
 
 
+    /**
+     * @TODO pls delete those methods and update tests
+     */
 
     public List<Piece> getActiveWhitePieces() {
         return allActivePieces(true);

@@ -1,6 +1,7 @@
 package schach.controller;
 
 import schach.model.Board;
+import schach.model.Piece;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class Input {
 
     private Board board;
     private Multiplayer multiplayer;
-    public static int currentMove;
+    public int currentMove;
 
     /**
      * Constructor
@@ -36,6 +37,12 @@ public class Input {
             if (input.equals("beaten")){
                 board.printBeaten();
             } else if (validMoveInput(input) && checkTurn(input, currentMove)) {
+                Piece movingPiece;
+                try {
+                    movingPiece = board.squareByDenotation(input.substring(0,2)).getOccupier();
+                } catch (Exception e){
+                    movingPiece = null;
+                }
                 board.movePiece(input.substring(0,2), input.substring(3,5));
                 // calling promotion method for piece if target Square is occupied
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
@@ -46,7 +53,10 @@ public class Input {
                     }
                 }
                 board.printBoard();
-                currentMove++;
+                if (movingPiece != null && movingPiece.isValidMove()){
+                    currentMove++;
+                }
+                System.out.println(currentMove);
             }
             if (board.getCheck().isCheckMate(true)
                     || board.getCheck().isCheckMate(false)){
@@ -88,8 +98,11 @@ public class Input {
             } else if (!this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 != 0) {
                 return true;
             }
-        };
-        System.out.println("It's not your turn!");
+            System.out.println("It's not your turn!");
+            return false;
+        }
+        System.out.println("!Invalid Move");
+        System.out.println("No piece found!");
         return false;
     }
 
