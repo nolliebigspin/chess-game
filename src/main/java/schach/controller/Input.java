@@ -1,6 +1,7 @@
 package schach.controller;
 
 import schach.model.Board;
+import schach.model.Piece;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,8 +12,7 @@ import java.util.Scanner;
 public class Input {
 
     private Board board;
-    private Multiplayer multiplayer;
-    public static int currentMove;
+    public int currentMove;
 
     /**
      * Constructor
@@ -21,7 +21,6 @@ public class Input {
     public Input(Board board) {
         this.board = board;
         currentMove = 0;
-        this.multiplayer = new Multiplayer(true); // Human
     }
 
     /**
@@ -36,6 +35,12 @@ public class Input {
             if (input.equals("beaten")){
                 board.printBeaten();
             } else if (validMoveInput(input) && checkTurn(input, currentMove)) {
+                Piece movingPiece;
+                try {
+                    movingPiece = board.squareByDenotation(input.substring(0,2)).getOccupier();
+                } catch (Exception e){
+                    movingPiece = null;
+                }
                 board.movePiece(input.substring(0,2), input.substring(3,5));
                 // calling promotion method for piece if target Square is occupied
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
@@ -46,7 +51,10 @@ public class Input {
                     }
                 }
                 board.printBoard();
-                currentMove++;
+                if (movingPiece != null && movingPiece.isValidMove()){
+                    currentMove++;
+                }
+                System.out.println(currentMove);
             }
             if (board.getCheck().isCheckMate(true)
                     || board.getCheck().isCheckMate(false)){
@@ -74,13 +82,15 @@ public class Input {
         }
 
         String[] legalNumbers = {"1", "2", "3", "4", "5", "6", "7", "8"};
-        if (!Arrays.asList(legalNumbers).contains(String.valueOf(number))){
-            return false;
-        }
-
-        return true;
+        return Arrays.asList(legalNumbers).contains(String.valueOf(number));
     }
 
+    /**
+     * Checks if it is the turn of the color that wants to move a piece
+     * @param command the denotation of the square the piece that should be moved is on
+     * @param currentMove the current move count
+     * @return true if it is the turn of the color that wants to move, false if not
+     */
     public boolean checkTurn(String command, int currentMove) {
         if  (this.board.squareByDenotation(command.substring(0, 2)).isOccupied()) {
             if (this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 == 0) {
@@ -88,8 +98,11 @@ public class Input {
             } else if (!this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 != 0) {
                 return true;
             }
-        };
-        System.out.println("It's not your turn!");
+            System.out.println("It's not your turn!");
+            return false;
+        }
+        System.out.println("!Invalid Move");
+        System.out.println("No piece found!");
         return false;
     }
 
@@ -104,10 +117,7 @@ public class Input {
         }
         char letter = prom.charAt(0);
         String[] legalLetters = {"Q", "R", "B", "N"};
-        if (!Arrays.asList(legalLetters).contains(String.valueOf(letter))) {
-            return false;
-        }
-        return true;
+        return Arrays.asList(legalLetters).contains(String.valueOf(letter));
     }
 
     /**

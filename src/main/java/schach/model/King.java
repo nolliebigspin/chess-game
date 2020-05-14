@@ -25,7 +25,7 @@ public class King extends Piece {
 
     @Override
     public String print() {
-        if (super.isWhite) {
+        if (super.white) {
             return "\u2654";
         }
         else {
@@ -64,7 +64,7 @@ public class King extends Piece {
      */
     @Override
     public void acceptMove(Square target){
-        if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
+        if (target.isOccupied() && target.getOccupier().white != white){
             board.addToCemetery(target.getOccupier());
         }
         if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castlingLongValid()){
@@ -87,7 +87,7 @@ public class King extends Piece {
     public void updateLegals() {
         legalNextSquares.clear();
 
-        boolean oppositeIsWhite = !isWhite;
+        boolean oppositeIsWhite = !white;
         int row = position.getRow();
         int column = position.getColumn();
 
@@ -101,7 +101,7 @@ public class King extends Piece {
         checkForwardLeft(column, row, oppositeIsWhite);
         if (castlingLongValid()){
             Square bishopPos;
-            if (isWhite){
+            if (white){
                 bishopPos = board.squareByDenotation("c1");
             } else {
                 bishopPos = board.squareByDenotation("c8");
@@ -110,7 +110,7 @@ public class King extends Piece {
         }
         if (castlingShortValid()){
             Square knightPos;
-            if (isWhite){
+            if (white){
                 knightPos = board.squareByDenotation("g1");
             } else {
                 knightPos = board.squareByDenotation("g8");
@@ -126,7 +126,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column, row + 1);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -137,7 +137,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column, row - 1);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -148,7 +148,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column - 1, row);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -159,7 +159,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column + 1, row);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -170,7 +170,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column + 1, row + 1);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -181,7 +181,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column + 1, row - 1);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -192,7 +192,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column - 1, row - 1);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -203,7 +203,7 @@ public class King extends Piece {
             Square nextSquare = board.getSquare(column - 1, row + 1);
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -218,7 +218,7 @@ public class King extends Piece {
         String queenPosition;
         String bishopPosition;
         String knightPosition;
-        if (isWhite){
+        if (white){
             rookPosition = "a1";
             queenPosition = "d1";
             bishopPosition = "c1";
@@ -251,10 +251,7 @@ public class King extends Piece {
             return false;
         }
         // checks if squares where king has to move over are under attack
-        if (board.isUnderAttack(queenPosition, !isWhite) || board.isUnderAttack(bishopPosition, !isWhite)){
-            return false;
-        }
-        return true;
+        return !board.isUnderAttack(queenPosition, !white) && !board.isUnderAttack(bishopPosition, !white);
     }
 
     /**
@@ -265,7 +262,7 @@ public class King extends Piece {
         String rookPosition;
         String bishopPosition;
         String knightPosition;
-        if (isWhite){
+        if (white){
             rookPosition = "h1";
             bishopPosition = "f1";
             knightPosition = "g1";
@@ -295,10 +292,7 @@ public class King extends Piece {
             return false;
         }
         // checks if squares where king has to move over are under attack
-        if (board.isUnderAttack(knightPosition, !isWhite) || board.isUnderAttack(bishopPosition, !isWhite)){
-            return false;
-        }
-        return true;
+        return !board.isUnderAttack(knightPosition, !white) && !board.isUnderAttack(bishopPosition, !white);
     }
 
     /**
@@ -316,7 +310,7 @@ public class King extends Piece {
             startColumn = 8;
             targetColumn = 6;
         }
-        if (isWhite){
+        if (white){
             row = 1;
         } else {
             row = 8;
@@ -328,7 +322,7 @@ public class King extends Piece {
     }
 
     private void filterAttacked(){
-        List<Square> attacked = board.attackedSquares(!isWhite);
+        List<Square> attacked = board.attackedSquares(!white);
         for (Square square: attacked){
             legalNextSquares.remove(square);
         }

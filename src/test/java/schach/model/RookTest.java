@@ -7,16 +7,25 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the concrete piece Class Rook
+ */
 class RookTest {
+
+    private String bishop = "bishop";
+    private String pawn = "pawn";
+    private String king = "king";
+    private String queen = "queen";
+    private String rook = "rook";
 
     // white rook
     @Test
     void scenarioWhite1() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", true);
-        testBoard.addPiece("bishop", "d5", false);
-        testBoard.addPiece("king", "g7", true);
-        testBoard.addPiece("king", "g4", false);
+        testBoard.addPiece(rook, "g5", true);
+        testBoard.addPiece(bishop, "d5", false);
+        testBoard.addPiece(king, "g7", true);
+        testBoard.addPiece(king, "g4", false);
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -41,11 +50,11 @@ class RookTest {
     @Test
     void scenarioWhite2() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", true);
-        testBoard.addPiece("bishop", "d5", false);
-        testBoard.addPiece("pawn", "g6", true);
-        testBoard.addPiece("king", "g4", false);
-        testBoard.addPiece("king", "h5", true);
+        testBoard.addPiece(rook, "g5", true);
+        testBoard.addPiece(bishop, "d5", false);
+        testBoard.addPiece(pawn, "g6", true);
+        testBoard.addPiece(king, "g4", false);
+        testBoard.addPiece(king, "h5", true);
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -68,11 +77,11 @@ class RookTest {
     @Test
     void scenarioWhite3() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", true);
-        testBoard.addPiece("bishop", "d5", false);
-        testBoard.addPiece("pawn", "g6", true);
-        testBoard.addPiece("king", "g4", false);
-        testBoard.addPiece("king", "h8", true);
+        testBoard.addPiece(rook, "g5", true);
+        testBoard.addPiece(bishop, "d5", false);
+        testBoard.addPiece(pawn, "g6", true);
+        testBoard.addPiece(king, "g4", false);
+        testBoard.addPiece(king, "h8", true);
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -96,11 +105,11 @@ class RookTest {
     @Test
     void scenarioWhite4() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", true);
-        testBoard.addPiece("bishop", "d5", false);
-        testBoard.addPiece("pawn", "g6", true);
-        testBoard.addPiece("king", "g3", true);
-        testBoard.addPiece("pawn", "h5", false);
+        testBoard.addPiece(rook, "g5", true);
+        testBoard.addPiece(bishop, "d5", false);
+        testBoard.addPiece(pawn, "g6", true);
+        testBoard.addPiece(king, "g3", true);
+        testBoard.addPiece(pawn, "h5", false);
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -126,11 +135,11 @@ class RookTest {
     @Test
     void scenarioWhite5() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", true);
-        testBoard.addPiece("bishop", "d5", false);
-        testBoard.addPiece("pawn", "g6", true);
-        testBoard.addPiece("king", "g3", true);
-        testBoard.addPiece("pawn", "h5", false);
+        testBoard.addPiece(rook, "g5", true);
+        testBoard.addPiece(bishop, "d5", false);
+        testBoard.addPiece(pawn, "g6", true);
+        testBoard.addPiece(king, "g3", true);
+        testBoard.addPiece(pawn, "h5", false);
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -155,11 +164,11 @@ class RookTest {
     @Test
     void scenarioBlack1() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", false);
-        testBoard.addPiece("bishop", "d5", true);
-        testBoard.addPiece("pawn", "g6", false);
-        testBoard.addPiece("king", "g4", true);
-        testBoard.addPiece("king", "h8", false);
+        testBoard.addPiece(rook, "g5", false);
+        testBoard.addPiece(bishop, "d5", true);
+        testBoard.addPiece(pawn, "g6", false);
+        testBoard.addPiece(king, "g4", true);
+        testBoard.addPiece(king, "h8", false);
         Rook r1 = new Rook(testBoard.getSquare(7,5),false,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -182,11 +191,11 @@ class RookTest {
     @Test
     void scenarioBlack2() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", false);
-        testBoard.addPiece("bishop", "d5", true);
-        testBoard.addPiece("pawn", "g6", false);
-        testBoard.addPiece("king", "g4", true);
-        testBoard.addPiece("king", "h5", false);
+        testBoard.addPiece(rook, "g5", false);
+        testBoard.addPiece(bishop, "d5", true);
+        testBoard.addPiece(pawn, "g6", false);
+        testBoard.addPiece(king, "g4", true);
+        testBoard.addPiece(king, "h5", false);
         Rook r1 = new Rook(testBoard.getSquare(7,5),false,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -208,11 +217,11 @@ class RookTest {
     @Test
     void scenarioWhiteLast() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "g5", true);
-        testBoard.addPiece("bishop", "g4", true);
-        testBoard.addPiece("pawn", "h5", true);
-        testBoard.addPiece("king", "f5", true);
-        testBoard.addPiece("queen", "g8", false);
+        testBoard.addPiece(rook, "g5", true);
+        testBoard.addPiece(bishop, "g4", true);
+        testBoard.addPiece(pawn, "h5", true);
+        testBoard.addPiece(king, "f5", true);
+        testBoard.addPiece(queen, "g8", false);
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -233,7 +242,7 @@ class RookTest {
     @Test
     void printTestWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", true);
+        testBoard.addPiece(rook, "a1", true);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u2656";
         assertEquals(expected, actual);
@@ -244,7 +253,7 @@ class RookTest {
     @Test
     void printTestBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", false);
+        testBoard.addPiece(rook, "a1", false);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265C";
         assertEquals(expected, actual);
@@ -255,7 +264,7 @@ class RookTest {
     @Test
     void RookNeverMoved() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", true);
+        testBoard.addPiece(rook, "a1", true);
         Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
         assertTrue(r.isNeverMoved());
     }
@@ -263,9 +272,9 @@ class RookTest {
     @Test
     void RookNeverMoved2() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", true);
-        testBoard.addPiece("king", "b5", false);
-        testBoard.addPiece("king", "e6", true);
+        testBoard.addPiece(rook, "a1", true);
+        testBoard.addPiece(king, "b5", false);
+        testBoard.addPiece(king, "e6", true);
         Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
         r.updateLegals();
         assertTrue(r.isNeverMoved());
@@ -278,9 +287,9 @@ class RookTest {
     @Test
     void RookHasMoved() {
         Board testBoard = new Board();
-        testBoard.addPiece("rook", "a1", true);
-        testBoard.addPiece("king", "b5", false);
-        testBoard.addPiece("king", "e6", true);
+        testBoard.addPiece(rook, "a1", true);
+        testBoard.addPiece(king, "b5", false);
+        testBoard.addPiece(king, "e6", true);
         Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
         r.updateLegals();
         r.move(testBoard.getSquare(1,2));

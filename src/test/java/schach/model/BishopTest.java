@@ -7,20 +7,28 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the concrete piece Class Bishop
+ */
 class BishopTest {
+
+    private String bishop = "bishop";
+    private String pawn = "pawn";
+    private String king = "king";
+    private String queen = "queen";
 
 
     // Test up right scenario with a possible move forward for a black pawn
     @Test
     void checkUpRightWhite1() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "d3", true);
-        testBoard.addPiece("bishop", "g6", true);
-        testBoard.addPiece("pawn", "c4", true);
-        testBoard.addPiece("pawn", "c2", true);
-        testBoard.addPiece("pawn", "e2", true);
-        testBoard.addPiece("king", "h8", true);
-        testBoard.addPiece("king", "a8", false);
+        testBoard.addPiece(bishop, "d3", true);
+        testBoard.addPiece(bishop, "g6", true);
+        testBoard.addPiece(pawn, "c4", true);
+        testBoard.addPiece(pawn, "c2", true);
+        testBoard.addPiece(pawn, "e2", true);
+        testBoard.addPiece(king, "h8", true);
+        testBoard.addPiece(king, "a8", false);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -38,13 +46,13 @@ class BishopTest {
     @Test
     void checkUpRightWhite2() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "d3", true);
-        testBoard.addPiece("bishop", "g6", false);
-        testBoard.addPiece("pawn", "c4", true);
-        testBoard.addPiece("pawn", "c2", true);
-        testBoard.addPiece("pawn", "e2", true);
-        testBoard.addPiece("king", "h8", true);
-        testBoard.addPiece("king", "a8", false);
+        testBoard.addPiece(bishop, "d3", true);
+        testBoard.addPiece(bishop, "g6", false);
+        testBoard.addPiece(pawn, "c4", true);
+        testBoard.addPiece(pawn, "c2", true);
+        testBoard.addPiece(pawn, "e2", true);
+        testBoard.addPiece(king, "h8", true);
+        testBoard.addPiece(king, "a8", false);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -63,13 +71,13 @@ class BishopTest {
     @Test
     void checkUpLeftWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "d3", true);
-        testBoard.addPiece("bishop", "a6", false);
-        testBoard.addPiece("pawn", "e4", true);
-        testBoard.addPiece("pawn", "c2", true);
-        testBoard.addPiece("pawn", "e2", true);
-        testBoard.addPiece("king", "h8", true);
-        testBoard.addPiece("king", "a8", false);
+        testBoard.addPiece(bishop, "d3", true);
+        testBoard.addPiece(bishop, "a6", false);
+        testBoard.addPiece(pawn, "e4", true);
+        testBoard.addPiece(pawn, "c2", true);
+        testBoard.addPiece(pawn, "e2", true);
+        testBoard.addPiece(king, "h8", true);
+        testBoard.addPiece(king, "a8", false);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -89,11 +97,11 @@ class BishopTest {
     @Test
     void checkBehindLeftRightWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "d3", true);
-        testBoard.addPiece("bishop", "c4", true);
-        testBoard.addPiece("pawn", "e4", true);
-        testBoard.addPiece("king", "c2", false);
-        testBoard.addPiece("king", "h8", true);
+        testBoard.addPiece(bishop, "d3", true);
+        testBoard.addPiece(bishop, "c4", true);
+        testBoard.addPiece(pawn, "e4", true);
+        testBoard.addPiece(king, "c2", false);
+        testBoard.addPiece(king, "h8", true);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -113,12 +121,12 @@ class BishopTest {
     @Test
     void checkBehindLeftRightBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "d3", false);
-        testBoard.addPiece("bishop", "c4", true);
-        testBoard.addPiece("pawn", "e4", true);
-        testBoard.addPiece("king", "c2", true);
-        testBoard.addPiece("king", "h8", false);
-        testBoard.addPiece("queen", "e2", true);
+        testBoard.addPiece(bishop, "d3", false);
+        testBoard.addPiece(bishop, "c4", true);
+        testBoard.addPiece(pawn, "e4", true);
+        testBoard.addPiece(king, "c2", true);
+        testBoard.addPiece(king, "h8", false);
+        testBoard.addPiece(queen, "e2", true);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),false,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -139,10 +147,10 @@ class BishopTest {
     @Test
     void checkBehindRight() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "d3", true);
-        testBoard.addPiece("queen", "e2", true);
-        testBoard.addPiece("pawn", "c4", true);
-        testBoard.addPiece("king", "e4", true);
+        testBoard.addPiece(bishop, "d3", true);
+        testBoard.addPiece(queen, "e2", true);
+        testBoard.addPiece(pawn, "c4", true);
+        testBoard.addPiece(king, "e4", true);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -163,7 +171,7 @@ class BishopTest {
     @Test
     void printTestWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "a1", true);
+        testBoard.addPiece(bishop, "a1", true);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u2657";
         assertEquals(expected, actual);
@@ -174,7 +182,7 @@ class BishopTest {
     @Test
     void printTestBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("bishop", "a1", false);
+        testBoard.addPiece(bishop, "a1", false);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265D";
         assertEquals(expected, actual);

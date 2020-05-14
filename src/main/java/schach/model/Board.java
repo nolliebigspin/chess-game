@@ -20,10 +20,6 @@ public class Board {
      */
     private List<Piece> cemetery = new ArrayList<>();
 
-    public List<Piece> getCemetery() {
-        return cemetery;
-    }
-
     /**
      * Check class to check for check-situation on the board
      */
@@ -35,6 +31,14 @@ public class Board {
     public Board() {
         initMatrix();
         this.check = new Check(this);
+    }
+
+    /**
+     * TODO maybe delete
+     * @return
+     */
+    public List<Piece> getCemetery() {
+        return cemetery;
     }
 
     /**
@@ -105,7 +109,6 @@ public class Board {
         new Queen(squareByDenotation("d8"), false, this);
         new King(squareByDenotation("e8"), false, this);
 
-        //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THERE MUST BE KINGS)
         check.updateKings();
 
         updateAllLegalSquares();
@@ -202,12 +205,14 @@ public class Board {
      */
     public void movePiece(String startingPos, String targetPos) {
         updateAllLegalSquares();
+        /** redundant because of checkTurn() method in input @TODO delete
         if (!squareByDenotation(startingPos).isOccupied()) {
             System.out.println("!Invalid Move");
             return;
         }
+         */
         if (squareByDenotation(targetPos).isOccupied()
-                && squareByDenotation(startingPos).getOccupier().isWhite == squareByDenotation(targetPos).getOccupier().isWhite) {
+                && squareByDenotation(startingPos).getOccupier().white == squareByDenotation(targetPos).getOccupier().white) {
             System.out.println("!Invalid Move");
             return;
         }
@@ -226,7 +231,7 @@ public class Board {
         List<Piece> pieces = new ArrayList<>();
         for (Square[] squareArray: squareMatrix){
             for (Square square: squareArray){
-                if (square.isOccupied() && square.getOccupier().isWhite == isWhite){
+                if (square.isOccupied() && square.getOccupier().white == isWhite){
                     pieces.add(square.getOccupier());
                 }
             }
@@ -293,6 +298,10 @@ public class Board {
         cemetery.add(piece);
     }
 
+    /**
+     * Removes a given piece from the cemetry, the list of beaten pieces
+     * @param piece that should be removed
+     */
     public void removeFromCemetery(Piece piece){
         cemetery.remove(piece);
     }
@@ -323,17 +332,4 @@ public class Board {
     }
 
 
-
-    public List<Piece> getActiveWhitePieces() {
-        return allActivePieces(true);
-    }
-    public List<Piece> getActiveBlackPieces() {
-        return allActivePieces(false);
-    }
-    public List<Square> getSquaresAttackedWhite() {
-        return attackedSquares(true);
-    }
-    public List<Square> getSquaresAttackedBlack() {
-        return attackedSquares(false);
-    }
 }

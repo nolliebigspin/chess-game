@@ -7,21 +7,29 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the concrete piece Class Queen
+ */
 class QueenTest {
+
+    private String bishop = "bishop";
+    private String pawn = "pawn";
+    private String king = "king";
+    private String queen = "queen";
 
     @Test
     void scenario1() {
         Board testBoard = new Board();
-        testBoard.addPiece("queen", "e5", false);
-        testBoard.addPiece("king", "e1", false);
-        testBoard.addPiece("bishop", "f4", true);
-        testBoard.addPiece("pawn", "f5", true);
-        testBoard.addPiece("king", "f6", true);
-        testBoard.addPiece("pawn", "d4", true);
-        testBoard.addPiece("bishop", "d5", true);
-        testBoard.addPiece("pawn", "d6", true);
-        testBoard.addPiece("pawn", "e4", true);
-        testBoard.addPiece("pawn", "e6", true);
+        testBoard.addPiece(queen, "e5", false);
+        testBoard.addPiece(king, "e1", false);
+        testBoard.addPiece(bishop, "f4", true);
+        testBoard.addPiece(pawn, "f5", true);
+        testBoard.addPiece(king, "f6", true);
+        testBoard.addPiece(pawn, "d4", true);
+        testBoard.addPiece(bishop, "d5", true);
+        testBoard.addPiece(pawn, "d6", true);
+        testBoard.addPiece(pawn, "e4", true);
+        testBoard.addPiece(pawn, "e6", true);
         Queen q1 = new Queen(testBoard.getSquare(5,5),false,testBoard);
         q1.updateLegals();
         List<Square> Actual =q1.getLegalNextSquares();
@@ -51,16 +59,16 @@ class QueenTest {
     @Test
     void scenario2() {
         Board testBoard = new Board();
-        testBoard.addPiece("queen", "e5", false);
-        testBoard.addPiece("king", "h8", false);
-        testBoard.addPiece("bishop", "g7", true);
-        testBoard.addPiece("pawn", "g5", true);
-        testBoard.addPiece("king", "g3", true);
-        testBoard.addPiece("pawn", "c7", true);
-        testBoard.addPiece("bishop", "c5", true);
-        testBoard.addPiece("pawn", "c3", true);
-        testBoard.addPiece("pawn", "e7", true);
-        testBoard.addPiece("pawn", "e3", true);
+        testBoard.addPiece(queen, "e5", false);
+        testBoard.addPiece(king, "h8", false);
+        testBoard.addPiece(bishop, "g7", true);
+        testBoard.addPiece(pawn, "g5", true);
+        testBoard.addPiece(king, "g3", true);
+        testBoard.addPiece(pawn, "c7", true);
+        testBoard.addPiece(bishop, "c5", true);
+        testBoard.addPiece(pawn, "c3", true);
+        testBoard.addPiece(pawn, "e7", true);
+        testBoard.addPiece(pawn, "e3", true);
         Queen q1 = new Queen(testBoard.getSquare(5,5),false,testBoard);
         q1.updateLegals();
         List<Square> Actual =q1.getLegalNextSquares();
@@ -107,7 +115,7 @@ class QueenTest {
     @Test
     void printTestWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("queen", "a1", true);
+        testBoard.addPiece(queen, "a1", true);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u2655";
         assertEquals(expected, actual);
@@ -118,7 +126,7 @@ class QueenTest {
     @Test
     void printTestBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("queen", "a1", false);
+        testBoard.addPiece(queen, "a1", false);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265B";
         assertEquals(expected, actual);

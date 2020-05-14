@@ -1,6 +1,5 @@
 package schach.model;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
@@ -11,15 +10,21 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the abstract class Piece
+ */
 class PieceTest {
+
+    private String pawn = "pawn";
+    private String king = "king";
 
     // moving a piece on the board
     @Test
     void move() {
         Board testBoard = new Board();
-        testBoard.addPiece("king", "a1", true);
-        testBoard.addPiece("king", "g7", false);
-        testBoard.addPiece("pawn", "b3", true);
+        testBoard.addPiece(king, "a1", true);
+        testBoard.addPiece(king, "g7", false);
+        testBoard.addPiece(pawn, "b3", true);
         King k = new King(testBoard.getSquare(1,1),true,testBoard);
         k.updateLegals();
         // makes sure that the piece is there
@@ -37,9 +42,9 @@ class PieceTest {
     @Test
     void getLegalSquares() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a5", true);
-        testBoard.addPiece("king", "b2", true);
-        testBoard.addPiece("king", "g7", false);
+        testBoard.addPiece(pawn, "a5", true);
+        testBoard.addPiece(king, "b2", true);
+        testBoard.addPiece(king, "g7", false);
         Pawn p = new Pawn(testBoard.getSquare(1,5),true,testBoard);
         List<Square> legalNextSquares = new ArrayList<Square>();
         legalNextSquares.add(testBoard.getSquare(1,6));
@@ -51,14 +56,12 @@ class PieceTest {
     @Test
     void printLegals() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a7", true);
-        testBoard.addPiece("king", "b2", true);
-        testBoard.addPiece("king", "g7", false);
+        testBoard.addPiece(pawn, "a7", true);
+        testBoard.addPiece(king, "b2", true);
+        testBoard.addPiece(king, "g7", false);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         final PrintStream originalOut = System.out;
-        final PrintStream originalErr = System.err;
         p.updateLegals();
         System.setOut(new PrintStream(outContent));
         p.printLegals();
@@ -70,7 +73,7 @@ class PieceTest {
     @Test
     void doPromotionNotOnEdge() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a7", true);
+        testBoard.addPiece(pawn, "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         assertNotNull(testBoard.squareByDenotation("a7").getOccupier());
         p.doPromotion("Q",testBoard.getSquare(1,7));
@@ -82,7 +85,7 @@ class PieceTest {
     @Test
     void doPromotionQueen() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a7", true);
+        testBoard.addPiece(pawn, "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         p.move(testBoard.getSquare(1,8));
         //assertNull(testBoard.squareByDenotation("a7").getOccupier());
@@ -95,7 +98,7 @@ class PieceTest {
     @Test
     void doPromotionRook() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a7", true);
+        testBoard.addPiece(pawn, "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         p.move(testBoard.getSquare(1,8));
         p.doPromotion("R",testBoard.getSquare(1,8));
@@ -107,7 +110,7 @@ class PieceTest {
     @Test
     void doPromotionKnight() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a2", false);
+        testBoard.addPiece(pawn, "a2", false);
         Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
         p.move(testBoard.getSquare(1,1));
         p.doPromotion("N",testBoard.getSquare(1,1));
@@ -119,7 +122,7 @@ class PieceTest {
     @Test
     void doPromotionBishop() {
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a2", false);
+        testBoard.addPiece(pawn, "a2", false);
         Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
         p.move(testBoard.getSquare(1,1));
         p.doPromotion("B",testBoard.getSquare(1,1));
@@ -135,9 +138,9 @@ class PieceTest {
         final PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
         Board testBoard = new Board();
-        testBoard.addPiece("pawn", "a3", true);
-        testBoard.addPiece("king", "a8", true);
-        testBoard.addPiece("king", "h1", false);
+        testBoard.addPiece(pawn, "a3", true);
+        testBoard.addPiece(king, "a8", true);
+        testBoard.addPiece(king, "h1", false);
         Pawn p = new Pawn(testBoard.getSquare(1,3),true,testBoard);
         p.updateLegals();
 
@@ -151,7 +154,7 @@ class PieceTest {
     @Test
     void getPositionTest(){
          Board testBoard = new Board();
-         testBoard.addPiece("pawn", "a2", false);
+         testBoard.addPiece(pawn, "a2", false);
          Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
          Square expected = testBoard.squareByDenotation("a2");
         assertEquals(expected,p.getPosition());

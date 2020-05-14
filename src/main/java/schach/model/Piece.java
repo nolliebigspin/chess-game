@@ -1,6 +1,5 @@
 package schach.model;
 
-import schach.controller.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public abstract class Piece {
     /**
      * Boolean to indicate the color of the Piece
      */
-    protected boolean isWhite;
+    protected boolean white;
 
     /**
      * Board that the piece are on
@@ -41,15 +40,20 @@ public abstract class Piece {
     private Piece beatenPiece;
 
     /**
+     * Boolean noting if the move was accepted or not
+     */
+    private boolean validMove;
+
+    /**
      * Constructor of Piece
      * the square where the piece is placed, marked and gets the Piece Object passed
      * @param position denotation of the square where the piece will be initiated on
-     * @param isWhite true if it is a piece of the white set, false if black
+     * @param white true if it is a piece of the white set, false if black
      * @param board the board where the piece will be played on
      */
-    public Piece (Square position, boolean isWhite, Board board){
+    public Piece (Square position, boolean white, Board board){
         this.position = position;
-        this.isWhite = isWhite;
+        this.white = white;
         this.board = board;
         position.setOccupied(true);
         position.setOccupier(this);
@@ -101,7 +105,7 @@ public abstract class Piece {
      */
     public void acceptMove(Square target){
         previousPos = this.position;
-        if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
+        if (target.isOccupied() && target.getOccupier().white != white){
             beatenPiece = target.getOccupier();
             board.addToCemetery(target.getOccupier());
         }
@@ -110,7 +114,7 @@ public abstract class Piece {
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
-        Input.currentMove++;
+        validMove = true;
         //updateLegals(); //TODO maybe delete, redundant?
     }
 
@@ -118,6 +122,7 @@ public abstract class Piece {
      * Refuses invalid moves and prints Error Message
      */
     protected void refuseMove(){
+        validMove = false;
         System.out.println("!Move is invalid");
     }
 
@@ -145,34 +150,26 @@ public abstract class Piece {
      * @param pos Position on Board where the promoted pawn stands
      */
     public void doPromotion(String prom, Square pos) {
-        if (this.isWhite && pos.getRow() != 8 || !(this instanceof Pawn)) {
+        if (this.white && pos.getRow() != 8 || !(this instanceof Pawn)) {
             return;
-        } else if (!this.isWhite && pos.getRow() != 1 || !(this instanceof Pawn)) {
+        } else if (!this.white && pos.getRow() != 1 || !(this instanceof Pawn)) {
             return;
         }
         switch (prom) {
             case "Q":
-                new Queen(pos, this.isWhite, this.board);
+                new Queen(pos, this.white, this.board);
                 break;
             case "R":
-                new Rook(pos, this.isWhite, this.board);
+                new Rook(pos, this.white, this.board);
                 break;
             case "B":
-                new Bishop(pos, this.isWhite, this.board);
+                new Bishop(pos, this.white, this.board);
                 break;
             case "N":
-                new Knight(pos, this.isWhite, this.board);
+                new Knight(pos, this.white, this.board);
                 break;
             default:
         }
-    }
-
-    /**
-     * getter for color of the piece
-     * @return true if white, false if black
-     */
-    public boolean getIsWhite(){
-        return isWhite;
     }
 
     /**
@@ -197,7 +194,15 @@ public abstract class Piece {
      * @return true/false
      */
     public boolean isWhite() {
-        return this.isWhite;
+        return this.white;
+    }
+
+    /**
+     * getter for validMove()
+     * @return true if move was accepted, false if move was refused
+     */
+    public boolean isValidMove(){
+        return validMove;
     }
 }
 

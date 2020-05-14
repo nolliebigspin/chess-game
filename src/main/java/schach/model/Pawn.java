@@ -20,7 +20,7 @@ public class Pawn extends Piece {
 
     @Override
     public String print() {
-        if (super.isWhite) {
+        if (super.white) {
             return "\u2659";
         } else {
             return "\u265F";
@@ -39,7 +39,7 @@ public class Pawn extends Piece {
             checkUpLeft(column, row);
         }
 
-        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+        if (board.getCheck().kingInCheck(white)){ //TODO: , board.attackedSquares(!isWhite)
             legalNextSquares = board.getCheck().legalsToResolveCheck(this);
             return;
         }
@@ -56,7 +56,7 @@ public class Pawn extends Piece {
         int secondRow;
         int oneUp;
 
-        if (isWhite) {
+        if (white) {
             startingRow = 2;
             secondRow = 4;
             oneUp = 1;
@@ -90,7 +90,7 @@ public class Pawn extends Piece {
         int right;
         boolean oppositeIsWhite;
 
-        if (isWhite) {
+        if (white) {
             oneUp = 1;
             right = 1;
             oppositeIsWhite = false;
@@ -100,10 +100,10 @@ public class Pawn extends Piece {
             oppositeIsWhite = true;
         }
 
-        if (column < 8 && isWhite || column > 1 && !isWhite) {
+        if (column < 8 && white || column > 1 && !white) {
             Square aheadRight = board.getSquare(column + right, row + oneUp);
 
-            if (aheadRight.isOccupied() && aheadRight.getOccupier().isWhite == oppositeIsWhite) {
+            if (aheadRight.isOccupied() && aheadRight.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(aheadRight);
             }
         }
@@ -120,7 +120,7 @@ public class Pawn extends Piece {
         int left;
         boolean oppositeIsWhite;
 
-        if (isWhite) {
+        if (white) {
             oneUp = 1;
             left = -1;
             oppositeIsWhite = false;
@@ -130,10 +130,10 @@ public class Pawn extends Piece {
             oppositeIsWhite = true;
         }
 
-        if (column > 1 && isWhite || column < 8 && !isWhite) {
+        if (column > 1 && white || column < 8 && !white) {
             Square aheadLeft = board.getSquare(column + left, row + oneUp);
 
-            if (aheadLeft.isOccupied() && aheadLeft.getOccupier().isWhite == oppositeIsWhite) {
+            if (aheadLeft.isOccupied() && aheadLeft.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(aheadLeft);
             }
         }
@@ -148,7 +148,7 @@ public class Pawn extends Piece {
         int column = this.position.getColumn();
         int row = this.position.getRow();
         int plusOne = 1;
-        if (!isWhite){
+        if (!white){
             plusOne = - 1;
         }
         if (column > 1){

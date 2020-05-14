@@ -17,7 +17,7 @@ public class Knight extends Piece {
 
     @Override
     public String print() {
-        if (super.isWhite) {
+        if (super.white) {
             return "\u2658";
         }
         else {
@@ -29,7 +29,7 @@ public class Knight extends Piece {
     public void updateLegals() {
         legalNextSquares.clear();
 
-        boolean oppositeIsWhite = !isWhite;
+        boolean oppositeIsWhite = !white;
         int row = position.getRow();
         int column = position.getColumn();
         checkForwardLeft(column, row, oppositeIsWhite);
@@ -41,7 +41,7 @@ public class Knight extends Piece {
         checkLeftBackward(column, row, oppositeIsWhite);
         checkLeftForward(column, row, oppositeIsWhite);
 
-        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+        if (board.getCheck().kingInCheck(white)){ //TODO: , board.attackedSquares(!isWhite)
             legalNextSquares = board.getCheck().legalsToResolveCheck(this);
             return;
         }
@@ -53,7 +53,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -65,7 +65,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -81,7 +81,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -93,7 +93,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -105,7 +105,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -117,7 +117,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -129,7 +129,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }
@@ -141,7 +141,7 @@ public class Knight extends Piece {
 
             if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
-            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().isWhite == oppositeIsWhite) {
+            } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
             }
         }

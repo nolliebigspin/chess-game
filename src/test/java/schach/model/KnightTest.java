@@ -7,18 +7,26 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the concrete piece Class Knight
+ */
 class KnightTest {
 
+    private String bishop = "bishop";
+    private String pawn = "pawn";
+    private String king = "king";
+    private String queen = "queen";
+    private String knight = "knight";
 
     @Test
     void scenarioWhite1() {
         Board testBoard = new Board();
-        testBoard.addPiece("knight", "d4", true);
-        testBoard.addPiece("bishop", "c6", false);
-        testBoard.addPiece("pawn", "c2", false);
-        testBoard.addPiece("king", "e6", false);
-        testBoard.addPiece("queen", "e2", false);
-        testBoard.addPiece("king", "h8", true);
+        testBoard.addPiece(knight, "d4", true);
+        testBoard.addPiece(bishop, "c6", false);
+        testBoard.addPiece(pawn, "c2", false);
+        testBoard.addPiece(king, "e6", false);
+        testBoard.addPiece(queen, "e2", false);
+        testBoard.addPiece(king, "h8", true);
         Knight Knight1 = new Knight(testBoard.getSquare(4,4),true,testBoard);
         Knight1.updateLegals();
         List<Square> Actual =Knight1.getLegalNextSquares();
@@ -46,12 +54,12 @@ class KnightTest {
     @Test
     void scenarioWhite2() {
         Board testBoard = new Board();
-        testBoard.addPiece("knight", "d4", true);
-        testBoard.addPiece("bishop", "b5", false);
-        testBoard.addPiece("pawn", "b3", false);
-        testBoard.addPiece("king", "f5", false);
-        testBoard.addPiece("king", "c8", true);
-        testBoard.addPiece("queen", "f3", false);
+        testBoard.addPiece(knight, "d4", true);
+        testBoard.addPiece(bishop, "b5", false);
+        testBoard.addPiece(pawn, "b3", false);
+        testBoard.addPiece(king, "f5", false);
+        testBoard.addPiece(king, "c8", true);
+        testBoard.addPiece(queen, "f3", false);
         Knight Knight1 = new Knight(testBoard.getSquare(4,4),true,testBoard);
         Knight1.updateLegals();
         List<Square> Actual =Knight1.getLegalNextSquares();
@@ -81,12 +89,12 @@ class KnightTest {
     @Test
     void scenarioBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("knight", "d4", false);
-        testBoard.addPiece("bishop", "b5", true);
-        testBoard.addPiece("pawn", "b3", true);
-        testBoard.addPiece("king", "f5", true);
-        testBoard.addPiece("queen", "f3", true);
-        testBoard.addPiece("king", "c8", false);
+        testBoard.addPiece(knight, "d4", false);
+        testBoard.addPiece(bishop, "b5", true);
+        testBoard.addPiece(pawn, "b3", true);
+        testBoard.addPiece(king, "f5", true);
+        testBoard.addPiece(queen, "f3", true);
+        testBoard.addPiece(king, "c8", false);
         Knight Knight1 = new Knight(testBoard.getSquare(4,4),false,testBoard);
         Knight1.updateLegals();
         List<Square> Actual =Knight1.getLegalNextSquares();
@@ -117,7 +125,7 @@ class KnightTest {
     @Test
     void printTestWhite() {
         Board testBoard = new Board();
-        testBoard.addPiece("knight", "a1", true);
+        testBoard.addPiece(knight, "a1", true);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u2658";
         assertEquals(expected, actual);
@@ -128,7 +136,7 @@ class KnightTest {
     @Test
     void printTestBlack() {
         Board testBoard = new Board();
-        testBoard.addPiece("knight", "a1", false);
+        testBoard.addPiece(knight, "a1", false);
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265E";
         assertEquals(expected, actual);
