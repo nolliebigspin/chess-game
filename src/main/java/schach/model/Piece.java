@@ -1,10 +1,6 @@
 package schach.model;
 
 import schach.controller.Input;
-import schach.model.Queen;
-import schach.model.Rook;
-import schach.model.Bishop;
-import schach.model.Knight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +29,16 @@ public abstract class Piece {
      * List of Squares that the Square could be moved to by a legal move
      */
     protected List<Square> legalNextSquares = new ArrayList<Square>();
+
+    /**
+     * Square the piece was occupying in before a move
+     */
+    private Square previousPos;
+
+    /**
+     * Piece that got beaten by the move of this piece
+     */
+    private Piece beatenPiece;
 
     /**
      * Constructor of Piece
@@ -74,14 +80,18 @@ public abstract class Piece {
      * @param target is the target square where the piece is moved to
      */
     public void move(Square target){
-        updateLegals();
+        boolean inList = false;
         for (Square square: legalNextSquares){
             if (square == target){
-                acceptMove(target);
-                return;
+                inList = true;
+                break;
             }
         }
-        refuseMove();
+        if (inList && !board.getCheck().inCheckIfMoved(this, target)){
+            acceptMove(target);
+        } else {
+            refuseMove();
+        }
     }
 
     /**
@@ -89,15 +99,19 @@ public abstract class Piece {
      * updates the position square of the Piece
      * @param target Square the Piece will be moved to
      */
-    protected void acceptMove(Square target){
+    public void acceptMove(Square target){
+        previousPos = this.position;
         if (target.isOccupied() && target.getOccupier().isWhite != isWhite){
+            beatenPiece = target.getOccupier();
             board.addToCemetery(target.getOccupier());
         }
         position.setOccupied(false);
+        position.setOccupier(null);
         this.position = target;
         position.setOccupied(true);
         position.setOccupier(this);
-        updateLegals();
+        Input.currentMove++;
+        //updateLegals(); //TODO maybe delete, redundant?
     }
 
     /**
@@ -109,9 +123,9 @@ public abstract class Piece {
 
     /**
      * getter for list of legal squares
-     * @return
+     * @return the list of legal squares
      */
-    public List<Square> getLegalSquares(){
+    public List<Square> getLegalNextSquares(){
         return legalNextSquares;
     }
 
@@ -121,7 +135,7 @@ public abstract class Piece {
      */
     public void printLegals(){
         for (Square square: legalNextSquares){
-            System.out.println(square.getDenotation());
+            System.out.print(square.getDenotation());
         }
     }
 
@@ -132,26 +146,58 @@ public abstract class Piece {
      */
     public void doPromotion(String prom, Square pos) {
         if (this.isWhite && pos.getRow() != 8 || !(this instanceof Pawn)) {
-            System.out.println("ZZZ");
             return;
         } else if (!this.isWhite && pos.getRow() != 1 || !(this instanceof Pawn)) {
-            System.out.println("XXX");
             return;
         }
         switch (prom) {
             case "Q":
-                Queen queenProm = new Queen(pos, this.isWhite, this.board);
+                new Queen(pos, this.isWhite, this.board);
                 break;
             case "R":
-                Rook rookProm = new Rook(pos, this.isWhite, this.board);
+                new Rook(pos, this.isWhite, this.board);
                 break;
             case "B":
-                Bishop bishopProm = new Bishop(pos, this.isWhite, this.board);
+                new Bishop(pos, this.isWhite, this.board);
                 break;
             case "N":
-                Knight knightProm = new Knight(pos, this.isWhite, this.board);
+                new Knight(pos, this.isWhite, this.board);
                 break;
             default:
         }
     }
+
+    /**
+     * getter for color of the piece
+     * @return true if white, false if black
+     */
+    public boolean getIsWhite(){
+        return isWhite;
+    }
+
+    /**
+     * Undoes the last move of the piece
+     * TODO delete possible beaten from cemetery
+     */
+    public void undoMove(){
+        Square newPos = position;
+        position.setOccupied(false);
+        position.setOccupier(null);
+        this.position = previousPos;
+        position.setOccupied(true);
+        position.setOccupier(this);
+        if (beatenPiece != null){
+            newPos.setOccupied(true);
+            newPos.setOccupier(beatenPiece);
+            board.removeFromCemetery(beatenPiece);
+        }
+    }
+    /**
+     * getter for isWhite
+     * @return true/false
+     */
+    public boolean isWhite() {
+        return this.isWhite;
+    }
 }
+

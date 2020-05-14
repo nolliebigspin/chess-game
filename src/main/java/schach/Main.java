@@ -8,11 +8,18 @@ import schach.model.Board;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("This is a chess game!");
-        System.out.println("Please enter if you want to play against another human or against our artificial intelligence?");
-        Board board = new Board();
-        board.printBoard();
-        Input input = new Input(board);
-        input.inOutRoutine();
+        try{
+            if (args[0].equals("--no-gui")){
+                System.out.println("Welcome :) ");
+                System.out.println("White starts first!");
+                Board board = new Board();
+                Input input = new Input(board);
+
+                input.inOutRoutine();
+            }
+        }
+        catch (Exception e){
+            System.out.println("No GUI implemented yet, please add argument: --no-gui");
+        }
     }
 }

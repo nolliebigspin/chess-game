@@ -1,5 +1,7 @@
 package schach.model;
 
+import schach.controller.Check;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +16,33 @@ public class Board {
     private Square[][] squareMatrix = new Square[8][8];
 
     /**
-     * List of pieces that are beaten, no longer activ on board
+     * List of pieces that are beaten, no longer available on the board
      */
     private List<Piece> cemetery = new ArrayList<>();
+
+    public List<Piece> getCemetery() {
+        return cemetery;
+    }
+
+    /**
+     * Check class to check for check-situation on the board
+     */
+    private Check check;
 
     /**
      * Constructor, initializes the Square Matrix and the start Lineup
      */
     public Board() {
         initMatrix();
+        this.check = new Check(this);
+    }
+
+    /**
+     * Getter for the Check
+     * @return the check
+     */
+    public Check getCheck(){
+        return check;
     }
 
     /**
@@ -41,6 +61,7 @@ public class Board {
      * Initializes all pieces and places them on the board in the starting lineup
      */
     public void initLineUp(){
+
         new Pawn(squareByDenotation("a2"), true, this);
         new Pawn(squareByDenotation("b2"), true, this);
         new Pawn(squareByDenotation("c2"), true, this);
@@ -84,7 +105,10 @@ public class Board {
         new Queen(squareByDenotation("d8"), false, this);
         new King(squareByDenotation("e8"), false, this);
 
+        //TODO initialize chckRuler somerwhere else, also if singlepieces are added (THERE MUST BE KINGS)
+        check.updateKings();
 
+        updateAllLegalSquares();
     }
 
     /**
@@ -96,7 +120,7 @@ public class Board {
     public void addPiece(String piece, String squareDenotation, boolean isWhite){
         Square position = squareByDenotation(squareDenotation);
         if (position.isOccupied()){
-            System.out.println("Position already occupied");
+            System.out.println("The given position is either occupied or it's an invalid backward move!");
             return;
         }
         switch (piece){
@@ -119,8 +143,9 @@ public class Board {
                 new King(position, isWhite, this);
                 break;
             default:
-                System.out.println("no valid piece: " + piece);
+                System.out.print("no valid piece: " + piece);
         }
+        check.updateKings();
     }
 
     /**
@@ -176,16 +201,20 @@ public class Board {
      * @param targetPos denotation of the square which the piece is supposed to be moved to
      */
     public void movePiece(String startingPos, String targetPos) {
+        updateAllLegalSquares();
         if (!squareByDenotation(startingPos).isOccupied()) {
-            System.out.println("!Invalid Move: No Piece found!");
+            System.out.println("!Invalid Move");
             return;
         }
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().isWhite == squareByDenotation(targetPos).getOccupier().isWhite) {
-            System.out.println("!Invalid Move: Square already occupied");
+            System.out.println("!Invalid Move");
             return;
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
+        updateAllLegalSquares();
+        //updateAllLegalSquares();  //Necessary because king has to filter again, after all moved: TODO FIX! DONE?
+
     }
 
     /**
@@ -193,7 +222,7 @@ public class Board {
      * @param isWhite true for all white pieces, false for all black pieces
      * @return List of all active pieces of a color
      */
-    private List<Piece> allActivePieces(boolean isWhite){
+    public List<Piece> allActivePieces(boolean isWhite){
         List<Piece> pieces = new ArrayList<>();
         for (Square[] squareArray: squareMatrix){
             for (Square square: squareArray){
@@ -206,16 +235,36 @@ public class Board {
     }
 
     /**
+     * Updates the list of legal squares of every active piece
+     */
+    public void updateAllLegalSquares(){
+        List<Piece> pieces = allActivePieces(true);
+        pieces.addAll(allActivePieces(false));
+        for (Piece piece: pieces){
+            piece.updateLegals();
+        }
+        for (Piece p : pieces){
+            if (p instanceof King){
+                p.updateLegals();
+            }
+        }
+    }
+
+    /**
      * Lists all squares that are currently under attack by a color
-     * @param isWhite true for all squares attacked by white, false for attacked by black
+     * @param attackerIsWhite true for all squares attacked by white, false for attacked by black
      * @return ArrayList of attacked squares
      */
-    private List<Square> attackedSquares(boolean isWhite){
-        List<Piece> allPieces = allActivePieces(isWhite);
+    public List<Square> attackedSquares(boolean attackerIsWhite){
+        List<Piece> allPieces = allActivePieces(attackerIsWhite);
         List<Square> attacked = new ArrayList<>();
         for (Piece piece: allPieces){
-            piece.updateLegals();
-            attacked.addAll(piece.getLegalSquares());
+            if (piece instanceof Pawn){
+                Pawn pawn = (Pawn) piece;
+                attacked.addAll(pawn.getAttackedSquares());
+            } else {
+                attacked.addAll(piece.getLegalNextSquares());
+            }
         }
         return attacked;
     }
@@ -244,6 +293,10 @@ public class Board {
         cemetery.add(piece);
     }
 
+    public void removeFromCemetery(Piece piece){
+        cemetery.remove(piece);
+    }
+
     /**
      * prints the list of beaten piece, by printing every beaten pieces unicode
      */
@@ -256,20 +309,31 @@ public class Board {
         }
     }
 
+
     /**
      * debug
      * TODO delete
      */
-    public void printAttacked() {
-        System.out.println("Under attack by white:");
-        List<Square> whites = attackedSquares(true);
-        for (Square square : whites) {
-            System.out.println(square.getDenotation());
+    public void printLegals(){
+        List<Piece> all = allActivePieces(true);
+        all.addAll(allActivePieces(false));
+        for (Piece piece: all){
+            piece.printLegals();
         }
-        System.out.println("\n Under attack by black:");
-        List<Square> blacks = attackedSquares(false);
-        for (Square square : blacks) {
-            System.out.println(square.getDenotation());
-        }
+    }
+
+
+
+    public List<Piece> getActiveWhitePieces() {
+        return allActivePieces(true);
+    }
+    public List<Piece> getActiveBlackPieces() {
+        return allActivePieces(false);
+    }
+    public List<Square> getSquaresAttackedWhite() {
+        return attackedSquares(true);
+    }
+    public List<Square> getSquaresAttackedBlack() {
+        return attackedSquares(false);
     }
 }

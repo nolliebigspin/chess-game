@@ -37,7 +37,6 @@ public class Rook extends Piece {
      */
     @Override
     public void move(Square target){
-        updateLegals();
         for (Square square: legalNextSquares){
             if (square == target){
                 acceptMove(target);
@@ -56,6 +55,11 @@ public class Rook extends Piece {
         checkBackward();
         checkRight();
         checkLeft();
+
+        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
+            return;
+        }
     }
 
     /**

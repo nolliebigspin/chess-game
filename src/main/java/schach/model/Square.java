@@ -87,7 +87,7 @@ public class Square {
 
     /**
      * getter for the denotation of square
-     * @return denonation of the square
+     * @return denotation of the square
      */
     public String getDenotation(){
         return this.denotation;

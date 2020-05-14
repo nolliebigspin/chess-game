@@ -28,10 +28,10 @@ public class Knight extends Piece {
     @Override
     public void updateLegals() {
         legalNextSquares.clear();
+
         boolean oppositeIsWhite = !isWhite;
         int row = position.getRow();
         int column = position.getColumn();
-
         checkForwardLeft(column, row, oppositeIsWhite);
         checkForwardRight(column, row, oppositeIsWhite);
         checkRightForward(column, row, oppositeIsWhite);
@@ -40,6 +40,11 @@ public class Knight extends Piece {
         checkBackwardLeft(column, row, oppositeIsWhite);
         checkLeftBackward(column, row, oppositeIsWhite);
         checkLeftForward(column, row, oppositeIsWhite);
+
+        if (board.getCheck().kingInCheck(isWhite)){ //TODO: , board.attackedSquares(!isWhite)
+            legalNextSquares = board.getCheck().legalsToResolveCheck(this);
+            return;
+        }
     }
 
     private void checkForwardLeft(int column, int row, boolean oppositeIsWhite) {
