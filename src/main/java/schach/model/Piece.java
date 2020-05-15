@@ -45,6 +45,11 @@ public abstract class Piece {
     private boolean validMove;
 
     /**
+     * Boolean indicating if the piece never moved
+     */
+    protected boolean neverMoved;
+
+    /**
      * Constructor of Piece
      * the square where the piece is placed, marked and gets the Piece Object passed
      * @param position denotation of the square where the piece will be initiated on
@@ -57,6 +62,7 @@ public abstract class Piece {
         this.board = board;
         position.setOccupied(true);
         position.setOccupier(this);
+        this.neverMoved = true;
     }
 
     /**
@@ -93,6 +99,7 @@ public abstract class Piece {
         }
         if (inList && !board.getCheck().inCheckIfMoved(this, target)){
             acceptMove(target);
+            neverMoved = false; //TODO replace in to accept move
         } else {
             refuseMove();
         }
@@ -198,11 +205,19 @@ public abstract class Piece {
     }
 
     /**
-     * getter for validMove()
+     * getter for validMove
      * @return true if move was accepted, false if move was refused
      */
     public boolean isValidMove(){
         return validMove;
+    }
+
+    /**
+     * getter for boolean neverMoved
+     * @return true if the piece was not moved yet, false if the piece already made a move
+     */
+    public boolean isNeverMoved(){
+        return neverMoved;
     }
 }
 
