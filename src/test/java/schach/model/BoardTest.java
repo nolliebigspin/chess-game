@@ -150,16 +150,12 @@ class BoardTest {
         Board testBoard = new Board();
         testBoard.addPiece(rook, "c2", true);
         testBoard.addPiece(rook, "c7", false);
-        testBoard.addPiece(king, "g4", true);
+        testBoard.addPiece(king, "g3", true);
         testBoard.addPiece(king, "h5", false);
-        Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
-        new Rook(testBoard.getSquare(3,7),false,testBoard);
-        r1.updateLegals();
-        r1.move(testBoard.getSquare(3,7));
+        testBoard.movePiece("c2", "c7");
         testBoard.printBeaten();
         assertEquals("\u265C\r\n", outContent.toString());
         System.setOut(originalOut);
-
     }
 
     @Test
