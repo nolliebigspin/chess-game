@@ -26,6 +26,11 @@ public class Board {
     private Check check;
 
     /**
+     * Piece that was moved in the last move
+     */
+    private Piece lastMoved;
+
+    /**
      * Constructor, initializes the Square Matrix and the start Lineup
      */
     public Board() {
@@ -316,6 +321,22 @@ public class Board {
         for (Piece piece: cemetery){
             System.out.println(piece.print());
         }
+    }
+
+    /**
+     * getter to return the last moved piece
+     * @return piece that was moved in the last move
+     */
+    public Piece getLastMoved(){
+        return lastMoved;
+    }
+
+    /**
+     * setter for the last moved piece
+     * @param piece the piece that should be set as the last moved piece
+     */
+    public void setLastMoved(Piece piece){
+        this.lastMoved = piece;
     }
 
 

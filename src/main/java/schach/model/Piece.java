@@ -122,7 +122,7 @@ public abstract class Piece {
         position.setOccupied(true);
         position.setOccupier(this);
         validMove = true;
-        //updateLegals(); //TODO maybe delete, redundant?
+        board.setLastMoved(this);
     }
 
     /**

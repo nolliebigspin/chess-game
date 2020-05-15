@@ -221,6 +221,21 @@ class BoardTest {
        System.setOut(originalOut);
     }
 
+    @Test
+    void testLastMoved(){
+        Board testBoard = new Board();
+        testBoard.addPiece(king, "h1", true);
+        testBoard.addPiece(king, "h8", false);
+        testBoard.addPiece(pawn, "h2", true);
+        Piece pawn = testBoard.squareByDenotation("h2").getOccupier();
+        Piece bKing = testBoard.squareByDenotation("h8").getOccupier();
+        assertNull(testBoard.getLastMoved());
+        testBoard.movePiece("h2", "h3");
+        assertSame(pawn, testBoard.getLastMoved());
+        testBoard.movePiece("h8", "g8");
+        assertSame(bKing, testBoard.getLastMoved());
+    }
+
     }
 
 
