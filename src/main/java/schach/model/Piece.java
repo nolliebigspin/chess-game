@@ -10,11 +10,6 @@ import java.util.List;
 public abstract class Piece {
 
     /**
-     * Boolean variable that indicates if the piece was never moved
-     */
-    protected boolean neverMoved;
-
-    /**
      * The Square the Piece is currently occupying
      */
     protected Square position;
@@ -62,7 +57,6 @@ public abstract class Piece {
         this.board = board;
         position.setOccupied(true);
         position.setOccupier(this);
-        this.neverMoved = true;
     }
 
     /**
@@ -121,7 +115,6 @@ public abstract class Piece {
         position.setOccupied(true);
         position.setOccupier(this);
         validMove = true;
-        neverMoved = false;
         //updateLegals(); //TODO maybe delete, redundant?
     }
 
@@ -210,14 +203,6 @@ public abstract class Piece {
      */
     public boolean isValidMove(){
         return validMove;
-    }
-
-    /**
-     * getter for the neverMoved() variable
-     * @return true if piece was never moved, false if piece already made a move
-     */
-    public boolean isNeverMoved(){
-        return neverMoved;
     }
 }
 

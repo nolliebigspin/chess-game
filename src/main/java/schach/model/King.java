@@ -8,6 +8,11 @@ import java.util.List;
 public class King extends Piece {
 
     /**
+     * indicates if king is still in its starting position
+     */
+    private boolean neverMoved;
+
+    /**
      * Constructor defining the initial position, color and board of the king piece
      * @param position the Square it will be placed on initially
      * @param isWhite true if white, false if black
@@ -15,6 +20,7 @@ public class King extends Piece {
      */
     public King(Square position, boolean isWhite, Board board) {
         super(position, isWhite, board);
+        this.neverMoved = true;
     }
 
     @Override
@@ -43,6 +49,7 @@ public class King extends Piece {
                     rookCastling(false);
                 }
                 acceptMove(target);
+                neverMoved = false;
                 return;
             }
         }
