@@ -51,30 +51,6 @@ public class King extends Piece {
     }
 
     /**
-     * allows the move to the target square
-     * updates the position square of the Piece
-     * checks additionally if castling is executed and moves the rook
-     * @param target Square the Piece will be moved to
-     */
-    @Override
-    public void acceptMove(Square target){
-        if (target.isOccupied() && target.getOccupier().white != white){
-            board.addToCemetery(target.getOccupier());
-        }
-        if ((target.getDenotation().equals("c1") || target.getDenotation().equals("c8")) && castlingLongValid()){
-            rookCastling(true);
-        }
-        if ((target.getDenotation().equals("g1") || target.getDenotation().equals("g8")) && castlingShortValid()) {
-            rookCastling(false);
-        }
-        position.setOccupied(false);
-        this.position = target;
-        position.setOccupied(true);
-        position.setOccupier(this);
-        updateLegals();
-    }
-
-    /**
      * Updates the list of legal squares
      */
     @Override
