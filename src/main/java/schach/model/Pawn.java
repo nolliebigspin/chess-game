@@ -9,6 +9,11 @@ import java.util.List;
 public class Pawn extends Piece {
 
     /**
+     * boolean that indicates if the pawn made the two square starting move
+     */
+    private boolean twoSquareMove;
+
+    /**
      * Constructor defining the initial position, color and board of the pawn piece
      * @param position the Square it will be placed on initially
      * @param isWhite true if white, false if black
@@ -159,5 +164,14 @@ public class Pawn extends Piece {
         }
         return attacked;
     }
+
+    public boolean isTwoSquareMove(){
+        return twoSquareMove;
+    }
+
+    public void setTwoSquareMove(boolean twoSquareMove){
+        this.twoSquareMove = twoSquareMove;
+    }
+
 
 }
