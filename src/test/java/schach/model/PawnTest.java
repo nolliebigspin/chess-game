@@ -214,6 +214,31 @@ class PawnTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void testMovingToSquaresBlack(){
+        Board testBoard = new Board();
+        testBoard.addPiece(king, "h8", false);
+        testBoard.addPiece(king, "h1", true);
+        testBoard.addPiece(pawn, "d7", false);
+        Pawn blackPawn = (Pawn) testBoard.squareByDenotation("d7").getOccupier();
+        assertTrue(blackPawn.movingTwoSquares(testBoard.squareByDenotation("d5")));
+        assertFalse(blackPawn.movingTwoSquares(testBoard.squareByDenotation("d6")));
+        testBoard.movePiece("d7", "d6");
+        assertFalse(blackPawn.movingTwoSquares(testBoard.squareByDenotation("d5")));
+    }
+
+    @Test
+    void testMovingToSquaresWhite(){
+        Board testBoard = new Board();
+        testBoard.addPiece(king, "h8", false);
+        testBoard.addPiece(king, "h1", true);
+        testBoard.addPiece(pawn, "d2", true);
+        Pawn blackPawn = (Pawn) testBoard.squareByDenotation("d2").getOccupier();
+        assertTrue(blackPawn.movingTwoSquares(testBoard.squareByDenotation("d4")));
+        assertFalse(blackPawn.movingTwoSquares(testBoard.squareByDenotation("d3")));
+        testBoard.movePiece("d2", "d3");
+        assertFalse(blackPawn.movingTwoSquares(testBoard.squareByDenotation("d4")));
+    }
 
 }
 

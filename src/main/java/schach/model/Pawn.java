@@ -9,6 +9,11 @@ import java.util.List;
 public class Pawn extends Piece {
 
     /**
+     * boolean var that indicates wherever the pawn made the opener move where its jumping two rows ahead
+     */
+    private boolean twoSquareOpener;
+
+    /**
      * Constructor defining the initial position, color and board of the pawn piece
      * @param position the Square it will be placed on initially
      * @param isWhite true if white, false if black
@@ -28,6 +33,24 @@ public class Pawn extends Piece {
     }
 
     @Override
+    public void move(Square target) {
+        boolean inList = false;
+        for (Square square: legalNextSquares){
+            if (square == target){
+                inList = true;
+                break;
+            }
+        }
+        if (inList && !board.getCheck().inCheckIfMoved(this, target)){
+            acceptMove(target);
+            twoSquareOpener = movingTwoSquares(target);
+            neverMoved = false; //TODO replace in to acceptMove()
+        } else {
+            refuseMove();
+        }
+    }
+
+    @Override
     protected void updateLegals() {
         legalNextSquares.clear();
 
@@ -43,6 +66,33 @@ public class Pawn extends Piece {
             legalNextSquares = board.getCheck().legalsToResolveCheck(this);
             return;
         }
+    }
+
+    /**
+     * checks wherever the pawn makes the two row opener move
+     * @param target the square the pawn is supposed to be moved to
+     * @return true if it is the two row opener move, false if not
+     */
+    protected boolean movingTwoSquares(Square target){
+        if (!neverMoved){
+            return false;
+        }
+        int secondRow = 4;
+        if (!isWhite()){
+            secondRow = 5;
+        }
+        if (target.getRow() == secondRow){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * getter for the twoSquareOpener var
+     * @return true if Pawn made the two row opener move, false if not
+     */
+    public boolean isTwoSquareOpener(){
+        return this.twoSquareOpener;
     }
 
     /**
