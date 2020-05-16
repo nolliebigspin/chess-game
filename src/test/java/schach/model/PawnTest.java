@@ -215,7 +215,7 @@ class PawnTest {
     }
 
     @Test
-    void testMovingToSquaresBlack(){
+    void testMovingTwoSquaresBlack(){
         Board testBoard = new Board();
         testBoard.addPiece(king, "h8", false);
         testBoard.addPiece(king, "h1", true);
@@ -228,7 +228,7 @@ class PawnTest {
     }
 
     @Test
-    void testMovingToSquaresWhite(){
+    void testMovingTwoSquaresWhite(){
         Board testBoard = new Board();
         testBoard.addPiece(king, "h8", false);
         testBoard.addPiece(king, "h1", true);
@@ -240,7 +240,61 @@ class PawnTest {
         assertFalse(blackPawn.movingTwoSquares(testBoard.squareByDenotation("d4")));
     }
 
+    @Test
+    void testCheckEnPassantRight(){
+        Board testBoard = new Board();
+        testBoard.addPiece(king, "e8", false);
+        testBoard.addPiece(king, "e1", true);
+        testBoard.addPiece(pawn, "b5", true);
+        testBoard.addPiece(pawn, "c7", false);
+        testBoard.addPiece(pawn, "g2", true);
+        testBoard.addPiece(pawn, "f4", false);
+        Pawn wPawn1 = (Pawn) testBoard.squareByDenotation("b5").getOccupier();
+        Pawn bPawn1 = (Pawn) testBoard.squareByDenotation("f4").getOccupier();
+        testBoard.movePiece("c7","c5");
+        assertTrue((wPawn1.checkEnPassantRight().size() == 1));
+        assertTrue(wPawn1.checkEnPassantRight().contains(testBoard.squareByDenotation("c6")));
+        testBoard.movePiece("g2","g4");
+        assertTrue(wPawn1.checkEnPassantRight().isEmpty());
+        assertTrue(bPawn1.checkEnPassantRight().contains(testBoard.squareByDenotation("g3")));
+    }
+
+    @Test
+    void testCheckEnPassantLeft(){
+        Board testBoard = new Board();
+        testBoard.addPiece(king, "e8", false);
+        testBoard.addPiece(king, "e1", true);
+        testBoard.addPiece(pawn, "b2", true);
+        testBoard.addPiece(pawn, "c4", false);
+        testBoard.addPiece(pawn, "h5", true);
+        testBoard.addPiece(pawn, "g7", false);
+        Pawn wPawn1 = (Pawn) testBoard.squareByDenotation("h5").getOccupier();
+        Pawn bPawn1 = (Pawn) testBoard.squareByDenotation("c4").getOccupier();
+        testBoard.movePiece("g7","g5");
+        assertTrue((wPawn1.checkEnPassantLeft().size() == 1));
+        assertTrue(wPawn1.checkEnPassantLeft().contains(testBoard.squareByDenotation("g6")));
+        testBoard.movePiece("b2","b4");
+        assertTrue(wPawn1.checkEnPassantLeft().isEmpty());
+        assertTrue(bPawn1.checkEnPassantLeft().contains(testBoard.squareByDenotation("b3")));
+    }
+
+    @Test
+    void testCheckEnPassantFails(){
+        Board testBoard = new Board();
+        testBoard.addPiece(king, "e8", false);
+        testBoard.addPiece(king, "e1", true);
+        testBoard.addPiece(pawn, "f4", true);
+        testBoard.addPiece(pawn, "g5", false);
+        testBoard.addPiece(pawn, "b2", true);
+        testBoard.addPiece(pawn, "a7", false);
+        Pawn wPawn1 = (Pawn) testBoard.squareByDenotation("f4").getOccupier();
+        testBoard.movePiece("g5", "g4");
+        testBoard.printBoard();
+        assertTrue(wPawn1.checkEnPassantRight().isEmpty());
+    }
+
 }
+
 
 
 

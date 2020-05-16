@@ -60,6 +60,8 @@ public class Pawn extends Piece {
             checkAhead(column, row);
             checkUpRight(column, row);
             checkUpLeft(column, row);
+            legalNextSquares.addAll(checkEnPassantRight());
+            legalNextSquares.addAll(checkEnPassantLeft());
         }
 
         if (board.getCheck().kingInCheck(white)){ //TODO: , board.attackedSquares(!isWhite)
@@ -208,6 +210,63 @@ public class Pawn extends Piece {
             attacked.add(board.getSquare(column + 1, row + plusOne));
         }
         return attacked;
+    }
+
+    protected List<Square> checkEnPassantRight(){
+        List<Square> list = new ArrayList<>();
+        int row = 5;
+        int oneUp = 1;
+        if (!white){
+            row = 4;
+            oneUp = -1;
+        }
+        if (position.getRow() != row || position.getColumn() == 8){
+            return list;
+        }
+        Square right = board.getSquare(position.getColumn() + 1, row);
+        Square rightUp = board.getSquare(position.getColumn() + 1, row + oneUp);
+        if (right.isOccupied() && right.getOccupier() instanceof Pawn){
+            Pawn pawn = (Pawn) right.getOccupier();
+            if (board.getLastMoved() == pawn && !rightUp.isOccupied()){
+                list.add(rightUp);
+            }
+        }
+        return list;
+    }
+
+    protected List<Square> checkEnPassantLeft(){
+        List<Square> list = new ArrayList<>();
+        int row = 5;
+        int oneUp = 1;
+        if (!white){
+            row = 4;
+            oneUp = -1;
+        }
+        if (position.getRow() != row || position.getColumn() == 1){
+            return list;
+        }
+        Square left = board.getSquare(position.getColumn() - 1, row);
+        Square leftUp = board.getSquare(position.getColumn() - 1, row + oneUp);
+        if (left.isOccupied() && left.getOccupier() instanceof Pawn){
+            Pawn pawn = (Pawn) left.getOccupier();
+            if (board.getLastMoved() == pawn && !leftUp.isOccupied()){
+                list.add(leftUp);
+            }
+        }
+        return list;
+    }
+
+    protected void enPassantAddBeaten(Square target){
+        if (!checkEnPassantRight().contains(target) && !checkEnPassantLeft().contains(target)){
+            return;
+        }
+        int colSwitch = 1;
+        int oneUp = 1;
+        if (checkEnPassantLeft().contains(target)){
+            colSwitch = -1;
+        }
+        beatenPiece = board.getSquare(position.getColumn() + colSwitch, position.getRow()).getOccupier();
+        board.addToCemetery(beatenPiece);
     }
 
 }
