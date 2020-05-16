@@ -83,10 +83,7 @@ public class Pawn extends Piece {
         if (!isWhite()){
             secondRow = 5;
         }
-        if (target.getRow() == secondRow){
-            return true;
-        }
-        return false;
+        return target.getRow() == secondRow;
     }
 
     /**
@@ -212,6 +209,12 @@ public class Pawn extends Piece {
         return attacked;
     }
 
+    /**
+     * Checks if a 'en passant' move is possible, if so returns a list of squares that the pawn would move to
+     * if it made a 'en passant' move
+     * @return target squares as a result of a 'en-passant' move
+     * TODO return just a single square - its never possible that two en-passant moves are possible
+     */
     protected List<Square> checkEnPassantRight(){
         List<Square> list = new ArrayList<>();
         int row = 5;
@@ -234,6 +237,12 @@ public class Pawn extends Piece {
         return list;
     }
 
+    /**
+     * Checks if a 'en passant' move is possible, if so returns a list of squares that the pawn would move to
+     * if it made a 'en passant' move
+     * @return target squares as a result of a 'en-passant' move
+     * TODO return just a single square - its never possible that two en-passant moves are possible
+     */
     protected List<Square> checkEnPassantLeft(){
         List<Square> list = new ArrayList<>();
         int row = 5;
@@ -256,6 +265,10 @@ public class Pawn extends Piece {
         return list;
     }
 
+    /**
+     * Method that removes the Pawn which is beaten in a en-Passant move
+     * @param target the target square the attacking pawn will be moved to
+     */
     protected void enPassantAddBeaten(Square target){
         if (!checkEnPassantRight().contains(target) && !checkEnPassantLeft().contains(target)){
             return;
