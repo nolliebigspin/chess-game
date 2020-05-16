@@ -1,4 +1,4 @@
-package schach.controller;
+package schach.controller.Interfaces;
 
 import schach.model.Board;
 import schach.model.Piece;
@@ -69,7 +69,7 @@ public class Input {
      * @param denotation string that should be validated
      * @return true if valid, false if incorrect
      */
-    protected boolean validDenotation(String denotation){
+    public boolean validDenotation(String denotation){
         if (denotation.length() != 2){
             return false;
         }
@@ -111,7 +111,7 @@ public class Input {
      * @param prom String that the pawn should be promoted to
      * @return boolean if the letter is legal character for promotion
      */
-    protected boolean validPromotion(String prom) {
+    public boolean validPromotion(String prom) {
         if (prom.length() != 1){
             return false;
         }
@@ -124,7 +124,7 @@ public class Input {
      * reads the input and returns it
      * @return the string of the input line
      */
-    protected String readInput() {
+    public String readInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("please enter your move: ");
         return scanner.nextLine();
@@ -135,7 +135,7 @@ public class Input {
      * @param input String that should be validated
      * @return true if String is valid move command, false if not
      */
-    protected boolean validMoveInput(String input) {
+    public boolean validMoveInput(String input) {
         String invalidOut = "!Invalid Move";
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {

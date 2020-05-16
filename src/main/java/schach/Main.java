@@ -1,6 +1,6 @@
 package schach;
 
-import schach.controller.Input;
+import schach.controller.Interfaces.Input;
 import schach.model.Board;
 
 /**
