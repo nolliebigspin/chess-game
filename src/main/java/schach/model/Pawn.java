@@ -261,12 +261,13 @@ public class Pawn extends Piece {
             return;
         }
         int colSwitch = 1;
-        int oneUp = 1;
         if (checkEnPassantLeft().contains(target)){
             colSwitch = -1;
         }
         beatenPiece = board.getSquare(position.getColumn() + colSwitch, position.getRow()).getOccupier();
         board.addToCemetery(beatenPiece);
+        beatenPiece.getPosition().setOccupied(false);
+        beatenPiece.getPosition().setOccupier(null);
     }
 
 }

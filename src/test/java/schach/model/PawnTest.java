@@ -293,6 +293,27 @@ class PawnTest {
         assertTrue(wPawn1.checkEnPassantRight().isEmpty());
     }
 
+    @Test
+    void testEnPassantAddBeaten(){
+        Board testBoard = new Board();
+        testBoard.addPiece(king, "e8", false);
+        testBoard.addPiece(king, "e1", true);
+        testBoard.addPiece(pawn, "h5", true);
+        testBoard.addPiece(pawn, "g7", false);
+        testBoard.addPiece(pawn, "d2", true);
+        testBoard.addPiece(pawn, "c4", false);
+        Pawn wPawn1 = (Pawn) testBoard.squareByDenotation("h5").getOccupier();
+        Pawn bPawn1 = (Pawn) testBoard.squareByDenotation("g7").getOccupier();
+        Pawn wPawn2 = (Pawn) testBoard.squareByDenotation("d2").getOccupier();
+        Pawn bPawn2 = (Pawn) testBoard.squareByDenotation("c4").getOccupier();
+        testBoard.movePiece("g7","g5");
+        wPawn1.enPassantAddBeaten(testBoard.squareByDenotation("g6"));
+        assertSame(bPawn1, wPawn1.beatenPiece);
+        testBoard.movePiece("d2", "d4");
+        bPawn2.enPassantAddBeaten(testBoard.squareByDenotation("d3"));
+        assertSame(wPawn2, bPawn2.beatenPiece);
+    }
+
 }
 
 

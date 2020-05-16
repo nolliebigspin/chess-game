@@ -37,7 +37,7 @@ public abstract class Piece {
     /**
      * Piece that got beaten by the move of this piece
      */
-    private Piece beatenPiece;
+    protected Piece beatenPiece;
 
     /**
      * Boolean noting if the move was accepted or not
@@ -114,7 +114,13 @@ public abstract class Piece {
         previousPos = this.position;
         if (target.isOccupied() && target.getOccupier().white != white){
             beatenPiece = target.getOccupier();
-            board.addToCemetery(target.getOccupier());
+            board.addToCemetery(beatenPiece);
+            beatenPiece.getPosition().setOccupied(false);
+            beatenPiece.getPosition().setOccupier(null);
+        }
+        if (this instanceof Pawn){
+            Pawn p = (Pawn) this;
+            p.enPassantAddBeaten(target);
         }
         position.setOccupied(false);
         position.setOccupier(null);
