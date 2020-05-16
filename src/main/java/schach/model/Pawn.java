@@ -227,7 +227,7 @@ public class Pawn extends Piece {
         Square rightUp = board.getSquare(position.getColumn() + 1, row + oneUp);
         if (right.isOccupied() && right.getOccupier() instanceof Pawn){
             Pawn pawn = (Pawn) right.getOccupier();
-            if (board.getLastMoved() == pawn && !rightUp.isOccupied()){
+            if (board.getLastMoved() == pawn && !rightUp.isOccupied() && pawn.twoSquareOpener){
                 list.add(rightUp);
             }
         }
@@ -249,7 +249,7 @@ public class Pawn extends Piece {
         Square leftUp = board.getSquare(position.getColumn() - 1, row + oneUp);
         if (left.isOccupied() && left.getOccupier() instanceof Pawn){
             Pawn pawn = (Pawn) left.getOccupier();
-            if (board.getLastMoved() == pawn && !leftUp.isOccupied()){
+            if (board.getLastMoved() == pawn && !leftUp.isOccupied() && pawn.twoSquareOpener){
                 list.add(leftUp);
             }
         }

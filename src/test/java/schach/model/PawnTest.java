@@ -285,12 +285,17 @@ class PawnTest {
         testBoard.addPiece(king, "e1", true);
         testBoard.addPiece(pawn, "f4", true);
         testBoard.addPiece(pawn, "g5", false);
-        testBoard.addPiece(pawn, "b2", true);
+        testBoard.addPiece(pawn, "b5", true);
         testBoard.addPiece(pawn, "a7", false);
         Pawn wPawn1 = (Pawn) testBoard.squareByDenotation("f4").getOccupier();
+        Pawn wPawn2 = (Pawn) testBoard.squareByDenotation("b5").getOccupier();
         testBoard.movePiece("g5", "g4");
         testBoard.printBoard();
         assertTrue(wPawn1.checkEnPassantRight().isEmpty());
+        testBoard.movePiece("a7","a6");
+        testBoard.movePiece("e1","d1");
+        testBoard.movePiece("a6","a5");
+        assertTrue(wPawn2.checkEnPassantLeft().isEmpty());
     }
 
     @Test
