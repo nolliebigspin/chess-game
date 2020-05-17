@@ -1,7 +1,7 @@
 package schach;
 
 import schach.controller.Interfaces.Input;
-import schach.controller.Interfaces.InputVsAi;
+import schach.controller.Interfaces.AiInterface;
 import schach.model.Board;
 
 import java.util.Scanner;
@@ -16,26 +16,22 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        try{
-            if (args[0].equals("--no-gui")){
-                if (vsHuman()){
-                    System.out.println("Welcome :) ");
-                    System.out.println("White starts first!");
-                    Board board = new Board();
-                    Input input = new Input(board);
-                    input.inOutRoutine();
-                }
-                else {
-                    InputVsAi input = new InputVsAi();
-                    input.runningRoutine();
-                }
-
+        if (args.length == 0 || !args[0].equals("--no-gui")){
+            System.out.println("No GUI implemented yet, please add argument: --no-gui");
+        } else {
+            if (vsHuman()){
+                System.out.println("Welcome :) ");
+                System.out.println("White starts first!");
+                Board board = new Board();
+                Input input = new Input(board);
+                input.inOutRoutine();
+            }
+            else {
+                AiInterface input = new AiInterface();
+                input.runningRoutine();
             }
         }
-        catch (Exception e){
-            System.out.println("No GUI implemented yet, please add argument: --no-gui");
-        }
-    }
+     }
 
     private static boolean vsHuman(){
         System.out.println("Playing against computer or another human? (computer/human) ");
