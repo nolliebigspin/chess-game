@@ -4,13 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import schach.model.Board;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test Class testing the PlayerInput class
+ */
 class PlayerInputTest {
 
     private Board board;
@@ -19,7 +20,7 @@ class PlayerInputTest {
 
 
     @BeforeEach
-    private void init(){
+    void init(){
         this.board = new Board();
         board.initLineUp();
         this.playerInput = new PlayerInput(board, true);
