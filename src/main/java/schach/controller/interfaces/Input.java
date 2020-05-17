@@ -1,4 +1,4 @@
-package schach.controller.Interfaces;
+package schach.controller.interfaces;
 
 import schach.model.Board;
 import schach.model.Piece;
