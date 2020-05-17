@@ -1,7 +1,7 @@
 package schach;
 
 import schach.controller.interfaces.Input;
-import schach.controller.interfaces.AiInterface;
+import schach.controller.interfaces.HumanVsComputer;
 import schach.model.Board;
 
 import java.util.Scanner;
@@ -27,7 +27,7 @@ public class Main {
                 input.inOutRoutine();
             }
             else {
-                AiInterface input = new AiInterface();
+                HumanVsComputer input = new HumanVsComputer();
                 input.runningRoutine();
             }
         }
