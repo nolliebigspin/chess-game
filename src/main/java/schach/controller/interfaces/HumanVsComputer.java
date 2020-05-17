@@ -87,6 +87,8 @@ public class HumanVsComputer {
 
     private void computerMove(){
         System.out.println("\n this would be a computer move");
+
+
         String computerMove = aiInteface.getNextMove();
         String startDenotation = computerMove.substring(0,2);
         String targetDenotation = computerMove.substring(3,5);
@@ -95,18 +97,22 @@ public class HumanVsComputer {
         board.movePiece(startDenotation, targetDenotation);
         if (computerMove.length() == 6){
             String prom = computerMove.substring(5);
-
+            piece.doPromotion(prom, board.squareByDenotation(targetDenotation));
         }
+
+
     }
 
     private void delayPrint(){
         System.out.print("\u27F3");
         for (int i = 1000000; i > 0; i--){
+            String out;
             if (i % 1000 == 0){
-                System.out.print("\r ");
+                out = "\r ";
             } else {
-                System.out.print("\r\u27F3 ");
+                out = "\r\u27F3 ";
             }
+            System.out.print(out);
         }
         System.out.println("\n");
     }

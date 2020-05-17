@@ -1,10 +1,13 @@
 package schach.controller.interfaces;
 
+import schach.controller.ai.SimpleAi;
 import schach.model.Board;
 
 public class AiInteface {
 
     private Board board;
+
+    private SimpleAi ai;
 
     private boolean white;
 
@@ -13,9 +16,10 @@ public class AiInteface {
     public AiInteface(Board board, boolean isWhite){
         this.board = board;
         this.white = isWhite;
+        this.ai = new SimpleAi(board, white);
     }
 
     protected String getNextMove(){
-        return nextMove;
+        return ai.getNextMove();
     }
 }

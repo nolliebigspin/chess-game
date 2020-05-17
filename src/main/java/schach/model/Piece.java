@@ -82,7 +82,7 @@ public abstract class Piece {
     /**
      * abstract Method to update the List of legal Squares
      */
-    protected abstract void updateLegals();
+    public abstract void updateLegals();
 
     /**
      * abstract Method to move the Piece

@@ -51,7 +51,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    protected void updateLegals() {
+    public void updateLegals() {
         legalNextSquares.clear();
 
         int column = position.getColumn();
