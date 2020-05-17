@@ -1,7 +1,7 @@
 package schach;
 
-import schach.controller.Interfaces.Input;
-import schach.controller.Interfaces.AiInterface;
+import schach.controller.interfaces.Input;
+import schach.controller.interfaces.AiInterface;
 import schach.model.Board;
 
 import java.util.Scanner;
