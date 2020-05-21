@@ -55,6 +55,7 @@ public class Input {
                     currentMove++;
                 }
                 System.out.println(currentMove);
+                System.out.println("!"+input);
             }
             if (board.getCheck().isCheckMate(true)
                     || board.getCheck().isCheckMate(false)){
@@ -147,7 +148,8 @@ public class Input {
             System.out.println(invalidOut);
             return false;
         }
-        if (input.length() == 6 && !validPromotion(input.substring(5))) {
+        if (input.length() >= 6 && !validPromotion(input.substring(5))) {
+            System.out.println(invalidOut);
             return false;
         }
         if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {
