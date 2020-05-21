@@ -47,7 +47,7 @@ public class GuiMain extends Application {
                 Background background = new Background(backgroundimage);
 ///////////////////////////////////////////////////////
         Button btn = new Button();
-        btn.setText("عدي ملك الخيا");
+        btn.setText("Start");
 //        btn.setScaleX(2);
         Menu game = new Menu("Game"); 
         MenuItem game1 = new MenuItem("Human VS Human"); 
