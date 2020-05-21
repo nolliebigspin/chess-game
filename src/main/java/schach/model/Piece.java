@@ -136,7 +136,7 @@ public abstract class Piece {
      */
     protected void refuseMove(){
         validMove = false;
-        System.out.println("!Move is not allowed");
+        System.out.println("Move is not allowed!");
     }
 
     /**

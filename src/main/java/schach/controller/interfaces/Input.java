@@ -137,7 +137,7 @@ public class Input {
      * @return true if String is valid move command, false if not
      */
     public boolean validMoveInput(String input) {
-        String invalidOut = "!Invalid Move";
+        String invalidOut = "Invalied Move!";
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
@@ -149,7 +149,7 @@ public class Input {
             return false;
         }
         if (input.length() >= 6 && !validPromotion(input.substring(5))) {
-            System.out.println(invalidOut);
+        	System.out.println(invalidOut);
             return false;
         }
         if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {
