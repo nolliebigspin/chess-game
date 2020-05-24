@@ -28,4 +28,6 @@ public class SimpleAi {
         return aiMoves.get(i);
     }
 
+    
+
 }
