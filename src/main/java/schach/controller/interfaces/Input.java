@@ -38,6 +38,7 @@ public class Input {
                 Piece movingPiece;
                 try {
                     movingPiece = board.squareByDenotation(input.substring(0,2)).getOccupier();
+                    movingPiece.setValidMoveFalse();
                 } catch (Exception e){
                     movingPiece = null;
                 }
