@@ -218,7 +218,7 @@ public class Board {
          */
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().white == squareByDenotation(targetPos).getOccupier().white) {
-            System.out.println("!Invalid Move");
+            System.out.println("!Move not allowed");
             return;
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));

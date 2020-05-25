@@ -99,6 +99,7 @@ public class Input {
             } else if (!this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 != 0) {
                 return true;
             }
+            System.out.println("!Move not allowed");
             System.out.println("It's not your turn!");
             return false;
         }
