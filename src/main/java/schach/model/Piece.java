@@ -225,5 +225,9 @@ public abstract class Piece {
     public boolean isNeverMoved(){
         return neverMoved;
     }
+
+    public void setValidMoveFalse(){
+        this.validMove = false;
+    }
 }
 
