@@ -210,12 +210,6 @@ public class Board {
      */
     public void movePiece(String startingPos, String targetPos) {
         updateAllLegalSquares();
-        /** redundant because of checkTurn() method in input @TODO delete
-        if (!squareByDenotation(startingPos).isOccupied()) {
-            System.out.println("!Invalid Move");
-            return;
-        }
-         */
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().white == squareByDenotation(targetPos).getOccupier().white) {
             System.out.println("!Move not allowed");
