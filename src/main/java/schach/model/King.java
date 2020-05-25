@@ -69,23 +69,25 @@ public class King extends Piece {
         checkBackwardRight(column, row, oppositeIsWhite);
         checkBackwardLeft(column, row, oppositeIsWhite);
         checkForwardLeft(column, row, oppositeIsWhite);
-        if (castlingLongValid()){
-            Square bishopPos;
-            if (white){
-                bishopPos = board.squareByDenotation("c1");
-            } else {
-                bishopPos = board.squareByDenotation("c8");
+        if (neverMoved){
+            if (castlingLongValid()){
+                Square bishopPos;
+                if (white){
+                    bishopPos = board.squareByDenotation("c1");
+                } else {
+                    bishopPos = board.squareByDenotation("c8");
+                }
+                legalNextSquares.add(bishopPos);
             }
-            legalNextSquares.add(bishopPos);
-        }
-        if (castlingShortValid()){
-            Square knightPos;
-            if (white){
-                knightPos = board.squareByDenotation("g1");
-            } else {
-                knightPos = board.squareByDenotation("g8");
+            if (castlingShortValid()){
+                Square knightPos;
+                if (white){
+                    knightPos = board.squareByDenotation("g1");
+                } else {
+                    knightPos = board.squareByDenotation("g8");
+                }
+                legalNextSquares.add(knightPos);
             }
-            legalNextSquares.add(knightPos);
         }
         filterAttacked();
 
