@@ -103,7 +103,7 @@ public class Input {
             System.out.println("It's not your turn!");
             return false;
         }
-        System.out.println("!Invalid Move");
+        System.out.println("!Move not allowed");
         System.out.println("No piece found!");
         return false;
     }
