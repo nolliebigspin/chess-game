@@ -18,10 +18,10 @@ public class Knight extends Piece {
     @Override
     public String print() {
         if (super.white) {
-            return "\u2658";
+            return "N";
         }
         else {
-            return "\u265E";
+            return "n";
         }
     }
 

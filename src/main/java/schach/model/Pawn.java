@@ -26,9 +26,9 @@ public class Pawn extends Piece {
     @Override
     public String print() {
         if (super.white) {
-            return "\u2659";
+            return "P";
         } else {
-            return "\u265F";
+            return "p";
         }
     }
 
