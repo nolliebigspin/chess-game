@@ -138,7 +138,7 @@ public class Input {
      * @return true if String is valid move command, false if not
      */
     public boolean validMoveInput(String input) {
-        String invalidOut = "!Invalid Move";
+        String invalidOut = "!Invalid move";
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);

@@ -201,7 +201,7 @@ class BoardTest {
         //p1.updateLegals();
         //p2.updateLegals();
         //p1.move(testBoard.getSquare(3,2));
-        //assertEquals("!Invalid Move: Square is already occupied\r\n", outContent.toString());
+        //assertEquals("!Invalid move: Square is already occupied\r\n", outContent.toString());
        // System.setOut(originalOut);
        //}
 
