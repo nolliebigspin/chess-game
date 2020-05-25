@@ -42,25 +42,27 @@ public class Input {
                     movingPiece = null;
                 }
                 board.movePiece(input.substring(0,2), input.substring(3,5));
+
                 // calling promotion method for piece if target Square is occupied
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
                     try {
                         board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
                     } catch (Exception e) {
-                        System.out.println("Promotion not possible!");
+                        System.out.println("Promotion not possible.");
                     }
                 }
-                board.printBoard();
                 if (movingPiece != null && movingPiece.isValidMove()){
+                    System.out.println("!" + input);
                     currentMove++;
+                    System.out.println("Move counter: " + currentMove);
                 }
-                System.out.println(currentMove);
-                System.out.println("!"+input);
+                board.printBoard();
+
             }
             if (board.getCheck().isCheckMate(true)
-                    || board.getCheck().isCheckMate(false)){
+                    || board.getCheck().isCheckMate(false)) {
+                System.out.println("CHECKMATE.");
                 running = false;
-                System.out.println("CHECKMATE!");
             }
         }
     }
@@ -100,11 +102,11 @@ public class Input {
                 return true;
             }
             System.out.println("!Move not allowed");
-            System.out.println("It's not your turn!");
+            System.out.println("It's not your turn.");
             return false;
         }
         System.out.println("!Move not allowed");
-        System.out.println("No piece found!");
+        System.out.println("No piece found.");
         return false;
     }
 
