@@ -69,25 +69,23 @@ public class King extends Piece {
         checkBackwardRight(column, row, oppositeIsWhite);
         checkBackwardLeft(column, row, oppositeIsWhite);
         checkForwardLeft(column, row, oppositeIsWhite);
-        if (neverMoved){
-            if (castlingLongValid()){
-                Square bishopPos;
-                if (white){
-                    bishopPos = board.squareByDenotation("c1");
-                } else {
-                    bishopPos = board.squareByDenotation("c8");
-                }
-                legalNextSquares.add(bishopPos);
+        if (castlingLongValid()){
+            Square bishopPos;
+            if (white){
+                bishopPos = board.squareByDenotation("c1");
+            } else {
+                bishopPos = board.squareByDenotation("c8");
             }
-            if (castlingShortValid()){
-                Square knightPos;
-                if (white){
-                    knightPos = board.squareByDenotation("g1");
-                } else {
-                    knightPos = board.squareByDenotation("g8");
-                }
-                legalNextSquares.add(knightPos);
+            legalNextSquares.add(bishopPos);
+        }
+        if (castlingShortValid()){
+            Square knightPos;
+            if (white){
+                knightPos = board.squareByDenotation("g1");
+            } else {
+                knightPos = board.squareByDenotation("g8");
             }
+            legalNextSquares.add(knightPos);
         }
         filterAttacked();
 
@@ -186,6 +184,9 @@ public class King extends Piece {
      * @return true if castling long is legal, false if not
      */
     private boolean castlingLongValid(){
+        if (!neverMoved){
+            return false;
+        }
         String rookPosition;
         String queenPosition;
         String bishopPosition;
@@ -231,6 +232,9 @@ public class King extends Piece {
      * @return true if castling short is legal, false if not
      */
     private boolean castlingShortValid(){
+        if (!neverMoved){
+            return false;
+        }
         String rookPosition;
         String bishopPosition;
         String knightPosition;
