@@ -258,6 +258,23 @@ class CheckTest {
     }
 
     /**
+     * test check +  enpassant
+     */
+    @Test
+    public void testEnPassantInCheck(){
+        lineUp(" white-king-b4, black-king-e8, white-pawn-b5, black-pawn-c7");
+        Pawn whitePawn = (Pawn) board.squareByDenotation("b5").getOccupier();
+        board.printBoard();
+        board.movePiece("c7", "c5");
+        board.printBoard();
+        assertTrue(check.kingInCheck(true));
+        whitePawn.updateLegals();
+        assertEquals(board.squareByDenotation("c6"), whitePawn.checkEnPassantRight().get(0));
+        board.movePiece("b5","c6");
+        board.printBoard();
+    }
+
+    /**
      * Method that simplifies the Board lineup;
      * @param input lineup in a certain string format
      */

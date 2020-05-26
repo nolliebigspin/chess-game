@@ -215,7 +215,7 @@ public class Pawn extends Piece {
      * @return target squares as a result of a 'en-passant' move
      * TODO return just a single square - its never possible that two en-passant moves are possible
      */
-    protected List<Square> checkEnPassantRight(){
+    public List<Square> checkEnPassantRight(){
         List<Square> list = new ArrayList<>();
         int row = 5;
         int oneUp = 1;
@@ -243,7 +243,7 @@ public class Pawn extends Piece {
      * @return target squares as a result of a 'en-passant' move
      * TODO return just a single square - its never possible that two en-passant moves are possible
      */
-    protected List<Square> checkEnPassantLeft(){
+    public List<Square> checkEnPassantLeft(){
         List<Square> list = new ArrayList<>();
         int row = 5;
         int oneUp = 1;

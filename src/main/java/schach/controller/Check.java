@@ -144,6 +144,15 @@ public class Check {
         if (piece instanceof Pawn){
             Pawn pawn = (Pawn) piece;
             legals.addAll(pawn.getAttackedSquares());
+            int oneUp = 1;
+            if (!pawn.isWhite()){
+                oneUp = -1;
+            }
+            if (!pawn.checkEnPassantLeft().isEmpty()){
+                newLegals.add(board.getSquare(piece.getPosition().getColumn() - 1, piece.getPosition().getRow() + oneUp));
+            } else if (!pawn.checkEnPassantRight().isEmpty()){
+                newLegals.add(board.getSquare(piece.getPosition().getColumn() + 1, piece.getPosition().getRow() + oneUp));
+            }
         }
         if (piece.getLegalNextSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
