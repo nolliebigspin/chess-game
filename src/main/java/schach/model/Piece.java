@@ -117,6 +117,8 @@ public abstract class Piece {
             board.addToCemetery(beatenPiece);
             beatenPiece.getPosition().setOccupied(false);
             beatenPiece.getPosition().setOccupier(null);
+        } else {
+            beatenPiece = null;
         }
         if (this instanceof Pawn){
             Pawn p = (Pawn) this;
