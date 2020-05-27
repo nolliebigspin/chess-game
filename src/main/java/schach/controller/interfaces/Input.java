@@ -65,12 +65,13 @@ public class Input {
                 }
                 board.printBoard();
 
+                if (board.getCheck().isCheckMate(!movingPiece.isWhite())) {
+                    System.out.println("CHECKMATE.");
+                    running = false;
+                }
+
             }
-            if (board.getCheck().isCheckMate(true)
-                    || board.getCheck().isCheckMate(false)) {
-                System.out.println("CHECKMATE.");
-                running = false;
-            }
+
         }
     }
 

@@ -223,7 +223,7 @@ public class DebuggerInput {
 
     public String readInput2() throws IOException {
         inCounter++;
-        if (inCounter == 2394){
+        if (inCounter == 3945){
             System.out.println("du bist da");
         }
         String txtInput = reader.readLine().substring(2, 7);
