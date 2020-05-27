@@ -1,6 +1,7 @@
 package schach.controller.interfaces;
 
 import schach.model.Board;
+import schach.model.Pawn;
 import schach.model.Piece;
 
 import java.util.Arrays;
@@ -45,13 +46,18 @@ public class Input {
                 board.movePiece(input.substring(0,2), input.substring(3,5));
 
                 // calling promotion method for piece if target Square is occupied
+                checkForPromotion(input, movingPiece);
+                /*
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
                     try {
-                        board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
+                        Pawn pawn = (Pawn)  board.squareByDenotation(input.substring(3,5)).getOccupier();
+                        pawn.doPromotion(input.substring(5));
                     } catch (Exception e) {
                         System.out.println("Promotion not possible.");
                     }
                 }
+                 */
+
                 if (movingPiece != null && movingPiece.isValidMove()){
                     System.out.println("!" + input);
                     currentMove++;
@@ -65,6 +71,29 @@ public class Input {
                 System.out.println("CHECKMATE.");
                 running = false;
             }
+        }
+    }
+
+    private void checkForPromotion(String input, Piece piece){
+        if (!(piece instanceof Pawn)){
+            return;
+        }
+        Pawn pawn = (Pawn) piece;
+        int finalRow = 8;
+        if (!pawn.isWhite()){
+            finalRow = 1;
+        }
+        if (pawn.getPosition().getRow() != finalRow){
+            return;
+        }
+        if (input.length() == 5){
+            pawn.doPromotion("Q");
+            return;
+        }
+        if (input.length() == 6){
+            String prom = input.substring(5);
+            pawn.doPromotion(prom);
+            return;
         }
     }
 

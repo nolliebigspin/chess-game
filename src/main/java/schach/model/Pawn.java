@@ -285,4 +285,30 @@ public class Pawn extends Piece {
         beatenPiece.getPosition().setOccupier(null);
     }
 
+    /**
+     * This method does the promotion for a pawn
+     * @param prom String for Piece which the pawn promotes to
+     */
+    public void doPromotion(String prom) {
+        if (this.white && position.getRow() != 8) {
+            return;
+        } else if (!this.white && position.getRow() != 1) {
+            return;
+        }
+        switch (prom) {
+            case "Q":
+                new Queen(this.position, this.white, this.board);
+                break;
+            case "R":
+                new Rook(this.position, this.white, this.board);
+                break;
+            case "B":
+                new Bishop(this.position, this.white, this.board);
+                break;
+            case "N":
+                new Knight(this.position, this.white, this.board);
+                break;
+        }
+    }
+
 }

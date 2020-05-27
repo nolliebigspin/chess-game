@@ -76,7 +76,7 @@ class PieceTest {
         testBoard.addPiece(pawn, "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         assertNotNull(testBoard.squareByDenotation("a7").getOccupier());
-        p.doPromotion("Q",testBoard.getSquare(1,7));
+        p.doPromotion("Q");
         String actual = testBoard.squareByDenotation("a7").getOccupier().print();
         String expected = "\u2659";
         assertEquals(expected, actual);
@@ -89,7 +89,7 @@ class PieceTest {
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         p.move(testBoard.getSquare(1,8));
         //assertNull(testBoard.squareByDenotation("a7").getOccupier());
-        p.doPromotion("Q",testBoard.getSquare(1,8));
+        p.doPromotion("Q");
         String actual = testBoard.squareByDenotation("a8").getOccupier().print();
         String expected = "\u2655";
         assertEquals(expected, actual);
@@ -101,7 +101,7 @@ class PieceTest {
         testBoard.addPiece(pawn, "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         p.move(testBoard.getSquare(1,8));
-        p.doPromotion("R",testBoard.getSquare(1,8));
+        p.doPromotion("R");
         String actual = testBoard.squareByDenotation("a8").getOccupier().print();
         String expected = "\u2656";
         assertEquals(expected, actual);
@@ -113,7 +113,7 @@ class PieceTest {
         testBoard.addPiece(pawn, "a2", false);
         Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
         p.move(testBoard.getSquare(1,1));
-        p.doPromotion("N",testBoard.getSquare(1,1));
+        p.doPromotion("N");
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265E";
         assertEquals(expected, actual);
@@ -125,7 +125,7 @@ class PieceTest {
         testBoard.addPiece(pawn, "a2", false);
         Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
         p.move(testBoard.getSquare(1,1));
-        p.doPromotion("B",testBoard.getSquare(1,1));
+        p.doPromotion("B");
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265D";
         assertEquals(expected, actual);

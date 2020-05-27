@@ -159,33 +159,7 @@ public abstract class Piece {
         }
     }
 
-    /**
-     * This method does the promotion for a pawn
-     * @param prom String for Piece which the pawn promotes to
-     * @param pos Position on Board where the promoted pawn stands
-     */
-    public void doPromotion(String prom, Square pos) {
-        if (this.white && pos.getRow() != 8 || !(this instanceof Pawn)) {
-            return;
-        } else if (!this.white && pos.getRow() != 1 || !(this instanceof Pawn)) {
-            return;
-        }
-        switch (prom) {
-            case "Q":
-                new Queen(pos, this.white, this.board);
-                break;
-            case "R":
-                new Rook(pos, this.white, this.board);
-                break;
-            case "B":
-                new Bishop(pos, this.white, this.board);
-                break;
-            case "N":
-                new Knight(pos, this.white, this.board);
-                break;
-            default:
-        }
-    }
+
 
     /**
      * Undoes the last move of the piece
