@@ -200,11 +200,13 @@ public class Pawn extends Piece {
         if (!white){
             plusOne = - 1;
         }
-        if (column > 1){
-            attacked.add(board.getSquare(column - 1, row + plusOne ));
-        }
-        if (column < 8){
-            attacked.add(board.getSquare(column + 1, row + plusOne));
+        if (row < 8 && row > 1){
+            if (column > 1){
+                attacked.add(board.getSquare(column - 1, row + plusOne ));
+            }
+            if (column < 8){
+                attacked.add(board.getSquare(column + 1, row + plusOne));
+            }
         }
         return attacked;
     }
