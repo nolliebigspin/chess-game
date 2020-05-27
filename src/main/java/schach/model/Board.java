@@ -266,6 +266,9 @@ public class Board {
             if (piece instanceof Pawn){
                 Pawn pawn = (Pawn) piece;
                 attacked.addAll(pawn.getAttackedSquares());
+            } else if (piece instanceof King){
+                King king = (King) piece;
+                attacked.addAll(king.getAttackedSquares());
             } else {
                 attacked.addAll(piece.getLegalNextSquares());
             }
@@ -345,6 +348,7 @@ public class Board {
             piece.printLegals();
         }
     }
+
 
 
 }

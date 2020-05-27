@@ -1,5 +1,6 @@
 package schach.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -185,6 +186,39 @@ public class King extends Piece {
                 legalNextSquares.add(nextSquare);
             }*/
         }
+    }
+
+    public List<Square> getAttackedSquares(){
+        List<Square> attacked = new ArrayList<>();
+        int col = this.position.getColumn();
+        int row = this.position.getRow();
+        if (row > 1){
+            attacked.add(board.getSquare(col, row - 1));
+            if (col > 1){
+                attacked.add(board.getSquare(col - 1, row - 1));
+            }
+            if (col < 8){
+                attacked.add(board.getSquare(col + 1, row - 1));
+            }
+        }
+        if (row < 8) {
+            attacked.add(board.getSquare(col, row + 1));
+            if (col > 1) {
+                attacked.add(board.getSquare(col - 1, row + 1));
+            }
+            if (col < 8) {
+                attacked.add(board.getSquare(col + 1, row + 1));
+
+            }
+        }
+        if (col > 1){
+            attacked.add(board.getSquare(col - 1, row));
+        }
+        if (col < 8){
+            attacked.add(board.getSquare(col + 1, row));
+        }
+
+        return attacked;
     }
 
     /**
