@@ -131,6 +131,7 @@ public abstract class Piece {
         position.setOccupier(this);
         validMove = true;
         board.setLastMoved(this);
+        this.updateLegals();
     }
 
     /**
@@ -177,6 +178,7 @@ public abstract class Piece {
             newPos.setOccupier(beatenPiece);
             board.removeFromCemetery(beatenPiece);
         }
+        this.updateLegals();
     }
     /**
      * getter for isWhite
