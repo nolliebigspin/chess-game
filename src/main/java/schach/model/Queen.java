@@ -60,7 +60,7 @@ public class Queen extends Piece {
             Square nextForward = board.getSquare(column, row + i);
             if (!(nextForward.isOccupied())){
                 legalNextSquares.add(nextForward);
-            } else if (nextForward.isOccupied() && nextForward.getOccupier().white == oppositeIsWhite){
+            } else if (nextForward.isOccupied() /*&& nextForward.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextForward);
                 break;
             }
@@ -83,7 +83,7 @@ public class Queen extends Piece {
             if (!(nextBackward.isOccupied())){
                 legalNextSquares.add(nextBackward);
             }
-            else if (nextBackward.isOccupied() && nextBackward.getOccupier().white == oppositeIsWhite){
+            else if (nextBackward.isOccupied() /*&& nextBackward.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextBackward);
                 break;
             }
@@ -106,7 +106,7 @@ public class Queen extends Piece {
             if (!(nextLeft.isOccupied())){
                 legalNextSquares.add(nextLeft);
             }
-            else if (nextLeft.isOccupied() && nextLeft.getOccupier().white == oppositeIsWhite){
+            else if (nextLeft.isOccupied() /*&& nextLeft.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextLeft);
                 break;
             }
@@ -129,7 +129,7 @@ public class Queen extends Piece {
             if (!(nextRight.isOccupied())){
                 legalNextSquares.add(nextRight);
             }
-            else if (nextRight.isOccupied() && nextRight.getOccupier().white == oppositeIsWhite){
+            else if (nextRight.isOccupied() /*&& nextRight.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextRight);
                 break;
             }
@@ -151,7 +151,7 @@ public class Queen extends Piece {
             Square nextForwardRight = board.getSquare(column + i, row + i);
             if (!(nextForwardRight.isOccupied())){
                 legalNextSquares.add(nextForwardRight);
-            } else if (nextForwardRight.isOccupied() && nextForwardRight.getOccupier().white == oppositeIsWhite){
+            } else if (nextForwardRight.isOccupied() /*&& nextForwardRight.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextForwardRight);
                 break;
             }
@@ -173,7 +173,7 @@ public class Queen extends Piece {
             Square nextForwardLeft = board.getSquare(column - i, row + i);
             if (!(nextForwardLeft.isOccupied())){
                 legalNextSquares.add(nextForwardLeft);
-            } else if (nextForwardLeft.isOccupied() && nextForwardLeft.getOccupier().white == oppositeIsWhite){
+            } else if (nextForwardLeft.isOccupied() /*&& nextForwardLeft.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextForwardLeft);
                 break;
             }
@@ -195,7 +195,7 @@ public class Queen extends Piece {
             Square nextBehindRight = board.getSquare(column + i, row - i);
             if (!(nextBehindRight.isOccupied())){
                 legalNextSquares.add(nextBehindRight);
-            } else if (nextBehindRight.isOccupied() && nextBehindRight.getOccupier().white == oppositeIsWhite){
+            } else if (nextBehindRight.isOccupied() /*&& nextBehindRight.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextBehindRight);
                 break;
             }
@@ -218,7 +218,7 @@ public class Queen extends Piece {
             Square nextBehindRight = board.getSquare(column - i, row - i);
             if (!(nextBehindRight.isOccupied())){
                 legalNextSquares.add(nextBehindRight);
-            } else if (nextBehindRight.isOccupied() && nextBehindRight.getOccupier().white == oppositeIsWhite){
+            } else if (nextBehindRight.isOccupied() /*&& nextBehindRight.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextBehindRight);
                 break;
             }
