@@ -21,10 +21,10 @@ public class King extends Piece {
     @Override
     public String print() {
         if (super.white) {
-            return "K";
+            return "\u2654";
         }
         else {
-            return "k";
+            return "\u265A";
         }
     }
 

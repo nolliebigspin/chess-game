@@ -18,10 +18,10 @@ public class Bishop extends Piece {
     @Override
     public String print() {
         if (super.white){
-            return "B";
+            return "\u2657";
         }
         else {
-            return "b";
+            return "\u265D";
         }
     }
 

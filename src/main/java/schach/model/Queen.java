@@ -18,10 +18,10 @@ public class Queen extends Piece {
     @Override
     public String print() {
         if (super.white) {
-            return "Q";
+            return "\u2655";
         }
         else {
-            return "q";
+            return "\u265B";
         }
     }
 

@@ -18,10 +18,10 @@ public class Rook extends Piece {
     @Override
     public String print() {
         if (super.white) {
-            return "R";
+            return "\u2656";
         }
         else {
-            return "r";
+            return "\u265C";
         }
     }
 
