@@ -46,13 +46,13 @@ public class Rook extends Piece {
      */
     private void checkForward(){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1 ; i <= 8 - position.getRow(); i++){
             Square nextForward = board.getSquare(position.getColumn(), position.getRow() + i);
@@ -74,13 +74,13 @@ public class Rook extends Piece {
      */
     private void checkBackward(){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i < position.getRow(); i++){
             Square nextBackward = board.getSquare(position.getColumn(), position.getRow() - i);
@@ -103,13 +103,13 @@ public class Rook extends Piece {
      */
     private void checkRight(){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i <= 8 - position.getColumn(); i++){
             Square nextRight = board.getSquare(position.getColumn() + i, position.getRow());
@@ -132,13 +132,13 @@ public class Rook extends Piece {
      */
     private void checkLeft(){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         //right (black), left (white)
         for (int i = 1; i < position.getColumn(); i++){

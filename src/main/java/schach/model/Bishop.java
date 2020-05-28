@@ -51,13 +51,13 @@ public class Bishop extends Piece {
      */
     private void checkForwardRight(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i <= 8 - column && i <= 8 - row; i++){
             Square nextForwardRight = board.getSquare(column + i, row + i);
@@ -82,13 +82,13 @@ public class Bishop extends Piece {
      */
     private void checkForwardLeft(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i < column && i <= 8 - row; i++){
             Square nextForwardLeft = board.getSquare(column - i, row + i);
@@ -113,13 +113,13 @@ public class Bishop extends Piece {
      */
     private void checkBehindRight(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i <= 8 - column && i < row; i++){
             Square nextBehindRight = board.getSquare(column + i, row - i);
@@ -144,13 +144,13 @@ public class Bishop extends Piece {
      */
     private void checkBehindLeft(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i < column && i < row; i++){
             Square nextBehindLeft = board.getSquare(column - i, row - i);

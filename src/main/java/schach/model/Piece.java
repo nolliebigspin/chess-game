@@ -204,6 +204,9 @@ public abstract class Piece {
         return neverMoved;
     }
 
+    /**
+     * Sets validMove false
+     */
     public void setValidMoveFalse(){
         this.validMove = false;
     }
