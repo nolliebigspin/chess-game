@@ -251,9 +251,11 @@ class CheckTest {
      */
     @Test
     public void testCheckMateDoubleCheck(){
-        lineUp(" white-king-a1, black-queen-e5, black-knight-d4, black-rook-b4, black-king-h8, white-rook-c7, white-bishop-a2");
+        lineUp(" white-king-a1, black-queen-e5, black-knight-d4, black-rook-b4, black-king-h8, white-bishop-a2");
+        board.printBoard();
         assertFalse(check.isCheckMate(true));
         board.movePiece("d4", "c2");
+        board.printBoard();
         assertTrue(check.isCheckMate(true));
     }
 

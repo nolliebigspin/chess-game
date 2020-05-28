@@ -177,7 +177,12 @@ public class Check {
         if (!kingIsWhite){
             king = blackKing;
         }
-        boolean cantMove = king.getLegalNextSquares().size() == 0;
+        List<Square> legals = king.getLegalNextSquares();
+        List<Piece> pieces = board.allActivePieces(kingIsWhite);
+        for (Piece piece: pieces){
+            legals.remove(piece.getPosition());
+        }
+        boolean cantMove = legals.size() == 0;
         boolean doubleCheck = attackersSettingCheck(kingIsWhite).size() > 1;
         boolean onlyKing = board.allActivePieces(kingIsWhite).size() == 1;
         boolean noOneCanHelp = noOneCanHelp(kingIsWhite);
