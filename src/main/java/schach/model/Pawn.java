@@ -200,11 +200,13 @@ public class Pawn extends Piece {
         if (!white){
             plusOne = - 1;
         }
-        if (column > 1){
-            attacked.add(board.getSquare(column - 1, row + plusOne ));
-        }
-        if (column < 8){
-            attacked.add(board.getSquare(column + 1, row + plusOne));
+        if (row < 8 && row > 1){
+            if (column > 1){
+                attacked.add(board.getSquare(column - 1, row + plusOne ));
+            }
+            if (column < 8){
+                attacked.add(board.getSquare(column + 1, row + plusOne));
+            }
         }
         return attacked;
     }
@@ -215,7 +217,7 @@ public class Pawn extends Piece {
      * @return target squares as a result of a 'en-passant' move
      * TODO return just a single square - its never possible that two en-passant moves are possible
      */
-    protected List<Square> checkEnPassantRight(){
+    public List<Square> checkEnPassantRight(){
         List<Square> list = new ArrayList<>();
         int row = 5;
         int oneUp = 1;
@@ -243,7 +245,7 @@ public class Pawn extends Piece {
      * @return target squares as a result of a 'en-passant' move
      * TODO return just a single square - its never possible that two en-passant moves are possible
      */
-    protected List<Square> checkEnPassantLeft(){
+    public List<Square> checkEnPassantLeft(){
         List<Square> list = new ArrayList<>();
         int row = 5;
         int oneUp = 1;
@@ -281,6 +283,32 @@ public class Pawn extends Piece {
         board.addToCemetery(beatenPiece);
         beatenPiece.getPosition().setOccupied(false);
         beatenPiece.getPosition().setOccupier(null);
+    }
+
+    /**
+     * This method does the promotion for a pawn
+     * @param prom String for Piece which the pawn promotes to
+     */
+    public void doPromotion(String prom) {
+        if (this.white && position.getRow() != 8) {
+            return;
+        } else if (!this.white && position.getRow() != 1) {
+            return;
+        }
+        switch (prom) {
+            case "Q":
+                new Queen(this.position, this.white, this.board);
+                break;
+            case "R":
+                new Rook(this.position, this.white, this.board);
+                break;
+            case "B":
+                new Bishop(this.position, this.white, this.board);
+                break;
+            case "N":
+                new Knight(this.position, this.white, this.board);
+                break;
+        }
     }
 
 }

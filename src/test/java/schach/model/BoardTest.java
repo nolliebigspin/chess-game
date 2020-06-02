@@ -94,7 +94,7 @@ class BoardTest {
         testBoard.addPiece(rook, "c2", true);
         testBoard.addPiece(rook, "c7", false);
         testBoard.addPiece(king, "g4", true);
-        testBoard.addPiece(king, "h5", false);
+        testBoard.addPiece(king, "e5", false);
         Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
         Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
         r1.updateLegals();
@@ -109,7 +109,7 @@ class BoardTest {
         testBoard.addPiece(rook, "c2", true);
         testBoard.addPiece(rook, "c7", false);
         testBoard.addPiece(king, "g4", true);
-        testBoard.addPiece(king, "h5", false);
+        testBoard.addPiece(king, "e5", false);
         Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
         Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
         r1.updateLegals();
@@ -201,7 +201,7 @@ class BoardTest {
         //p1.updateLegals();
         //p2.updateLegals();
         //p1.move(testBoard.getSquare(3,2));
-        //assertEquals("!Invalid Move: Square is already occupied\r\n", outContent.toString());
+        //assertEquals("!Invalid move: Square is already occupied\r\n", outContent.toString());
        // System.setOut(originalOut);
        //}
 
@@ -213,7 +213,7 @@ class BoardTest {
       Board testBoard = new Board();
       testBoard.addPiece(pawn, "c3", true);
       testBoard.addPiece(king, "g4", true);
-      testBoard.addPiece(king, "h5", false);
+      testBoard.addPiece(king, "e5", false);
       Pawn p1 = new Pawn(testBoard.getSquare(3,3),true,testBoard);
       p1.updateLegals();
       testBoard.printLegals();

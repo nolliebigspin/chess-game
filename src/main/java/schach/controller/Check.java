@@ -144,6 +144,15 @@ public class Check {
         if (piece instanceof Pawn){
             Pawn pawn = (Pawn) piece;
             legals.addAll(pawn.getAttackedSquares());
+            int oneUp = 1;
+            if (!pawn.isWhite()){
+                oneUp = -1;
+            }
+            if (!pawn.checkEnPassantLeft().isEmpty()){
+                newLegals.add(board.getSquare(piece.getPosition().getColumn() - 1, piece.getPosition().getRow() + oneUp));
+            } else if (!pawn.checkEnPassantRight().isEmpty()){
+                newLegals.add(board.getSquare(piece.getPosition().getColumn() + 1, piece.getPosition().getRow() + oneUp));
+            }
         }
         if (piece.getLegalNextSquares().contains(attacker.getPosition())){
             newLegals.add(attacker.getPosition());
@@ -168,7 +177,12 @@ public class Check {
         if (!kingIsWhite){
             king = blackKing;
         }
-        boolean cantMove = king.getLegalNextSquares().size() == 0;
+        List<Square> legals = king.getLegalNextSquares();
+        List<Piece> pieces = board.allActivePieces(kingIsWhite);
+        for (Piece piece: pieces){
+            legals.remove(piece.getPosition());
+        }
+        boolean cantMove = legals.size() == 0;
         boolean doubleCheck = attackersSettingCheck(kingIsWhite).size() > 1;
         boolean onlyKing = board.allActivePieces(kingIsWhite).size() == 1;
         boolean noOneCanHelp = noOneCanHelp(kingIsWhite);

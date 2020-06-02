@@ -1,5 +1,6 @@
 package schach.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -94,89 +95,130 @@ public class King extends Piece {
     private void checkForward(int column, int row, boolean oppositeIsWhite) {
         if (row < 8) {
             Square nextSquare = board.getSquare(column, row + 1);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
-            }
+            }*/
         }
     }
 
     private void checkBackward(int column, int row, boolean oppositeIsWhite) {
         if (row > 1) {
             Square nextSquare = board.getSquare(column, row - 1);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
-            }
+            }*/
         }
     }
 
     private void checkLeft(int column, int row, boolean oppositeIsWhite) {
         if (column > 1) {
             Square nextSquare = board.getSquare(column - 1, row);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
-            }
+            }*/
         }
     }
 
     private void checkRight(int column, int row, boolean oppositeIsWhite) {
         if (column < 8) {
             Square nextSquare = board.getSquare(column + 1, row);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
-            }
+            }*/
         }
     }
 
     private void checkForwardRight(int column, int row, boolean oppositeIsWhite) {
         if (row < 8 && column < 8) {
             Square nextSquare = board.getSquare(column + 1, row + 1);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
-            }
+            }*/
         }
     }
 
     private void checkBackwardRight(int column, int row, boolean oppositeIsWhite) {
         if (column < 8 && row > 1){
             Square nextSquare = board.getSquare(column + 1, row - 1);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
-            }
+            }*/
         }
     }
 
     private void checkBackwardLeft(int column, int row, boolean oppositeIsWhite) {
         if (column > 1 && row > 1) {
             Square nextSquare = board.getSquare(column - 1, row - 1);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
-            }
+            }*/
         }
     }
 
     private void checkForwardLeft(int column, int row, boolean oppositeIsWhite) {
         if (column > 1 && row < 8) {
             Square nextSquare = board.getSquare(column - 1, row + 1);
-            if (!nextSquare.isOccupied()) {
+            legalNextSquares.add(nextSquare);
+            /*if (!nextSquare.isOccupied()) {
                 legalNextSquares.add(nextSquare);
             } else if (nextSquare.isOccupied() && nextSquare.getOccupier().white == oppositeIsWhite) {
                 legalNextSquares.add(nextSquare);
+            }*/
+        }
+    }
+
+    public List<Square> getAttackedSquares(){
+        List<Square> attacked = new ArrayList<>();
+        int col = this.position.getColumn();
+        int row = this.position.getRow();
+        if (row > 1){
+            attacked.add(board.getSquare(col, row - 1));
+            if (col > 1){
+                attacked.add(board.getSquare(col - 1, row - 1));
+            }
+            if (col < 8){
+                attacked.add(board.getSquare(col + 1, row - 1));
             }
         }
+        if (row < 8) {
+            attacked.add(board.getSquare(col, row + 1));
+            if (col > 1) {
+                attacked.add(board.getSquare(col - 1, row + 1));
+            }
+            if (col < 8) {
+                attacked.add(board.getSquare(col + 1, row + 1));
+
+            }
+        }
+        if (col > 1){
+            attacked.add(board.getSquare(col - 1, row));
+        }
+        if (col < 8){
+            attacked.add(board.getSquare(col + 1, row));
+        }
+
+        return attacked;
     }
 
     /**
@@ -184,6 +226,9 @@ public class King extends Piece {
      * @return true if castling long is legal, false if not
      */
     private boolean castlingLongValid(){
+        if (!neverMoved){
+            return false;
+        }
         String rookPosition;
         String queenPosition;
         String bishopPosition;
@@ -229,6 +274,9 @@ public class King extends Piece {
      * @return true if castling short is legal, false if not
      */
     private boolean castlingShortValid(){
+        if (!neverMoved){
+            return false;
+        }
         String rookPosition;
         String bishopPosition;
         String knightPosition;

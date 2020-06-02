@@ -114,7 +114,7 @@ public class HumanVsComputer {
         if (piece.isValidMove()){
             if (playerInput.isPromotion()){
                 String prom = playerMove.substring(5);
-                piece.doPromotion(prom, board.squareByDenotation(targetDenotation));
+                //piece.doPromotion(prom, board.squareByDenotation(targetDenotation));
             }
             return;
         } else {
@@ -140,7 +140,7 @@ public class HumanVsComputer {
         board.movePiece(startDenotation, targetDenotation);
         if (computerMove.length() == 6){
             String prom = computerMove.substring(5);
-            piece.doPromotion(prom, board.squareByDenotation(targetDenotation));
+            //piece.doPromotion(prom, board.squareByDenotation(targetDenotation));
         }
 
 
