@@ -76,7 +76,7 @@ class PieceTest {
         testBoard.addPiece(pawn, "a7", true);
         Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
         assertNotNull(testBoard.squareByDenotation("a7").getOccupier());
-        p.doPromotion("Q",testBoard.getSquare(1,7));
+        p.doPromotion("Q");
         String actual = testBoard.squareByDenotation("a7").getOccupier().print();
         String expected = "\u2659";
         assertEquals(expected, actual);
@@ -85,11 +85,10 @@ class PieceTest {
     @Test
     void doPromotionQueen() {
         Board testBoard = new Board();
-        testBoard.addPiece(pawn, "a7", true);
-        Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
-        p.move(testBoard.getSquare(1,8));
+        testBoard.addPiece(pawn, "a8", true);
+        Pawn p = (Pawn) testBoard.squareByDenotation("a8").getOccupier();
         //assertNull(testBoard.squareByDenotation("a7").getOccupier());
-        p.doPromotion("Q",testBoard.getSquare(1,8));
+        p.doPromotion("Q");
         String actual = testBoard.squareByDenotation("a8").getOccupier().print();
         String expected = "\u2655";
         assertEquals(expected, actual);
@@ -98,10 +97,9 @@ class PieceTest {
     @Test
     void doPromotionRook() {
         Board testBoard = new Board();
-        testBoard.addPiece(pawn, "a7", true);
-        Pawn p = new Pawn(testBoard.getSquare(1,7),true,testBoard);
-        p.move(testBoard.getSquare(1,8));
-        p.doPromotion("R",testBoard.getSquare(1,8));
+        testBoard.addPiece(pawn, "a8", true);
+        Pawn p = (Pawn) testBoard.squareByDenotation("a8").getOccupier();
+        p.doPromotion("R");
         String actual = testBoard.squareByDenotation("a8").getOccupier().print();
         String expected = "\u2656";
         assertEquals(expected, actual);
@@ -110,10 +108,9 @@ class PieceTest {
     @Test
     void doPromotionKnight() {
         Board testBoard = new Board();
-        testBoard.addPiece(pawn, "a2", false);
-        Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
-        p.move(testBoard.getSquare(1,1));
-        p.doPromotion("N",testBoard.getSquare(1,1));
+        testBoard.addPiece(pawn, "a1", false);
+        Pawn p = (Pawn) testBoard.squareByDenotation("a1").getOccupier();
+        p.doPromotion("N");
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265E";
         assertEquals(expected, actual);
@@ -122,10 +119,9 @@ class PieceTest {
     @Test
     void doPromotionBishop() {
         Board testBoard = new Board();
-        testBoard.addPiece(pawn, "a2", false);
-        Pawn p = new Pawn(testBoard.getSquare(1,2),false,testBoard);
-        p.move(testBoard.getSquare(1,1));
-        p.doPromotion("B",testBoard.getSquare(1,1));
+        testBoard.addPiece(pawn, "a1", false);
+        Pawn p = (Pawn) testBoard.squareByDenotation("a1").getOccupier();
+        p.doPromotion("B");
         String actual = testBoard.squareByDenotation("a1").getOccupier().print();
         String expected = "\u265D";
         assertEquals(expected, actual);
@@ -146,7 +142,7 @@ class PieceTest {
 
         p.move(testBoard.getSquare(1,2));
         //p.updateLegals();
-        assertEquals("!Move is invalid\r\n", outContent.toString());
+        assertEquals("!Move not allowed\r\n", outContent.toString());
         System.setOut(originalOut);
     }
 

@@ -26,6 +26,7 @@ class RookTest {
         testBoard.addPiece(bishop, "d5", false);
         testBoard.addPiece(king, "g7", true);
         testBoard.addPiece(king, "g4", false);
+
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -42,8 +43,10 @@ class RookTest {
         legals.add(empty3);
         legals.add(empty4);
         legals.add(enemy2);
+        legals.add(testBoard.squareByDenotation("d5"));
+        legals.add(testBoard.squareByDenotation("g7"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
     }
 
 
@@ -53,8 +56,9 @@ class RookTest {
         testBoard.addPiece(rook, "g5", true);
         testBoard.addPiece(bishop, "d5", false);
         testBoard.addPiece(pawn, "g6", true);
-        testBoard.addPiece(king, "g4", false);
+        testBoard.addPiece(king, "g3", false);
         testBoard.addPiece(king, "h5", true);
+        testBoard.printBoard();
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -69,8 +73,11 @@ class RookTest {
         legals.add(empty3);
         legals.add(empty2);
         legals.add(enemy2);
+        legals.add(testBoard.squareByDenotation("g3"));
+        legals.add(testBoard.squareByDenotation("h5"));
+        legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
     }
 
 
@@ -82,6 +89,7 @@ class RookTest {
         testBoard.addPiece(pawn, "g6", true);
         testBoard.addPiece(king, "g4", false);
         testBoard.addPiece(king, "h8", true);
+
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -97,8 +105,9 @@ class RookTest {
         legals.add(empty3);
         legals.add(empty2);
         legals.add(enemy2);
+        legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
     }
 
 
@@ -110,6 +119,7 @@ class RookTest {
         testBoard.addPiece(pawn, "g6", true);
         testBoard.addPiece(king, "g3", true);
         testBoard.addPiece(pawn, "h5", false);
+
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -125,8 +135,10 @@ class RookTest {
         legals.add(empty3);
         legals.add(empty2);
         legals.add(enemy2);
+        legals.add(testBoard.squareByDenotation("g6"));
+        legals.add(testBoard.squareByDenotation("g3"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
     }
 
 
@@ -140,6 +152,7 @@ class RookTest {
         testBoard.addPiece(pawn, "g6", true);
         testBoard.addPiece(king, "g3", true);
         testBoard.addPiece(pawn, "h5", false);
+        testBoard.printBoard();
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -155,8 +168,10 @@ class RookTest {
         legals.add(empty3);
         legals.add(empty2);
         legals.add(enemy2);
+        legals.add(testBoard.squareByDenotation("g6"));
+        legals.add(testBoard.squareByDenotation("g3"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
     }
 
 
@@ -169,6 +184,7 @@ class RookTest {
         testBoard.addPiece(pawn, "g6", false);
         testBoard.addPiece(king, "g4", true);
         testBoard.addPiece(king, "h8", false);
+        testBoard.printBoard();
         Rook r1 = new Rook(testBoard.getSquare(7,5),false,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -183,8 +199,9 @@ class RookTest {
         legals.add(empty3);
         legals.add(empty2);
         legals.add(enemy2);
+        legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));;
     }
 
 
@@ -194,8 +211,9 @@ class RookTest {
         testBoard.addPiece(rook, "g5", false);
         testBoard.addPiece(bishop, "d5", true);
         testBoard.addPiece(pawn, "g6", false);
-        testBoard.addPiece(king, "g4", true);
+        testBoard.addPiece(king, "g3", true);
         testBoard.addPiece(king, "h5", false);
+        testBoard.printBoard();
         Rook r1 = new Rook(testBoard.getSquare(7,5),false,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -208,8 +226,11 @@ class RookTest {
         legals.add(empty3);
         legals.add(empty2);
         legals.add(enemy2);
+        legals.add(testBoard.squareByDenotation("g3"));
+        legals.add(testBoard.squareByDenotation("h5"));
+        legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));;
     }
 
 
@@ -222,6 +243,7 @@ class RookTest {
         testBoard.addPiece(pawn, "h5", true);
         testBoard.addPiece(king, "f5", true);
         testBoard.addPiece(queen, "g8", false);
+
         Rook r1 = new Rook(testBoard.getSquare(7,5),true,testBoard);
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
@@ -232,8 +254,11 @@ class RookTest {
         legals.add(empty1);
         legals.add(empty2);
         legals.add(enemy);
+        legals.add(testBoard.squareByDenotation("g4"));
+        legals.add(testBoard.squareByDenotation("h5"));
+        legals.add(testBoard.squareByDenotation("f5"));
         // test the CheckUpLeft method
-        assertEquals(legals,Actual);
+        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));;
     }
 
 

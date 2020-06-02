@@ -210,15 +210,9 @@ public class Board {
      */
     public void movePiece(String startingPos, String targetPos) {
         updateAllLegalSquares();
-        /** redundant because of checkTurn() method in input @TODO delete
-        if (!squareByDenotation(startingPos).isOccupied()) {
-            System.out.println("!Invalid Move");
-            return;
-        }
-         */
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().white == squareByDenotation(targetPos).getOccupier().white) {
-            System.out.println("!Invalid Move");
+            System.out.println("!Move not allowed");
             return;
         }
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
@@ -272,6 +266,9 @@ public class Board {
             if (piece instanceof Pawn){
                 Pawn pawn = (Pawn) piece;
                 attacked.addAll(pawn.getAttackedSquares());
+            } else if (piece instanceof King){
+                King king = (King) piece;
+                attacked.addAll(king.getAttackedSquares());
             } else {
                 attacked.addAll(piece.getLegalNextSquares());
             }
@@ -351,6 +348,7 @@ public class Board {
             piece.printLegals();
         }
     }
+
 
 
 }

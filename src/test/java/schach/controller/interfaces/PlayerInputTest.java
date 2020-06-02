@@ -59,7 +59,7 @@ class PlayerInputTest {
 
     @Test
     void testInputIsMoveGibberish(){
-        String expected = "!Invalid Move" + System.lineSeparator() +
+        String expected = "!Invalid move" + System.lineSeparator() +
                 "no valid input given - please enter 'help' for further info" + System.lineSeparator();
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
