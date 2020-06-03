@@ -348,7 +348,10 @@ public class Board {
             piece.printLegals();
         }
     }
+
+
     public Square[][] getSquares() {
     	return this.squareMatrix;
     }
+
 }
