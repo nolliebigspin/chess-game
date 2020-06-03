@@ -18,7 +18,7 @@ class BoardValueTreeTest {
     @Test
     void testGenerally(){
         board.initLineUp();
-        new BoardValueTree(board, 5, true, null);
+        new BoardValueTree(board, 3, true, null);
     }
 
 }

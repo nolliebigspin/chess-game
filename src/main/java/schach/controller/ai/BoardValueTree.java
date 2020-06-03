@@ -24,6 +24,7 @@ public class BoardValueTree {
     private Move lastMoved;
 
     public BoardValueTree(Board board, int maxDepth, boolean isWhitesTurn, Move lastMoved){
+        System.out.println(maxDepth);
         this.board = board;
         this.maxDepth = maxDepth;
         this.whitesTurn = isWhitesTurn;
@@ -31,7 +32,6 @@ public class BoardValueTree {
         this.lastMoved = lastMoved;
         this.moves = getMoves();
         this.children = generateChild();
-        board.setLastMoved(lastMoved.getPiece());
     }
 
     private List<Move> getMoves(){

@@ -220,7 +220,7 @@ public abstract class Piece {
             if (square.isOccupied() && square.getOccupier().isWhite() == white){
                 filtered.remove(square);
             }
-            if (board.getCheck().inCheckIfMoved(this, square)){
+            else if (board.getCheck().inCheckIfMoved(this, square)){
                 filtered.remove(square);
             }
         }
