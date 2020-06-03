@@ -210,5 +210,16 @@ public abstract class Piece {
     public void setValidMoveFalse(){
         this.validMove = false;
     }
+
+    public List<Square> filteredLegals(){
+        List<Square> filtered = new ArrayList<>();
+        filtered.addAll(legalNextSquares);
+        for (Square square: legalNextSquares){
+            if (square.isOccupied() && square.getOccupier().isWhite() == white){
+                filtered.remove(square);
+            }
+        }
+        return filtered;
+    }
 }
 

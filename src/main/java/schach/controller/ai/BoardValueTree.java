@@ -36,7 +36,7 @@ public class BoardValueTree {
         List<Piece> pieces = board.allActivePieces(whitesTurn);
         for (Piece piece: pieces){
             piece.updateLegals();
-            List<Square> legals = piece.getLegalNextSquares();
+            List<Square> legals = piece.filteredLegals();
             for (Square square: legals){
                 moves.add(new Move(piece, square));
             }
@@ -50,12 +50,11 @@ public class BoardValueTree {
         } else {
             List<BoardValueTree> children = new ArrayList<>();
             for (Move move: moves){
-                Board nextBoard = new Board();
-                nextBoard = board;
+                Board nextBoard = new Board(board.getPositioning());
                 String[] denotation = move.moveAsString().split("-");
                 nextBoard.movePiece(denotation[0], denotation[1]);
                 children.add(new BoardValueTree(nextBoard, maxDepth - 1, !whitesTurn));
-                board.printBoard();
+                nextBoard.printBoard();
             }
             return children;
         }
