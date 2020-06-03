@@ -1,6 +1,7 @@
 package schach.view;
 
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -24,10 +25,15 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -49,20 +55,36 @@ public class HomeScreen extends Pane {
 	private String playerColor;
 	private boolean multiplayer;
 	private GridPane boardPane;
+	@FXML
+	private VBox image;
 	
 	@FXML
 	private VBox content;
 	
 	public HomeScreen() {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GUI/Components/HomeScreen.fxml"));
-	    	fxmlLoader.setRoot(this);
+			FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("HomeScreen.fxml"));
+//	    	FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setRoot(this);
 	    	fxmlLoader.setController(this);
 	    	fxmlLoader.load();
-	    	this.getStylesheets().add(HomeScreen.class.getResource("GUI/Style/root.css").toExternalForm());
+	    	this.getStylesheets().add(HomeScreen.class.getResource("root.css").toExternalForm());
 //	    	mainContent = new VBox(this.menuBox);
 //	    	mainContent.getChildren().add(this.menuBox);
 	    	///////////// test
+	    	////// background
+	    	// image ex
+//	    	FileInputStream input = new FileInputStream(
+//					System.getProperty("user.dir") + "\\src\\main\\resources\\schach\\view\\background.jpeg");
+////					
+//			Image image = new Image(input);
+//			BackgroundImage backgroundimage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.SPACE,
+//					BackgroundPosition.DEFAULT,
+//					new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true));
+//
+//			Background background = new Background(backgroundimage);
+//			this.image.setBackground(background);
+	    	//////////end
 	    	startGame();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -196,8 +218,15 @@ public class HomeScreen extends Pane {
 		this.boardPane.setPrefSize(500, 500);
 		updateBoard(board);
 		boardBox.getChildren().add(boardPane);
-		content.getChildren().add(boardBox);
+		
 		content.setPrefSize(700, 500);
+		/// Last Move section
+		HBox lastMove = new HBox();
+		lastMove.setPrefSize(100, 100);
+		Label l = new Label("Last Move");
+		lastMove.getChildren().add(l);
+//		content.getChildren().add(lastMove);
+		content.getChildren().addAll(boardBox,lastMove);
 //		content.setPrefSize(600, 600);
 //		mainContent.
 //		mainContent.setAlignment(Pos.BOTTOM_LEFT);
@@ -234,17 +263,17 @@ public class HomeScreen extends Pane {
 							b.setContentDisplay(ContentDisplay.CENTER);
 							b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
 							b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
+							/// color
 							b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
 							boardPane.add(b, col, row);
 							int position[] = {col, row};
 							///////////// Add listener
 							b.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
 								@Override
 								public void handle(MouseEvent e) {
 
 //									b.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, Insets.EMPTY)));
-									Alert alert = new Alert(AlertType.INFORMATION);
+//									Alert alert = new Alert(AlertType.INFORMATION);
 //							current pice		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
 									Piece p = board.getSquares()[8-position[0]][position[1]].getOccupier();
 									p.updateLegals();
