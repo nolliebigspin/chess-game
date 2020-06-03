@@ -19,11 +19,17 @@ public class Main {
         if (args.length == 0 || !args[0].equals("--no-gui")){
             System.out.println("No GUI implemented yet, please add argument: --no-gui");
         } else {
-            System.out.println("Welcome :) ");
-            System.out.println("White starts first!");
-            Board board = new Board();
-            Input input = new Input(board);
-            input.inOutRoutine();
+            if (vsHuman()){
+                System.out.println("Welcome :) ");
+                System.out.println("White starts first!");
+                Board board = new Board();
+                Input input = new Input(board);
+                input.inOutRoutine();
+            }
+            else {
+                HumanVsComputer input = new HumanVsComputer();
+                input.runningRoutine();
+            }
         }
      }
 
