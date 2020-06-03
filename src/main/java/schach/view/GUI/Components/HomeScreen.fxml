@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root styleClass="root" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="600"
+	prefWidth="600" type="Pane" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<VBox id="vbox" prefHeight="400.0" prefWidth="800.0"
+      xmlns:fx="http://javafx.com/fxml" styleClass="minuBox"
+      >
+   <MenuBar fx:id="menuBar" prefHeight="40.0" styleClass="mainMenu">
+      <menus>
+         <Menu text="Start" styleClass="root_Menu">
+            <items>
+               <Menu text="New Game" >
+               <items>
+               		<MenuItem text="Human VS Human" onAction="#showDialogHuman" />
+               		<MenuItem text="Human VS CPU" onAction="#showDialogCPU" />
+               	</items>
+               </Menu>
+               <MenuItem text="Load Game"/>
+               <SeparatorMenuItem  />
+               <MenuItem text="Exit"/>
+            </items>
+         </Menu>
+         <Menu text="Edit">
+            <items>
+               <MenuItem text="Copy"/>
+               <MenuItem text="Cut"/>
+               <MenuItem text="Paste"/>
+               <MenuItem text="Odai"/>
+            </items>
+         </Menu>
+         <Menu text="Help">
+            <items>
+               <MenuItem text="Search" disable="true"/>
+               <MenuItem text="Online Manual" visible="false"/>
+               <SeparatorMenuItem />
+               <MenuItem text="About" />
+            </items>
+         </Menu>
+      </menus>
+   </MenuBar>
+</VBox>
+			
+	</children>
+
+</fx:root>
