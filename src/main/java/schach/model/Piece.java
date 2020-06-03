@@ -213,9 +213,14 @@ public abstract class Piece {
 
     public List<Square> filteredLegals(){
         List<Square> filtered = new ArrayList<>();
+        List<Square> newLegals = new ArrayList<>();
+        newLegals.addAll(legalNextSquares);
         filtered.addAll(legalNextSquares);
-        for (Square square: legalNextSquares){
+        for (Square square: newLegals){
             if (square.isOccupied() && square.getOccupier().isWhite() == white){
+                filtered.remove(square);
+            }
+            if (board.getCheck().inCheckIfMoved(this, square)){
                 filtered.remove(square);
             }
         }

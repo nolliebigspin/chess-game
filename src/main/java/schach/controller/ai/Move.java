@@ -36,6 +36,10 @@ public class Move {
         }
     }
 
+    public Piece getPiece(){
+        return piece;
+    }
+
     public boolean isAttacking(){
         return attacking;
     }

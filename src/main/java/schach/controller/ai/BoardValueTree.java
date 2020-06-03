@@ -21,14 +21,17 @@ public class BoardValueTree {
 
     private List<BoardValueTree> children;
 
-    public BoardValueTree(Board board, int maxDepth, boolean isWhitesTurn){
+    private Move lastMoved;
+
+    public BoardValueTree(Board board, int maxDepth, boolean isWhitesTurn, Move lastMoved){
         this.board = board;
         this.maxDepth = maxDepth;
         this.whitesTurn = isWhitesTurn;
         this.value = calcBoardValue();
+        this.lastMoved = lastMoved;
         this.moves = getMoves();
         this.children = generateChild();
-        System.out.println("Ebene: " + maxDepth + " | Value: " + value);
+        board.setLastMoved(lastMoved.getPiece());
     }
 
     private List<Move> getMoves(){
@@ -53,8 +56,10 @@ public class BoardValueTree {
                 Board nextBoard = new Board(board.getPositioning());
                 String[] denotation = move.moveAsString().split("-");
                 nextBoard.movePiece(denotation[0], denotation[1]);
-                children.add(new BoardValueTree(nextBoard, maxDepth - 1, !whitesTurn));
-                nextBoard.printBoard();
+                if (lastMoved != null){
+                    nextBoard.setLastMoved(lastMoved.getPiece());
+                }
+                children.add(new BoardValueTree(nextBoard, maxDepth - 1, !whitesTurn, move));
             }
             return children;
         }
