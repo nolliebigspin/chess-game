@@ -21,4 +21,14 @@ class BoardValueTreeTest {
         new BoardValueTree(board, 3, true, null);
     }
 
+    @Test
+    void testMinmax(){
+        board.initLineUp();
+        board.movePiece("b1", "c3");
+        board.movePiece("b7", "b5");
+        board.printBoard();
+        BoardValueTree bvt = new BoardValueTree(board, true, null);
+        System.out.println(bvt.minmax(2));
+    }
+
 }

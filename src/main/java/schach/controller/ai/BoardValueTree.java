@@ -31,7 +31,37 @@ public class BoardValueTree {
         this.value = calcBoardValue();
         this.lastMoved = lastMoved;
         this.moves = getMoves();
-        this.children = generateChild();
+        this.children = generateChild(maxDepth);
+    }
+
+    public BoardValueTree(Board board, boolean isWhitesTurn, Move lastMoved){
+        this.board = board;
+        this.whitesTurn = isWhitesTurn;
+        this.value = calcBoardValue();
+        this.lastMoved = lastMoved;
+        this.moves = getMoves();
+    }
+
+    public int minmax(int depth){
+        if (depth == 0){
+            return value;
+        }
+        List<BoardValueTree> children = generateChild(depth);
+        if (whitesTurn){
+            int maxVal = -10000;
+            for (BoardValueTree boardValueTree: children){
+                int val = boardValueTree.minmax(depth - 1);
+                maxVal = Math.max(maxVal, val);
+            }
+            return maxVal;
+        } else {
+            int minEval = 10000;
+            for (BoardValueTree boardValueTree: children){
+                int val = boardValueTree.minmax(depth - 1);
+                minEval = Math.min(minEval, val);
+            }
+            return minEval;
+        }
     }
 
     private List<Move> getMoves(){
@@ -47,7 +77,7 @@ public class BoardValueTree {
         return moves;
     }
 
-    private List<BoardValueTree> generateChild(){
+    private List<BoardValueTree> generateChild(int maxDepth){
         if (maxDepth == 0){
             return null;
         } else {
@@ -59,7 +89,7 @@ public class BoardValueTree {
                 if (lastMoved != null){
                     nextBoard.setLastMoved(lastMoved.getPiece());
                 }
-                children.add(new BoardValueTree(nextBoard, maxDepth - 1, !whitesTurn, move));
+                children.add(new BoardValueTree(nextBoard, !whitesTurn, move));
             }
             return children;
         }
