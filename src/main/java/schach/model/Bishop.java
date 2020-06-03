@@ -51,19 +51,19 @@ public class Bishop extends Piece {
      */
     private void checkForwardRight(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i <= 8 - column && i <= 8 - row; i++){
             Square nextForwardRight = board.getSquare(column + i, row + i);
             if (!(nextForwardRight.isOccupied())){
                 legalNextSquares.add(nextForwardRight);
-            } else if (nextForwardRight.isOccupied() && nextForwardRight.getOccupier().white == oppositeIsWhite){
+            } else if (nextForwardRight.isOccupied() /*&& nextForwardRight.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextForwardRight);
                 break;
             }
@@ -82,19 +82,19 @@ public class Bishop extends Piece {
      */
     private void checkForwardLeft(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i < column && i <= 8 - row; i++){
             Square nextForwardLeft = board.getSquare(column - i, row + i);
             if (!(nextForwardLeft.isOccupied())){
                 legalNextSquares.add(nextForwardLeft);
-            } else if (nextForwardLeft.isOccupied() && nextForwardLeft.getOccupier().white == oppositeIsWhite){
+            } else if (nextForwardLeft.isOccupied() /*&& nextForwardLeft.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextForwardLeft);
                 break;
             }
@@ -113,19 +113,19 @@ public class Bishop extends Piece {
      */
     private void checkBehindRight(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i <= 8 - column && i < row; i++){
             Square nextBehindRight = board.getSquare(column + i, row - i);
             if (!(nextBehindRight.isOccupied())){
                 legalNextSquares.add(nextBehindRight);
-            } else if (nextBehindRight.isOccupied() && nextBehindRight.getOccupier().white == oppositeIsWhite){
+            } else if (nextBehindRight.isOccupied() /*&& nextBehindRight.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextBehindRight);
                 break;
             }
@@ -144,19 +144,19 @@ public class Bishop extends Piece {
      */
     private void checkBehindLeft(int column, int row){
 
-        boolean oppositeIsWhite;
+        /*boolean oppositeIsWhite;
 
         if (white){
             oppositeIsWhite = false;
         } else {
             oppositeIsWhite = true;
-        }
+        }*/
 
         for (int i = 1; i < column && i < row; i++){
             Square nextBehindLeft = board.getSquare(column - i, row - i);
             if (!(nextBehindLeft.isOccupied())){
                 legalNextSquares.add(nextBehindLeft);
-            } else if (nextBehindLeft.isOccupied() && nextBehindLeft.getOccupier().white == oppositeIsWhite){
+            } else if (nextBehindLeft.isOccupied()/* && nextBehindLeft.getOccupier().white == oppositeIsWhite*/){
                 legalNextSquares.add(nextBehindLeft);
                 break;
             }

@@ -117,6 +117,8 @@ public abstract class Piece {
             board.addToCemetery(beatenPiece);
             beatenPiece.getPosition().setOccupied(false);
             beatenPiece.getPosition().setOccupier(null);
+        } else {
+            beatenPiece = null;
         }
         if (this instanceof Pawn){
             Pawn p = (Pawn) this;
@@ -129,6 +131,7 @@ public abstract class Piece {
         position.setOccupier(this);
         validMove = true;
         board.setLastMoved(this);
+        this.updateLegals();
     }
 
     /**
@@ -136,7 +139,7 @@ public abstract class Piece {
      */
     protected void refuseMove(){
         validMove = false;
-        System.out.println("Move is not allowed!");
+        System.out.println("!Move not allowed");
     }
 
     /**
@@ -157,33 +160,7 @@ public abstract class Piece {
         }
     }
 
-    /**
-     * This method does the promotion for a pawn
-     * @param prom String for Piece which the pawn promotes to
-     * @param pos Position on Board where the promoted pawn stands
-     */
-    public void doPromotion(String prom, Square pos) {
-        if (this.white && pos.getRow() != 8 || !(this instanceof Pawn)) {
-            return;
-        } else if (!this.white && pos.getRow() != 1 || !(this instanceof Pawn)) {
-            return;
-        }
-        switch (prom) {
-            case "Q":
-                new Queen(pos, this.white, this.board);
-                break;
-            case "R":
-                new Rook(pos, this.white, this.board);
-                break;
-            case "B":
-                new Bishop(pos, this.white, this.board);
-                break;
-            case "N":
-                new Knight(pos, this.white, this.board);
-                break;
-            default:
-        }
-    }
+
 
     /**
      * Undoes the last move of the piece
@@ -201,6 +178,7 @@ public abstract class Piece {
             newPos.setOccupier(beatenPiece);
             board.removeFromCemetery(beatenPiece);
         }
+        this.updateLegals();
     }
     /**
      * getter for isWhite
@@ -224,6 +202,13 @@ public abstract class Piece {
      */
     public boolean isNeverMoved(){
         return neverMoved;
+    }
+
+    /**
+     * Sets validMove false
+     */
+    public void setValidMoveFalse(){
+        this.validMove = false;
     }
 }
 

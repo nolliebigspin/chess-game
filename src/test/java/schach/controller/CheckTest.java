@@ -251,10 +251,29 @@ class CheckTest {
      */
     @Test
     public void testCheckMateDoubleCheck(){
-        lineUp(" white-king-a1, black-queen-e5, black-knight-d4, black-rook-b4, black-king-h8, white-rook-c7, white-bishop-a2");
+        lineUp(" white-king-a1, black-queen-e5, black-knight-d4, black-rook-b4, black-king-h8, white-bishop-a2");
+        board.printBoard();
         assertFalse(check.isCheckMate(true));
         board.movePiece("d4", "c2");
+        board.printBoard();
         assertTrue(check.isCheckMate(true));
+    }
+
+    /**
+     * test check +  enpassant
+     */
+    @Test
+    public void testEnPassantInCheck(){
+        lineUp(" white-king-b4, black-king-e8, white-pawn-b5, black-pawn-c7");
+        Pawn whitePawn = (Pawn) board.squareByDenotation("b5").getOccupier();
+        board.printBoard();
+        board.movePiece("c7", "c5");
+        board.printBoard();
+        assertTrue(check.kingInCheck(true));
+        whitePawn.updateLegals();
+        assertEquals(board.squareByDenotation("c6"), whitePawn.checkEnPassantRight().get(0));
+        board.movePiece("b5","c6");
+        board.printBoard();
     }
 
     /**

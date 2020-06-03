@@ -1,6 +1,7 @@
 package schach.controller.interfaces;
 
 import schach.model.Board;
+import schach.model.Pawn;
 import schach.model.Piece;
 
 import java.util.Arrays;
@@ -38,30 +39,62 @@ public class Input {
                 Piece movingPiece;
                 try {
                     movingPiece = board.squareByDenotation(input.substring(0,2)).getOccupier();
+                    movingPiece.setValidMoveFalse();
                 } catch (Exception e){
                     movingPiece = null;
                 }
                 board.movePiece(input.substring(0,2), input.substring(3,5));
+
                 // calling promotion method for piece if target Square is occupied
+                checkForPromotion(input, movingPiece);
+                /*
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
                     try {
-                        board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
+                        Pawn pawn = (Pawn)  board.squareByDenotation(input.substring(3,5)).getOccupier();
+                        pawn.doPromotion(input.substring(5));
                     } catch (Exception e) {
-                        System.out.println("Promotion not possible!");
+                        System.out.println("Promotion not possible.");
                     }
                 }
-                board.printBoard();
+                 */
+
                 if (movingPiece != null && movingPiece.isValidMove()){
+                    System.out.println("!" + input);
                     currentMove++;
+                    System.out.println("Move counter: " + currentMove);
                 }
-                System.out.println(currentMove);
-                System.out.println("!"+input);
+                board.printBoard();
+
+                if (movingPiece.isValidMove() && board.getCheck().isCheckMate(!movingPiece.isWhite())) {
+                    System.out.println("CHECKMATE.");
+                    running = false;
+                }
+
             }
-            if (board.getCheck().isCheckMate(true)
-                    || board.getCheck().isCheckMate(false)){
-                running = false;
-                System.out.println("CHECKMATE!");
-            }
+
+        }
+    }
+
+    private void checkForPromotion(String input, Piece piece){
+        if (!(piece instanceof Pawn)){
+            return;
+        }
+        Pawn pawn = (Pawn) piece;
+        int finalRow = 8;
+        if (!pawn.isWhite()){
+            finalRow = 1;
+        }
+        if (pawn.getPosition().getRow() != finalRow){
+            return;
+        }
+        if (input.length() == 5){
+            pawn.doPromotion("Q");
+            return;
+        }
+        if (input.length() == 6){
+            String prom = input.substring(5);
+            pawn.doPromotion(prom);
+            return;
         }
     }
 
@@ -99,11 +132,12 @@ public class Input {
             } else if (!this.board.squareByDenotation(command.substring(0, 2)).getOccupier().isWhite() && currentMove % 2 != 0) {
                 return true;
             }
-            System.out.println("It's not your turn!");
+            System.out.println("!Move not allowed");
+            System.out.println("It's not your turn.");
             return false;
         }
-        System.out.println("!Invalid Move");
-        System.out.println("No piece found!");
+        System.out.println("!Move not allowed");
+        System.out.println("No piece found.");
         return false;
     }
 
@@ -137,7 +171,7 @@ public class Input {
      * @return true if String is valid move command, false if not
      */
     public boolean validMoveInput(String input) {
-        String invalidOut = "Invalied Move!";
+        String invalidOut = "!Invalid move";
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
@@ -149,7 +183,7 @@ public class Input {
             return false;
         }
         if (input.length() >= 6 && !validPromotion(input.substring(5))) {
-        	System.out.println(invalidOut);
+            System.out.println(invalidOut);
             return false;
         }
         if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {

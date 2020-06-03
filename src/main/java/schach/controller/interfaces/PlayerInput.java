@@ -103,7 +103,7 @@ public class PlayerInput {
         if (piece.isWhite() == white){
             return true;
         } else {
-            System.out.println("!Invalid Move");
+            System.out.println("!Invalid move");
             System.out.println("You tried to move a piece of the enemy!");
             return false;
         }
@@ -128,7 +128,7 @@ public class PlayerInput {
      * @return true if String is valid move command, false if not
      */
     private boolean validMoveInput(String input) {
-        String invalidOut = "!Invalid Move";
+        String invalidOut = "!Invalid move";
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
