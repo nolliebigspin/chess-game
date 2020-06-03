@@ -45,7 +45,7 @@ public class Input {
                 // calling promotion method for piece if target Square is occupied
                 if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
                     try {
-                      //  board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
+                        board.squareByDenotation(input.substring(3,5)).getOccupier().doPromotion(input.substring(5), board.squareByDenotation(input.substring(3,5)));
                     } catch (Exception e) {
                         System.out.println("Promotion not possible!");
                     }

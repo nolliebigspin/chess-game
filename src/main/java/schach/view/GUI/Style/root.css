@@ -3,7 +3,7 @@
     -fx-font-family: "Courier New";
     -fx-base: rgb(132, 145, 47);
     -fx-background: rgb(28, 38, 31);
-    -fx-padding:10pt;
+    -fx-padding:0pt;
 }
 .minuBox{
 	-fx-background-insets: 0, 1, 2;

@@ -4,14 +4,16 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root styleClass="root" maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="600"
-	prefWidth="600" type="Pane" xmlns="http://javafx.com/javafx/8"
+<fx:root styleClass="root" maxHeight="-Infinity" maxWidth="-Infinity" 
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="650"
+	prefWidth="800" type="Pane" xmlns="http://javafx.com/javafx/8" 
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<VBox id="vbox" prefHeight="400.0" prefWidth="800.0"
-      xmlns:fx="http://javafx.com/fxml" styleClass="minuBox"
+		<VBox viewOrder="1" id="mainBox" prefHeight="800" prefWidth="800.0"
+      xmlns:fx="http://javafx.com/fxml" styleClass="minuBox" alignment="TOP_LEFT"
       >
+      <VBox prefHeight="100.0" prefWidth="400.0"
+       styleClass="minuBox" alignment="TOP_LEFT">
    <MenuBar fx:id="menuBar" prefHeight="40.0" styleClass="mainMenu">
       <menus>
          <Menu text="Start" styleClass="root_Menu">
@@ -33,6 +35,7 @@
                <MenuItem text="Cut"/>
                <MenuItem text="Paste"/>
                <MenuItem text="Odai"/>
+               <MenuItem text="KK"/>
             </items>
          </Menu>
          <Menu text="Help">
@@ -45,6 +48,10 @@
          </Menu>
       </menus>
    </MenuBar>
+   </VBox>
+    <VBox prefHeight="500.0" prefWidth="500"
+   fx:id="content">
+   </VBox>
 </VBox>
 			
 	</children>
