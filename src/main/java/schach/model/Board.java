@@ -3,7 +3,9 @@ package schach.model;
 import schach.controller.Check;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class Board representing the chess board
@@ -31,11 +33,23 @@ public class Board {
     private Piece lastMoved;
 
     /**
-     * Constructor, initializes the Square Matrix and the start Lineup
+     * Constructor, initializes the Square Matrix
      */
     public Board() {
         initMatrix();
         this.check = new Check(this);
+    }
+
+    /**
+     * Constructor, initializing the Square Matrix and places pieces given by a HashMap
+     * @param positioning HashMap that represents the wanted Positioning
+     */
+    public Board(List<String> positioning){
+        initMatrix();
+        Positioning pos = new Positioning(this);
+        pos.writePositioning(positioning);
+        this.check = new Check(this);
+        updateAllLegalSquares();
     }
 
     /**
@@ -336,6 +350,22 @@ public class Board {
         this.lastMoved = piece;
     }
 
+    /**
+     * getter to return the squareMatrix
+     * @return Matrix of Squares
+     */
+    public Square[][] getSquareMatrix() {
+        return squareMatrix;
+    }
+
+    /**
+     * gets the current positioning of the pieces on the board
+     * @return Map containing the Piece and the belonging square both as Strings
+     */
+    public List<String> getPositioning(){
+        Positioning pos = new Positioning(this);
+        return pos.readPositioning();
+    }
 
     /**
      * debug
