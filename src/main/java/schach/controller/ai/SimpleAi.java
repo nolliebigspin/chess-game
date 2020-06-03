@@ -11,10 +11,10 @@ import java.util.Random;
 
 public class SimpleAi {
 
-    private AiInteface aiInteface;
+    private AiInteface aiInterface;
 
     public SimpleAi(AiInteface aiInterface){
-        this.aiInteface = aiInterface;
+        this.aiInterface = aiInterface;
     }
 
     public String getNextMove(){
@@ -23,11 +23,8 @@ public class SimpleAi {
     }
 
     public Move randomMove(){
-        List<Move> aiMoves = aiInteface.getAiMoves();
+        List<Move> aiMoves = aiInterface.getAiMoves();
         int i = new Random().nextInt(aiMoves.size());
         return aiMoves.get(i);
     }
-
-    
-
 }
