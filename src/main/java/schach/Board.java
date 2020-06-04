@@ -11,7 +11,7 @@ public class Board {
     private Square[][] squareMatrix = new Square[8][8];
 
     /**
-     * Constructor, initializes the Square Matrix and the start Linup
+     * Constructor, initializes the Square Matrix and the start Lineup
      */
     public Board(){
         initMatrix();
@@ -27,8 +27,8 @@ public class Board {
         int x = 8;
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                String denonation = ""  + resolveIntToChar(j+1) + x;
-                this.squareMatrix[i][j] = new Square(denonation);
+                String denotaion = ""  + resolveIntToChar(j+1) + x;
+                this.squareMatrix[i][j] = new Square(denotaion);
             }
             x--;
         }

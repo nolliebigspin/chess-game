@@ -10,10 +10,10 @@
 	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<VBox viewOrder="1" id="mainBox" prefHeight="800" prefWidth="800.0"
-      xmlns:fx="http://javafx.com/fxml" styleClass="minuBox" alignment="TOP_LEFT"
+      xmlns:fx="http://javafx.com/fxml" styleClass="menuBox" alignment="TOP_LEFT"
       >
       <VBox prefHeight="100.0" prefWidth="700.0"
-       styleClass="minuBox" alignment="TOP_LEFT">
+       styleClass="menuBox" alignment="TOP_LEFT">
    <MenuBar fx:id="menuBar" prefHeight="40.0" styleClass="mainMenu">
       <menus>
          <Menu text="Start" styleClass="root_Menu">
@@ -24,26 +24,22 @@
                		<MenuItem text="Human VS CPU" onAction="#showDialogCPU" />
                	</items>
                </Menu>
-               <MenuItem text="Load Game"/>
+               <MenuItem text="LOAD GAME"/>
                <SeparatorMenuItem  />
-               <MenuItem text="Exit"/>
+               <MenuItem text="SAVE AND EXIT"/>
             </items>
          </Menu>
-         <Menu text="Edit">
+         <Menu text="Settings">
             <items>
-               <MenuItem text="Copy"/>
-               <MenuItem text="Cut"/>
-               <MenuItem text="Paste"/>
-               <MenuItem text="Odai"/>
-               <MenuItem text="KK"/>
+               <MenuItem text="INSTRUCTOR"/>
+               <MenuItem text="LANGUAGE"/>
             </items>
          </Menu>
          <Menu text="Help">
             <items>
-               <MenuItem text="Search" disable="true"/>
-               <MenuItem text="Online Manual" visible="false"/>
+                <MenuItem text="HOW TO PLAY"/>
                <SeparatorMenuItem />
-               <MenuItem text="About" />
+               <MenuItem text="ABOUT"/>
             </items>
          </Menu>
       </menus>

@@ -41,6 +41,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
+import schach.Square;
 import schach.model.Board;
 import schach.model.Piece;
 
@@ -55,15 +56,21 @@ public class HomeScreen extends Pane {
 	private String playerColor;
 	private boolean multiplayer;
 	private GridPane boardPane;
+
+
+
 	@FXML
 	private VBox image;
-	
+
+
+
+
 	@FXML
 	private VBox content;
 	
 	public HomeScreen() {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("HomeScreen.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
 //	    	FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setRoot(this);
 	    	fxmlLoader.setController(this);
@@ -85,25 +92,30 @@ public class HomeScreen extends Pane {
 //			Background background = new Background(backgroundimage);
 //			this.image.setBackground(background);
 	    	//////////end
-	    	startGame();
+	    	//startGame();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
+
+
+
+
+
 	@FXML
 	private void showDialogHuman(){  	
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("New Game");
 		dialog.setHeaderText("Add Players");
-		dialog.getDialogPane().setStyle("-fx-background-color: orange;");
+		dialog.getDialogPane().setStyle("-fx-background-color: #edfffc;");
 		// Set the icon (must be included in the project).
 		// Set the button types.
 		ButtonType startButton = new ButtonType("Start", ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(startButton, ButtonType.CANCEL);
 		// Create the username and password labels and fields.
 		GridPane grid = new GridPane();
-		grid.setStyle("-fx-text-fill: orange;");
+		grid.setStyle("-fx-text-fill: #f0ffef;");
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(20, 150, 10, 10));
@@ -150,13 +162,15 @@ public class HomeScreen extends Pane {
 			startGame();
 		});
 	}
-	
+
+
+
 	@FXML
 	private void showDialogCPU(){
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("New Game");
 		dialog.setHeaderText("Add Player");
-		dialog.getDialogPane().setStyle("-fx-background-color: orange;");
+		dialog.getDialogPane().setStyle("-fx-background-color: #feff39;");
 		// Set the icon (must be included in the project).
 //		dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 
@@ -208,7 +222,12 @@ public class HomeScreen extends Pane {
 			startGame();
 		});
 	}
-	
+
+
+
+
+
+
 	private void startGame() {
 		Board board = new Board();
 		board.initLineUp();
@@ -231,89 +250,98 @@ public class HomeScreen extends Pane {
 //		mainContent.
 //		mainContent.setAlignment(Pos.BOTTOM_LEFT);
 	}
-	
+
+
+
+
+
+
+
 	private void updateBoard(Board board) {
+		//Square[][] squareMatrix1 = new Square[8][8];
+
+		String[] alphabet = { " ", "A", "B", "C", "D", "E", "F", "G", "H" };
+		String []numbers = { " ","1", "2", "3", "4", "5", "6", "7", "8" };
 		Color c;
-		String[] alfa = { "", "A", "B", "C", "D", "E", "F", "G", "H" };
-		for (int row = 0; row < 9; row++) {
-			for (int col = 0; col < 9; col++) {
-				if ((row + col) % 2 == 0) {
-					c = Color.ORANGE;
-				} else {
-					c = Color.BLACK;
-				}
-				if (row == 8) {
-					if(col != 0) {
-						Label b = new Label("  " + alfa[col]);
+
+	for (int row = 0; row < 9; row++) {
+		for (int col = 0; col < 9; col++) {
+			if ((row + col) % 2 == 0) {
+				c = Color.BLACK;
+			} else {
+				c = Color.BLANCHEDALMOND;
+			}
+			if (row == 8) {
+				if(col != 0) {
+					Label b = new Label("  " + alphabet[col]);
 					b.setTextFill(Color.web("#ff0000", 0.8));
 					b.setContentDisplay(ContentDisplay.RIGHT);
 					b.setAlignment(Pos.CENTER_LEFT);
 					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
-					b.setBackground(new Background(new BackgroundFill(Color.rgb(100, 100, 100), null, Insets.EMPTY)));
+					b.setBackground(new Background(new BackgroundFill(Color.rgb(75, 75, 75), null, Insets.EMPTY)));
 					boardPane.add(b, col, row);
-					}
-					
-				} else if (col != 0){
+				}
+
+			} else if (col != 0){
 
 //					 System.out.println(board.squareByDenotation(alfa[col]+String.valueOf(row)));
 //						if (board.getSquares()[col - 1][row].isOccupied()) {
-					if (board.getSquares()[8-col][row].isOccupied()) {
+				if (board.getSquares()[8-col][row].isOccupied()) {
 //							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
-						Label b = new Label("  " + board.getSquares()[8-col][row].getOccupier().print());
-							b.setContentDisplay(ContentDisplay.CENTER);
-							b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
-							b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
-							/// color
-							b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
-							boardPane.add(b, col, row);
-							int position[] = {col, row};
-							///////////// Add listener
-							b.setOnMouseClicked(new EventHandler<MouseEvent>(){
-								@Override
-								public void handle(MouseEvent e) {
+					Label b = new Label("  " + board.getSquares()[8-col][row].getOccupier().print());
+					b.setContentDisplay(ContentDisplay.CENTER);
+					b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
+					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
+					/// color
+					b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
+					boardPane.add(b, col, row);
+					int position[] = {col, row};
+					///////////// Add listener
+					b.setOnMouseClicked(new EventHandler<MouseEvent>(){
+						@Override
+						public void handle(MouseEvent e) {
 
 //									b.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, Insets.EMPTY)));
-//									Alert alert = new Alert(AlertType.INFORMATION);
-//							current pice		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
-									Piece p = board.getSquares()[8-position[0]][position[1]].getOccupier();
-									p.updateLegals();
-									System.out.println(p.print()+" White: "+p.isWhite());
-									for(int i = 0;i <p.getLegalNextSquares().size();i++ ) {
-									System.out.println("can move to:"+p.getLegalNextSquares().get(i).getColumn()+", "+p.getLegalNextSquares().get(i).getRow())	;
-									}
-//									alert.setContentText(board.getSquares()[position[0] - 1][position[1]].getOccupier().print());
-//									alert.showAndWait().ifPresent(rs -> {
-//									    if (rs == ButtonType.OK) {
-//									        System.out.println("Pressed OK.");
-//									    }
-//									});
-								}
-							});
-							
-							
-						}else {
-							Label b = new Label();
-							b.setContentDisplay(ContentDisplay.CENTER);
-							b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
-							b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
-							b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
-							boardPane.add(b, col, row);
+									Alert alert = new Alert(AlertType.INFORMATION);
+//							current piece 		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
+							Piece p = board.getSquares()[8-position[0]][position[1]].getOccupier();
+							System.out.println(p.print()+" White: "+p.isWhite());
+							for(int i = 0;i <p.getLegalNextSquares().size();i++ ) {
+								System.out.println("can move to:"+p.getLegalNextSquares().get(i).getColumn()+", "+p.getLegalNextSquares().get(i).getRow())	;
+							}
+									alert.setContentText(board.getSquares()[position[0] - 1][position[1]].getOccupier().print());
+									alert.showAndWait().ifPresent(rs -> {
+									    if (rs == ButtonType.OK) {
+									        System.out.println("Pressed OK.");
+									    }
+									});
 						}
-					} else {
-						Label b = new Label(String.valueOf(8 - row));
-						b.setContentDisplay(ContentDisplay.RIGHT);
-						b.setAlignment(Pos.CENTER_LEFT);
-						b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
-						b.setBackground(new Background(new BackgroundFill(Color.rgb(100,100,100), null, Insets.EMPTY)));
-						boardPane.add(b, col, row);
+					});
 
-					}
+
+				}else {
+					Label b = new Label();
+					b.setContentDisplay(ContentDisplay.CENTER);
+					b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
+					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
+					b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
+					boardPane.add(b, col, row);
+				}
+			} else {
+				Label b = new Label(numbers[8-row]);
+				b.setContentDisplay(ContentDisplay.RIGHT);
+				b.setAlignment(Pos.CENTER_LEFT);
+				b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
+				b.setBackground(new Background(new BackgroundFill(Color.rgb(75,75,75), null, Insets.EMPTY)));
+				boardPane.add(b, col, row);
+
+			}
 
 //					b.setAlignment(Pos.CENTER_LEFT);
 
-	
-			}
+
 		}
 	}
-	
+}
+
 }
