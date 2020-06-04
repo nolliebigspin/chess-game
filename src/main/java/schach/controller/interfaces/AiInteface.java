@@ -53,7 +53,7 @@ public class AiInteface {
      * gets all active pieces played by the ai
      * @return List of active Pieces played by the ai
      */
-    protected List<Piece> getAiPices(){
+    protected List<Piece> getAiPieces(){
         return board.allActivePieces(white);
     }
 
@@ -71,7 +71,7 @@ public class AiInteface {
      */
     public List<Move> getAiMoves(){
         List<Move> moves = new ArrayList<>();
-        List<Piece> aiPieces = getAiPices();
+        List<Piece> aiPieces = getAiPieces();
         for (Piece piece: aiPieces){
             piece.updateLegals();
             List<Square> legals = piece.getLegalNextSquares();

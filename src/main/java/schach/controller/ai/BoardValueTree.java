@@ -6,6 +6,7 @@ import schach.model.Square;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class BoardValueTree {
 
@@ -40,6 +41,30 @@ public class BoardValueTree {
         this.value = calcBoardValue();
         this.lastMoved = lastMoved;
         this.moves = getMoves();
+    }
+
+    public Move bestValuedMove(boolean whitesTurn, int maxDepth){
+        List<BoardValueTree> children = generateChild(maxDepth);
+        Move bestMove = null;
+        int bestValue = 0;
+        if (whitesTurn){
+            for (BoardValueTree child: children){
+                if (child.getValue() > bestValue){
+                    bestMove = child.getLastMoved();
+                }
+            }
+        } else {
+            for (BoardValueTree child: children){
+                if (child.getValue() < bestValue){
+                    bestMove = child.getLastMoved();
+                }
+            }
+        }
+        if (bestMove == null){
+            int i = new Random().nextInt(children.size());
+            bestMove = children.get(i).getLastMoved();
+        }
+        return bestMove;
     }
 
     public int minmax(int depth){
@@ -97,6 +122,14 @@ public class BoardValueTree {
 
     protected int calcBoardValue(){
         return calcWhiteValue() + calcBlackValue();
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public Move getLastMoved() {
+        return lastMoved;
     }
 
     private int calcWhiteValue(){
