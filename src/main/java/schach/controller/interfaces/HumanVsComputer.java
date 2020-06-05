@@ -1,5 +1,7 @@
 package schach.controller.interfaces;
 
+import schach.controller.ai.MinMaxAi;
+import schach.controller.ai.SimpleAi;
 import schach.model.Board;
 import schach.model.Piece;
 
@@ -49,7 +51,7 @@ public class HumanVsComputer {
         }
 
         this.playerInput = new PlayerInput(board, playerIsWhite);
-        this.aiInteface = new AiInteface(board, !playerIsWhite);
+        this.aiInteface = new MinMaxAi(board, !playerIsWhite);
 
         board.printBoard();
     }

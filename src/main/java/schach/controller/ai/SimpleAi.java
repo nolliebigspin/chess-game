@@ -9,12 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SimpleAi {
+public class SimpleAi extends AiInteface{
 
-    private AiInteface aiInterface;
 
-    public SimpleAi(AiInteface aiInterface){
-        this.aiInterface = aiInterface;
+    /**
+     * the constructor initializing the ai and fields
+     *
+     * @param board
+     * @param isWhite
+     */
+    public SimpleAi(Board board, boolean isWhite) {
+        super(board, isWhite);
     }
 
     public String getNextMove(){
@@ -23,7 +28,7 @@ public class SimpleAi {
     }
 
     public Move randomMove(){
-        List<Move> aiMoves = aiInterface.getAiMoves();
+        List<Move> aiMoves = getAiMoves();
         int i = new Random().nextInt(aiMoves.size());
         return aiMoves.get(i);
     }
