@@ -23,12 +23,12 @@
 }
 
 .menu-item:focused {
-     -fx-background-color: orange;
+     -fx-background-color: grey;
      -fx-text-fill: white;
 }
 
 .menu-item:focused .label {
-    -fx-text-fill: orange;
+    -fx-text-fill: grey;
     -fx-text-fill: white;
 }
 

@@ -328,61 +328,63 @@ public class HomeScreen extends Pane {
 		final int size = 8;
 		//Square[][] squareMatrix1 = new Square[8][8];
 
-		String[] alphabet = {" ","A","B","C", "D","E","F","G","H"};
-		String []numbers = { "1", "2", "3", "4", "5", "6", "7", "8" };
+
 		Color c;
-		Square[][] squareMatrix = new Square[8][8];
-	for (int row = 0; row < 9; row++) {
-		for (int col = 0; col < 9; col++) {
+
+	for (int col= 0; col < 8; col++) {
+		for (int row = 0; row < 8;row++) {
 			if ((row + col) % 2 == 0) {
 				c = Color.BLACK;
 			} else {
 				c = Color.GREY;
 			}
-			if (row == 8) {
-				if(col != 0) {
-					Label b = new Label(alphabet[col]);
-					b.setTextFill(Color.web("#ff0000", 0.8));
-					b.setContentDisplay(ContentDisplay.LEFT);
-					b.setAlignment(Pos.CENTER);
-					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
-					b.setBackground(new Background(new BackgroundFill(Color.rgb(75, 75, 75), null, Insets.EMPTY)));
-					boardPane.add(b, col, row);
-				}
+			//if (row == 8) {
+	//			if(board.getSquares()[col][row].isOccupied()) {
+	//				Label b = new Label();
+	//				b.setTextFill(Color.web("#ff0000", 0.8));
+	//				b.setContentDisplay(ContentDisplay.LEFT);
+	//				b.setAlignment(Pos.CENTER);
+	//				b.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
+	//				b.setBackground(new Background(new BackgroundFill(Color.rgb(75, 75, 75), null, Insets.EMPTY)));
+	//				boardPane.add(b, col, row);
+	//			}
 
-			} else if (col != 0){
+	//		 else {
 
 //					 System.out.println(board.squareByDenotation(alfa[col]+String.valueOf(row)));
 //						if (board.getSquares()[col - 1][row].isOccupied()) {
-				if (board.getSquares()[8-col][row].isOccupied()) {
+				if (board.getSquares()[col][row].isOccupied()) {
 //							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
-					Label b = new Label("  " + (board.getSquares()[8-col][row].getOccupier().print()));
+					Label b = new Label("  " + (board.getSquares()[col][row].getOccupier().print()));
 					b.setContentDisplay(ContentDisplay.CENTER);
-					b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
-					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
+					b.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					b.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
 					/// color
 					b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
 					boardPane.add(b, col, row);
 					int position[] = {col, row};
 					///////////// Add listener
-					b.setOnMouseClicked(new EventHandler<MouseEvent>(){
+					int finalCol = col;
+					int finalRow = row;
+					b.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent e) {
 
 //									b.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, Insets.EMPTY)));
-									Alert alert = new Alert(AlertType.INFORMATION);
+							Alert alert = new Alert(AlertType.INFORMATION);
 //							current piece 		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
-							Piece p = board.getSquares()[8-position[0]][7-position[1]].getOccupier();
-							System.out.println(p.print()+" White: "+p.isWhite());
-							for(int i = 0;i <p.getLegalNextSquares().size();i++ ) {
-								System.out.println("can move to:"+p.getLegalNextSquares().get(i).getColumn()+", "+p.getLegalNextSquares().get(i).getRow())	;
+							//Square s = board.getSquare(finalCol, finalRow).getOccupier();
+							Piece p = board.getSquare(col, row).getOccupier();
+							System.out.println(p.print() + " White: " + p.isWhite());
+							for (int i = 0; i < p.getLegalNextSquares().size(); i++) {
+								System.out.println("can move to:" + p.getLegalNextSquares().get(i).getColumn() + ", " + p.getLegalNextSquares().get(i).getRow());
 							}
-									alert.setContentText(board.getSquares()[8-position[0] ][7-position[1]].getOccupier().print());
-									alert.showAndWait().ifPresent(rs -> {
-									    if (rs == ButtonType.OK) {
-									        System.out.println("Pressed OK.");
-									    }
-									});
+							alert.setContentText(board.getSquares()[finalCol][finalRow].getOccupier().print());
+							alert.showAndWait().ifPresent(rs -> {
+								if (rs == ButtonType.OK) {
+									System.out.println("Pressed OK.");
+								}
+							});
 						}
 					});
 
@@ -390,20 +392,20 @@ public class HomeScreen extends Pane {
 				}else {
 					Label b = new Label();
 					b.setContentDisplay(ContentDisplay.CENTER);
-					b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
-					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
+					b.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					b.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
 					b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
 					boardPane.add(b, col, row);
 				}
-			} else {
-				Label b = new Label(numbers[row]);
-				b.setContentDisplay(ContentDisplay.RIGHT);
-				b.setAlignment(Pos.CENTER_LEFT);
-				b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
-				b.setBackground(new Background(new BackgroundFill(Color.rgb(75,75,75), null, Insets.EMPTY)));
-				boardPane.add(b, col, row);
+			/// else {
+			//	Label b = new Label([row]);
+			//	b.setContentDisplay(ContentDisplay.RIGHT);
+			//	b.setAlignment(Pos.CENTER_LEFT);
+			//	b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
+			//	b.setBackground(new Background(new BackgroundFill(Color.rgb(75,75,75), null, Insets.EMPTY)));
+			//	boardPane.add(b, col, row);
 
-			}
+			//}
 
 //					b.setAlignment(Pos.CENTER_LEFT);
 
