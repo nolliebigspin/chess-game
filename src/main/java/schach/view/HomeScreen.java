@@ -175,7 +175,7 @@ public class HomeScreen extends Pane {
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("New Game");
 		dialog.setHeaderText("Add Player");
-		dialog.getDialogPane().setStyle("-fx-background-color: #feff39;");
+		dialog.getDialogPane().setStyle("-fx-background-color: #feffef;");
 		// Set the icon (must be included in the project).
 //		dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 
@@ -355,7 +355,7 @@ public class HomeScreen extends Pane {
 //						if (board.getSquares()[col - 1][row].isOccupied()) {
 				if (board.getSquares()[col][row].isOccupied()) {
 //							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
-					Label b = new Label("  " + (board.getSquares()[col][row].getOccupier().print()));
+					Label b = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
 					b.setContentDisplay(ContentDisplay.CENTER);
 					b.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
 					b.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
@@ -374,12 +374,12 @@ public class HomeScreen extends Pane {
 							Alert alert = new Alert(AlertType.INFORMATION);
 //							current piece 		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
 							//Square s = board.getSquare(finalCol, finalRow).getOccupier();
-							Piece p = board.getSquares()[finalCol][finalRow].getOccupier();
+							Piece p = board.getSquares()[finalCol][7-finalRow].getOccupier();
 							System.out.println(p.print() + " White: " + p.isWhite());
 							for (int i = 0; i < p.getLegalNextSquares().size(); i++) {
 								System.out.println("can move to:" + p.getLegalNextSquares().get(i).getColumn() + ", " + p.getLegalNextSquares().get(i).getRow());
 							}
-							alert.setContentText(board.getSquares()[finalCol][finalRow].getOccupier().print());
+							alert.setContentText(board.getSquares()[finalCol][7-finalRow].getOccupier().print());
 							alert.showAndWait().ifPresent(rs -> {
 								if (rs == ButtonType.OK) {
 									System.out.println("Pressed OK.");
