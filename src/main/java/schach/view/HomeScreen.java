@@ -304,7 +304,11 @@ public class HomeScreen extends Pane {
 
 
 
+public void movementInstructor(){
 
+
+
+}
 
 
 
@@ -376,8 +380,9 @@ public class HomeScreen extends Pane {
 							//Square s = board.getSquare(finalCol, finalRow).getOccupier();
 							Piece p = board.getSquares()[finalCol][7-finalRow].getOccupier();
 							System.out.println(p.print() + " White: " + p.isWhite());
-							for (int i = 0; i < p.getLegalNextSquares().size(); i++) {
-								System.out.println("can move to:" + p.getLegalNextSquares().get(i).getColumn() + ", " + p.getLegalNextSquares().get(i).getRow());
+							for (int i = 0; i < p.filteredLegals().size(); i++) {
+							//	p.updateLegals();
+								System.out.println("can move to:" + p.filteredLegals().get(i).getColumn() + ", " + p.filteredLegals().get(i).getRow());
 							}
 							alert.setContentText(board.getSquares()[finalCol][7-finalRow].getOccupier().print());
 							alert.showAndWait().ifPresent(rs -> {
