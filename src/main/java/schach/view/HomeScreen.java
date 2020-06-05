@@ -374,7 +374,7 @@ public class HomeScreen extends Pane {
 							Alert alert = new Alert(AlertType.INFORMATION);
 //							current piece 		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
 							//Square s = board.getSquare(finalCol, finalRow).getOccupier();
-							Piece p = board.getSquare(col, row).getOccupier();
+							Piece p = board.getSquare(finalCol, finalRow).getOccupier();
 							System.out.println(p.print() + " White: " + p.isWhite());
 							for (int i = 0; i < p.getLegalNextSquares().size(); i++) {
 								System.out.println("can move to:" + p.getLegalNextSquares().get(i).getColumn() + ", " + p.getLegalNextSquares().get(i).getRow());
