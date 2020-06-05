@@ -57,7 +57,7 @@ public class Board {
     /**
      * Initializing the matrix by creating Square typ objects
      */
-    private void initMatrix(){
+    public void initMatrix(){
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
                 this.squareMatrix[i][j] = new Square(i+1, j+1);

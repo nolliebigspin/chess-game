@@ -1,6 +1,10 @@
 package schach.view;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Optional;
@@ -41,7 +45,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
-import schach.Square;
+import schach.model.Square;
+import schach.controller.interfaces.Input;
 import schach.model.Board;
 import schach.model.Piece;
 
@@ -92,7 +97,7 @@ public class HomeScreen extends Pane {
 //			Background background = new Background(backgroundimage);
 //			this.image.setBackground(background);
 	    	//////////end
-	    	//startGame();
+	    	startGame();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -229,12 +234,15 @@ public class HomeScreen extends Pane {
 
 
 	private void startGame() {
+
 		Board board = new Board();
+
+		board.initMatrix();
 		board.initLineUp();
 		board.updateAllLegalSquares();
 		HBox boardBox = new HBox();
 		this.boardPane = new GridPane();
-		this.boardPane.setPrefSize(500, 500);
+		this.boardPane.setPrefSize(600, 600);
 		updateBoard(board);
 		boardBox.getChildren().add(boardPane);
 		
@@ -257,26 +265,86 @@ public class HomeScreen extends Pane {
 
 
 
+
+
+
+
+	public static Map<Integer, Image> wFigures;
+	static {
+		wFigures = new HashMap<Integer, Image>();
+		wFigures.put(0, new Image(HomeScreen.class.getResource("wp.png").toExternalForm(), false));
+		wFigures.put(1, new Image(HomeScreen.class.getResource("wr.png").toExternalForm(), false));
+		wFigures.put(2, new Image(HomeScreen.class.getResource("wb.png").toExternalForm(), false));
+		wFigures.put(3, new Image(HomeScreen.class.getResource("wki.png").toExternalForm(), false));
+		wFigures.put(4, new Image(HomeScreen.class.getResource("wq.png").toExternalForm(), false));
+		wFigures.put(5, new Image(HomeScreen.class.getResource("wq.png").toExternalForm(), false));
+	}
+
+	public static Map<Integer, Image> bFigure;
+		static {
+			bFigure = new HashMap<Integer, Image>();
+			bFigure.put(0, new Image(HomeScreen.class.getResource("bp.png").toExternalForm(), false));
+			bFigure.put(1, new Image(HomeScreen.class.getResource("br.png").toExternalForm(), false));
+			bFigure.put(2, new Image(HomeScreen.class.getResource("bb.png").toExternalForm(), false));
+			bFigure.put(3, new Image(HomeScreen.class.getResource("bk.png").toExternalForm(), false));
+			bFigure.put(4, new Image(HomeScreen.class.getResource("bq.png").toExternalForm(), false));
+			bFigure.put(5, new Image(HomeScreen.class.getResource("bki.png").toExternalForm(), false));
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private void updateBoard(Board board) {
+		GridPane root = new GridPane();
+		final int size = 8;
 		//Square[][] squareMatrix1 = new Square[8][8];
 
-		String[] alphabet = { " ", "A", "B", "C", "D", "E", "F", "G", "H" };
-		String []numbers = { " ","1", "2", "3", "4", "5", "6", "7", "8" };
+		String[] alphabet = {" ","A","B","C", "D","E","F","G","H"};
+		String []numbers = { "1", "2", "3", "4", "5", "6", "7", "8" };
 		Color c;
-
+		Square[][] squareMatrix = new Square[8][8];
 	for (int row = 0; row < 9; row++) {
 		for (int col = 0; col < 9; col++) {
 			if ((row + col) % 2 == 0) {
 				c = Color.BLACK;
 			} else {
-				c = Color.BLANCHEDALMOND;
+				c = Color.GREY;
 			}
 			if (row == 8) {
 				if(col != 0) {
-					Label b = new Label("  " + alphabet[col]);
+					Label b = new Label(alphabet[col]);
 					b.setTextFill(Color.web("#ff0000", 0.8));
-					b.setContentDisplay(ContentDisplay.RIGHT);
-					b.setAlignment(Pos.CENTER_LEFT);
+					b.setContentDisplay(ContentDisplay.LEFT);
+					b.setAlignment(Pos.CENTER);
 					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
 					b.setBackground(new Background(new BackgroundFill(Color.rgb(75, 75, 75), null, Insets.EMPTY)));
 					boardPane.add(b, col, row);
@@ -288,7 +356,7 @@ public class HomeScreen extends Pane {
 //						if (board.getSquares()[col - 1][row].isOccupied()) {
 				if (board.getSquares()[8-col][row].isOccupied()) {
 //							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
-					Label b = new Label("  " + board.getSquares()[8-col][row].getOccupier().print());
+					Label b = new Label("  " + (board.getSquares()[8-col][row].getOccupier().print()));
 					b.setContentDisplay(ContentDisplay.CENTER);
 					b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
 					b.prefWidthProperty().bind(boardPane.widthProperty().divide(9));
@@ -304,12 +372,12 @@ public class HomeScreen extends Pane {
 //									b.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, Insets.EMPTY)));
 									Alert alert = new Alert(AlertType.INFORMATION);
 //							current piece 		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
-							Piece p = board.getSquares()[8-position[0]][position[1]].getOccupier();
+							Piece p = board.getSquares()[8-position[0]][7-position[1]].getOccupier();
 							System.out.println(p.print()+" White: "+p.isWhite());
 							for(int i = 0;i <p.getLegalNextSquares().size();i++ ) {
 								System.out.println("can move to:"+p.getLegalNextSquares().get(i).getColumn()+", "+p.getLegalNextSquares().get(i).getRow())	;
 							}
-									alert.setContentText(board.getSquares()[position[0] - 1][position[1]].getOccupier().print());
+									alert.setContentText(board.getSquares()[8-position[0] ][7-position[1]].getOccupier().print());
 									alert.showAndWait().ifPresent(rs -> {
 									    if (rs == ButtonType.OK) {
 									        System.out.println("Pressed OK.");
@@ -328,7 +396,7 @@ public class HomeScreen extends Pane {
 					boardPane.add(b, col, row);
 				}
 			} else {
-				Label b = new Label(numbers[8-row]);
+				Label b = new Label(numbers[row]);
 				b.setContentDisplay(ContentDisplay.RIGHT);
 				b.setAlignment(Pos.CENTER_LEFT);
 				b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
