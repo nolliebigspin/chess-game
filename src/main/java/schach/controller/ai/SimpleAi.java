@@ -1,11 +1,7 @@
 package schach.controller.ai;
 
-import schach.controller.interfaces.AiInteface;
 import schach.model.Board;
-import schach.model.Piece;
-import schach.model.Square;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

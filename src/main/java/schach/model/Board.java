@@ -189,6 +189,7 @@ public class Board {
             x--;
         }
         System.out.println("\t a \t b \t c \t d \t e \t f \t g \t h");
+        System.out.println("");
     }
 
     /**

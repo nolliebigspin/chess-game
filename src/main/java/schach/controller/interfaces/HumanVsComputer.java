@@ -1,7 +1,7 @@
 package schach.controller.interfaces;
 
+import schach.controller.ai.AiInteface;
 import schach.controller.ai.MinMaxAi;
-import schach.controller.ai.SimpleAi;
 import schach.model.Board;
 import schach.model.Piece;
 
@@ -69,12 +69,10 @@ public class HumanVsComputer {
                 playersTurn = false;
             } else {
                 computerMove();
-                delayPrint();
                 playersTurn = true;
             }
             board.printBoard();
-            //TODO only one isCheckMate at a time like in Input
-            if (board.getCheck().isCheckMate(true) || board.getCheck().isCheckMate(false)){
+            if (playersTurn && board.getCheck().isCheckMate(!playerIsWhite) || !playersTurn && board.getCheck().isCheckMate(playerIsWhite)){
                 running = false;
                 System.out.println("CHECKMATE!");
             }
@@ -84,7 +82,6 @@ public class HumanVsComputer {
     /**
      * I/O method that asks for the color the player wants
      * @return true if input 'white', false if input 'black'
-     * TODO move to PlayerInput Class
      */
     private boolean askForWhite(){
         System.out.println("Which color do you want to play with? (white/black)");
@@ -134,40 +131,15 @@ public class HumanVsComputer {
      * TODO update Promotion CaLL
      */
     private void computerMove(){
-        System.out.println("\n this would be a computer move");
-
-
+        System.out.println("Computer generating Move ...");
         String computerMove = aiInteface.getNextMove();
         String startDenotation = computerMove.substring(0,2);
         String targetDenotation = computerMove.substring(3,5);
-        Piece piece = board.squareByDenotation(startDenotation).getOccupier();
-
         board.movePiece(startDenotation, targetDenotation);
         if (computerMove.length() == 6){
             String prom = computerMove.substring(5);
             //piece.doPromotion(prom, board.squareByDenotation(targetDenotation));
         }
-
-
-    }
-
-    /**
-     * just delays the routine and displays a loading arrow
-     * DEBUG
-     * TODO delete
-     */
-    private void delayPrint(){
-        System.out.print("\u27F3");
-        for (int i = 1000000; i > 0; i--){
-            String out;
-            if (i % 1000 == 0){
-                out = "\r ";
-            } else {
-                out = "\r\u27F3 ";
-            }
-            System.out.print(out);
-        }
-        System.out.println("\n");
     }
 
 }

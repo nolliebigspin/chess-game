@@ -100,6 +100,9 @@ public class PlayerInput {
      */
     private boolean pieceIsRightColor(String move){
         Piece piece = board.squareByDenotation(move.substring(0,2)).getOccupier();
+        if (piece == null){
+            return false;
+        }
         if (piece.isWhite() == white){
             return true;
         } else {
@@ -148,6 +151,7 @@ public class PlayerInput {
         }
         return true;
     }
+
 
     /**
      * validates if the given last character of the input is a correct piece for promotion

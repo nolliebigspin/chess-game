@@ -1,6 +1,5 @@
 package schach.controller.ai;
 
-import schach.controller.interfaces.AiInteface;
 import schach.model.Board;
 
 public class MinMaxAi extends AiInteface {

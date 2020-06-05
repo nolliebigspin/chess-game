@@ -1,10 +1,7 @@
 package schach.controller.interfaces;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import schach.controller.ai.AiInteface;
 import schach.model.Board;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AiIntefaceTest {
 

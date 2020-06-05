@@ -49,13 +49,13 @@ public class BoardValueTree {
         int bestValue = 0;
         if (whitesTurn){
             for (BoardValueTree child: children){
-                if (child.getValue() > bestValue){
+                if (child.minmax(maxDepth) > bestValue){
                     bestMove = child.getLastMoved();
                 }
             }
         } else {
             for (BoardValueTree child: children){
-                if (child.getValue() < bestValue){
+                if (child.minmax(maxDepth) < bestValue){
                     bestMove = child.getLastMoved();
                 }
             }
