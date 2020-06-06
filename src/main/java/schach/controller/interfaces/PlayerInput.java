@@ -117,12 +117,7 @@ public class PlayerInput {
      * @return true if move input included a promotion, false if not
      */
     public boolean isPromotion(){
-        try {
-            return move.length() == 6;
-        } catch (Exception e){
-            return false;
-        }
-
+        return move.length() == 6;
     }
 
     /**

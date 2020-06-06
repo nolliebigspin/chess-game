@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import schach.controller.ai.AiInterface;
 import schach.model.Board;
 
-class AiIntefaceTest {
+class AiInterfaceTest {
 
     Board board;
 
