@@ -4,6 +4,8 @@ import schach.controller.interfaces.Input;
 import schach.controller.interfaces.HumanVsComputer;
 import schach.model.Board;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -16,8 +18,15 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        if (args.length == 0 || !args[0].equals("--no-gui")){
+        List<String> arguments = Arrays.asList(args);
+        if (arguments.size() == 0 || !arguments.contains("--no-gui")){
             System.out.println("No GUI implemented yet, please add argument: --no-gui");
+        } else if (arguments.contains("--simple")){
+            System.out.println("Welcome :) ");
+            System.out.println("White starts first!");
+            Board board = new Board();
+            Input input = new Input(board);
+            input.inOutRoutine();
         } else {
             if (vsHuman()){
                 System.out.println("Welcome :) ");
