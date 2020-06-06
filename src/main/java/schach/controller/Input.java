@@ -1,5 +1,7 @@
 package schach.controller;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import schach.model.Board;
 import schach.model.Piece;
 
@@ -57,11 +59,34 @@ public class Input {
                 System.out.println(currentMove);
             }
             if (board.getCheck().isCheckMate(true)
-                    || board.getCheck().isCheckMate(false)){
+                    || board.getCheck().isCheckMate(false)) {
+                String color = "";
+                if (board.getCheck().isCheckMate((true))) {
+                    color = "White";
+                } else {
+                    color = "Black";
+                }
+                alertOutput("CHECKMATE!", "CHECKMATE! " + color + " won the game!", true);
                 running = false;
                 System.out.println("CHECKMATE!");
             }
         }
+    }
+
+    private void alertOutput(String title, String text, boolean withExitButton) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(text);
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("Pressed Ok.");
+            }
+            if (withExitButton) {
+                if (rs == ButtonType.CLOSE) {
+                    System.out.println("Pressed Exit.");
+                }
+            }
+        });
     }
 
     /**
