@@ -188,4 +188,20 @@ public class PlayerInput {
         return Arrays.asList(legalNumbers).contains(String.valueOf(number));
     }
 
+    /**
+     * checks if input was yes or no, else calls own recursively
+     * @return true if input was yes, false in it was no
+     */
+    public boolean yes(){
+        Scanner scanner = new Scanner(System.in);
+        String in = scanner.nextLine();
+        if (in.equals("y") || in.equals("yes")){
+            return true;
+        } else if (in.equals("n") || in.equals("no")){
+            return false;
+        } else {
+            return yes();
+        }
+    }
+
 }

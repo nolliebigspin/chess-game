@@ -2,6 +2,7 @@ package schach.controller.interfaces;
 
 import schach.controller.ai.AiInterface;
 import schach.controller.ai.MinMaxAi;
+import schach.controller.ai.SimpleAi;
 import schach.model.Board;
 import schach.model.Pawn;
 import schach.model.Piece;
@@ -52,7 +53,12 @@ public class HumanVsComputer {
         }
 
         this.playerInput = new PlayerInput(board, playerIsWhite);
-        this.aiInterface = new MinMaxAi(board, !playerIsWhite);
+        System.out.println("do you want to play against a simple ai ('yes'), or against a ai using min-max algorithm ('no')");
+        if (playerInput.yes()){
+            this.aiInterface = new SimpleAi(board, !playerIsWhite);
+        } else {
+            this.aiInterface = new MinMaxAi(board, !playerIsWhite);
+        }
 
         board.printBoard();
     }
@@ -99,6 +105,7 @@ public class HumanVsComputer {
         }
         return false;
     }
+
 
     /**
      * gets the move input by the playerInput interface, processes it so it can get forwarded
