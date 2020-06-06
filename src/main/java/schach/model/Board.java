@@ -3,9 +3,7 @@ package schach.model;
 import schach.controller.Check;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Class Board representing the chess board
@@ -356,7 +354,8 @@ public class Board {
      * @return Matrix of Squares
      */
     public Square[][] getSquareMatrix() {
-        return squareMatrix;
+        Square[][] matrix = squareMatrix;
+        return matrix;
     }
 
     /**

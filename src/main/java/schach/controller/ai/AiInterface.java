@@ -1,7 +1,5 @@
 package schach.controller.ai;
 
-import schach.controller.ai.Move;
-import schach.controller.ai.SimpleAi;
 import schach.model.Board;
 import schach.model.Piece;
 import schach.model.Square;
@@ -13,7 +11,7 @@ import java.util.List;
  * Class that act as a interface between ai and the game/input
  * generates and stores all information the ai will need
  */
-public abstract class AiInteface {
+public abstract class AiInterface {
 
     /**
      * the board the game is played on
@@ -31,7 +29,7 @@ public abstract class AiInteface {
      * @param board
      * @param isWhite
      */
-    public AiInteface(Board board, boolean isWhite){
+    public AiInterface(Board board, boolean isWhite){
         this.board = board;
         this.white = isWhite;
     }
@@ -51,14 +49,6 @@ public abstract class AiInteface {
     }
 
     /**
-     * gets all active pieces played by the enemy player
-     * @return List of all active pieces played by the ai
-     */
-    protected List<Piece> getEnemyPieces(){
-        return board.allActivePieces(!white);
-    }
-
-    /**
      * gets all moves possible for the ai in the current turn
      * @return List of moves currently possible for the ai
      */
@@ -74,23 +64,4 @@ public abstract class AiInteface {
         }
         return moves;
     }
-
-    /**
-     * gets all moves possible for the player in the current turn
-     * @return List of Moves currently possible for the player
-     */
-    protected List<Move> getEnemyMoves(){
-        List<Move> moves = new ArrayList<>();
-        List<Piece> enemyPieces = getEnemyPieces();
-        for (Piece piece: enemyPieces){
-            piece.updateLegals();
-            List<Square> legals = piece.getLegalNextSquares();
-            for (Square square: legals){
-                moves.add(new Move(piece, square));
-            }
-        }
-        return moves;
-    }
-
-
 }
