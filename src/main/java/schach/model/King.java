@@ -147,6 +147,11 @@ public class King extends Piece {
         }
     }
 
+    /**
+     * returns all squares that are under attack by the king
+     * needed because checker, now redundant because legal square contain all squares now
+     * @return list of squares that are under attack by the king
+     */
     public List<Square> getAttackedSquares(){
         List<Square> attacked = new ArrayList<>();
         int col = this.position.getColumn();

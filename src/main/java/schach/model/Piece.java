@@ -211,6 +211,11 @@ public abstract class Piece {
         this.validMove = false;
     }
 
+    /**
+     * filters the legal list by removing all squares which are occupied by pieces of the same color
+     * and squares that would set the own king in check
+     * @return filtered list of legal squares
+     */
     public List<Square> filteredLegals(){
         List<Square> filtered = new ArrayList<>();
         List<Square> newLegals = new ArrayList<>();

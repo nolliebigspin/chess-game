@@ -1,4 +1,4 @@
-package schach.controller;
+package schach.controller.interfaces;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
