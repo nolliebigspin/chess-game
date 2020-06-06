@@ -1,9 +1,11 @@
 package schach.controller.ai;
 
 import org.junit.jupiter.api.BeforeEach;
-import schach.controller.ai.AiInterface;
 import schach.model.Board;
 
+/**
+ * tests the AiInterface
+ */
 class AiInterfaceTest {
 
     Board board;

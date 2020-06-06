@@ -28,7 +28,7 @@ class BishopTest {
         testBoard.addPiece(pawn, "c2", true);
         testBoard.addPiece(pawn, "e2", true);
         testBoard.addPiece(king, "h8", true);
-        testBoard.addPiece(king, "a8", false);;
+        testBoard.addPiece(king, "a8", false);
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
@@ -42,7 +42,7 @@ class BishopTest {
         legals.add(testBoard.squareByDenotation("c4"));
         legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -71,7 +71,7 @@ class BishopTest {
         legals.add(testBoard.squareByDenotation("c2"));
         legals.add(testBoard.squareByDenotation("c4"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
     // Test up right scenario with a possible move forward for a black pawn
@@ -100,7 +100,7 @@ class BishopTest {
         legals.add(testBoard.squareByDenotation("c2"));
         legals.add(testBoard.squareByDenotation("e4"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -127,7 +127,7 @@ class BishopTest {
         legals.add(testBoard.squareByDenotation("c4"));
         legals.add(testBoard.squareByDenotation("e4"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -179,7 +179,7 @@ class BishopTest {
         legals.add(testBoard.squareByDenotation("e4"));
         legals.add(testBoard.squareByDenotation("c4"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 

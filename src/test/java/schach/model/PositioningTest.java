@@ -2,10 +2,11 @@ package schach.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import schach.controller.Check;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test the Positioning Class
+ */
 class PositioningTest {
 
     /**
@@ -14,7 +15,7 @@ class PositioningTest {
     Board board;
 
     @BeforeEach
-    private void initBoard(){
+    void initBoard(){
         this.board = new Board();
     }
 
