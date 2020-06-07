@@ -1,5 +1,6 @@
 package schach.controller;
 
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import schach.model.Board;
@@ -88,7 +89,8 @@ public class Input {
                 ButtonType buttonExit = new ButtonType("Exit");
                 if (res == buttonExit) {
                     System.out.println("Pressed Exit.");
-                    //Platform.exit();
+                    Platform.exit();
+                    System.exit(0);
                 }
             }
         });
