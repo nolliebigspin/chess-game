@@ -79,17 +79,16 @@ public class Input {
         alert.setContentText(text);
 
         ButtonType buttonOK = new ButtonType("Ok");
-        if (withExitButton) {
-            ButtonType buttonExit = new ButtonType("Exit");
-        }
 
-        alert.showAndWait().ifPresent(rs -> {
-            if (rs == ButtonType.OK) {
+        alert.showAndWait().ifPresent(res -> {
+            if (res == buttonOK) {
                 System.out.println("Pressed Ok.");
             }
             if (withExitButton) {
-                if (rs == ButtonType.CLOSE) {
+                ButtonType buttonExit = new ButtonType("Exit");
+                if (res == buttonExit) {
                     System.out.println("Pressed Exit.");
+                    //Platform.exit();
                 }
             }
         });
