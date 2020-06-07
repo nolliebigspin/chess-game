@@ -1,5 +1,8 @@
 package schach.controller.interfaces;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import schach.model.Board;
 import schach.model.Pawn;
 import schach.model.Piece;
@@ -67,6 +70,13 @@ public class Input {
 
                 if (movingPiece.isValidMove() && board.getCheck().isCheckMate(!movingPiece.isWhite())) {
                     System.out.println("CHECKMATE.");
+                    String color = "";
+                    if (board.getCheck().isCheckMate((true))) {
+                        color = "White";
+                    } else {
+                        color = "Black";
+                    }
+                    alertOutput("CHECKMATE!", "CHECKMATE! " + color + " won the game!", true);
                     running = false;
                 }
 
@@ -134,10 +144,12 @@ public class Input {
             }
             System.out.println("!Move not allowed");
             System.out.println("It's not your turn.");
+            alertOutput("Move not allowed", "It's not your turn.", false);
             return false;
         }
         System.out.println("!Move not allowed");
         System.out.println("No piece found.");
+        alertOutput("Move not allowed", "It's not your turn.", false);
         return false;
     }
 
@@ -175,22 +187,48 @@ public class Input {
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
+            alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         //Exception if string not: xx-xx
         if (!(input.charAt(2) == '-')) {
             System.out.println(invalidOut);
+            alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         if (input.length() >= 6 && !validPromotion(input.substring(5))) {
             System.out.println(invalidOut);
+            alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {
             System.out.println(invalidOut);
+            alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         return true;
+    }
+
+    private void alertOutput(String title, String text, boolean withExitButton) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(text);
+
+        ButtonType buttonOK = new ButtonType("Ok");
+
+        alert.showAndWait().ifPresent(res -> {
+            if (res == buttonOK) {
+                System.out.println("Pressed Ok.");
+            }
+            if (withExitButton) {
+                ButtonType buttonExit = new ButtonType("Exit");
+                if (res == buttonExit) {
+                    System.out.println("Pressed Exit.");
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }
+        });
     }
 }
 
