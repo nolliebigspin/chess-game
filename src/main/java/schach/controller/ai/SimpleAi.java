@@ -1,54 +1,41 @@
 package schach.controller.ai;
 
 import schach.model.Board;
-import schach.model.Piece;
-import schach.model.Square;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SimpleAi {
+/**
+ * a simple ai that just randomly picks a possible move as the next move
+ */
+public class SimpleAi extends AiInterface {
 
-    private Board board;
-
-    private boolean white;
-
-    private List<Move> aiMoves;
-
-    private List<Piece> aiPieces;
-
-    public SimpleAi(Board board, boolean isWhite){
-        this.board = board;
-        this.white = isWhite;
+    /**
+     * the constructor initializing the fields
+     * @param board the ai will be active on
+     * @param isWhite true if ai plays white pieces, false if ai plays black pieces
+     */
+    public SimpleAi(Board board, boolean isWhite) {
+        super(board, isWhite);
     }
 
-    private void updateAiPieces(){
-        aiPieces = board.allActivePieces(white);
-    }
-
-    private void possibleMoves(){
-        List<Move> moves = new ArrayList<>();
-        updateAiPieces();
-        for (Piece piece: aiPieces){
-            piece.updateLegals();
-            List<Square> legals = piece.getLegalNextSquares();
-            for (Square square: legals){
-                moves.add(new Move(piece, square));
-            }
-        }
-        this.aiMoves = moves;
-    }
-
+    /**
+     * calls random move and returns the string representing the move
+     * @return syntactically correct Move represented as a string
+     */
+    @Override
     public String getNextMove(){
         Move move = randomMove();
         return move.moveAsString();
     }
 
-    public Move randomMove(){
-        possibleMoves();
+    /**
+     * randomly generates a move and returns it
+     * @return a randomly generated move the ai can execute
+     */
+    private Move randomMove(){
+        List<Move> aiMoves = getAiMoves();
         int i = new Random().nextInt(aiMoves.size());
         return aiMoves.get(i);
     }
-
 }

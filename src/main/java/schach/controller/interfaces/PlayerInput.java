@@ -100,6 +100,9 @@ public class PlayerInput {
      */
     private boolean pieceIsRightColor(String move){
         Piece piece = board.squareByDenotation(move.substring(0,2)).getOccupier();
+        if (piece == null){
+            return false;
+        }
         if (piece.isWhite() == white){
             return true;
         } else {
@@ -149,6 +152,7 @@ public class PlayerInput {
         return true;
     }
 
+
     /**
      * validates if the given last character of the input is a correct piece for promotion
      * @param prom String that the pawn should be promoted to
@@ -182,6 +186,22 @@ public class PlayerInput {
 
         String[] legalNumbers = {"1", "2", "3", "4", "5", "6", "7", "8"};
         return Arrays.asList(legalNumbers).contains(String.valueOf(number));
+    }
+
+    /**
+     * checks if input was yes or no, else calls own recursively
+     * @return true if input was yes, false in it was no
+     */
+    public boolean yes(){
+        Scanner scanner = new Scanner(System.in);
+        String in = scanner.nextLine();
+        if (in.equals("y") || in.equals("yes")){
+            return true;
+        } else if (in.equals("n") || in.equals("no")){
+            return false;
+        } else {
+            return yes();
+        }
     }
 
 }
