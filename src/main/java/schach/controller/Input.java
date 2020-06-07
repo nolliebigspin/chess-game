@@ -77,6 +77,12 @@ public class Input {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setContentText(text);
+
+        ButtonType buttonOK = new ButtonType("Ok");
+        if (withExitButton) {
+            ButtonType buttonExit = new ButtonType("Exit");
+        }
+
         alert.showAndWait().ifPresent(rs -> {
             if (rs == ButtonType.OK) {
                 System.out.println("Pressed Ok.");
@@ -127,6 +133,7 @@ public class Input {
             return false;
         }
         System.out.println("!Invalid Move");
+        alertOutput("Invalid Move", "The input you gave is invalid!", false);
         System.out.println("No piece found!");
         return false;
     }
@@ -165,17 +172,21 @@ public class Input {
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
+            alertOutput("Invalid Move", "The input you gave is invalid!", false);
             return false;
         }
         //Exception if string not: xx-xx
         if (!(input.charAt(2) == '-')) {
             System.out.println(invalidOut);
+            alertOutput("Invalid Move", "The input you gave is invalid!", false);
             return false;
         }
         if (input.length() == 6 && !validPromotion(input.substring(5))) {
+            alertOutput("Invalid Move", "The input you gave is invalid!", false);
             return false;
         }
         if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {
+            alertOutput("Invalid Move", "The input you gave is invalid!", false);
             System.out.println(invalidOut);
             return false;
         }
