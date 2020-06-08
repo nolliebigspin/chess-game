@@ -2,7 +2,6 @@ package schach.controller.interfaces;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import schach.controller.interfaces.Input;
 import schach.model.Board;
 
 import java.io.ByteArrayInputStream;

@@ -142,21 +142,6 @@ class BoardTest {
         System.setOut(originalOut);
     }
 
-    @Test
-    void beatenTes(){
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outContent));
-        Board testBoard = new Board();
-        testBoard.addPiece(rook, "c2", true);
-        testBoard.addPiece(rook, "c7", false);
-        testBoard.addPiece(king, "g3", true);
-        testBoard.addPiece(king, "h5", false);
-        testBoard.movePiece("c2", "c7");
-        testBoard.printBeaten();
-        assertEquals("\u265C\r\n", outContent.toString());
-        System.setOut(originalOut);
-    }
 
     @Test
     void squareByDenotationNull(){
