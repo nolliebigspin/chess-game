@@ -1,115 +1,63 @@
 package schach.view;
-
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.SynchronousQueue;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
+import javafx.scene.control.*;
+import javafx.scene.control.skin.LabeledSkinBase;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.StageStyle;
 import javafx.util.Pair;
 import schach.model.Square;
-import schach.controller.interfaces.Input;
 import schach.model.Board;
 import schach.model.Piece;
-
-
 public class HomeScreen extends Pane {
-	
-	@FXML
-	private VBox menuBox;
 
+	@FXML
+	public GridPane grid;
+	private Label light;
+	private CheckBox highlight;
 	private String playerOneName;
 	private String PlayerTwoName;
 	private String playerColor;
-	private boolean multiplayer;
+	private Boolean multiplayer;
 	private GridPane boardPane;
-
-
-
+	@FXML
+	private VBox menuBox;
 	@FXML
 	private VBox image;
-
-
-
-
 	@FXML
 	private VBox content;
-	
+
+	Boolean canMove;
+	private Board board;
+	private final Label[][] labels = new Label[8][8];
+	private final Map<Label, Square> labelMap = new HashMap<Label, Square>();
+
 	public HomeScreen() {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
-//	    	FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setRoot(this);
-	    	fxmlLoader.setController(this);
-	    	fxmlLoader.load();
-	    	this.getStylesheets().add(HomeScreen.class.getResource("root.css").toExternalForm());
-//	    	mainContent = new VBox(this.menuBox);
-//	    	mainContent.getChildren().add(this.menuBox);
-	    	///////////// test
-	    	////// background
-	    	// image ex
-//	    	FileInputStream input = new FileInputStream(
-//					System.getProperty("user.dir") + "\\src\\main\\resources\\schach\\view\\background.jpeg");
-////					
-//			Image image = new Image(input);
-//			BackgroundImage backgroundimage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.SPACE,
-//					BackgroundPosition.DEFAULT,
-//					new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, true));
-//
-//			Background background = new Background(backgroundimage);
-//			this.image.setBackground(background);
-	    	//////////end
-	    	startGame();
+			fxmlLoader.setController(this);
+			fxmlLoader.load();
+			this.getStylesheets().add(HomeScreen.class.getResource("root.css").toExternalForm());
+			startGame();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
-
-
-
-
 	@FXML
-	private void showDialogHuman(){  	
+	private void showDialogHuman() {
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("New Game");
 		dialog.setHeaderText("Add Players");
@@ -149,9 +97,7 @@ public class HomeScreen extends Pane {
 		dialog.getDialogPane().setContent(grid);
 		// Request focus on the username field by default.
 		Platform.runLater(() -> playerOne.requestFocus());
-
-		// Convert the result to a username-password-pair when the login button is
-		// clicked.
+		// Convert the result to a username-password-pair when the login button is clicked.
 		dialog.setResultConverter(dialogButton -> {
 			if (dialogButton == startButton) {
 				return new Pair<>(playerOne.getText(), playerTwo.getText());
@@ -160,7 +106,6 @@ public class HomeScreen extends Pane {
 		});
 		Optional<Pair<String, String>> result = dialog.showAndWait();
 		result.ifPresent(player -> {
-//		    System.out.println("Player1 = " + player.getKey() + ", Player2 = " + player.getValue());
 			playerOneName = player.getKey();
 			PlayerTwoName = player.getValue();
 			this.multiplayer = true;
@@ -168,21 +113,16 @@ public class HomeScreen extends Pane {
 		});
 	}
 
-
-
 	@FXML
-	private void showDialogCPU(){
+	private void showDialogCPU() {
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("New Game");
 		dialog.setHeaderText("Add Player");
 		dialog.getDialogPane().setStyle("-fx-background-color: #feffef;");
 		// Set the icon (must be included in the project).
-//		dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
-
 		// Set the button types.
 		ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
-
 		// Create the username and password labels and fields.
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
@@ -200,11 +140,9 @@ public class HomeScreen extends Pane {
 		grid.add(new Label("Play With:"), 0, 1);
 		grid.add(white, 1, 1);
 		grid.add(black, 1, 2);
-
 		// Enable/Disable login button depending on whether a username was entered.
 		Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
 		loginButton.setDisable(true);
-
 		// Do some validation (using the Java 8 lambda syntax).
 		playerOne.textProperty().addListener((observable, oldValue, newValue) -> {
 			loginButton.setDisable(newValue.trim().isEmpty());
@@ -218,205 +156,190 @@ public class HomeScreen extends Pane {
 		});
 		Optional<Pair<String, String>> result = dialog.showAndWait();
 		result.ifPresent(username -> {
-//			System.out.println("Done");
 			playerOneName = username.getKey();
 			RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
 			playerColor = selectedRadioButton.getText();
-//			System.out.println(selectedRadioButton.getText());
 			this.multiplayer = false;
 			startGame();
 		});
 	}
 
-
-
-
-
-
 	private void startGame() {
-
-		Board board = new Board();
-
+		this.board = new Board();
 		board.initMatrix();
 		board.initLineUp();
 		board.updateAllLegalSquares();
 		HBox boardBox = new HBox();
 		this.boardPane = new GridPane();
 		this.boardPane.setPrefSize(600, 600);
-		updateBoard(board);
+		reset();
 		boardBox.getChildren().add(boardPane);
-		
 		content.setPrefSize(700, 500);
 		/// Last Move section
 		HBox lastMove = new HBox();
 		lastMove.setPrefSize(100, 100);
 		Label l = new Label("Last Move");
 		lastMove.getChildren().add(l);
-//		content.getChildren().add(lastMove);
-		content.getChildren().addAll(boardBox,lastMove);
-//		content.setPrefSize(600, 600);
-//		mainContent.
-//		mainContent.setAlignment(Pos.BOTTOM_LEFT);
+		content.getChildren().addAll(boardBox, lastMove);
 	}
 
+public ArrayList<Label> list = new ArrayList<Label>();
+    private final Map<Label,Square> map = new HashMap<Label,Square>();
+	private final Map<Square,Label> mapTwo = new HashMap<Square,Label>();
+	private void reset() {
+		Color squareColor;
+
+		for (int col = 0; col < 8; col++) {
+			for (int row = 0; row < 8; row++) {
+				if ((row + col) % 2 == 0) {
+					squareColor = Color.BLACK;
+				} else {
+					squareColor = Color.GREY;
+				}
 
 
-
-
-
-
-
-
-
-
-	public static Map<Integer, Image> wFigures;
-	static {
-		wFigures = new HashMap<Integer, Image>();
-		wFigures.put(0, new Image(HomeScreen.class.getResource("wp.png").toExternalForm(), false));
-		wFigures.put(1, new Image(HomeScreen.class.getResource("wr.png").toExternalForm(), false));
-		wFigures.put(2, new Image(HomeScreen.class.getResource("wb.png").toExternalForm(), false));
-		wFigures.put(3, new Image(HomeScreen.class.getResource("wki.png").toExternalForm(), false));
-		wFigures.put(4, new Image(HomeScreen.class.getResource("wq.png").toExternalForm(), false));
-		wFigures.put(5, new Image(HomeScreen.class.getResource("wq.png").toExternalForm(), false));
-	}
-
-	public static Map<Integer, Image> bFigure;
-		static {
-			bFigure = new HashMap<Integer, Image>();
-			bFigure.put(0, new Image(HomeScreen.class.getResource("bp.png").toExternalForm(), false));
-			bFigure.put(1, new Image(HomeScreen.class.getResource("br.png").toExternalForm(), false));
-			bFigure.put(2, new Image(HomeScreen.class.getResource("bb.png").toExternalForm(), false));
-			bFigure.put(3, new Image(HomeScreen.class.getResource("bk.png").toExternalForm(), false));
-			bFigure.put(4, new Image(HomeScreen.class.getResource("bq.png").toExternalForm(), false));
-			bFigure.put(5, new Image(HomeScreen.class.getResource("bki.png").toExternalForm(), false));
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-public void movementInstructor(){
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	private void updateBoard(Board board) {
-		GridPane root = new GridPane();
-		final int size = 8;
-		//Square[][] squareMatrix1 = new Square[8][8];
-
-
-		Color c;
-
-	for (int col= 0; col < 8; col++) {
-		for (int row = 0; row < 8;row++) {
-			if ((row + col) % 2 == 0) {
-				c = Color.BLACK;
-			} else {
-				c = Color.GREY;
-			}
-			//if (row == 8) {
-	//			if(board.getSquares()[col][row].isOccupied()) {
-	//				Label b = new Label();
-	//				b.setTextFill(Color.web("#ff0000", 0.8));
-	//				b.setContentDisplay(ContentDisplay.LEFT);
-	//				b.setAlignment(Pos.CENTER);
-	//				b.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
-	//				b.setBackground(new Background(new BackgroundFill(Color.rgb(75, 75, 75), null, Insets.EMPTY)));
-	//				boardPane.add(b, col, row);
-	//			}
-
-	//		 else {
-
-//					 System.out.println(board.squareByDenotation(alfa[col]+String.valueOf(row)));
-//						if (board.getSquares()[col - 1][row].isOccupied()) {
 				if (board.getSquares()[col][row].isOccupied()) {
-//							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
-					Label b = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
-					b.setContentDisplay(ContentDisplay.CENTER);
-					b.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
-					b.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
-					/// color
-					b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
-					boardPane.add(b, col, row);
-					int position[] = {col, row};
-					///////////// Add listener
+
+					Label squareTile = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
+					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
+					// color
+					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
+					boardPane.add(squareTile, col, row);
+					//map.put( squareTile,new Square(col, row));
+                    map.put(squareTile, board.getSquare(col + 1,7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1,7 - row + 1),squareTile);
+					// Add listener
 					int finalCol = col;
 					int finalRow = row;
-					b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					final Label temp = labels[col][row];
+					list.add(squareTile);
+					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent e) {
+							Square ts = board.getSquares()[finalCol][7 - finalRow];
+							final Piece occupier = ts.getOccupier();
 
-//									b.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, Insets.EMPTY)));
-							Alert alert = new Alert(AlertType.INFORMATION);
-//							current piece 		board.getSquares()[position[0] - 1][position[1]].getOccupier().print();
-							//Square s = board.getSquare(finalCol, finalRow).getOccupier();
-							Piece p = board.getSquares()[finalCol][7-finalRow].getOccupier();
-							System.out.println(p.print() + " White: " + p.isWhite());
-							for (int i = 0; i < p.filteredLegals().size(); i++) {
-							//	p.updateLegals();
-								System.out.println("can move to:" + p.filteredLegals().get(i).getColumn() + ", " + p.filteredLegals().get(i).getRow());
+							final List<Square> legalSquareList = occupier.filteredLegals();
+							ArrayList<Label> legalLabelList = getLegalLabelList(legalSquareList);
+							colorizeLegalNextSquares(squareTile, legalLabelList);
+
+                            Square shit = (Square) map.get(squareTile);
+                            System.out.println(squareTile);
+                            System.out.println(shit);
+                            if(shit.isOccupied()) {
+                                System.out.println("hallo" + shit.getOccupier().print() + shit.getOccupier().isWhite());
+                            }
+							//Highlight possible moves if turned on
+							for (int i = 0; i < occupier.filteredLegals().size(); i++) {
+								System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
 							}
-							alert.setContentText(board.getSquares()[finalCol][7-finalRow].getOccupier().print());
-							alert.showAndWait().ifPresent(rs -> {
-								if (rs == ButtonType.OK) {
-									System.out.println("Pressed OK.");
-								}
-							});
 						}
 					});
+				} else {
+					Label temp = labels[col][row];
+					Label squareTile = new Label();
+					squareTile.setContentDisplay(ContentDisplay.CENTER);
+					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
+					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
+					boardPane.add(squareTile, col, row);
+					int finalCol = col;
+					int finalRow = row;
+                    GridPane.setFillWidth(squareTile,true);
+                    GridPane.setFillHeight(squareTile, true);
+					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						@Override
+						public void handle(MouseEvent e) {
+							Square ts = board.getSquares()[finalCol][7 - finalRow];
+							//System.out.println(ts);
+                            Square shit = (Square) map.get(squareTile);
+                            System.out.println(squareTile);
+                            System.out.println(shit);
+                            if(shit.isOccupied()) {
+                                System.out.println("hallo" + shit.getOccupier());
+                            }
+								}
+					});
+					map.put( squareTile,board.getSquare(col + 1, 7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1, 7 - row + 1), squareTile);
 
-
-				}else {
-					Label b = new Label();
-					b.setContentDisplay(ContentDisplay.CENTER);
-					b.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
-					b.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
-					b.setBackground(new Background(new BackgroundFill(c, null, Insets.EMPTY)));
-					boardPane.add(b, col, row);
 				}
-			/// else {
-			//	Label b = new Label([row]);
-			//	b.setContentDisplay(ContentDisplay.RIGHT);
-			//	b.setAlignment(Pos.CENTER_LEFT);
-			//	b.prefHeightProperty().bind(boardPane.heightProperty().divide(9));
-			//	b.setBackground(new Background(new BackgroundFill(Color.rgb(75,75,75), null, Insets.EMPTY)));
-			//	boardPane.add(b, col, row);
-
-			//}
-
-//					b.setAlignment(Pos.CENTER_LEFT);
-
-
+			}
 		}
 	}
-}
 
+	/**
+	 * Returns an ArrayList with all Labels of a givent square List
+	 * @param squareList List of squares
+	 * @return List of Squares filled with an emty string if its not occupied or with the occupier that is printed
+	 * on the board
+	 */
+	public ArrayList<Label> getLegalLabelList(List<Square> squareList) {
+		ArrayList<Label> labelList = new ArrayList<Label>();
+
+		for (int i = 0; i < squareList.size(); i++) {
+			Square s = squareList.get(i);
+			labelList.add(mapTwo.get(s));
+		}
+		return labelList;
+	}
+
+	/**
+	 * This method will color the actually clicked Square to red and the legal next squares to green
+	 * @param clicked Label that is clicked
+	 * @param nextLabels List of labels that are legal next squares
+	 */
+	private void colorizeLegalNextSquares(Label clicked, ArrayList<Label> nextLabels) {
+		Color clickedColor = Color.RED;
+		Color nextColor = Color.GREEN;
+		clicked.setBackground(new Background(new BackgroundFill(clickedColor, null, Insets.EMPTY)));
+		for (int i = 0; i < nextLabels.size(); i++) {
+			nextLabels.get(i).setBackground(new Background(new BackgroundFill(nextColor, null, Insets.EMPTY)));
+		}
+	}
+
+	/**
+	 * Method to decolorize all labels on the board
+	 */
+	private void resetColorizedLabels() {
+		Color squareColor;
+
+		for (int col = 0; col < 8; col++) {
+			for (int row = 0; row < 8; row++) {
+				if ((row + col) % 2 == 0) {
+					squareColor = Color.BLACK;
+				} else {
+					squareColor = Color.GREY;
+				}
+
+				if (board.getSquares()[col][row].isOccupied()) {
+
+					Label squareTile = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
+					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
+					// color
+					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
+					boardPane.add(squareTile, col, row);
+
+					map.put(squareTile, board.getSquare(col + 1,7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1,7 - row + 1),squareTile);
+					list.add(squareTile);
+				} else {
+					Label squareTile = new Label();
+					squareTile.setContentDisplay(ContentDisplay.CENTER);
+					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
+					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
+					boardPane.add(squareTile, col, row);
+					GridPane.setFillWidth(squareTile,true);
+					GridPane.setFillHeight(squareTile, true);
+
+					map.put( squareTile,board.getSquare(col + 1, 7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1, 7 - row + 1), squareTile);
+
+				}
+			}
+		}
+	}
 }

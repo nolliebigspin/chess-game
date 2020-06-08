@@ -76,7 +76,7 @@ public class Input {
                     } else {
                         color = "Black";
                     }
-                    alertOutput("CHECKMATE!", "CHECKMATE! " + color + " won the game!", true);
+                    // alertOutput("CHECKMATE!", "CHECKMATE! " + color + " won the game!", true);
                     running = false;
                 }
 
@@ -144,12 +144,12 @@ public class Input {
             }
             System.out.println("!Move not allowed");
             System.out.println("It's not your turn.");
-            alertOutput("Move not allowed", "It's not your turn.", false);
+            // alertOutput("Move not allowed", "It's not your turn.", false);
             return false;
         }
         System.out.println("!Move not allowed");
         System.out.println("No piece found.");
-        alertOutput("Move not allowed", "It's not your turn.", false);
+        // alertOutput("Move not allowed", "It's not your turn.", false);
         return false;
     }
 
@@ -187,29 +187,29 @@ public class Input {
         //Exception if string to short
         if (input.length() != 5 && input.length() != 6) {
             System.out.println(invalidOut);
-            alertOutput("Invalid move", "Incorrect input.", false);
+            //alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         //Exception if string not: xx-xx
         if (!(input.charAt(2) == '-')) {
             System.out.println(invalidOut);
-            alertOutput("Invalid move", "Incorrect input.", false);
+            //alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         if (input.length() >= 6 && !validPromotion(input.substring(5))) {
             System.out.println(invalidOut);
-            alertOutput("Invalid move", "Incorrect input.", false);
+            //alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         if (!validDenotation(input.substring(0,2)) || !validDenotation(input.substring(3,5))) {
             System.out.println(invalidOut);
-            alertOutput("Invalid move", "Incorrect input.", false);
+            //alertOutput("Invalid move", "Incorrect input.", false);
             return false;
         }
         return true;
     }
 
-    private void alertOutput(String title, String text, boolean withExitButton) {
+    public void alertOutput(String title, String text, boolean withExitButton) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setContentText(text);
