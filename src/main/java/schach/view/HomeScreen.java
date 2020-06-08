@@ -329,5 +329,17 @@ public class HomeScreen extends Pane {
 		}
 	}
 
-
+	/**
+	 * This method will color the actually clicked Square to red and the legal next squares to green
+	 * @param clicked Label that is clicked
+	 * @param nextLabels List of labels that are legal next squares
+	 */
+	private void colorizeLegalNextSquares(Label clicked, List<Label> nextLabels) {
+		Color clickedColor = Color.RED;
+		Color nextColor = Color.GREEN;
+		clicked.setBackground(new Background(new BackgroundFill(clickedColor, null, Insets.EMPTY)));
+		for (int i = 0; i < nextLabels.size(); i++) {
+			nextLabels.get(i).setBackground(new Background(new BackgroundFill(nextColor, null, Insets.EMPTY)));
+		}
+	}
 }
