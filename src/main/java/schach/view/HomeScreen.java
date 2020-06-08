@@ -37,11 +37,17 @@ public class HomeScreen extends Pane {
 	private VBox image;
 	@FXML
 	private VBox content;
-
+    private int currentMove;
 	Boolean canMove;
 	private Board board;
 	private final Label[][] labels = new Label[8][8];
 	private final Map<Label, Square> labelMap = new HashMap<Label, Square>();
+	public ArrayList<Label> list = new ArrayList<Label>();
+	private final Map<Label,Square> map = new HashMap<Label,Square>();
+	private final Map<Square,Label> mapTwo = new HashMap<Square,Label>();
+	private Label lastClickedOn;
+	private Square lastClicked;
+
 
 	public HomeScreen() {
 		try {
@@ -173,8 +179,17 @@ public class HomeScreen extends Pane {
 		HBox boardBox = new HBox();
 		this.boardPane = new GridPane();
 		this.boardPane.setPrefSize(600, 600);
-		//updateBoard();
+		boardBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				int x = (int) mouseEvent.getX();
+				int y = (int) mouseEvent.getY();
+				Square s = resolveCoordinatesToSquare(x, y);
+				lastClicked = s;
+			}
+		});
 		reset();
+
 		boardBox.getChildren().add(boardPane);
 		content.setPrefSize(700, 500);
 		/// Last Move section
@@ -186,10 +201,55 @@ public class HomeScreen extends Pane {
 	}
 
 
+	private Square resolveCoordinatesToSquare(int x, int y){
+		int xCoordinate = 1;
+		int yCoordinate = 1;
+		for (int i = 75; i <= 75*8; i+=75){
+			if (x < i){
+				break;
+			}
+			xCoordinate++;
+		}
+		for (int i = 58; i <= 58*8; i+=58){
+			if (y < i){
+				break;
+			}
+			yCoordinate++;
+		}
+		System.out.println(xCoordinate + " " + yCoordinate);
+		return board.getSquare(xCoordinate, 9 - yCoordinate );
+	}
 
 
-public ArrayList<Label> list = new ArrayList<Label>();
-    private final Map<Label,Square> map = new HashMap<Label,Square>();
+
+/**
+	private void test(Label label){
+		Square startingSquare = map.get(label);
+		if (!startingSquare.isOccupied()){
+			return;
+		}
+		Piece piece = startingSquare.getOccupier();
+		piece.updateLegals();
+		List<Square> legals = piece.filteredLegals();
+		Square clickedSquare = map.get(lastClickedOn);
+		if (legals.contains(clickedSquare)){
+			board.movePiece(startingSquare.getDenotation(), clickedSquare.getDenotation());
+		}
+		reset();
+	}
+
+	private Square getNextClicked(){
+
+	}
+
+	private void move(Label start, Label target){
+
+	}
+*/
+
+
+
+
 	private void reset() {
 		Color squareColor;
 
@@ -200,8 +260,6 @@ public ArrayList<Label> list = new ArrayList<Label>();
 				} else {
 					squareColor = Color.GREY;
 				}
-
-
 				if (board.getSquares()[col][row].isOccupied()) {
 
 					Label squareTile = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
@@ -211,43 +269,40 @@ public ArrayList<Label> list = new ArrayList<Label>();
 					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
 					boardPane.add(squareTile, col, row);
 					//map.put( squareTile,new Square(col, row));
-                    map.put(squareTile, board.getSquare(col + 1,7-row + 1));
+					list.add(squareTile);
+                    map.put(squareTile, board.getSquare(col + 1,7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1,7 - row + 1),squareTile);
 					// Add listener
 					int finalCol = col;
 					int finalRow = row;
 					final Label temp = labels[col][row];
-					list.add(squareTile);
+
 					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent e) {
+							lastClickedOn = squareTile;
 							Square ts = board.getSquares()[finalCol][7 - finalRow];
 							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
 							final Piece occupier = ts.getOccupier();
-							final List<Square> legal = occupier.filteredLegals();
-                            Square shit = (Square) map.get(squareTile);
+							final List<Square> legalSquareList = occupier.filteredLegals();
+							//Highlight legal moves
+							ArrayList<Label> legalLabelList = getLegalLabelList(legalSquareList);
+							colorizeLegalNextSquares(squareTile, legalLabelList);
+							Square place = (Square) map.get(squareTile);
                             System.out.println(squareTile);
-                            System.out.println(shit);
-                        //     if(shit.isOccupied()) {
-                             //      System.out.println("hallo" + shit.getOccupier().print() + shit.getOccupier().isWhite());
-                            //}
-                            //  for (int i = 0; i < occupier.filteredLegals().size(); i++) {
-                            //    System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
-							  //      }
-
+                            System.out.println(place);
                             //White movement
-                            if(shit.getOccupier().isWhite() && Input.getCurrentMove()% 2 == 0){
+                            if(place.isOccupied()){
 
                             }
                             //Black movement
-                            if(shit.getOccupier().isWhite() && Input.getCurrentMove()% 2 != 0){
+                            if(place.isOccupied() &&! place.getOccupier().isWhite() && currentMove% 2 != 0){
 
                             }
+
 						}
-
 					});
-
 				} else {
-					Label temp = labels[col][row];
 					Label squareTile = new Label();
 					squareTile.setContentDisplay(ContentDisplay.CENTER);
 					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
@@ -261,9 +316,9 @@ public ArrayList<Label> list = new ArrayList<Label>();
 					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent e) {
+							lastClickedOn = squareTile;
 							Square ts = board.getSquares()[finalCol][7 - finalRow];
 							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
-							//System.out.println(ts);
                             Square shit = (Square) map.get(squareTile);
                             System.out.println(squareTile);
                             System.out.println(shit);
@@ -272,8 +327,9 @@ public ArrayList<Label> list = new ArrayList<Label>();
                             }
 								}
 					});
-					map.put( squareTile,board.getSquare(col + 1, 7-row + 1));
-
+					map.put( squareTile,board.getSquare(col + 1, 7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1, 7 - row + 1), squareTile);
+					list.add(squareTile);
 
 
 				}
@@ -287,15 +343,12 @@ public ArrayList<Label> list = new ArrayList<Label>();
 	 * @return List of Squares filled with an emty string if its not occupied or with the occupier that is printed
 	 * on the board
 	 */
-	public ArrayList<Label> convertSquaresToLabels(ArrayList<Square> squareList) {
+	public ArrayList<Label> getLegalLabelList(List<Square> squareList) {
 		ArrayList<Label> labelList = new ArrayList<Label>();
 
 		for (int i = 0; i < squareList.size(); i++) {
-			if (!squareList.get(i).isOccupied()) {
-				labelList.add(new Label("     " + squareList.get(i).getOccupier().print()));
-			} else {
-				labelList.add(new Label());
-			}
+			Square s = squareList.get(i);
+			labelList.add(mapTwo.get(s));
 		}
 		return labelList;
 	}
@@ -305,8 +358,7 @@ public ArrayList<Label> list = new ArrayList<Label>();
 	 * @param clicked Label that is clicked
 	 * @param nextLabels List of labels that are legal next squares
 	 */
-	private void colorizeLegalNextSquares(Label clicked, List<Label> nextLabels) {
-		ObservableList<Node> childs = boardPane.getChildren();
+	private void colorizeLegalNextSquares(Label clicked, ArrayList<Label> nextLabels) {
 		Color clickedColor = Color.RED;
 		Color nextColor = Color.GREEN;
 		clicked.setBackground(new Background(new BackgroundFill(clickedColor, null, Insets.EMPTY)));
