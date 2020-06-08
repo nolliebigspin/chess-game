@@ -16,6 +16,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
+import schach.controller.interfaces.Input;
 import schach.model.Square;
 import schach.model.Board;
 import schach.model.Piece;
@@ -184,75 +185,7 @@ public class HomeScreen extends Pane {
 		content.getChildren().addAll(boardBox, lastMove);
 	}
 
-	private void updateBoard() {
-		Color squareColor;
 
-		for (int col = 0; col < 8; col++) {
-			for (int row = 0; row < 8; row++) {
-				if ((row + col) % 2 == 0) {
-					squareColor = Color.BLACK;
-				} else {
-					squareColor = Color.GREY;
-				}
-				labels[col][row] = new Label(col + "," + (row));
-				labelMap.put(labels[col][row], new Square(col, row));
-				labels[col][row].prefWidthProperty().bind(boardPane.widthProperty().divide(8));
-				labels[col][row].prefHeightProperty().bind(boardPane.heightProperty().divide(8));
-				GridPane.setFillWidth(labels[col][row], true);
-				GridPane.setFillHeight(labels[col][row], true);
-
-				if (board.getSquares()[col][row].isOccupied()) {
-//							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
-					Label squareTile = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
-					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
-					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
-					// color
-					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
-					boardPane.add(squareTile, col, row);
-					// Add listener
-					int finalCol = col;
-					int finalRow = row;
-					final Label temp = labels[col][row];
-
-					temp.setId("b" + col + row);
-
-					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
-						@Override
-						public void handle(MouseEvent e) {
-							Square tile = board.getSquares()[finalCol][7 - finalRow];
-							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
-
-							final Piece occupier = tile.getOccupier();
-
-							if (occupier.isWhite()) {
-								final List<Square> legal = occupier.filteredLegals();
-
-								//resetBoard();--------------------------------------------------------------------
-								for (final Square s : legal) {
-									//Highlight possible moves if turned on
-
-									for (int i = 0; i < occupier.filteredLegals().size(); i++) {
-										System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
-
-										canMove = true;
-									}
-									System.out.println(temp.getId());
-								}
-							}
-						}
-					});
-				} else {
-					Label temp = labels[col][row];
-					Label squareTile = new Label();
-					squareTile.setContentDisplay(ContentDisplay.CENTER);
-					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
-					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
-					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
-					boardPane.add(squareTile, col, row);
-				}
-			}
-		}
-	}
 
 
 public ArrayList<Label> list = new ArrayList<Label>();
@@ -294,13 +227,21 @@ public ArrayList<Label> list = new ArrayList<Label>();
                             Square shit = (Square) map.get(squareTile);
                             System.out.println(squareTile);
                             System.out.println(shit);
-                            if(shit.isOccupied()) {
-                                System.out.println("hallo" + shit.getOccupier().print() + shit.getOccupier().isWhite());
-                            }
+                        //     if(shit.isOccupied()) {
+                             //      System.out.println("hallo" + shit.getOccupier().print() + shit.getOccupier().isWhite());
+                            //}
+                            //  for (int i = 0; i < occupier.filteredLegals().size(); i++) {
+                            //    System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
+							  //      }
 
-                            for (int i = 0; i < occupier.filteredLegals().size(); i++) {
-                                System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
-							        }
+                            //White movement
+                            if(shit.getOccupier().isWhite() && Input.getCurrentMove()% 2 == 0){
+
+                            }
+                            //Black movement
+                            if(shit.getOccupier().isWhite() && Input.getCurrentMove()% 2 != 0){
+
+                            }
 						}
 
 					});

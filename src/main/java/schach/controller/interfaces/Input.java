@@ -16,6 +16,11 @@ import java.util.Scanner;
 public class Input {
 
     private Board board;
+
+    public static int getCurrentMove() {
+        return currentMove;
+    }
+
     public int currentMove;
 
     /**
