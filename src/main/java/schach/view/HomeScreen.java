@@ -199,7 +199,7 @@ public class HomeScreen extends Pane {
 				}
 			}
 		});
-		reset();
+		print();
 		boardBox.getChildren().add(boardPane);
 		content.setPrefSize(700, 500);
 		/// Last Move section
@@ -220,7 +220,7 @@ public class HomeScreen extends Pane {
 		if (legals.contains(target)){
 			board.movePiece(start.getDenotation(), target.getDenotation());
 		}
-		reset();
+		print();
 		clickCounter = 0;
 		clickedList.clear();
 	}
