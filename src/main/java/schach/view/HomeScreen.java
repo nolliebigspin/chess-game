@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.LabeledSkinBase;
@@ -35,7 +36,7 @@ public class HomeScreen extends Pane {
 	@FXML
 	private VBox image;
 	@FXML
-	private VBox content;
+	private HBox content;
 
 	Boolean canMove;
 	private Board board;
@@ -170,17 +171,24 @@ public class HomeScreen extends Pane {
 		board.initLineUp();
 		board.updateAllLegalSquares();
 		HBox boardBox = new HBox();
+		boardBox.setPrefSize(500,500);
 		this.boardPane = new GridPane();
-		this.boardPane.setPrefSize(600, 600);
+		this.boardPane.setPrefSize(500, 500);
 		//updateBoard();
 		reset();
 		boardBox.getChildren().add(boardPane);
-		content.setPrefSize(700, 500);
+//		content.setPrefSize(700, 500);
 		/// Last Move section
-		HBox lastMove = new HBox();
-		lastMove.setPrefSize(100, 100);
+		VBox lastMove = new VBox();
+		lastMove.setPrefSize(250,500);
+		lastMove.getStyleClass().add("lastMove");
+		lastMove.setAlignment(Pos.TOP_CENTER);
+//		lastMove.setPrefSize(100, 100);
 		Label l = new Label("Last Move");
+		l.getStyleClass().add("lastMove-label");
+//		l.setBackground(new Background(new BackgroundFill(Color.GREEN, null, Insets.EMPTY)));
 		lastMove.getChildren().add(l);
+		content.setSpacing(10);
 		content.getChildren().addAll(boardBox, lastMove);
 	}
 

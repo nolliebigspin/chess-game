@@ -12,7 +12,7 @@
 		<VBox viewOrder="1" id="mainBox" prefHeight="800" prefWidth="800.0"
       xmlns:fx="http://javafx.com/fxml" styleClass="menuBox" alignment="TOP_LEFT"
       >
-      <VBox prefHeight="100.0" prefWidth="700.0"
+      <VBox prefHeight="100.0" prefWidth="800.0"
        styleClass="menuBox" alignment="TOP_LEFT">
    <MenuBar fx:id="menuBar" prefHeight="40.0" styleClass="mainMenu">
       <menus>
@@ -45,9 +45,9 @@
       </menus>
    </MenuBar>
    </VBox>
-    <VBox prefHeight="500.0" prefWidth="500"
+    <HBox prefHeight="500.0" prefWidth="800"
    fx:id="content">
-   </VBox>
+   </HBox>
 </VBox>
 			
 	</children>

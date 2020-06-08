@@ -49,8 +49,17 @@
 	-fx-background-color: #0b0b0a;
 	 -fx-text-fill: white;
 }
-
-
+.lastMove{
+    -fx-background-color: #83827b ;
+}
+.lastMove-label{
+    -fx-background-color:  #0b0b0a;
+    -fx-background-radius: 15,15,15,15 ;
+}
+.lastMove-label:hover{
+    -fx-background-color: RED;
+    -fx-background-radius: 5,5,5,5;
+}
 
 
 
