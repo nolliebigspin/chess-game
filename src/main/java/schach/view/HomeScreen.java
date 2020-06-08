@@ -266,7 +266,6 @@ public class HomeScreen extends Pane {
 					squareColor = Color.GREY;
 				}
 				labels[col][row] = new Label(col + "," + (row));
-
 				labels[col][row].prefWidthProperty().bind(boardPane.widthProperty().divide(8));
 				labels[col][row].prefHeightProperty().bind(boardPane.heightProperty().divide(8));
 				GridPane.setFillWidth(labels[col][row], true);
@@ -280,7 +279,7 @@ public class HomeScreen extends Pane {
 					// color
 					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
 					boardPane.add(squareTile, col, row);
-					map.put(squareTile, new Square(col, row));
+					map.put(squareTile, new Square(col, 7-row));
 					// Add listener
 					int finalCol = col;
 					int finalRow = row;
@@ -292,19 +291,14 @@ public class HomeScreen extends Pane {
 							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
 							final Piece occupier = ts.getOccupier();
 							final List<Square> legal = occupier.filteredLegals();
-
-								  //resetBoard();--------------------------------------------------------------------
-								   for (final Square s : legal) {
-									//Highlight possible moves if turned on
-
-									for (int i = 0; i < occupier.filteredLegals().size(); i++) {
-										System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
-										System.out.println(ts);
-										System.out.println(map.get(squareTile));
-									}
-
-								}
-
+							System.out.println(ts);
+							System.out.println(map.get(squareTile));
+							//resetBoard();--------------------------------------------------------------------
+							// /	for (final Square s : legal) {
+								//Highlight possible moves if turned on
+							        for (int i = 0; i < occupier.filteredLegals().size(); i++) {
+									System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
+							        }
 						}
 
 					});
@@ -317,7 +311,19 @@ public class HomeScreen extends Pane {
 					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
 					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
 					boardPane.add(squareTile, col, row);
-					map.put(squareTile, new Square(col, row));
+					int finalCol = col;
+					int finalRow = row;
+					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						@Override
+						public void handle(MouseEvent e) {
+							Square ts = board.getSquares()[finalCol][7 - finalRow];
+							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
+							        System.out.println(ts);
+									System.out.println(map.get(squareTile));
+								}
+
+					});
+					map.put(squareTile, new Square(col, 7-row));
 				}
 			}
 		}
