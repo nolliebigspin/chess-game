@@ -342,4 +342,26 @@ public ArrayList<Label> list = new ArrayList<Label>();
 			}
 		}
 	}
+
+	public void showAlert(String title, String text, boolean withExitButton) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setContentText(text);
+
+		ButtonType buttonOK = new ButtonType("Ok");
+
+		alert.showAndWait().ifPresent(res -> {
+			if (res == buttonOK) {
+				System.out.println("Pressed Ok.");
+			}
+			if (withExitButton) {
+				ButtonType buttonExit = new ButtonType("Exit");
+				if (res == buttonExit) {
+					System.out.println("Pressed Exit.");
+					Platform.exit();
+					System.exit(0);
+				}
+			}
+		});
+	}
 }
