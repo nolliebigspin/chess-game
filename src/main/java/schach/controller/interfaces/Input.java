@@ -1,5 +1,8 @@
 package schach.controller.interfaces;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import schach.model.Board;
 import schach.model.Pawn;
 import schach.model.Piece;
@@ -13,6 +16,8 @@ import java.util.Scanner;
 public class Input {
 
     private Board board;
+
+
     public int currentMove;
 
     /**
@@ -47,16 +52,6 @@ public class Input {
 
                 // calling promotion method for piece if target Square is occupied
                 checkForPromotion(input, movingPiece);
-                /*
-                if (input.length() == 6 && board.squareByDenotation(input.substring(3,5)).isOccupied()) {
-                    try {
-                        Pawn pawn = (Pawn)  board.squareByDenotation(input.substring(3,5)).getOccupier();
-                        pawn.doPromotion(input.substring(5));
-                    } catch (Exception e) {
-                        System.out.println("Promotion not possible.");
-                    }
-                }
-                 */
 
                 if (movingPiece != null && movingPiece.isValidMove()){
                     System.out.println("!" + input);
@@ -67,6 +62,12 @@ public class Input {
 
                 if (movingPiece.isValidMove() && board.getCheck().isCheckMate(!movingPiece.isWhite())) {
                     System.out.println("CHECKMATE.");
+                    String color = "";
+                    if (board.getCheck().isCheckMate((true))) {
+                        color = "White";
+                    } else {
+                        color = "Black";
+                    }
                     running = false;
                 }
 

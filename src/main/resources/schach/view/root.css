@@ -1,0 +1,86 @@
+.root{
+	-fx-font-size: 16pt;
+    -fx-font-family: "roboto";
+/*    -fx-base: rgb(10, 10, 10);
+    -fx-background: rgba(53, 64, 35, 0.2);*/
+    -fx-padding:0pt;
+}
+.menuBox{
+	-fx-background-insets: 0, 1, 2;
+	-fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+	-fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
+}
+.century1{
+	-fx-end-margin:400pt;
+}
+.centuryCell{
+    -fx-border-style: solid; 
+    -fx-border-width: 5pt; 
+    -fx-border-color: black;
+}
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu-item:focused {
+     -fx-background-color: #83827b;
+     -fx-text-fill: #000000;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: #feff39;
+    -fx-text-fill: white;
+}
+
+.context-menu {
+     -fx-background-color: black;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+}
+.mainMenu{
+	-fx-border-style: solid inside;
+	     -fx-background-color: #83827b;
+     -fx-text-fill: #0b0b0a;
+     -fx-transition:2000;
+}
+
+.mainMenu:hover{
+	-fx-background-color: #0b0b0a;
+	 -fx-text-fill: white;
+}
+.lastMove{
+    -fx-background-color: #83827b ;
+}
+.lastMove-label{
+    -fx-background-color:  #0b0b0a;
+    -fx-background-radius: 15,15,15,15 ;
+}
+
+.cemetery{
+    -fx-background-color: #83827b ;
+    -fx-background-radius: 5,5,5,5;
+}
+.cemetery Label{
+    -fx-background-color: #0b0b0a;
+    -fx-background-radius: 5,5,5,5;
+}
+.lastMoveTable{
+    -fx-background-color: #0b0b0a ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
