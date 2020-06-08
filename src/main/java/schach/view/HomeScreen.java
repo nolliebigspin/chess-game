@@ -3,6 +3,7 @@ import java.util.*;
 import java.util.concurrent.SynchronousQueue;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -330,11 +331,33 @@ public class HomeScreen extends Pane {
 	}
 
 	/**
+	 * Returns an ArrayList with all Labels of a givent square List
+	 * @param squareList List of squares
+	 * @return List of Squares filled with an emty string if its not occupied or with the occupier that is printed
+	 * on the board
+	 */
+	public ArrayList<Label> convertSquaresToLabels(ArrayList<Square> squareList) {
+		ArrayList<Label> labelList = new ArrayList<Label>();
+
+		for (int i = 0; i < squareList.size(); i++) {
+			int col = squareList.get(i).getColumn();
+			int row = squareList.get(i).getRow();
+			if (!squareList.get(i).isOccupied()) {
+				labelList.add(new Label("     " + squareList.get(i).getOccupier().print()));
+			} else {
+				labelList.add(new Label());
+			}
+		}
+		return labelList;
+	}
+
+	/**
 	 * This method will color the actually clicked Square to red and the legal next squares to green
 	 * @param clicked Label that is clicked
 	 * @param nextLabels List of labels that are legal next squares
 	 */
 	private void colorizeLegalNextSquares(Label clicked, List<Label> nextLabels) {
+		ObservableList<Node> childs = boardPane.getChildren();
 		Color clickedColor = Color.RED;
 		Color nextColor = Color.GREEN;
 		clicked.setBackground(new Background(new BackgroundFill(clickedColor, null, Insets.EMPTY)));
