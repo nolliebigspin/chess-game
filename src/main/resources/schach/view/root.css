@@ -1,8 +1,8 @@
 .root{
 	-fx-font-size: 16pt;
     -fx-font-family: "roboto";
-    -fx-base: rgb(10, 10, 10);
-    -fx-background: rgba(53, 64, 35, 0.2);
+/*    -fx-base: rgb(10, 10, 10);
+    -fx-background: rgba(53, 64, 35, 0.2);*/
     -fx-padding:0pt;
 }
 .menuBox{
@@ -56,9 +56,17 @@
     -fx-background-color:  #0b0b0a;
     -fx-background-radius: 15,15,15,15 ;
 }
-.lastMove-label:hover{
-    -fx-background-color: RED;
+
+.cemetery{
+    -fx-background-color: #83827b ;
     -fx-background-radius: 5,5,5,5;
+}
+.cemetery Label{
+    -fx-background-color: #0b0b0a;
+    -fx-background-radius: 5,5,5,5;
+}
+.lastMoveTable{
+    -fx-background-color: #0b0b0a ;
 }
 
 
