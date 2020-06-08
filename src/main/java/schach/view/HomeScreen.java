@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.skin.LabeledSkinBase;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.*;
@@ -253,8 +254,8 @@ public class HomeScreen extends Pane {
 	}
 
 
-
-	private final Map<Label, Square> map = new HashMap<Label, Square>();
+public ArrayList<Label> list = new ArrayList<Label>();
+    private final Map<Label,Square> map = new HashMap<Label,Square>();
 	private void reset() {
 		Color squareColor;
 
@@ -265,11 +266,7 @@ public class HomeScreen extends Pane {
 				} else {
 					squareColor = Color.GREY;
 				}
-				labels[col][row] = new Label(col + "," + (row));
-				labels[col][row].prefWidthProperty().bind(boardPane.widthProperty().divide(8));
-				labels[col][row].prefHeightProperty().bind(boardPane.heightProperty().divide(8));
-				GridPane.setFillWidth(labels[col][row], true);
-				GridPane.setFillHeight(labels[col][row], true);
+
 
 				if (board.getSquares()[col][row].isOccupied()) {
 //							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
@@ -279,11 +276,13 @@ public class HomeScreen extends Pane {
 					// color
 					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
 					boardPane.add(squareTile, col, row);
-					map.put(squareTile, new Square(col, 7-row));
+					//map.put( squareTile,new Square(col, row));
+                    map.put(squareTile, board.getSquare(col + 1,row + 1));
 					// Add listener
 					int finalCol = col;
 					int finalRow = row;
 					final Label temp = labels[col][row];
+					list.add(squareTile);
 					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent e) {
@@ -291,8 +290,15 @@ public class HomeScreen extends Pane {
 							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
 							final Piece occupier = ts.getOccupier();
 							final List<Square> legal = occupier.filteredLegals();
-							System.out.println(ts);
-							System.out.println(map.get(squareTile));
+                            Square shit = (Square) map.get(squareTile);
+                            System.out.println(squareTile);
+                            System.out.println(shit);
+                            if(shit.isOccupied()) {
+                                System.out.println("hallo" + shit.getOccupier());
+                            }
+                          //  System.out.println(boardPane.getChildren());
+                         //   System.out.println(list);
+
 							//resetBoard();--------------------------------------------------------------------
 							// /	for (final Square s : legal) {
 								//Highlight possible moves if turned on
@@ -313,17 +319,26 @@ public class HomeScreen extends Pane {
 					boardPane.add(squareTile, col, row);
 					int finalCol = col;
 					int finalRow = row;
+                    GridPane.setFillWidth(squareTile,true);
+                    GridPane.setFillHeight(squareTile, true);
 					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent e) {
 							Square ts = board.getSquares()[finalCol][7 - finalRow];
 							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
-							        System.out.println(ts);
-									System.out.println(map.get(squareTile));
+							//System.out.println(ts);
+                            Square shit = (Square) map.get(squareTile);
+                            System.out.println(squareTile);
+                            System.out.println(shit);
+                            if(shit.isOccupied()) {
+                                System.out.println("hallo" + shit.getOccupier());
+                            }
 								}
-
 					});
-					map.put(squareTile, new Square(col, 7-row));
+					map.put( squareTile,board.getSquare(col + 1, row + 1));
+
+
+
 				}
 			}
 		}
