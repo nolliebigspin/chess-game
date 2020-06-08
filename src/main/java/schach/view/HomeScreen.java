@@ -270,7 +270,7 @@ public ArrayList<Label> list = new ArrayList<Label>();
 
 
 				if (board.getSquares()[col][row].isOccupied()) {
-//							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
+
 					Label squareTile = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
 					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
 					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
@@ -278,7 +278,7 @@ public ArrayList<Label> list = new ArrayList<Label>();
 					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
 					boardPane.add(squareTile, col, row);
 					//map.put( squareTile,new Square(col, row));
-                    map.put(squareTile, board.getSquare(col + 1,row + 1));
+                    map.put(squareTile, board.getSquare(col + 1,7-row + 1));
 					// Add listener
 					int finalCol = col;
 					int finalRow = row;
@@ -295,16 +295,11 @@ public ArrayList<Label> list = new ArrayList<Label>();
                             System.out.println(squareTile);
                             System.out.println(shit);
                             if(shit.isOccupied()) {
-                                System.out.println("hallo" + shit.getOccupier());
+                                System.out.println("hallo" + shit.getOccupier().print() + shit.getOccupier().isWhite());
                             }
-                          //  System.out.println(boardPane.getChildren());
-                         //   System.out.println(list);
 
-							//resetBoard();--------------------------------------------------------------------
-							// /	for (final Square s : legal) {
-								//Highlight possible moves if turned on
-							        for (int i = 0; i < occupier.filteredLegals().size(); i++) {
-									System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
+                            for (int i = 0; i < occupier.filteredLegals().size(); i++) {
+                                System.out.println("can move to:" + occupier.filteredLegals().get(i).getColumn() + ", " + occupier.filteredLegals().get(i).getRow());
 							        }
 						}
 
@@ -336,7 +331,7 @@ public ArrayList<Label> list = new ArrayList<Label>();
                             }
 								}
 					});
-					map.put( squareTile,board.getSquare(col + 1, row + 1));
+					map.put( squareTile,board.getSquare(col + 1, 7-row + 1));
 
 
 
