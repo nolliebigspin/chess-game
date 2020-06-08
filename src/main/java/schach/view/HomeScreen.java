@@ -218,7 +218,6 @@ public ArrayList<Label> list = new ArrayList<Label>();
 						@Override
 						public void handle(MouseEvent e) {
 							Square ts = board.getSquares()[finalCol][7 - finalRow];
-							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
 							final Piece occupier = ts.getOccupier();
 
 							final List<Square> legalSquareList = occupier.filteredLegals();
@@ -253,7 +252,6 @@ public ArrayList<Label> list = new ArrayList<Label>();
 						@Override
 						public void handle(MouseEvent e) {
 							Square ts = board.getSquares()[finalCol][7 - finalRow];
-							squareTile.setBackground(new Background(new BackgroundFill(Color.RED, null, Insets.EMPTY)));
 							//System.out.println(ts);
                             Square shit = (Square) map.get(squareTile);
                             System.out.println(squareTile);
