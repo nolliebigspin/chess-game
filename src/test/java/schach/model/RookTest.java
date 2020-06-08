@@ -46,7 +46,7 @@ class RookTest {
         legals.add(testBoard.squareByDenotation("d5"));
         legals.add(testBoard.squareByDenotation("g7"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -77,7 +77,7 @@ class RookTest {
         legals.add(testBoard.squareByDenotation("h5"));
         legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -107,7 +107,7 @@ class RookTest {
         legals.add(enemy2);
         legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -138,7 +138,7 @@ class RookTest {
         legals.add(testBoard.squareByDenotation("g6"));
         legals.add(testBoard.squareByDenotation("g3"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -171,7 +171,7 @@ class RookTest {
         legals.add(testBoard.squareByDenotation("g6"));
         legals.add(testBoard.squareByDenotation("g3"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -201,7 +201,7 @@ class RookTest {
         legals.add(enemy2);
         legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));;
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -230,7 +230,7 @@ class RookTest {
         legals.add(testBoard.squareByDenotation("h5"));
         legals.add(testBoard.squareByDenotation("g6"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));;
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
@@ -258,7 +258,7 @@ class RookTest {
         legals.add(testBoard.squareByDenotation("h5"));
         legals.add(testBoard.squareByDenotation("f5"));
         // test the CheckUpLeft method
-        assertTrue((legals.containsAll(Actual)) && Actual.containsAll(legals));;
+        assertTrue(legals.containsAll(Actual) && Actual.containsAll(legals));
     }
 
 
