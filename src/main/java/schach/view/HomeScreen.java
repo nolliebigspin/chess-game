@@ -340,8 +340,6 @@ public class HomeScreen extends Pane {
 		ArrayList<Label> labelList = new ArrayList<Label>();
 
 		for (int i = 0; i < squareList.size(); i++) {
-			int col = squareList.get(i).getColumn();
-			int row = squareList.get(i).getRow();
 			if (!squareList.get(i).isOccupied()) {
 				labelList.add(new Label("     " + squareList.get(i).getOccupier().print()));
 			} else {
