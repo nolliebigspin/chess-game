@@ -264,8 +264,6 @@ public ArrayList<Label> list = new ArrayList<Label>();
 					map.put( squareTile,board.getSquare(col + 1, 7 - row + 1));
 					mapTwo.put(board.getSquare(col + 1, 7 - row + 1), squareTile);
 
-
-
 				}
 			}
 		}
@@ -298,6 +296,50 @@ public ArrayList<Label> list = new ArrayList<Label>();
 		clicked.setBackground(new Background(new BackgroundFill(clickedColor, null, Insets.EMPTY)));
 		for (int i = 0; i < nextLabels.size(); i++) {
 			nextLabels.get(i).setBackground(new Background(new BackgroundFill(nextColor, null, Insets.EMPTY)));
+		}
+	}
+
+	/**
+	 * Method to decolorize all labels on the board
+	 */
+	private void resetColorizedLabels() {
+		Color squareColor;
+
+		for (int col = 0; col < 8; col++) {
+			for (int row = 0; row < 8; row++) {
+				if ((row + col) % 2 == 0) {
+					squareColor = Color.BLACK;
+				} else {
+					squareColor = Color.GREY;
+				}
+
+				if (board.getSquares()[col][row].isOccupied()) {
+
+					Label squareTile = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
+					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
+					// color
+					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
+					boardPane.add(squareTile, col, row);
+
+					map.put(squareTile, board.getSquare(col + 1,7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1,7 - row + 1),squareTile);
+					list.add(squareTile);
+				} else {
+					Label squareTile = new Label();
+					squareTile.setContentDisplay(ContentDisplay.CENTER);
+					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
+					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
+					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
+					boardPane.add(squareTile, col, row);
+					GridPane.setFillWidth(squareTile,true);
+					GridPane.setFillHeight(squareTile, true);
+
+					map.put( squareTile,board.getSquare(col + 1, 7 - row + 1));
+					mapTwo.put(board.getSquare(col + 1, 7 - row + 1), squareTile);
+
+				}
+			}
 		}
 	}
 }
