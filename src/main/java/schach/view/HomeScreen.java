@@ -343,6 +343,12 @@ public ArrayList<Label> list = new ArrayList<Label>();
 		}
 	}
 
+	/**
+	 *
+	 * @param title Title of the alert window
+	 * @param text Messagetext of the alert window
+	 * @param withExitButton Boolean if alert window should have an exit button
+	 */
 	public void showAlert(String title, String text, boolean withExitButton) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle(title);
