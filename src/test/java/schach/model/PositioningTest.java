@@ -2,6 +2,7 @@ package schach.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -20,13 +21,10 @@ class PositioningTest {
     }
 
     @Test
-    void testPositioning(){
-        lineUp(" white-queen-a1, white-king-c1, white-knight-f1, white-pawn-c3, white-pawn-b5, black-bishop-g6, black-rook-h8, black-queen-e8, black-king-c8");
-        board.printBoard();
-        Board nBoard = new Board(board.getPositioning());
-        nBoard.printBoard();
-        nBoard.movePiece("f1","g3");
-        nBoard.printBoard();
+    void testGeneral(){
+        board.initLineUp();
+        Board nb = new Board(board.getPositioning());
+        assertTrue(nb.squareByDenotation("e2").isOccupied());
     }
 
     /**

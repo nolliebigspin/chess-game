@@ -156,7 +156,14 @@ class PieceTest {
         assertEquals(expected,p.getPosition());
     }
 
-
+    @Test
+    void testFilteredLegals(){
+        Board testBoard = new Board();
+        testBoard.initLineUp();
+        Piece p = testBoard.squareByDenotation("e2").getOccupier();
+        p.updateLegals();
+        assertTrue(p.filteredLegals().contains(testBoard.squareByDenotation("e3")));
+    }
 
 
 }
