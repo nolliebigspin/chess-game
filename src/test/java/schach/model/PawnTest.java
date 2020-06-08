@@ -252,7 +252,7 @@ class PawnTest {
         Pawn wPawn1 = (Pawn) testBoard.squareByDenotation("b5").getOccupier();
         Pawn bPawn1 = (Pawn) testBoard.squareByDenotation("f4").getOccupier();
         testBoard.movePiece("c7","c5");
-        assertTrue(wPawn1.checkEnPassantRight().size() == 1);
+        assertEquals(1, wPawn1.checkEnPassantRight().size());
         assertTrue(wPawn1.checkEnPassantRight().contains(testBoard.squareByDenotation("c6")));
         testBoard.movePiece("g2","g4");
         assertTrue(wPawn1.checkEnPassantRight().isEmpty());
@@ -271,7 +271,7 @@ class PawnTest {
         Pawn wPawn1 = (Pawn) testBoard.squareByDenotation("h5").getOccupier();
         Pawn bPawn1 = (Pawn) testBoard.squareByDenotation("c4").getOccupier();
         testBoard.movePiece("g7","g5");
-        assertTrue(wPawn1.checkEnPassantLeft().size() == 1);
+        assertEquals(wPawn1.checkEnPassantLeft().size(), 1);
         assertTrue(wPawn1.checkEnPassantLeft().contains(testBoard.squareByDenotation("g6")));
         testBoard.movePiece("b2","b4");
         assertTrue(wPawn1.checkEnPassantLeft().isEmpty());

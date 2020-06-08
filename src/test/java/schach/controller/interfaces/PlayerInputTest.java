@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import schach.model.Board;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -43,6 +44,8 @@ class PlayerInputTest {
     @Test
     void testInputIsMoveInvalid2(){
         assertFalse(playerInput.inputIsMove("z7-e9"));
+        assertFalse(playerInput.inputIsMove("e4-e2"));
+        assertFalse(playerInput.inputIsMove("e--e2"));
     }
 
 
@@ -82,4 +85,34 @@ class PlayerInputTest {
         System.setOut(originalOut);
     }
 
+    @Test
+    void testInputRoutine(){
+        board.initLineUp();
+        String in = "e2-e4";
+        System.setIn(new ByteArrayInputStream(in.getBytes()));
+        assertEquals(in, playerInput.inputRoutine());
+    }
+
+    @Test
+    void testPromotion(){
+        board.initLineUp();
+        String in = "e2-e4";
+        System.setIn(new ByteArrayInputStream(in.getBytes()));
+        playerInput.inputRoutine();
+        assertFalse(playerInput.isPromotion());
+        in = "e2-e4Q";
+        System.setIn(new ByteArrayInputStream(in.getBytes()));
+        playerInput.inputRoutine();
+        assertTrue(playerInput.isPromotion());
+    }
+
+    @Test
+    void testYes(){
+        String in = "yes";
+        System.setIn(new ByteArrayInputStream(in.getBytes()));
+        assertTrue(playerInput.yes());
+        in = "no";
+        System.setIn(new ByteArrayInputStream(in.getBytes()));
+        assertFalse(playerInput.yes());
+    }
 }

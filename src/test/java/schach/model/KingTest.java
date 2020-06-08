@@ -234,6 +234,25 @@ class KingTest {
         assertEquals(legals,Actual);
     }
 
+    @Test
+    void testCasteling(){
+       Board board = new Board();
+       board.initLineUp();
+       Piece wKing = board.squareByDenotation("e1").getOccupier();
+       board.movePiece("e2","e3");
+        board.movePiece("b7","b5");
+        board.movePiece("f1","e2");
+        board.movePiece("c8","b7");
+        board.movePiece("g1","h3");
+        board.movePiece("b8","a6");
+        board.movePiece("e1","g1");
+        board.movePiece("d7","d6");
+        board.movePiece("d2","d3");
+        board.movePiece("d8","d7");
+        board.movePiece("e8","c8");
+        assertEquals(board.squareByDenotation("g1").getOccupier(), wKing);
+    }
+
 
 
 
