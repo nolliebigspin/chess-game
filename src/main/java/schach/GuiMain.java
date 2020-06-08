@@ -20,7 +20,6 @@ public class GuiMain extends Application {
         Scene scene = new Scene(homeScreen);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-//        primaryStage.setMinWidth(300);
         primaryStage.setTitle("Chess Game");
         primaryStage.show();
     }

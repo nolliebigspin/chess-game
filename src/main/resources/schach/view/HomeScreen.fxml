@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.shape.Line?>
 <fx:root styleClass="root" maxHeight="-Infinity" maxWidth="-Infinity"
@@ -18,12 +17,12 @@
                   styleClass="menuBox" alignment="TOP_LEFT">
                 <MenuBar fx:id="menuBar" prefHeight="40.0" styleClass="mainMenu">
                     <menus>
-                        <Menu text="Start" styleClass="root_Menu">
+                        <Menu text="START" styleClass="root_Menu">
                             <items>
                                 <Menu text="New Game" >
                                     <items>
-                                        <MenuItem text="Human VS Human" onAction="#showDialogHuman" />
-                                        <MenuItem text="Human VS CPU" onAction="#showDialogCPU" />
+                                        <MenuItem text="Human VS Human" onAction="#Human" />
+                                        <MenuItem text="Human VS CPU" onAction="#AI" />
                                     </items>
                                 </Menu>
                                 <MenuItem text="LOAD GAME"/>
@@ -31,13 +30,13 @@
                                 <MenuItem text="SAVE AND EXIT"/>
                             </items>
                         </Menu>
-                        <Menu text="Settings">
+                        <Menu text="SETTINGS">
                             <items>
                                 <MenuItem text="INSTRUCTOR"/>
                                 <MenuItem text="LANGUAGE"/>
                             </items>
                         </Menu>
-                        <Menu text="Help">
+                        <Menu text="HELP">
                             <items>
                                 <MenuItem text="HOW TO PLAY"/>
                                 <SeparatorMenuItem />

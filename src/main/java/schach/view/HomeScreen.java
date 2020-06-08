@@ -1,10 +1,7 @@
 package schach.view;
 import java.io.FileInputStream;
 import java.util.*;
-import java.util.concurrent.SynchronousQueue;
-
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +9,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.skin.LabeledSkinBase;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
-import schach.controller.interfaces.Input;
 import schach.model.Square;
 import schach.model.Board;
 import schach.model.Piece;
@@ -42,10 +37,7 @@ public class HomeScreen extends Pane {
 	private HBox content;
 	@FXML
 	private HBox cemetery;
-	@FXML
-	//private HBox panner;
-
-    private int currentMove;
+	private int currentMove;
 	boolean canMove;
 	private Board board;
 	private final Label[][] labels = new Label[8][8];
@@ -69,11 +61,6 @@ public class HomeScreen extends Pane {
 			fxmlLoader.load();
 			this.getStylesheets().add(HomeScreen.class.getResource("root.css").toExternalForm());
 			this.cemetery.setVisible(false);
-			//////////// HomeScreen Background Image section ////////////////
-			//	this.panner = new HBox();
-			//	panner.prefWidth(800);
-			//	panner.prefHeight(800);
-			//	this.panner.setId("panner");
 			FileInputStream input = new FileInputStream(
 					System.getProperty("user.dir") + "\\src\\main\\java\\schach\\view\\GUI\\images\\background.jpeg");
 			Image image = new Image(input);
@@ -82,8 +69,6 @@ public class HomeScreen extends Pane {
 					new BackgroundSize(BackgroundSize.AUTO,BackgroundSize.AUTO,true,true,true, true));
 			Background background = new Background(backgroundimage);
 			this.setBackground(background);
-			//////////////////////////////////
-//			startGame();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -91,7 +76,7 @@ public class HomeScreen extends Pane {
 	}
 
 	@FXML
-	private void showDialogHuman() {
+	private void Human() {
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("New Game");
 		dialog.setHeaderText("Add Players");
@@ -114,10 +99,8 @@ public class HomeScreen extends Pane {
 		grid.add(playerOne, 1, 0);
 		grid.add(new Label("Player 2:"), 0, 1);
 		grid.add(playerTwo, 1, 1);
-		// Enable/Disable login button depending on whether a username was entered.
 		Node loginButton = dialog.getDialogPane().lookupButton(startButton);
 		loginButton.setDisable(true);
-		// Do some validation (using the Java 8 lambda syntax).
 		playerOne.textProperty().addListener((observable, oldValue, newValue) -> {
 			playerTwo.textProperty().addListener((observable1, oldValue1, newValue1) -> {
 				loginButton.setDisable(newValue.trim().isEmpty() || newValue1.trim().isEmpty());
@@ -129,9 +112,7 @@ public class HomeScreen extends Pane {
 			});
 		});
 		dialog.getDialogPane().setContent(grid);
-		// Request focus on the username field by default.
 		Platform.runLater(() -> playerOne.requestFocus());
-		// Convert the result to a username-password-pair when the login button is clicked.
 		dialog.setResultConverter(dialogButton -> {
 			if (dialogButton == startButton) {
 				return new Pair<>(playerOne.getText(), playerTwo.getText());
@@ -149,16 +130,14 @@ public class HomeScreen extends Pane {
 	}
 
 	@FXML
-	private void showDialogCPU() {
+	private void AI() {
 		Dialog<Pair<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("New Game");
 		dialog.setHeaderText("Add Player");
 		dialog.getDialogPane().setStyle("-fx-background-color: #feffef;");
-		// Set the icon (must be included in the project).
 		// Set the button types.
 		ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
-		// Create the username and password labels and fields.
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -175,10 +154,8 @@ public class HomeScreen extends Pane {
 		grid.add(new Label("Play With:"), 0, 1);
 		grid.add(white, 1, 1);
 		grid.add(black, 1, 2);
-		// Enable/Disable login button depending on whether a username was entered.
 		Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
 		loginButton.setDisable(true);
-		// Do some validation (using the Java 8 lambda syntax).
 		playerOne.textProperty().addListener((observable, oldValue, newValue) -> {
 			loginButton.setDisable(newValue.trim().isEmpty());
 		});
@@ -202,7 +179,6 @@ public class HomeScreen extends Pane {
 
 	private void startGame() {
 		this.moves = new ArrayList<Board>();
-
 		this.setBackground(null);
 		this.setStyle("-fx-base: rgb(10, 10, 10);-fx-background: rgba(53, 64, 35, 0.2);");
 		this.cemetery.setVisible(true);
@@ -227,8 +203,6 @@ public class HomeScreen extends Pane {
 				lastClicked = s;
 				clickedList.add(s);
 				if (clickedList.get(0).isOccupied()){
-					//lastClicked.getOccupier().updateLegals();
-					//colorizeLegalNextSquares(mapTwo.get(lastClicked), lastClicked.getOccupier().filteredLegals());
 					if (clickCounter == 2){
 						move(clickedList.get(0));
 					}
@@ -237,8 +211,6 @@ public class HomeScreen extends Pane {
 		});
 		print();
 		boardBox.getChildren().add(boardPane);
-//		content.setPrefSize(700, 500);
-		/// Last Move section
 		VBox lastMove = new VBox();
 		lastMove.setPrefSize(250,500);
 		lastMove.getStyleClass().add("lastMove");
@@ -249,9 +221,8 @@ public class HomeScreen extends Pane {
 		Label l = new Label("Last Move");
 		lastMove.getChildren().add(l);
 		lastMove.getChildren().add(this.lastMobeTableBox);
-
 		l.getStyleClass().add("lastMove-label");
-//		l.setBackground(new Background(new BackgroundFill(Color.GREEN, null, Insets.EMPTY)));
+		l.setBackground(new Background(new BackgroundFill(Color.GREEN, null, Insets.EMPTY)));
 		updateLastMove();
 		content.setSpacing(10);
 		content.getChildren().addAll(boardBox, lastMove);
@@ -293,31 +264,6 @@ public class HomeScreen extends Pane {
 	}
 
 
-
-/**
-	private void test(Label label){
-		Square startingSquare = map.get(label);
-		if (!startingSquare.isOccupied()){
-			return;
-		}
-		Piece piece = startingSquare.getOccupier();
-		piece.updateLegals();
-		List<Square> legals = piece.filteredLegals();
-		Square clickedSquare = map.get(lastClickedOn);
-		if (legals.contains(clickedSquare)){
-			board.movePiece(startingSquare.getDenotation(), clickedSquare.getDenotation());
-		}
-		reset();
-	}
-
-	private Square getNextClicked(){
-
-	}
-
-	private void move(Label start, Label target){
-
-	}
-*/
 
 	private void print(){
 		Color squareColor;
@@ -380,14 +326,12 @@ public class HomeScreen extends Pane {
 					squareColor = Color.GREY;
 				}
 				if (board.getSquares()[col][row].isOccupied()) {
-
 					Label squareTile = new Label("     " + (board.getSquare(col+1,row+1).getOccupier().print()));
 					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
 					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
 					// color
 					squareTile.setBackground(new Background(new BackgroundFill(squareColor, null, Insets.EMPTY)));
 					boardPane.add(squareTile, col, 9 - row);
-					//map.put( squareTile,new Square(col, row));
 					list.add(squareTile);
                     map.put(squareTile, board.getSquare(col + 1,7 - row + 1));
 					mapTwo.put(board.getSquare(col + 1,7 - row + 1),squareTile);
@@ -395,7 +339,6 @@ public class HomeScreen extends Pane {
 					int finalCol = col;
 					int finalRow = row;
 					final Label temp = labels[col][row];
-
 					squareTile.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent e) {
@@ -410,12 +353,10 @@ public class HomeScreen extends Pane {
                             System.out.println(squareTile);
                             System.out.println(place);
                             //White movement
-                            if(place.isOccupied()){
-
+                            if(place.isOccupied()&& place.getOccupier().isWhite() && currentMove% 2 == 0){
                             }
                             //Black movement
                             if(place.isOccupied() &&! place.getOccupier().isWhite() && currentMove% 2 != 0){
-
                             }
 
 						}
@@ -488,7 +429,7 @@ public class HomeScreen extends Pane {
 	/**
 	 * This method will color the actually clicked Square to red and the legal next squares to green
 	 * @param clicked Label that is clicked
-	 * @param nextLabels List of labels that are legal next squares
+	 * @param nextSquare List of labels that are legal next squares
 	 */
 	private void colorizeLegalNextSquares(Label clicked, List<Square> nextSquare) {
 		Color clickedColor = Color.RED;
@@ -562,12 +503,12 @@ public class HomeScreen extends Pane {
 
 		alert.showAndWait().ifPresent(res -> {
 			if (res == buttonOK) {
-				System.out.println("Pressed Ok.");
+				System.out.println("Ok.");
 			}
 			if (withExitButton) {
 				ButtonType buttonExit = new ButtonType("Exit");
 				if (res == buttonExit) {
-					System.out.println("Pressed Exit.");
+					System.out.println("Exit");
 					Platform.exit();
 					System.exit(0);
 				}
