@@ -271,7 +271,7 @@ public ArrayList<Label> list = new ArrayList<Label>();
 
 
 				if (board.getSquares()[col][row].isOccupied()) {
-//							Label b = new Label("  " + board.getSquares()[col - 1][row].getOccupier().print());
+
 					Label squareTile = new Label("     " + (board.getSquares()[col][row].getOccupier().print()));
 					squareTile.prefHeightProperty().bind(boardPane.heightProperty().divide(8));
 					squareTile.prefWidthProperty().bind(boardPane.widthProperty().divide(8));
@@ -301,7 +301,7 @@ public ArrayList<Label> list = new ArrayList<Label>();
                             System.out.println(squareTile);
                             System.out.println(shit);
                             if(shit.isOccupied()) {
-                                System.out.println("hallo" + shit.getOccupier());
+                                System.out.println("hallo" + shit.getOccupier().print() + shit.getOccupier().isWhite());
                             }
 							//Highlight possible moves if turned on
 							for (int i = 0; i < occupier.filteredLegals().size(); i++) {
@@ -335,8 +335,7 @@ public ArrayList<Label> list = new ArrayList<Label>();
                             }
 								}
 					});
-					map.put( squareTile,board.getSquare(col + 1, 7 - row + 1));
-					mapTwo.put(board.getSquare(col + 1, 7 - row + 1),squareTile);
+					map.put( squareTile,board.getSquare(col + 1, row + 1));
 
 
 
