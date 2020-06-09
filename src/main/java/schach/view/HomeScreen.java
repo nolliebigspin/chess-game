@@ -203,6 +203,7 @@ public class HomeScreen extends Pane {
 				lastClicked = s;
 				clickedList.add(s);
 				if (clickedList.get(0).isOccupied()){
+					colorizeLegalNextSquares(mapTwo.get(clickedList.get(0)), clickedList.get(0).getOccupier().filteredLegals());
 					if (clickCounter == 2){
 						move(clickedList.get(0));
 					}
