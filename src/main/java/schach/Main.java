@@ -20,7 +20,8 @@ public class Main {
     public static void main(String[] args) {
         List<String> arguments = Arrays.asList(args);
         if (arguments.size() == 0 || !arguments.contains("--no-gui")){
-            System.out.println("No GUI implemented yet, please add argument: --no-gui");
+            String[] guiArgs = null;
+            GuiMain.main(guiArgs);
         } else if (arguments.contains("--simple")){
             System.out.println("Welcome :) ");
             System.out.println("White starts first!");
