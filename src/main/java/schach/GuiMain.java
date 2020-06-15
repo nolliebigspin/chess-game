@@ -1,13 +1,13 @@
 package schach;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import schach.view.HomeScreen;
+
+import java.net.URL;
+import java.nio.file.Paths;
 
 public class GuiMain extends Application {
     public static void main(String[] args) {
@@ -15,12 +15,11 @@ public class GuiMain extends Application {
     }
     
     @Override
-    public void start(Stage primaryStage) {
-        HomeScreen homeScreen = new HomeScreen();
-        Scene scene = new Scene(homeScreen);
+    public void start(Stage primaryStage) throws Exception{
+        URL url = Paths.get("src/main/java/schach/startMenu.fxml").toUri().toURL();
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.setTitle("Chess Game");
         primaryStage.show();
     }
 }
