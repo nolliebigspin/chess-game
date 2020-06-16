@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 public class GuiMain extends Application {
 
     private StartMenu startMenu;
-    //private GameScreen gameScreen;
+    private schach.view.GameScreen gameScreen;
 
     public static void main(String[] args) {
         launch();
@@ -22,7 +22,7 @@ public class GuiMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception{
-        URL url = Paths.get("src/main/java/schach/view/startMenu.fxml").toUri().toURL();
+        URL url = Paths.get("src/main/resources/startMenu.fxml").toUri().toURL();
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -50,7 +50,7 @@ public class GuiMain extends Application {
         });
     }
 
-    /*private void setGameScreen(GameScreen gameScreen){
+    private void setGameScreen(schach.view.GameScreen gameScreen){
         this.gameScreen = gameScreen;
-    }*/
+    }
 }

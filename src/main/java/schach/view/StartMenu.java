@@ -133,9 +133,9 @@ public class StartMenu {
     }
 
     public void start() throws Exception{
-        //URL url = Paths.get("src/main/java/schach/gameScreen.fxml").toUri().toURL();
-        FXMLLoader fxmlLoader = new FXMLLoader(/*getClass().getResource("/gameScreen.fxml")*/);
-        Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("gameScreen.fxml"));
+        URL url = Paths.get("src/main/resources/gameScreen.fxml").toUri().toURL();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
+        Parent root = fxmlLoader.load(url);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
     }
