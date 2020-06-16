@@ -57,8 +57,29 @@ public class StartMenu {
     }
 
     public void setPlayerName1(){
-        player1 = playerName1.getText();
+        player1 = cutPlayerName(true);
         playerNameColor.setText(player1);
+    }
+
+    public void setPlayerName2(){
+        player2 = cutPlayerName(false);
+    }
+
+    private String cutPlayerName(Boolean isPlayer1){
+        String name = playerName1.getText();
+        if(!isPlayer1){
+            name = playerName2.getText();
+        }
+        String newName = name;
+        if (name.length() > 12){
+            newName = name.substring(0, 12);
+            if (isPlayer1){
+                playerName1.setText(newName);
+            } else {
+                playerName2.setText(newName);
+            }
+        }
+        return newName;
     }
 
     public TextField getPlayerName1(){
