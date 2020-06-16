@@ -1,14 +1,31 @@
-package schach;
+package schach.view;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import java.net.URL;
+import java.nio.file.Paths;
 
 public class StartMenu {
 
+    @FXML
+    public Pane aiContainerPane;
+    @FXML
+    public ToggleButton toggleButtonSimple;
+    @FXML
+    public ToggleButton toggleButtonMinMax;
+    @FXML
+    public Button startButton;
     @FXML
     private ToggleButton toggleComputer;
     @FXML
@@ -24,26 +41,31 @@ public class StartMenu {
     @FXML
     private Label playerNameColor;
 
+    private Stage primaryStage;
     private Boolean vsPlayer;
     private String player1;
     private String player2;
     private Boolean player1isWhite;
+    private Boolean simpleAi;
 
     public StartMenu(){
         vsPlayer = true;
         player1isWhite = true;
+        simpleAi = true;
     }
 
     public void setToggleComputer(){
         togglePlayer.setSelected(false);
         vsPlayer = false;
         playerName2.setVisible(false);
+        aiContainerPane.setVisible(true);
     }
 
     public void setTogglePlayer(){
         toggleComputer.setSelected(false);
         vsPlayer = true;
         playerName2.setVisible(true);
+        aiContainerPane.setVisible(false);
     }
 
     public void setToggleButtonWhite(){
@@ -58,11 +80,27 @@ public class StartMenu {
 
     public void setPlayerName1(){
         player1 = cutPlayerName(true);
+        if (player1.length() == 0){
+            player1 = "Player 1";
+        }
         playerNameColor.setText(player1);
     }
 
     public void setPlayerName2(){
         player2 = cutPlayerName(false);
+        if (player2.length() == 0){
+            player2 = "Player 2";
+        }
+    }
+
+    public void setToggleButtonSimple(){
+        toggleButtonMinMax.setSelected(false);
+        simpleAi = true;
+    }
+
+    public void setToggleButtonMinMax(){
+        toggleButtonSimple.setSelected(false);
+        simpleAi = false;
     }
 
     private String cutPlayerName(Boolean isPlayer1){
@@ -86,8 +124,21 @@ public class StartMenu {
         return playerName1;
     }
 
-
-    public void start(){
-
+    public TextField getPlayerName2() {
+        return playerName2;
     }
+
+    public void setPrimaryStage(Stage primaryStage){
+        this.primaryStage = primaryStage;
+    }
+
+    public void start() throws Exception{
+        //URL url = Paths.get("src/main/java/schach/gameScreen.fxml").toUri().toURL();
+        FXMLLoader fxmlLoader = new FXMLLoader(/*getClass().getResource("/gameScreen.fxml")*/);
+        Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("gameScreen.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+    }
+
+
 }

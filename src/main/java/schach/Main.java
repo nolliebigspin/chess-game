@@ -3,6 +3,7 @@ package schach;
 import schach.controller.interfaces.Input;
 import schach.controller.interfaces.HumanVsComputer;
 import schach.model.Board;
+import schach.view.GuiMain;
 
 import java.util.Arrays;
 import java.util.List;
