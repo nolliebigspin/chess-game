@@ -32,13 +32,6 @@ public class StartMenu {
     public StartMenu(){
         vsPlayer = true;
         player1isWhite = true;
-//        playerName1.textProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-//                setPlayerName1();
-//                System.out.println("as");
-//            }
-//        });
     }
 
     public void setToggleComputer(){
@@ -68,6 +61,9 @@ public class StartMenu {
         playerNameColor.setText(player1);
     }
 
+    public TextField getPlayerName1(){
+        return playerName1;
+    }
 
 
     public void start(){
