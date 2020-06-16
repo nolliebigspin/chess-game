@@ -16,8 +16,9 @@ public class GuiMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception{
-        GuiHandler guiHandler = new GuiHandler();
-        Scene scene = new Scene(guiHandler);
+        URL url = Paths.get("src/main/java/schach/startMenu.fxml").toUri().toURL();
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
