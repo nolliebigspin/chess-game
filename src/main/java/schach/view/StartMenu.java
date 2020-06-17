@@ -137,6 +137,7 @@ public class StartMenu {
         this.guiMain = guiMain;
     }
 
+    //TODO in GUIMAIN pls
     public void start() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
         Parent root = fxmlLoader.load();
@@ -145,6 +146,7 @@ public class StartMenu {
         primaryStage.setResizable(true);
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.initGameMode(vsPlayer, player1isWhite, simpleAi);
+        gameScreen.initHashMap();
     }
 
 

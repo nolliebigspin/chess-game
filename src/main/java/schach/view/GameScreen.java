@@ -8,6 +8,7 @@ import schach.model.Board;
 import schach.model.Square;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class GameScreen {
 
@@ -19,17 +20,18 @@ public class GameScreen {
     private Boolean simpleAi;
 
     private Board board;
-    private HashMap<StackPane, Square> paneToSquare;
+    private Map<StackPane, Square> paneToSquare;
 
     public GameScreen(){
         this.board = new Board();
-        //initHashMap();
+        paneToSquare = new HashMap<>();
     }
 
-    private void initHashMap(){
+    public void initHashMap(){
         for (Node node: gridPane.getChildren()){
             if (node instanceof StackPane){
                 StackPane pane = (StackPane) node;
+                int col = gridPane.getColumnIndex(node);
                 Square square = board.getSquare(gridPane.getColumnIndex(node) + 1, 8 - gridPane.getRowIndex(node));
                 paneToSquare.put(pane, square);
             }
