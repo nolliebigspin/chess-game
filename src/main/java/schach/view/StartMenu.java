@@ -138,6 +138,7 @@ public class StartMenu {
         Parent root = fxmlLoader.load(url);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(true);
     }
 
 
