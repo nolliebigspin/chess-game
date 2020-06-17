@@ -47,6 +47,7 @@ public class StartMenu {
     private String player2;
     private Boolean player1isWhite;
     private Boolean simpleAi;
+    private GuiMain guiMain;
 
     public StartMenu(){
         vsPlayer = true;
@@ -132,13 +133,18 @@ public class StartMenu {
         this.primaryStage = primaryStage;
     }
 
+    public void setGuiMain(GuiMain guiMain){
+        this.guiMain = guiMain;
+    }
+
     public void start() throws Exception{
-        URL url = Paths.get("src/main/resources/gameScreen.fxml").toUri().toURL();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
-        Parent root = fxmlLoader.load(url);
+        Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
+        GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
+        gameScreen.initGameMode(vsPlayer, player1isWhite, simpleAi);
     }
 
 
