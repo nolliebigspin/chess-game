@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import schach.model.Board;
+import schach.model.Positioning;
 import schach.model.Square;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class GameScreen {
 
     public GameScreen(){
         this.board = new Board();
+        board.initLineUp();
         paneToSquareMap = new HashMap<>();
         squareToPaneMap = new HashMap<>();
     }
@@ -43,22 +45,25 @@ public class GameScreen {
         for (Map.Entry<StackPane, Square> entry: paneToSquareMap.entrySet()){
             squareToPaneMap.put(entry.getValue(), entry.getKey());
         }
-        placeImageOnPane("\u265F", squareToPaneMap.get(board.squareByDenotation("a1")));
-    }
-
-    private StackPane getStackPaneFromGrid(int col, int row){
-        for (Node node: gridPane.getChildren()){
-            if (gridPane.getColumnIndex(node) == col && gridPane.getRowIndex(node) == row){
-                return (StackPane) node;
-            }
-        }
-        return null;
+        printBoard();
     }
 
     public void initGameMode(Boolean vsPlayer, Boolean playerIsWhite, Boolean simpleAi){
         this.vsPlayer = vsPlayer;
         this.playerIsWhite = playerIsWhite;
         this.simpleAi = simpleAi;
+    }
+
+    public void printBoard(){
+        Positioning positioning = new Positioning(board);
+        positioning.readPositioning();
+        Map<Square, String> pos = positioning.getPositioningMap();
+        for (Map.Entry<Square, String> entry: pos.entrySet()){
+            String unicode = entry.getValue();
+            Square square = entry.getKey();
+            StackPane pane = squareToPaneMap.get(square);
+            placeImageOnPane(unicode, pane);
+        }
     }
 
     private void placeImageOnPane(String unicode, StackPane pane){
