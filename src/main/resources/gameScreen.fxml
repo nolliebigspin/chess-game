@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1311.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.GameScreen">
    <children>
-      <Pane layoutX="68.0" layoutY="113.0">
+      <Pane fx:id="boardContainerPane" layoutX="68.0" layoutY="113.0">
          <children>
             <GridPane fx:id="gridPane" prefHeight="500.0" prefWidth="500.0">
               <columnConstraints>
@@ -33,9 +33,9 @@
               </rowConstraints>
                <children>
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
-                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="6" GridPane.rowIndex="0" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
@@ -64,10 +64,10 @@
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="7" GridPane.rowIndex="3" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="7" GridPane.rowIndex="5" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: white;" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
-                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="7" GridPane.rowIndex="0"/>
+                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+                  <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="7" GridPane.rowIndex="0" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
