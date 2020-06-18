@@ -82,11 +82,13 @@ public class Check {
      * @return true if Piece would allow the king to be in a check-situatio, false if move is safe for king
      */
     public boolean inCheckIfMoved(Piece movingPiece, Square target){
+        Piece realLastMoved = board.getLastMoved();
         movingPiece.acceptMove(target);
         board.updateAllLegalSquares();
         //List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.getIsWhite());
         boolean inCheck = kingInCheck(movingPiece.isWhite()/**TODO delete: , currentlyAttacked*/);
         movingPiece.undoMove();
+        board.setLastMoved(realLastMoved);
         board.updateAllLegalSquares();
         return inCheck;
     }
