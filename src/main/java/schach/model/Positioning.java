@@ -47,7 +47,7 @@ public class Positioning {
         return place;
     }
 
-    public Map getPositioningMap(){
+    public Map<Square, String> getPositioningMap(){
         return this.hashMap;
     }
 
