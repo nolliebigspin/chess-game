@@ -114,6 +114,7 @@ public class ChessBoardController {
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
+        board.printBoard();
         resetBackground();
         printBoard();
         inMove = false;
