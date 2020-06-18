@@ -1,8 +1,10 @@
 package schach.view;
 
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -23,6 +25,7 @@ public class ChessBoardController {
     private Board board;
     private Map<StackPane, Square> paneToSquareMap = new HashMap<>();
     private Map<Square, StackPane> squareToPaneMap = new HashMap<>();
+    private StackPane lastClickedPane;
 
     public ChessBoardController(Pane container){
         this.container = container;
@@ -35,6 +38,7 @@ public class ChessBoardController {
         board.initLineUp();
         initHashMap();
         printBoard();
+        initEventHandler();
     }
 
     public void initGameMode(Boolean vsPlayer, Boolean playerIsWhite, Boolean simpleAi){
@@ -55,6 +59,22 @@ public class ChessBoardController {
         for (Map.Entry<StackPane, Square> entry: paneToSquareMap.entrySet()){
             squareToPaneMap.put(entry.getValue(), entry.getKey());
         }
+    }
+
+    private void initEventHandler(){
+        for (Node node: gridPane.getChildren()){
+            node.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    lastClickedPane = (StackPane) node;
+                    paneClicked((StackPane) node);
+                }
+            });
+        }
+    }
+
+    private void paneClicked(StackPane pane){
+        System.out.println(paneToSquareMap.get(pane).getDenotation());
     }
 
     private void printBoard(){

@@ -1,19 +1,12 @@
 package schach.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import schach.model.Board;
-import schach.model.Positioning;
-import schach.model.Square;
 
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ * Controller for gameScreen.fxml
+ */
 public class GameScreen {
 
     @FXML
@@ -21,7 +14,10 @@ public class GameScreen {
     @FXML
     public Pane boardContainerPane;
 
-
+    /**
+     * getter for the pane containing the gridPane representing the chess board
+     * @return the container pane
+     */
     public Pane getContainerPane(){
         return this.boardContainerPane;
     }

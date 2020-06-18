@@ -1,21 +1,15 @@
 package schach.view;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-import java.net.URL;
-import java.nio.file.Paths;
-
+/**
+ * Controller for startMenu.fxml
+ */
 public class StartMenu {
 
     @FXML
@@ -41,7 +35,6 @@ public class StartMenu {
     @FXML
     private Label playerNameColor;
 
-    private Stage primaryStage;
     private Boolean vsPlayer;
     private String player1;
     private String player2;
@@ -49,12 +42,18 @@ public class StartMenu {
     private Boolean simpleAi;
     private GuiMain guiMain;
 
+    /**
+     * Constructor setting Game Mode Booleans true
+     */
     public StartMenu(){
         vsPlayer = true;
         player1isWhite = true;
         simpleAi = true;
     }
 
+    /**
+     * If toggle button 'toggleComputer' clicked
+     */
     public void setToggleComputer(){
         togglePlayer.setSelected(false);
         vsPlayer = false;
@@ -62,6 +61,9 @@ public class StartMenu {
         aiContainerPane.setVisible(true);
     }
 
+    /**
+     * If toggle button 'togglePlayer' clicked
+     */
     public void setTogglePlayer(){
         toggleComputer.setSelected(false);
         vsPlayer = true;
@@ -69,16 +71,26 @@ public class StartMenu {
         aiContainerPane.setVisible(false);
     }
 
+    /**
+     * If toggle button 'toggleButtonWhite' clicked:
+     */
     public void setToggleButtonWhite(){
         toggleButtonBlack.setSelected(false);
         player1isWhite = true;
     }
 
+    /**
+     * If toggle button 'toggleButtonWhite' clicked:
+     */
     public void setToggleButtonBlack(){
         toggleButtonWhite.setSelected(false);
         player1isWhite = false;
     }
 
+    /**
+     * updates name of player 1
+     * called by eventhandler in GuiMain
+     */
     public void setPlayerName1(){
         player1 = cutPlayerName(true);
         if (player1.length() == 0){
@@ -87,6 +99,10 @@ public class StartMenu {
         playerNameColor.setText(player1);
     }
 
+    /**
+     * updates name of player 2
+     * called by eventHandler in GuiMain
+     */
     public void setPlayerName2(){
         player2 = cutPlayerName(false);
         if (player2.length() == 0){
@@ -94,16 +110,11 @@ public class StartMenu {
         }
     }
 
-    public void setToggleButtonSimple(){
-        toggleButtonMinMax.setSelected(false);
-        simpleAi = true;
-    }
-
-    public void setToggleButtonMinMax(){
-        toggleButtonSimple.setSelected(false);
-        simpleAi = false;
-    }
-
+    /**
+     * controls String length of Name input and limits name string if necessary
+     * @param isPlayer1 true if name of player 1 should be controlled, false if name of player 2
+     * @return cut version of the name
+     */
     private String cutPlayerName(Boolean isPlayer1){
         String name = playerName1.getText();
         if(!isPlayer1){
@@ -121,22 +132,51 @@ public class StartMenu {
         return newName;
     }
 
+    /**
+     * If toggle button 'toggleButtonSimple' clicked:
+     */
+    public void setToggleButtonSimple(){
+        toggleButtonMinMax.setSelected(false);
+        simpleAi = true;
+    }
+
+    /**
+     * If toggle button 'toggleButtonMinMax' clicked:
+     */
+    public void setToggleButtonMinMax(){
+        toggleButtonSimple.setSelected(false);
+        simpleAi = false;
+    }
+
+    /**
+     * getter for name of player 1
+     * @return name of player 1
+     */
     public TextField getPlayerName1(){
         return playerName1;
     }
 
+    /**
+     * getter for name of player 2
+     * @return name of player 2
+     */
     public TextField getPlayerName2() {
         return playerName2;
     }
 
-    public void setPrimaryStage(Stage primaryStage){
-        this.primaryStage = primaryStage;
-    }
-
+    /**
+     * setter to initialize the guiMain
+     * @param guiMain
+     */
     public void setGuiMain(GuiMain guiMain){
         this.guiMain = guiMain;
     }
 
+    /**
+     * Called if 'start' button clicked
+     * loads the main game screen via guiMain
+     * @throws Exception
+     */
     public void start() throws Exception {
         guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi);
     }
