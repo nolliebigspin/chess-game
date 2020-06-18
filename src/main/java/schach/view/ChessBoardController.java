@@ -8,10 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import schach.model.Board;
-import schach.model.Piece;
-import schach.model.Positioning;
-import schach.model.Square;
+import schach.model.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -156,7 +153,11 @@ public class ChessBoardController {
         piece.updateLegals();
         List<Square> legals = piece.filteredLegals();
         for (Square square: legals){
-            squareToPaneMap.get(square).setStyle("-fx-background-color: green;");
+            if (square.isOccupied()){
+                squareToPaneMap.get(square).setStyle("-fx-background-color: red;");
+            } else {
+                squareToPaneMap.get(square).setStyle("-fx-background-color: green;");
+            }
         }
     }
 

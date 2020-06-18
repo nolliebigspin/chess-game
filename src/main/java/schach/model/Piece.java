@@ -174,6 +174,8 @@ public abstract class Piece {
         position.setOccupied(true);
         position.setOccupier(this);
         if (beatenPiece != null){
+            //System.out.println(beatenPiece.print() + ":" + beatenPiece.getPosition().getDenotation());
+            Square beatenSquare = beatenPiece.getPosition();
             newPos.setOccupied(true);
             newPos.setOccupier(beatenPiece);
             board.removeFromCemetery(beatenPiece);
