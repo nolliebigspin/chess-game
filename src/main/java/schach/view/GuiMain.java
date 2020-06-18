@@ -6,8 +6,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 
@@ -15,6 +17,7 @@ public class GuiMain extends Application {
 
     private StartMenu startMenu;
     private schach.view.GameScreen gameScreen;
+    private Stage stage;
 
     public static void main(String[] args) {
         launch();
@@ -29,8 +32,10 @@ public class GuiMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
+        stage = primaryStage;
         startMenu = (StartMenu) fxmlLoader.getController();
         startMenu.setPrimaryStage(primaryStage);
+        startMenu.setGuiMain(this);
         initStartMenuHandler();
     }
 
@@ -50,7 +55,14 @@ public class GuiMain extends Application {
         });
     }
 
-    private void setGameScreen(schach.view.GameScreen gameScreen){
-        this.gameScreen = gameScreen;
+    public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
+        gameScreen.initGameMode(vsPlayer, player1isWhite, simpleAi);
+        gameScreen.initHashMap();
     }
 }
