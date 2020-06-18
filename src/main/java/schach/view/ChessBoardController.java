@@ -14,6 +14,7 @@ import schach.model.Positioning;
 import schach.model.Square;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChessBoardController {
@@ -27,6 +28,8 @@ public class ChessBoardController {
     private Map<StackPane, Square> paneToSquareMap = new HashMap<>();
     private Map<Square, StackPane> squareToPaneMap = new HashMap<>();
     private StackPane lastClickedPane;
+    private Boolean inMove;
+    private Piece toBeMoved;
 
     public ChessBoardController(Pane container){
         this.container = container;
@@ -37,6 +40,7 @@ public class ChessBoardController {
         }
         this.board = new Board();
         board.initLineUp();
+        this.inMove = false;
         initHashMap();
         printBoard();
         initEventHandler();
@@ -64,26 +68,64 @@ public class ChessBoardController {
 
     private void initEventHandler(){
         for (Node node: gridPane.getChildren()){
-            node.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    lastClickedPane = (StackPane) node;
-                    paneClicked((StackPane) node);
-                }
-            });
+            if (node instanceof StackPane){
+                node.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        lastClickedPane = (StackPane) node;
+                        if (inMove){
+                            checkForMove();
+                        } else {
+                            paneClicked((StackPane) node);
+                        }
+                    }
+                });
+            }
         }
     }
 
     private void paneClicked(StackPane pane){
+        resetBackground();
+        pane.setStyle("-fx-background-color: blue;");
         Piece piece;
         Square square = paneToSquareMap.get(pane);
         System.out.println(square.getDenotation());
         if (square.isOccupied()){
             piece = square.getOccupier();
+            if (correctTurn(piece)){
+                colorLegals(piece);
+                inMove = true;
+                toBeMoved = piece;
+            }
         }
     }
 
+    private void checkForMove(){
+        toBeMoved.updateLegals();
+        List<Square> legals = toBeMoved.filteredLegals();
+        if (legals.contains(paneToSquareMap.get(lastClickedPane))){
+            move();
+        } else {
+            paneClicked(lastClickedPane);
+        }
+    }
+
+    private void move(){
+        Square start = toBeMoved.getPosition();
+        Square target = paneToSquareMap.get(lastClickedPane);
+        board.movePiece(start.getDenotation(), target.getDenotation());
+        resetBackground();
+        printBoard();
+        inMove = false;
+    }
+
     private void printBoard(){
+        for (Node node: gridPane.getChildren()){
+            if (node instanceof StackPane){
+                StackPane pane = (StackPane) node;
+                pane.getChildren().clear();
+            }
+        }
         Positioning positioning = new Positioning(board);
         positioning.readPositioning();
         Map<Square, String> pos = positioning.getPositioningMap();
@@ -93,6 +135,32 @@ public class ChessBoardController {
             StackPane pane = squareToPaneMap.get(square);
             placeImageOnPane(unicode, pane);
         }
+    }
+
+    private void resetBackground(){
+        for (Node node: gridPane.getChildren()){
+            if (node instanceof StackPane){
+                int col = GridPane.getColumnIndex(node);
+                int row = GridPane.getRowIndex(node);
+                if (col % 2 == row % 2){
+                    node.setStyle("-fx-background-color: white;");
+                } else {
+                    node.setStyle("-fx-background-color: grey;");
+                }
+            }
+        }
+    }
+
+    private void colorLegals(Piece piece){
+        piece.updateLegals();
+        List<Square> legals = piece.filteredLegals();
+        for (Square square: legals){
+            squareToPaneMap.get(square).setStyle("-fx-background-color: green;");
+        }
+    }
+
+    private boolean correctTurn(Piece clickedPiece){
+        return true;
     }
 
     private void placeImageOnPane(String unicode, StackPane pane){
