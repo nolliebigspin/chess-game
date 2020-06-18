@@ -13,6 +13,9 @@ public class GameScreen {
     public GridPane gridPane;
     @FXML
     public Pane boardContainerPane;
+    @FXML
+    public Pane controllerContainerPane;
+
 
     /**
      * getter for the pane containing the gridPane representing the chess board
@@ -20,6 +23,10 @@ public class GameScreen {
      */
     public Pane getContainerPane(){
         return this.boardContainerPane;
+    }
+
+    public Pane getControllerContainerPane(){
+        return this.controllerContainerPane;
     }
 
 }

@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import schach.model.Board;
+import schach.model.Piece;
 import schach.model.Positioning;
 import schach.model.Square;
 
@@ -74,7 +75,12 @@ public class ChessBoardController {
     }
 
     private void paneClicked(StackPane pane){
-        System.out.println(paneToSquareMap.get(pane).getDenotation());
+        Piece piece;
+        Square square = paneToSquareMap.get(pane);
+        System.out.println(square.getDenotation());
+        if (square.isOccupied()){
+            piece = square.getOccupier();
+        }
     }
 
     private void printBoard(){
