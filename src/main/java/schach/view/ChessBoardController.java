@@ -153,7 +153,10 @@ public class ChessBoardController {
         piece.updateLegals();
         List<Square> legals = piece.filteredLegals();
         for (Square square: legals){
-            if (square.isOccupied()){
+            if (piece instanceof Pawn && square.getColumn() != piece.getPosition().getColumn() && !square.isOccupied()){
+                squareToPaneMap.get(board.getLastMoved().getPosition()).setStyle("-fx-background-color: red;");
+                squareToPaneMap.get(square).setStyle("-fx-background-color: green;");
+            } else if (square.isOccupied()){
                 squareToPaneMap.get(square).setStyle("-fx-background-color: red;");
             } else {
                 squareToPaneMap.get(square).setStyle("-fx-background-color: green;");
