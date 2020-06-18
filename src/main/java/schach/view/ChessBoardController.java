@@ -18,15 +18,16 @@ public class ChessBoardController {
 
     private Pane container;
     private GridPane gridPane;
-    private Boolean vsPlayer;
-    private Boolean playerIsWhite;
-    private Boolean simpleAi;
+    private boolean vsPlayer;
+    private boolean playerIsWhite;
+    private boolean simpleAi;
     private Board board;
     private Map<StackPane, Square> paneToSquareMap = new HashMap<>();
     private Map<Square, StackPane> squareToPaneMap = new HashMap<>();
     private StackPane lastClickedPane;
-    private Boolean inMove;
+    private boolean inMove;
     private Piece toBeMoved;
+    private boolean whitesTurn;
 
     public ChessBoardController(Pane container){
         this.container = container;
@@ -38,12 +39,13 @@ public class ChessBoardController {
         this.board = new Board();
         board.initLineUp();
         this.inMove = false;
+        this.whitesTurn = true;
         initHashMap();
         printBoard();
         initEventHandler();
     }
 
-    public void initGameMode(Boolean vsPlayer, Boolean playerIsWhite, Boolean simpleAi){
+    public void initGameMode(boolean vsPlayer, boolean playerIsWhite, boolean simpleAi){
         this.vsPlayer = vsPlayer;
         this.playerIsWhite = playerIsWhite;
         this.simpleAi = simpleAi;
@@ -86,7 +88,6 @@ public class ChessBoardController {
         pane.setStyle("-fx-background-color: blue;");
         Piece piece;
         Square square = paneToSquareMap.get(pane);
-        System.out.println(square.getDenotation());
         if (square.isOccupied()){
             piece = square.getOccupier();
             if (correctTurn(piece)){
@@ -111,10 +112,13 @@ public class ChessBoardController {
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
-        board.printBoard();
         resetBackground();
         printBoard();
         inMove = false;
+        whitesTurn = !whitesTurn;
+        if (board.getCheck().isCheckMate(!whitesTurn)){
+            gameOver();
+        }
     }
 
     private void printBoard(){
@@ -165,7 +169,12 @@ public class ChessBoardController {
     }
 
     private boolean correctTurn(Piece clickedPiece){
-        return true;
+        return clickedPiece.isWhite() == whitesTurn;
+    }
+
+    private void gameOver(){
+        Pane overlay = (Pane) this.container.lookup("gameOverOverlay");
+        overlay.setVisible(true);
     }
 
     private void placeImageOnPane(String unicode, StackPane pane){
