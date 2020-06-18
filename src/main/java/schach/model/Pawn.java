@@ -202,10 +202,16 @@ public class Pawn extends Piece {
         }
         if (row < 8 && row > 1){
             if (column > 1){
-                attacked.add(board.getSquare(column - 1, row + plusOne ));
+                Square square = board.getSquare(column - 1, row + plusOne );
+                if (square.isOccupied() && square.getOccupier().isWhite() != white){
+                    attacked.add(square);
+                }
             }
             if (column < 8){
-                attacked.add(board.getSquare(column + 1, row + plusOne));
+                Square square = board.getSquare(column + 1, row + plusOne);
+                if (square.isOccupied() && square.getOccupier().isWhite() != white){
+                    attacked.add(square);
+                }
             }
         }
         return attacked;
