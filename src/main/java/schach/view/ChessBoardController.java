@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class ChessBoardController {
 
+
     private Pane container;
     private GridPane gridPane;
     private Boolean vsPlayer;
