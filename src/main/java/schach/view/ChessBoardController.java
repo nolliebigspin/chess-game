@@ -115,10 +115,10 @@ public class ChessBoardController {
         resetBackground();
         printBoard();
         inMove = false;
-        whitesTurn = !whitesTurn;
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
         }
+        whitesTurn = !whitesTurn;
     }
 
     private void printBoard(){
@@ -173,7 +173,7 @@ public class ChessBoardController {
     }
 
     private void gameOver(){
-        Pane overlay = (Pane) this.container.lookup("gameOverOverlay");
+        Pane overlay = (Pane) this.container.lookup("#gameOverOverlay");
         overlay.setVisible(true);
     }
 
