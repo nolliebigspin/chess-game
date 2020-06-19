@@ -63,10 +63,6 @@ public class GameScreen {
         //
     }
 
-    public void handleOpenStartMenu(ActionEvent actionEvent) {
-        //
-    }
-
     public void handleOpenManual(ActionEvent actionEvent) {
         //
     }
@@ -77,16 +73,13 @@ public class GameScreen {
 
     public void handleShowPossibleMoves(ActionEvent e) {
         this.showPossibleMoves = ((CheckMenuItem)e.getSource()).isSelected();
-        System.out.println(showPossibleMoves);
     }
 
     public void handleAllowMultipleSelect(ActionEvent e) {
         this.allowMultipleSelect = ((CheckMenuItem)e.getSource()).isSelected();
-        System.out.println(allowMultipleSelect);
     }
 
     public void handleIsInCheck(ActionEvent e) {
         this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
-        System.out.println(showIsInCheck);
     }
 }
