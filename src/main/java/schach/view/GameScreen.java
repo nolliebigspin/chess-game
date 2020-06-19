@@ -15,6 +15,8 @@ public class GameScreen {
     public Pane boardContainerPane;
     @FXML
     public Pane controllerContainerPane;
+    @FXML
+    public Pane topMenuBar;
 
 
     /**
@@ -27,6 +29,10 @@ public class GameScreen {
 
     public Pane getControllerContainerPane(){
         return this.controllerContainerPane;
+    }
+
+    public Pane getTopMenuBar() {
+        return this.topMenuBar;
     }
 
 }
