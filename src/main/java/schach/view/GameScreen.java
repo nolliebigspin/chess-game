@@ -33,10 +33,6 @@ public class GameScreen {
         return this.controllerContainerPane;
     }
 
-    public MenuBar getTopMenuBar() {
-        return this.topMenuBar;
-    }
-
     //TopMenuBar button handling
     public void handleButtonRestart() {
         //
