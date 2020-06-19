@@ -17,23 +17,63 @@ import java.util.Map;
 
 public class ChessBoardController {
 
+    /**
+     * the Pane containing the BoardGrid and other needed FXML objects
+     */
     private Pane container;
-    private GridPane gridPane;
-    private boolean vsPlayer;
-    private boolean playerIsWhite;
-    private boolean simpleAi;
+
+    /**
+     * the GridPane representing the chess board, containing and arranging the StackPanes representing the Squares
+     */
+    private GridPane boardGridPane;
+
+    /**
+     * the Board containing the logic
+     */
     private Board board;
+
+    /**
+     * HashMap assigning every Square to a StackPane
+     */
     private Map<StackPane, Square> paneToSquareMap = new HashMap<>();
+
+    /**
+     * HashMap assigning every StackPane to a Square
+     */
     private Map<Square, StackPane> squareToPaneMap = new HashMap<>();
-    private StackPane lastClickedPane;
+
+    /**
+     * boolean determining if a valid Piece was already clicked, so the next click will be a move
+     */
     private boolean inMove;
+
+    /**
+     * Valid Piece that was last clicked and can be moved
+     */
     private Piece toBeMoved;
+
+    /**
+     * boolean determining whose turn it is
+     */
     private boolean whitesTurn;
+
+    /**
+     * boolean determining if clicks on the BoardGrid will be ignored
+     */
     private boolean disabledMouseOnBoard;
 
+    /**
+     * String to save space, PMD forced me to do that :/
+     */
+    private String backgroundGreen = "-fx-background-color: green;";
+
+    /**
+     * Constructor initializing fields, maps and event handler
+     * @param container the Pane that contains the Chessboard and all belonging Panes
+     */
     public ChessBoardController(Pane container){
         this.container = container;
-        gridPane = (GridPane) container.lookup("#chessBoardGrid");
+        boardGridPane = (GridPane) container.lookup("#chessBoardGrid");
         this.board = new Board();
         board.initLineUp();
         this.inMove = false;
@@ -44,17 +84,13 @@ public class ChessBoardController {
         initEventHandler();
     }
 
-    public void initGameMode(boolean vsPlayer, boolean playerIsWhite, boolean simpleAi){
-        this.vsPlayer = vsPlayer;
-        this.playerIsWhite = playerIsWhite;
-        this.simpleAi = simpleAi;
-    }
-
+    /**
+     * initializes the two hashmaps assigning Squares to StackPane and vice versa
+     */
     private void initHashMap(){
-        for (Node node: gridPane.getChildren()){
+        for (Node node: boardGridPane.getChildren()){
             if (node instanceof StackPane){
                 StackPane pane = (StackPane) node;
-                int col = GridPane.getColumnIndex(node);
                 Square square = board.getSquare(GridPane.getColumnIndex(node) + 1, 8 - GridPane.getRowIndex(node));
                 paneToSquareMap.put(pane, square);
             }
@@ -64,16 +100,19 @@ public class ChessBoardController {
         }
     }
 
+    /**
+     * initializes the event handler for the stackpanes on the board and for promotion grids
+     */
     private void initEventHandler(){
-        for (Node node: gridPane.getChildren()){
+        //Eventhandler for every stackpane representing the squares
+        for (Node node: boardGridPane.getChildren()){
             if (node instanceof StackPane){
                 node.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         if (!disabledMouseOnBoard){
-                            lastClickedPane = (StackPane) node;
                             if (inMove){
-                                checkForMove();
+                                checkForMove((StackPane) node);
                             } else {
                                 paneClicked((StackPane) node);
                             }
@@ -83,6 +122,7 @@ public class ChessBoardController {
             }
         }
 
+        //Eventhandler for all StackPanes in the PromotionGrids
         GridPane promWhiteGrid = (GridPane) container.lookup("#promWhiteGrid");
         GridPane promBlackGrid = (GridPane) container.lookup("#promBlackGrid");
         List<Node> promGridChildren = new ArrayList<>();
@@ -100,6 +140,11 @@ public class ChessBoardController {
         }
     }
 
+    /**
+     * Called if a Pane was clicked and there is not valid piece chosen
+     * Colors the pane and checks if there is a valid piece on the pane
+     * @param pane the pane that was clicked on
+     */
     private void paneClicked(StackPane pane){
         resetBackground();
         pane.setStyle("-fx-background-color: blue;");
@@ -115,17 +160,26 @@ public class ChessBoardController {
         }
     }
 
-    private void checkForMove(){
+    /**
+     * Called if a Pane was clicked and there is a valid piece chosen: inMove
+     * Checks if the last clicked pane represents a legal square the toBeMoved piece can be moved to
+     * if so calls move method, otherwise calls paneClicked method
+     */
+    private void checkForMove(StackPane lastClickedPane){
         toBeMoved.updateLegals();
         List<Square> legals = toBeMoved.filteredLegals();
         if (legals.contains(paneToSquareMap.get(lastClickedPane))){
-            move();
+            move(lastClickedPane);
         } else {
             paneClicked(lastClickedPane);
         }
     }
 
-    private void move(){
+    /**
+     * calls the board.movePiece method and calls the print method
+     * checks for promotion and checkmate
+     */
+    private void move(StackPane lastClickedPane){
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
@@ -133,6 +187,7 @@ public class ChessBoardController {
         if (isPromotion(toBeMoved)){
             showPromotion(toBeMoved.isWhite());
         }
+        rotateGame();
         printBoard();
         inMove = false;
         if (board.getCheck().isCheckMate(!whitesTurn)){
@@ -141,6 +196,11 @@ public class ChessBoardController {
         whitesTurn = !whitesTurn;
     }
 
+    /**
+     * Checks if promotion is valid
+     * @param piece the promotion should be checked for
+     * @return true if promotion will executed, false if no promotion possible
+     */
     private boolean isPromotion(Piece piece){
         if (!(piece instanceof Pawn)){
             return false;
@@ -150,15 +210,16 @@ public class ChessBoardController {
         if (!pawn.isWhite()){
             finalRow = 1;
         }
-        if (pawn.getPosition().getRow() != finalRow){
-            return false;
-        }
-        return true;
+        return pawn.getPosition().getRow() == finalRow;
     }
 
+    /**
+     * displays the PromotionGrid and disables the mouse events on the board grid
+     * @param whiteProm true if promotion for white, false if promotion for black
+     */
     private void showPromotion(boolean whiteProm){
         disabledMouseOnBoard = true;
-        squareToPaneMap.get(toBeMoved.getPosition()).setStyle("-fx-background-color: green;");
+        squareToPaneMap.get(toBeMoved.getPosition()).setStyle(backgroundGreen);
         GridPane promGrid = (GridPane) container.lookup("#promWhiteGrid");
         if (!whiteProm){
             promGrid = (GridPane) container.lookup("#promBlackGrid");
@@ -166,8 +227,14 @@ public class ChessBoardController {
         promGrid.setVisible(true);
     }
 
+    /**
+     * called if mouse clicked on pane in the promotion grid
+     * Executes the promotion by getting the pathname of the image displayed in the pane and converting it to a
+     * pawn.doPromotion call
+     * @param pane the Pane in a Promotion grid clicked on
+     */
     private void doPromotion(StackPane pane){
-        pane.setStyle("-fx-background-color: green;");
+        pane.setStyle(backgroundGreen);
         ImageView imageView = null;
         for (Node node: pane.getChildren()){
             if (node instanceof ImageView){
@@ -192,12 +259,22 @@ public class ChessBoardController {
         printBoard();
     }
 
+    /**
+     * 'Draws' the Chess Board by getting the positioning of the board, iterating over all active piece and
+     * displaying the belonging image in the belonging StackPane
+     */
     private void printBoard(){
-        for (Node node: gridPane.getChildren()){
+        for (Node node: boardGridPane.getChildren()){
             if (node instanceof StackPane){
                 StackPane pane = (StackPane) node;
                 pane.getChildren().clear();
             }
+        }
+        List<Piece> allPieces = new ArrayList<>();
+        allPieces.addAll(board.allActivePieces(true));
+        allPieces.addAll(board.allActivePieces(false));
+        for (Piece piece: allPieces){
+
         }
         Positioning positioning = new Positioning(board);
         positioning.readPositioning();
@@ -210,8 +287,70 @@ public class ChessBoardController {
         }
     }
 
+    /**
+     * Places image of a wanted piece on a StackPane via a ImageView
+     * @param unicode the unicode of the piece that should be displayed as a image
+     * @param pane the pane the image will be place on
+     */
+    private void placeImageOnPane(String unicode, StackPane pane){
+        Image img = unicodeToImage(unicode);
+        ImageView imageView = new ImageView(img);
+        pane.getChildren().add(imageView);
+    }
+
+    /**
+     * 'Converts' a unicode of a piece to the belonging image
+     * @param unicode the unicode representing the piece
+     * @return image displaying the piece
+     */
+    private Image unicodeToImage(String unicode){
+        String path = null;
+        switch (unicode){
+            case "\u2654":
+                path = "assets/whiteKing.png";
+                break;
+            case "\u265A":
+                path = "assets/blackKing.png";
+                break;
+            case "\u2655":
+                path = "assets/whiteQueen.png";
+                break;
+            case "\u265B":
+                path = "assets/blackQueen.png";
+                break;
+            case "\u2656":
+                path = "assets/whiteRook.png";
+                break;
+            case "\u265C":
+                path = "assets/blackRook.png";
+                break;
+            case "\u2657":
+                path = "assets/whiteBishop.png";
+                break;
+            case "\u265D":
+                path = "assets/blackBishop.png";
+                break;
+            case "\u2658":
+                path = "assets/whiteKnight.png";
+                break;
+            case "\u265E":
+                path = "assets/blackKnight.png";
+                break;
+            case "\u2659":
+                path = "assets/whitePawn.png";
+                break;
+            case "\u265F":
+                path = "assets/blackPawn.png";
+                break;
+        }
+        return new Image(path);
+    }
+
+    /**
+     * Resets the background color of all StackPanes in the BoardGrid to grey/white
+     */
     private void resetBackground(){
-        for (Node node: gridPane.getChildren()){
+        for (Node node: boardGridPane.getChildren()){
             if (node instanceof StackPane){
                 int col = GridPane.getColumnIndex(node);
                 int row = GridPane.getRowIndex(node);
@@ -224,69 +363,52 @@ public class ChessBoardController {
         }
     }
 
+    /**
+     * Colors the legalSquares of a given piece
+     * @param piece Piece the legal squares should be colored
+     */
     private void colorLegals(Piece piece){
         piece.updateLegals();
         List<Square> legals = piece.filteredLegals();
         for (Square square: legals){
             if (piece instanceof Pawn && square.getColumn() != piece.getPosition().getColumn() && !square.isOccupied()){
                 squareToPaneMap.get(board.getLastMoved().getPosition()).setStyle("-fx-background-color: red;");
-                squareToPaneMap.get(square).setStyle("-fx-background-color: green;");
+                squareToPaneMap.get(square).setStyle(backgroundGreen);
             } else if (square.isOccupied()){
                 squareToPaneMap.get(square).setStyle("-fx-background-color: red;");
             } else {
-                squareToPaneMap.get(square).setStyle("-fx-background-color: green;");
+                squareToPaneMap.get(square).setStyle(backgroundGreen);
             }
         }
     }
 
+    public void rotateGame(){
+        double rotation = boardGridPane.getRotate();
+        boardGridPane.setRotate(rotation + 180);
+        for (Node node: boardGridPane.getChildren()){
+            if (node instanceof StackPane){
+                StackPane pane = (StackPane) node;
+                pane.setRotate(rotation + 180);
+            }
+        }
+    }
+
+    /**
+     * checks if its the right turn
+     * @param clickedPiece piece that was clicked on
+     * @return true if clicked piece can be moved, false if its not the turn of the color of the piece
+     */
     private boolean correctTurn(Piece clickedPiece){
         return clickedPiece.isWhite() == whitesTurn;
     }
 
+    /**
+     * Called if Checkmate
+     * displays overlay with game over message
+     */
     private void gameOver(){
         Pane overlay = (Pane) this.container.lookup("#gameOverOverlay");
         overlay.setVisible(true);
-    }
-
-    private void placeImageOnPane(String unicode, StackPane pane){
-        Image img = unicodeToImage(unicode);
-        ImageView imageView = new ImageView(img);
-        pane.getChildren().add(imageView);
-    }
-
-    private Image unicodeToImage(String unicode){
-        String path = unicodeToPath(unicode);
-        return new Image(path);
-    }
-
-    private String unicodeToPath(String unicode){
-        switch (unicode){
-            case "\u2654":
-                return "assets/whiteKing.png";
-            case "\u265A":
-                return "assets/blackKing.png";
-            case "\u2655":
-                return "assets/whiteQueen.png";
-            case "\u265B":
-                return "assets/blackQueen.png";
-            case "\u2656":
-                return "assets/whiteRook.png";
-            case "\u265C":
-                return "assets/blackRook.png";
-            case "\u2657":
-                return "assets/whiteBishop.png";
-            case "\u265D":
-                return "assets/blackBishop.png";
-            case "\u2658":
-                return "assets/whiteKnight.png";
-            case "\u265E":
-                return "assets/blackKnight.png";
-            case "\u2659":
-                return "assets/whitePawn.png";
-            case "\u265F":
-                return "assets/blackPawn.png";
-        }
-        return null;
     }
 
 }
