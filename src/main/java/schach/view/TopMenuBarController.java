@@ -1,11 +1,13 @@
 package schach.view;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
 public class TopMenuBarController {
 
+    @FXML
     private MenuBar topMenuBar;
     private Menu menuGame;
     private MenuItem buttonRestart;
@@ -19,4 +21,7 @@ public class TopMenuBarController {
         this.topMenuBar = topMenuBar;
     }
 
+    public void handleButtonRestart() {
+        System.out.println("Test123");
+    }
 }

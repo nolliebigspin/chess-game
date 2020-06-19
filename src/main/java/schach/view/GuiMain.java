@@ -84,5 +84,6 @@ public class GuiMain extends Application {
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         new ChessBoardController(gameScreen.getContainerPane());
         new LastMoveController(gameScreen.getControllerContainerPane());
+        new TopMenuBarController((gameScreen.getTopMenuBar()));
     }
 }
