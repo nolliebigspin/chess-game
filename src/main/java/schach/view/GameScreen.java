@@ -20,6 +20,10 @@ public class GameScreen {
     @FXML
     public MenuBar topMenuBar;
 
+    private boolean showPossibleMoves;
+    private boolean allowMultipleSelect;
+    private boolean showIsInCheck;
+
 
     /**
      * getter for the pane containing the gridPane representing the chess board
@@ -58,7 +62,7 @@ public class GameScreen {
         //
     }
 
-    public void handleClickMultiplePieces(ActionEvent actionEvent) {
+    public void handleAllowMultipleSelect(ActionEvent actionEvent) {
         //
     }
 

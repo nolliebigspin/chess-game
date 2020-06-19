@@ -127,7 +127,7 @@
           <Menu fx:id="menuSettings" mnemonicParsing="false" text="Settings">
             <items>
                   <CheckMenuItem fx:id="checkShowPossibleMoves" mnemonicParsing="false" onAction="#handleShowPossibleMoves" text="Show possible moves" />
-                  <CheckMenuItem fx:id="checkClickMultiplePieces" mnemonicParsing="false" onAction="#handleClickMultiplePieces" text="Enable clicking on multiple pieces" />
+                  <CheckMenuItem fx:id="checkAllowMultipleSelect" mnemonicParsing="false" onAction="#handleAllowMultipleSelect" text="Enable clicking on multiple pieces" />
                   <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" text="Show if player is in check" />
                   <MenuItem fx:id="buttonTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" text="Turn board" />
               <MenuItem fx:id="buttonOpenStartMenu" mnemonicParsing="false" onAction="#handleOpenStartMenu" text="Start Menu" />
