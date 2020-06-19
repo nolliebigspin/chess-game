@@ -1,6 +1,7 @@
 package schach.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -16,7 +17,7 @@ public class GameScreen {
     @FXML
     public Pane controllerContainerPane;
     @FXML
-    public Pane topMenuBar;
+    public MenuBar topMenuBar;
 
 
     /**
@@ -31,7 +32,7 @@ public class GameScreen {
         return this.controllerContainerPane;
     }
 
-    public Pane getTopMenuBar() {
+    public MenuBar getTopMenuBar() {
         return this.topMenuBar;
     }
 

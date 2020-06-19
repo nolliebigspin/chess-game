@@ -115,24 +115,24 @@
          </children>
       </Pane>
       <Pane fx:id="controllerContainerPane" layoutX="656.0" layoutY="110.0" prefHeight="506.0" prefWidth="237.0" />
-      <MenuBar fx:id="topMenuBar" layoutX="2.0" layoutY="2.0" prefHeight="25.0" prefWidth="1311.0">
+      <MenuBar fx:id="topMenuBar" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="1311.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Game">
+          <Menu fx:id="menuGame" mnemonicParsing="false" text="Game">
             <items>
-              <MenuItem mnemonicParsing="false" text="Restart" />
-                  <MenuItem mnemonicParsing="false" text="Give up" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
+              <MenuItem fx:id="buttonRestart" mnemonicParsing="false" text="Restart" />
+                  <MenuItem fx:id="buttonGiveUp" mnemonicParsing="false" text="Give up" />
+                  <MenuItem fx:id="buttonSave" mnemonicParsing="false" text="Save" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Settings">
+          <Menu fx:id="menuSettings" mnemonicParsing="false" text="Settings">
             <items>
-              <MenuItem mnemonicParsing="false" text="Start Menu" />
+              <MenuItem fx:id="buttonOpenStartMenu" mnemonicParsing="false" text="Start Menu" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="Manual" />
-                  <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="buttonManual" mnemonicParsing="false" text="Manual" />
+                  <MenuItem fx:id="buttonAbout" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
