@@ -232,15 +232,11 @@ public class Pawn extends Piece {
         if (row < 8 && row > 1){
             if (column > 1){
                 Square square = board.getSquare(column - 1, row + plusOne );
-                if (square.isOccupied() && square.getOccupier().isWhite() != white){
-                    attacked.add(square);
-                }
+                attacked.add(square);
             }
             if (column < 8){
                 Square square = board.getSquare(column + 1, row + plusOne);
-                if (square.isOccupied() && square.getOccupier().isWhite() != white){
-                    attacked.add(square);
-                }
+                attacked.add(square);
             }
         }
         return attacked;
