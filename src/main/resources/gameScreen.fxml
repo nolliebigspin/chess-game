@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -121,18 +122,20 @@
             <items>
               <MenuItem fx:id="buttonRestart" mnemonicParsing="false" onAction="#handleButtonRestart" text="Restart" />
                   <MenuItem fx:id="buttonGiveUp" mnemonicParsing="false" onAction="#handleGiveUp" text="Give up" />
-                  <MenuItem fx:id="buttonSave" mnemonicParsing="false" onAction="#handleSave" text="Save" />
             </items>
           </Menu>
           <Menu fx:id="menuSettings" mnemonicParsing="false" text="Settings">
             <items>
+                  <CheckMenuItem fx:id="checkShowPossibleMoves" mnemonicParsing="false" onAction="#handleShowPossibleMoves" text="Show possible moves" />
+                  <CheckMenuItem fx:id="checkClickMultiplePieces" mnemonicParsing="false" onAction="#handleClickMultiplePieces" text="Enable clicking on multiple pieces" />
+                  <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" text="Show if player is in check" />
+                  <MenuItem fx:id="buttonTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" text="Turn board" />
               <MenuItem fx:id="buttonOpenStartMenu" mnemonicParsing="false" onAction="#handleOpenStartMenu" text="Start Menu" />
             </items>
           </Menu>
           <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="buttonManual" mnemonicParsing="false" onAction="#handleOpenManual" text="Manual" />
-                  <MenuItem fx:id="buttonAbout" mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>
         </menus>

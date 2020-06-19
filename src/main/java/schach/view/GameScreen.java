@@ -42,10 +42,6 @@ public class GameScreen {
         //
     }
 
-    public void handleSave(ActionEvent actionEvent) {
-        //
-    }
-
     public void handleOpenStartMenu(ActionEvent actionEvent) {
         //
     }
@@ -54,7 +50,19 @@ public class GameScreen {
         //
     }
 
-    public void handleAbout(ActionEvent actionEvent) {
+    public void handleTurnBoard(ActionEvent actionEvent) {
+        //
+    }
+
+    public void handleShowPossibleMoves(ActionEvent actionEvent) {
+        //
+    }
+
+    public void handleClickMultiplePieces(ActionEvent actionEvent) {
+        //
+    }
+
+    public void handleIsInCheck(ActionEvent actionEvent) {
         //
     }
 }
