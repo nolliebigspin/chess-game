@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import schach.model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,18 +29,16 @@ public class ChessBoardController {
     private boolean inMove;
     private Piece toBeMoved;
     private boolean whitesTurn;
+    private boolean disabledMouseOnBoard;
 
     public ChessBoardController(Pane container){
         this.container = container;
-        for (Node node: container.getChildren()){
-            if (node instanceof GridPane){
-                this.gridPane = (GridPane) node;
-            }
-        }
+        gridPane = (GridPane) container.lookup("#chessBoardGrid");
         this.board = new Board();
         board.initLineUp();
         this.inMove = false;
         this.whitesTurn = true;
+        this.disabledMouseOnBoard = false;
         initHashMap();
         printBoard();
         initEventHandler();
@@ -55,8 +54,8 @@ public class ChessBoardController {
         for (Node node: gridPane.getChildren()){
             if (node instanceof StackPane){
                 StackPane pane = (StackPane) node;
-                int col = gridPane.getColumnIndex(node);
-                Square square = board.getSquare(gridPane.getColumnIndex(node) + 1, 8 - gridPane.getRowIndex(node));
+                int col = GridPane.getColumnIndex(node);
+                Square square = board.getSquare(GridPane.getColumnIndex(node) + 1, 8 - GridPane.getRowIndex(node));
                 paneToSquareMap.put(pane, square);
             }
         }
@@ -71,12 +70,30 @@ public class ChessBoardController {
                 node.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        lastClickedPane = (StackPane) node;
-                        if (inMove){
-                            checkForMove();
-                        } else {
-                            paneClicked((StackPane) node);
+                        if (!disabledMouseOnBoard){
+                            lastClickedPane = (StackPane) node;
+                            if (inMove){
+                                checkForMove();
+                            } else {
+                                paneClicked((StackPane) node);
+                            }
                         }
+                    }
+                });
+            }
+        }
+
+        GridPane promWhiteGrid = (GridPane) container.lookup("#promWhiteGrid");
+        GridPane promBlackGrid = (GridPane) container.lookup("#promBlackGrid");
+        List<Node> promGridChildren = new ArrayList<>();
+        promGridChildren.addAll(promWhiteGrid.getChildren());
+        promGridChildren.addAll(promBlackGrid.getChildren());
+        for (Node node: promGridChildren){
+            if (node instanceof StackPane){
+                node.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        doPromotion((StackPane) node);
                     }
                 });
             }
@@ -113,12 +130,66 @@ public class ChessBoardController {
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
         resetBackground();
+        if (isPromotion(toBeMoved)){
+            showPromotion(toBeMoved.isWhite());
+        }
         printBoard();
         inMove = false;
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
         }
         whitesTurn = !whitesTurn;
+    }
+
+    private boolean isPromotion(Piece piece){
+        if (!(piece instanceof Pawn)){
+            return false;
+        }
+        Pawn pawn = (Pawn) piece;
+        int finalRow = 8;
+        if (!pawn.isWhite()){
+            finalRow = 1;
+        }
+        if (pawn.getPosition().getRow() != finalRow){
+            return false;
+        }
+        return true;
+    }
+
+    private void showPromotion(boolean whiteProm){
+        disabledMouseOnBoard = true;
+        squareToPaneMap.get(toBeMoved.getPosition()).setStyle("-fx-background-color: green;");
+        GridPane promGrid = (GridPane) container.lookup("#promWhiteGrid");
+        if (!whiteProm){
+            promGrid = (GridPane) container.lookup("#promBlackGrid");
+        }
+        promGrid.setVisible(true);
+    }
+
+    private void doPromotion(StackPane pane){
+        pane.setStyle("-fx-background-color: green;");
+        ImageView imageView = null;
+        for (Node node: pane.getChildren()){
+            if (node instanceof ImageView){
+                imageView = (ImageView) node;
+            }
+        }
+        Image image = imageView.getImage();
+        String imgName = image.getUrl().substring(112);
+        String prom = imgName.substring(5, 6);
+        if (prom.equals("K")){
+            prom = "N";
+        }
+        Pawn pawn = (Pawn) toBeMoved;
+        pawn.doPromotion(prom);
+
+        pane.setStyle("-fx-background-color: grey;");
+        if (!pawn.isWhite()){
+            pane.setStyle("-fx-background-color: white;");
+        }
+        pane.getParent().setVisible(false);
+        disabledMouseOnBoard = false;
+        printBoard();
     }
 
     private void printBoard(){
