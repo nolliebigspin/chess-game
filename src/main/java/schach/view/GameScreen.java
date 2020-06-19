@@ -2,6 +2,7 @@ package schach.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -24,6 +25,22 @@ public class GameScreen {
     private boolean allowMultipleSelect;
     private boolean showIsInCheck;
 
+    private boolean vsPlayer;
+    private boolean playerOneIsWhite;
+    private boolean simpleAi;
+
+    private GuiMain guimain;
+
+    public void setGuiMain(GuiMain newGuiMan) {
+        this.guimain = newGuiMan;
+    }
+
+    public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi) {
+        this.vsPlayer = newVsPlayer;
+        this.playerOneIsWhite = newPlayerOneIsWhite;
+        this.simpleAi = newSimpleAi;
+    }
+
 
     /**
      * getter for the pane containing the gridPane representing the chess board
@@ -38,8 +55,8 @@ public class GameScreen {
     }
 
     //TopMenuBar button handling
-    public void handleButtonRestart() {
-        //
+    public void handleButtonRestart() throws Exception {
+        guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi);
     }
 
     public void handleGiveUp(ActionEvent actionEvent) {
@@ -59,7 +76,9 @@ public class GameScreen {
     }
 
     public void handleShowPossibleMoves(ActionEvent actionEvent) {
-        //
+        if (((CheckMenuItem)actionEvent.getSource()).isSelected()) {
+
+        }
     }
 
     public void handleAllowMultipleSelect(ActionEvent actionEvent) {

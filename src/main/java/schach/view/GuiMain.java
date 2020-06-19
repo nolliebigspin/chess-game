@@ -82,6 +82,8 @@ public class GuiMain extends Application {
         stage.setScene(scene);
         stage.setResizable(true);
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
+        gameScreen.setGuiMain(this);
+        gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
         new ChessBoardController(gameScreen.getContainerPane());
         new LastMoveController(gameScreen.getControllerContainerPane());
     }
