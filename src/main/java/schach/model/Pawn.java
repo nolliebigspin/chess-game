@@ -192,7 +192,36 @@ public class Pawn extends Piece {
      * Gets all squares the pawn can make a attack move to
      * @return list of attacked squares
      */
-    public List<Square> getAttackedSquares(){
+    public List<Square> getAttackedSquaresAttacked(){
+        List<Square> attacked = new ArrayList<>();
+        int column = this.position.getColumn();
+        int row = this.position.getRow();
+        int plusOne = 1;
+        if (!white){
+            plusOne = - 1;
+        }
+        if (row < 8 && row > 1){
+            if (column > 1){
+                Square square = board.getSquare(column - 1, row + plusOne );
+                if (square.isOccupied() && square.getOccupier().isWhite() != white){
+                    attacked.add(square);
+                }
+            }
+            if (column < 8){
+                Square square = board.getSquare(column + 1, row + plusOne);
+                if (square.isOccupied() && square.getOccupier().isWhite() != white){
+                    attacked.add(square);
+                }
+            }
+        }
+        return attacked;
+    }
+
+    /**
+     * Gets all squares the pawn can make a attack move to
+     * @return list of attacked squares
+     */
+    public List<Square> getAttackedSquaresAll(){
         List<Square> attacked = new ArrayList<>();
         int column = this.position.getColumn();
         int row = this.position.getRow();

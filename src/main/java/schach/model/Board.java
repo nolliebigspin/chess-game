@@ -278,7 +278,7 @@ public class Board {
         for (Piece piece: allPieces){
             if (piece instanceof Pawn){
                 Pawn pawn = (Pawn) piece;
-                attacked.addAll(pawn.getAttackedSquares());
+                attacked.addAll(pawn.getAttackedSquaresAttacked());
             } else if (piece instanceof King){
                 King king = (King) piece;
                 attacked.addAll(king.getAttackedSquares());
