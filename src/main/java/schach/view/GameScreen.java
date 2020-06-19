@@ -1,5 +1,6 @@
 package schach.view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.GridPane;
@@ -36,4 +37,28 @@ public class GameScreen {
         return this.topMenuBar;
     }
 
+    //TopMenuBar button handling
+    public void handleButtonRestart() {
+        //
+    }
+
+    public void handleGiveUp(ActionEvent actionEvent) {
+        //
+    }
+
+    public void handleSave(ActionEvent actionEvent) {
+        //
+    }
+
+    public void handleOpenStartMenu(ActionEvent actionEvent) {
+        //
+    }
+
+    public void handleOpenManual(ActionEvent actionEvent) {
+        //
+    }
+
+    public void handleAbout(ActionEvent actionEvent) {
+        //
+    }
 }

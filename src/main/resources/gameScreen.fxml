@@ -120,19 +120,19 @@
           <Menu fx:id="menuGame" mnemonicParsing="false" text="Game">
             <items>
               <MenuItem fx:id="buttonRestart" mnemonicParsing="false" onAction="#handleButtonRestart" text="Restart" />
-                  <MenuItem fx:id="buttonGiveUp" mnemonicParsing="false" text="Give up" />
-                  <MenuItem fx:id="buttonSave" mnemonicParsing="false" text="Save" />
+                  <MenuItem fx:id="buttonGiveUp" mnemonicParsing="false" onAction="#handleGiveUp" text="Give up" />
+                  <MenuItem fx:id="buttonSave" mnemonicParsing="false" onAction="#handleSave" text="Save" />
             </items>
           </Menu>
           <Menu fx:id="menuSettings" mnemonicParsing="false" text="Settings">
             <items>
-              <MenuItem fx:id="buttonOpenStartMenu" mnemonicParsing="false" text="Start Menu" />
+              <MenuItem fx:id="buttonOpenStartMenu" mnemonicParsing="false" onAction="#handleOpenStartMenu" text="Start Menu" />
             </items>
           </Menu>
           <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem fx:id="buttonManual" mnemonicParsing="false" text="Manual" />
-                  <MenuItem fx:id="buttonAbout" mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="buttonManual" mnemonicParsing="false" onAction="#handleOpenManual" text="Manual" />
+                  <MenuItem fx:id="buttonAbout" mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>
         </menus>
