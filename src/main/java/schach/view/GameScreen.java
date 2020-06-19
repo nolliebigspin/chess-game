@@ -21,9 +21,9 @@ public class GameScreen {
     @FXML
     public MenuBar topMenuBar;
 
-    private boolean showPossibleMoves;
-    private boolean allowMultipleSelect;
-    private boolean showIsInCheck;
+    private boolean showPossibleMoves = false;
+    private boolean allowMultipleSelect = false;
+    private boolean showIsInCheck = false;
 
     private boolean vsPlayer;
     private boolean playerOneIsWhite;
@@ -75,17 +75,18 @@ public class GameScreen {
         //
     }
 
-    public void handleShowPossibleMoves(ActionEvent actionEvent) {
-        if (((CheckMenuItem)actionEvent.getSource()).isSelected()) {
-
-        }
+    public void handleShowPossibleMoves(ActionEvent e) {
+        this.showPossibleMoves = ((CheckMenuItem)e.getSource()).isSelected();
+        System.out.println(showPossibleMoves);
     }
 
-    public void handleAllowMultipleSelect(ActionEvent actionEvent) {
-        //
+    public void handleAllowMultipleSelect(ActionEvent e) {
+        this.allowMultipleSelect = ((CheckMenuItem)e.getSource()).isSelected();
+        System.out.println(allowMultipleSelect);
     }
 
-    public void handleIsInCheck(ActionEvent actionEvent) {
-        //
+    public void handleIsInCheck(ActionEvent e) {
+        this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
+        System.out.println(showIsInCheck);
     }
 }
