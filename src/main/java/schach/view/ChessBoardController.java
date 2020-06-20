@@ -67,6 +67,8 @@ public abstract class ChessBoardController {
      */
     protected String backgroundGreen = "-fx-background-color: green;";
 
+    protected Boolean rotate;
+
     /**
      * Constructor initializing fields, maps and event handler
      * @param container the Pane that contains the Chessboard and all belonging Panes
@@ -395,6 +397,10 @@ public abstract class ChessBoardController {
     protected void gameOver(){
         Pane overlay = (Pane) this.container.lookup("#gameOverOverlay");
         overlay.setVisible(true);
+    }
+
+    public void setRotate(Boolean rotate){
+        this.rotate = rotate;
     }
 
 }

@@ -1,6 +1,7 @@
 package schach.view;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -36,7 +37,22 @@ public class ChessBoardComputer extends ChessBoardController{
     }
 
     private void computerMove(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                resetBackground();
+                printBoard();
+                rotateGame();
+            }
+        });
         disabledMouseOnBoard = true;
+        if (ai instanceof SimpleAi){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         String aiMove = ai.getNextMove();
         String[] squares = aiMove.split("-");
         board.movePiece(squares[0], squares[1]);
@@ -47,6 +63,18 @@ public class ChessBoardComputer extends ChessBoardController{
                 if (board.getCheck().isCheckMate(!whitesTurn)){
                     gameOver();
                 }
+            }
+        });
+        if (ai instanceof SimpleAi){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
                 rotateGame();
             }
         });
@@ -54,8 +82,25 @@ public class ChessBoardComputer extends ChessBoardController{
         disabledMouseOnBoard = false;
     }
 
+    Thread computerThread;
+
     @Override
     protected void move(StackPane lastClickedPane){
+        /*Task<Void> runComputer = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        resetBackground();
+                        printBoard();
+                        rotateGame();
+                    }
+                });
+                computerMove();
+                return null;
+            }
+        };*/
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
@@ -67,45 +112,26 @@ public class ChessBoardComputer extends ChessBoardController{
             gameOver();
         }
         whitesTurn = !whitesTurn;
-        Thread thread = new Thread(new Runnable() {
+        computerThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        resetBackground();
-                        printBoard();
-                        rotateGame();
-                    }
-                });
                 computerMove();
             }
         });
-        thread.start();
+        computerThread.start();
     }
 
     @Override
     protected void showPromotion(boolean whiteProm) {
         disabledMouseOnBoard = true;
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        printBoard();
-                        squareToPaneMap.get(toBeMoved.getPosition()).setStyle(backgroundGreen);
-                        GridPane promGrid = (GridPane) container.lookup("#promWhiteGrid");
-                        if (!whiteProm){
-                            promGrid = (GridPane) container.lookup("#promBlackGrid");
-                        }
-                        promGrid.setVisible(true);
-                    }
-                });
-
-            }
-        });
-        thread.start();
+        printBoard();
+        squareToPaneMap.get(toBeMoved.getPosition()).setStyle(backgroundGreen);
+        GridPane promGrid = (GridPane) container.lookup("#promWhiteGrid");
+        if (!whiteProm){
+            promGrid = (GridPane) container.lookup("#promBlackGrid");
+        }
+        promGrid.setVisible(true);
+        promotionWaitForInput();
     }
 
     private void promotionWaitForInput(){
