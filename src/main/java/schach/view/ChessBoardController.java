@@ -15,12 +15,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChessBoardController {
+public abstract class ChessBoardController {
 
     /**
      * the Pane containing the BoardGrid and other needed FXML objects
      */
-    private Pane container;
+    protected Pane container;
 
     /**
      * the GridPane representing the chess board, containing and arranging the StackPanes representing the Squares
@@ -30,42 +30,42 @@ public class ChessBoardController {
     /**
      * the Board containing the logic
      */
-    private Board board;
+    protected Board board;
 
     /**
      * HashMap assigning every Square to a StackPane
      */
-    private Map<StackPane, Square> paneToSquareMap = new HashMap<>();
+    protected Map<StackPane, Square> paneToSquareMap = new HashMap<>();
 
     /**
      * HashMap assigning every StackPane to a Square
      */
-    private Map<Square, StackPane> squareToPaneMap = new HashMap<>();
+    protected Map<Square, StackPane> squareToPaneMap = new HashMap<>();
 
     /**
      * boolean determining if a valid Piece was already clicked, so the next click will be a move
      */
-    private boolean inMove;
+    protected boolean inMove;
 
     /**
      * Valid Piece that was last clicked and can be moved
      */
-    private Piece toBeMoved;
+    protected Piece toBeMoved;
 
     /**
      * boolean determining whose turn it is
      */
-    private boolean whitesTurn;
+    protected boolean whitesTurn;
 
     /**
      * boolean determining if clicks on the BoardGrid will be ignored
      */
-    private boolean disabledMouseOnBoard;
+    protected boolean disabledMouseOnBoard;
 
     /**
      * String to save space, PMD forced me to do that :/
      */
-    private String backgroundGreen = "-fx-background-color: green;";
+    protected String backgroundGreen = "-fx-background-color: green;";
 
     /**
      * Constructor initializing fields, maps and event handler
@@ -138,6 +138,7 @@ public class ChessBoardController {
                 });
             }
         }
+
     }
 
     /**
@@ -179,29 +180,14 @@ public class ChessBoardController {
      * calls the board.movePiece method and calls the print method
      * checks for promotion and checkmate
      */
-    private void move(StackPane lastClickedPane){
-        Square start = toBeMoved.getPosition();
-        Square target = paneToSquareMap.get(lastClickedPane);
-        board.movePiece(start.getDenotation(), target.getDenotation());
-        resetBackground();
-        if (isPromotion(toBeMoved)){
-            showPromotion(toBeMoved.isWhite());
-        }
-        rotateGame();
-        printBoard();
-        inMove = false;
-        if (board.getCheck().isCheckMate(!whitesTurn)){
-            gameOver();
-        }
-        whitesTurn = !whitesTurn;
-    }
+    protected abstract void move(StackPane lastClickedPane);
 
     /**
      * Checks if promotion is valid
      * @param piece the promotion should be checked for
      * @return true if promotion will executed, false if no promotion possible
      */
-    private boolean isPromotion(Piece piece){
+    protected boolean isPromotion(Piece piece){
         if (!(piece instanceof Pawn)){
             return false;
         }
@@ -217,7 +203,7 @@ public class ChessBoardController {
      * displays the PromotionGrid and disables the mouse events on the board grid
      * @param whiteProm true if promotion for white, false if promotion for black
      */
-    private void showPromotion(boolean whiteProm){
+    protected void showPromotion(boolean whiteProm){
         disabledMouseOnBoard = true;
         squareToPaneMap.get(toBeMoved.getPosition()).setStyle(backgroundGreen);
         GridPane promGrid = (GridPane) container.lookup("#promWhiteGrid");
@@ -263,7 +249,7 @@ public class ChessBoardController {
      * 'Draws' the Chess Board by getting the positioning of the board, iterating over all active piece and
      * displaying the belonging image in the belonging StackPane
      */
-    private void printBoard(){
+    protected void printBoard(){
         for (Node node: boardGridPane.getChildren()){
             if (node instanceof StackPane){
                 StackPane pane = (StackPane) node;
@@ -349,7 +335,7 @@ public class ChessBoardController {
     /**
      * Resets the background color of all StackPanes in the BoardGrid to grey/white
      */
-    private void resetBackground(){
+    protected void resetBackground(){
         for (Node node: boardGridPane.getChildren()){
             if (node instanceof StackPane){
                 int col = GridPane.getColumnIndex(node);
@@ -406,7 +392,7 @@ public class ChessBoardController {
      * Called if Checkmate
      * displays overlay with game over message
      */
-    private void gameOver(){
+    protected void gameOver(){
         Pane overlay = (Pane) this.container.lookup("#gameOverOverlay");
         overlay.setVisible(true);
     }

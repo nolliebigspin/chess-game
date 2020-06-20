@@ -1,8 +1,11 @@
 package schach.view;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import schach.model.Square;
 
 public class ChessBoardHuman extends ChessBoardController{
+
     /**
      * Constructor initializing fields, maps and event handler
      *
@@ -10,5 +13,23 @@ public class ChessBoardHuman extends ChessBoardController{
      */
     public ChessBoardHuman(Pane container) {
         super(container);
+    }
+
+    @Override
+    protected void move(StackPane lastClickedPane) {
+        Square start = toBeMoved.getPosition();
+        Square target = paneToSquareMap.get(lastClickedPane);
+        board.movePiece(start.getDenotation(), target.getDenotation());
+        resetBackground();
+        if (isPromotion(toBeMoved)){
+            showPromotion(toBeMoved.isWhite());
+        }
+        rotateGame();
+        printBoard();
+        inMove = false;
+        if (board.getCheck().isCheckMate(!whitesTurn)){
+            gameOver();
+        }
+        whitesTurn = !whitesTurn;
     }
 }
