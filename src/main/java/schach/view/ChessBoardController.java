@@ -221,7 +221,7 @@ public abstract class ChessBoardController {
      * pawn.doPromotion call
      * @param pane the Pane in a Promotion grid clicked on
      */
-    private void doPromotion(StackPane pane){
+    protected void doPromotion(StackPane pane){
         pane.setStyle(backgroundGreen);
         ImageView imageView = null;
         for (Node node: pane.getChildren()){
