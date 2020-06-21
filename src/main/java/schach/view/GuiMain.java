@@ -82,11 +82,13 @@ public class GuiMain extends Application {
         stage.setScene(scene);
         stage.setResizable(true);
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
+        ChessBoardController boardController;
         if (vsPlayer){
-            new ChessBoardHuman(gameScreen.getContainerPane());
+            boardController = new ChessBoardHuman(gameScreen.getContainerPane());
         } else {
-            new ChessBoardComputer(gameScreen.getContainerPane(),simpleAi, player1isWhite);
+            boardController = new ChessBoardComputer(gameScreen.getContainerPane(),simpleAi, player1isWhite);
         }
         new LastMoveController(gameScreen.getControllerContainerPane());
+        gameScreen.setBoardController(boardController);
     }
 }

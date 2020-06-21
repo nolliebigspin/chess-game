@@ -470,6 +470,20 @@ public abstract class ChessBoardController {
 
     public void setRotate(Boolean rotate){
         this.rotate = rotate;
+        if (!rotate){
+            boardGridPane.setRotate(0);
+            for (Node node: boardGridPane.getChildren()){
+                if (node instanceof StackPane){
+                    StackPane stackPane = (StackPane) node;
+                    for (Node innerNode: stackPane.getChildren()){
+                        if (innerNode instanceof ImageView){
+                            ImageView view = (ImageView) innerNode;
+                            view.setRotate(0);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

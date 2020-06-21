@@ -211,7 +211,7 @@
       </Pane>
       <Pane layoutX="68.0" layoutY="14.0" prefHeight="62.0" prefWidth="1048.0">
          <children>
-            <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="button" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#setRotation" text="Button" />
          </children>
       </Pane>
       <Pane fx:id="controllerContainerPane" layoutX="747.0" layoutY="110.0" prefHeight="506.0" prefWidth="237.0" />
