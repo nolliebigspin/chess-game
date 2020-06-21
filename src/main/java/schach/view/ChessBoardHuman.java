@@ -23,13 +23,22 @@ public class ChessBoardHuman extends ChessBoardController{
         resetBackground();
         if (isPromotion(toBeMoved)){
             showPromotion(toBeMoved.isWhite());
+        } else {
+            rotateGame();
         }
-        rotateGame();
+
         printBoard();
         inMove = false;
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
         }
         whitesTurn = !whitesTurn;
+    }
+
+    @Override
+    protected void doPromotion(StackPane pane) {
+        super.doPromotion(pane);
+        resetBackground();
+        rotateGame();
     }
 }

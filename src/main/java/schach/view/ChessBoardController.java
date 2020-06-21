@@ -1,5 +1,9 @@
 package schach.view;
 
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -8,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import schach.model.*;
 
 import java.util.ArrayList;
@@ -81,6 +86,7 @@ public abstract class ChessBoardController {
         this.inMove = false;
         this.whitesTurn = true;
         this.disabledMouseOnBoard = false;
+        this.rotate = true;
         initHashMap();
         printBoard();
         initEventHandler();
@@ -222,7 +228,6 @@ public abstract class ChessBoardController {
      * @param pane the Pane in a Promotion grid clicked on
      */
     protected void doPromotion(StackPane pane){
-        pane.setStyle(backgroundGreen);
         ImageView imageView = null;
         for (Node node: pane.getChildren()){
             if (node instanceof ImageView){
@@ -283,6 +288,7 @@ public abstract class ChessBoardController {
     private void placeImageOnPane(String unicode, StackPane pane){
         Image img = unicodeToImage(unicode);
         ImageView imageView = new ImageView(img);
+        imageView.setRotate(boardGridPane.getRotate());
         pane.getChildren().add(imageView);
     }
 
@@ -371,14 +377,77 @@ public abstract class ChessBoardController {
     }
 
     public void rotateGame(){
-        double rotation = boardGridPane.getRotate();
-        boardGridPane.setRotate(rotation + 180);
-        for (Node node: boardGridPane.getChildren()){
-            if (node instanceof StackPane){
-                StackPane pane = (StackPane) node;
-                pane.setRotate(rotation + 180);
-            }
+        if (!rotate){
+            return;
         }
+        Thread rotationThread = new Thread(new Runnable() {
+            Duration duration = Duration.millis(500);
+            @Override
+            public void run() {
+                disabledMouseOnBoard = true;
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        ScaleTransition downsizeTransition = new ScaleTransition(duration, boardGridPane);
+                        ScaleTransition enlargeTransition = new ScaleTransition(duration, boardGridPane);
+                        RotateTransition rotateTransition = new RotateTransition(duration, boardGridPane);
+                        downsizeTransition.setByX(-0.2);
+                        downsizeTransition.setByY(-0.2);
+                        enlargeTransition.setByX(0.2);
+                        enlargeTransition.setByY(0.2);
+                        rotateTransition.setByAngle(180);
+                        List<RotateTransition> imageTransitions = new ArrayList<>();
+                        List<ImageView> imageViews = new ArrayList<>();
+                        for (Node node: boardGridPane.getChildren()){
+                            if (node instanceof StackPane){
+                                StackPane stackPane = (StackPane) node;
+                                for (Node innerNode: stackPane.getChildren()){
+                                    if (innerNode instanceof ImageView){
+                                        ImageView view = (ImageView) innerNode;
+                                        imageViews.add(view);
+                                    }
+                                }
+                            }
+                        }
+                        for (ImageView imageView: imageViews){
+                            RotateTransition imgRoation = new RotateTransition(duration, imageView);
+                            imgRoation.setByAngle(180);
+                            imageTransitions.add(imgRoation);
+                        }
+                        
+                        downsizeTransition.play();
+                        downsizeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                rotateTransition.play();
+                                for (RotateTransition transition: imageTransitions){
+                                    transition.play();
+                                }
+                            }
+                        });
+                        rotateTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                enlargeTransition.play();
+                            }
+                        });
+                        enlargeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                disabledMouseOnBoard = false;
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
+        rotationThread.start();
     }
 
     /**

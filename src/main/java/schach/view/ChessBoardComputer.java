@@ -11,13 +11,10 @@ import schach.model.Square;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class ChessBoardComputer extends ChessBoardController{
 
     private AiInterface ai;
-
-    private boolean playerIsWhite;
 
     private boolean inPromotion;
 
@@ -34,7 +31,6 @@ public class ChessBoardComputer extends ChessBoardController{
         } else {
             ai = new MinMaxAi(board, !playerIsWhite);
         }
-        this.playerIsWhite = playerIsWhite;
         if (!playerIsWhite){
             computerMove();
         }
@@ -44,13 +40,15 @@ public class ChessBoardComputer extends ChessBoardController{
     }
 
     private void computerMove(){
-        if (ai instanceof SimpleAi && promHistory.get(1)){
+        //if player made promotion, short delay before rotation
+        if (promHistory.get(1)){
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //runLater to address JavaFX application Thread
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -60,16 +58,19 @@ public class ChessBoardComputer extends ChessBoardController{
             }
         });
         disabledMouseOnBoard = true;
+        //short delay for simpleAi in before ai makes a move
         if (ai instanceof SimpleAi){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        //generates ai move, can take a while: reason for the extra thread
         String aiMove = ai.getNextMove();
         String[] squares = aiMove.split("-");
         board.movePiece(squares[0], squares[1]);
+        //runLater to address JavaFX application Thread
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -79,13 +80,7 @@ public class ChessBoardComputer extends ChessBoardController{
                 }
             }
         });
-        if (ai instanceof SimpleAi){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        //runLater to address JavaFX application Thread
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -111,17 +106,20 @@ public class ChessBoardComputer extends ChessBoardController{
             gameOver();
         }
         whitesTurn = !whitesTurn;
+        //extra Thread that executes the move by the ai, otherwise would block the JavaFX Thread and freeze the gui
         Thread computerThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 computerMove();
             }
         });
+        //Thread will not be started if the players in a promotion pick currently
         if (!inPromotion && !promHistory.get(0)){
             computerThread.start();
         }
+        //If the extra Thread is not running (so inPromotion): redraws the gui (otherwise done in the extra Thread)
+        //TODO simplify/connect the two if statements
         if (!computerThread.isAlive()){
-            resetBackground();
             printBoard();
         }
     }
@@ -142,6 +140,7 @@ public class ChessBoardComputer extends ChessBoardController{
 
     @Override
     protected void doPromotion(StackPane pane) {
+        resetBackground();
         super.doPromotion(pane);
         Thread computerThread = new Thread(new Runnable() {
             @Override
