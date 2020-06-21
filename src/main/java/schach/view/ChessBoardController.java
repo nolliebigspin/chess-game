@@ -455,7 +455,7 @@ public abstract class ChessBoardController {
      * @param clickedPiece piece that was clicked on
      * @return true if clicked piece can be moved, false if its not the turn of the color of the piece
      */
-    private boolean correctTurn(Piece clickedPiece){
+    protected boolean correctTurn(Piece clickedPiece){
         return clickedPiece.isWhite() == whitesTurn;
     }
 

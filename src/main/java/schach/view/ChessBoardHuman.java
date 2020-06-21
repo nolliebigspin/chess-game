@@ -2,6 +2,7 @@ package schach.view;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import schach.model.Piece;
 import schach.model.Square;
 
 public class ChessBoardHuman extends ChessBoardController{
@@ -41,4 +42,5 @@ public class ChessBoardHuman extends ChessBoardController{
         resetBackground();
         rotateGame();
     }
+
 }

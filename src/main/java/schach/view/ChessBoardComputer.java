@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import schach.controller.ai.AiInterface;
 import schach.controller.ai.MinMaxAi;
 import schach.controller.ai.SimpleAi;
+import schach.model.Piece;
 import schach.model.Square;
 
 import java.util.ArrayList;
@@ -20,23 +21,35 @@ public class ChessBoardComputer extends ChessBoardController{
 
     private List<Boolean> promHistory = new ArrayList<>();
 
+    private boolean playerIsWhite;
+
+    private boolean inFirstMove;
+
     /**
      * Constructor initializing fields, maps and event handler
      * @param container the Pane that contains the Chessboard and all belonging Panes
      */
     public ChessBoardComputer(Pane container, boolean simpleAi, boolean playerIsWhite) {
         super(container);
+        this.playerIsWhite = playerIsWhite;
         if (simpleAi){
             ai = new SimpleAi(board, !playerIsWhite);
         } else {
             ai = new MinMaxAi(board, !playerIsWhite);
         }
-        if (!playerIsWhite){
-            computerMove();
-        }
         inPromotion = false;
         promHistory.add(0, false);
         promHistory.add(1, false);
+        inFirstMove = true;
+        if (!playerIsWhite){
+            Thread computerThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    computerMove();
+                }
+            });
+            computerThread.start();
+        }
     }
 
     private void computerMove(){
@@ -54,7 +67,10 @@ public class ChessBoardComputer extends ChessBoardController{
             public void run() {
                 resetBackground();
                 printBoard();
-                rotateGame();
+                if(!inFirstMove){
+                    rotateGame();
+                }
+
             }
         });
         disabledMouseOnBoard = true;
@@ -89,6 +105,7 @@ public class ChessBoardComputer extends ChessBoardController{
         });
         whitesTurn = !whitesTurn;
         disabledMouseOnBoard = false;
+        inFirstMove = false;
     }
 
     @Override
@@ -151,5 +168,10 @@ public class ChessBoardComputer extends ChessBoardController{
         inPromotion = false;
         promHistory.add(0, false);
         computerThread.start();
+    }
+
+    @Override
+    protected boolean correctTurn(Piece clickedPiece) {
+        return clickedPiece.isWhite() == whitesTurn && clickedPiece.isWhite() == playerIsWhite;
     }
 }
