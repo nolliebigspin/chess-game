@@ -82,4 +82,5 @@ public class GameScreen {
     public void handleIsInCheck(ActionEvent e) {
         this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
     }
+
 }
