@@ -22,7 +22,7 @@ public class GameScreen {
     @FXML
     public MenuBar topMenuBar;
 
-    private boolean showPossibleMoves = false;
+    private boolean showPossibleMoves = true;
     private boolean allowMultipleSelect = false;
     private boolean showIsInCheck = false;
     private boolean turnBoard = true;
@@ -66,7 +66,6 @@ public class GameScreen {
         guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi);
     }
 
-
     public void handleBackToStartMenu(ActionEvent e) {
         //
     }
@@ -75,8 +74,13 @@ public class GameScreen {
         //
     }
 
+    /**
+     * Toggles if the possible moves are shown or not
+     * @param e describes the event of the mouse click for this event
+     */
     public void handleShowPossibleMoves(ActionEvent e) {
         this.showPossibleMoves = ((CheckMenuItem)e.getSource()).isSelected();
+        boardController.setPossibleMoves(showPossibleMoves);
     }
 
     public void handleAllowMultipleSelect(ActionEvent e) {
@@ -87,6 +91,11 @@ public class GameScreen {
         this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
     }
 
+    /**
+     * Toggles if the board should turn around or not after each move.
+     * default: black on top and white on bottom
+     * @param e describes the event of the mouse click for this event
+     */
     public void handleTurnBoard(ActionEvent e) {
         this.turnBoard = ((CheckMenuItem)e.getSource()).isSelected();
         boardController.setRotate(turnBoard);

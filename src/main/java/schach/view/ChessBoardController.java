@@ -73,6 +73,7 @@ public abstract class ChessBoardController {
     protected String backgroundGreen = "-fx-background-color: green;";
 
     protected Boolean rotate;
+    protected Boolean possibleMoves = true;
 
     /**
      * Constructor initializing fields, maps and event handler
@@ -90,6 +91,14 @@ public abstract class ChessBoardController {
         initHashMap();
         printBoard();
         initEventHandler();
+    }
+
+    /**
+     * Setter to toggle if possible moves are shown or not
+     * @param newValue new bool value if possible moves should be shown or not
+     */
+    public void setPossibleMoves(boolean newValue) {
+        this.possibleMoves = newValue;
     }
 
     /**
@@ -162,7 +171,9 @@ public abstract class ChessBoardController {
         if (square.isOccupied()){
             piece = square.getOccupier();
             if (correctTurn(piece)){
-                colorLegals(piece);
+                if (possibleMoves) {
+                    colorLegals(piece);
+                }
                 inMove = true;
                 toBeMoved = piece;
             }
@@ -498,5 +509,4 @@ public abstract class ChessBoardController {
             }
         }
     }
-
 }
