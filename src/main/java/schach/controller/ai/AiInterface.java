@@ -25,6 +25,11 @@ public abstract class AiInterface {
     protected boolean white;
 
     /**
+     * the next move as a string
+     */
+    protected String nextMove;
+
+    /**
      * the constructor initializing the ai and fields
      * @param board
      * @param isWhite
@@ -63,5 +68,13 @@ public abstract class AiInterface {
             }
         }
         return moves;
+    }
+
+    /**
+     * Getter for the next move field
+     * @return String representing the move
+     */
+    public String getNextMoveField(){
+        return this.nextMove;
     }
 }

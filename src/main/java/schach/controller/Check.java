@@ -109,7 +109,7 @@ public class Check {
         List<Square> legals;
         if (attacker instanceof Pawn){
             Pawn pawn = (Pawn) attacker;
-            legals = pawn.getAttackedSquares();
+            legals = pawn.getAttackedSquaresAll();
         } else {
             legals = attacker.getLegalNextSquares();
         }
@@ -145,7 +145,7 @@ public class Check {
         List<Square> legals = piece.getLegalNextSquares();
         if (piece instanceof Pawn){
             Pawn pawn = (Pawn) piece;
-            legals.addAll(pawn.getAttackedSquares());
+            legals.addAll(pawn.getAttackedSquaresAttacked());
             int oneUp = 1;
             if (!pawn.isWhite()){
                 oneUp = -1;

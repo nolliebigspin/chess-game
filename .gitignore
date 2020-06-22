@@ -6,3 +6,4 @@ docs/Diagrams/
 jacoco-resources/
 schach.model/
 log.txt
+/src/main/java/schach/debug/

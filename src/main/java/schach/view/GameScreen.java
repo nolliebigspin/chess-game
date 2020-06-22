@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -41,6 +42,7 @@ public class GameScreen {
         this.simpleAi = newSimpleAi;
     }
 
+    ChessBoardController boardController;
 
     /**
      * getter for the pane containing the gridPane representing the chess board
@@ -52,6 +54,10 @@ public class GameScreen {
 
     public Pane getControllerContainerPane(){
         return this.controllerContainerPane;
+    }
+
+    public void setBoardController(ChessBoardController boardController){
+        this.boardController = boardController;
     }
 
     //TopMenuBar button handling

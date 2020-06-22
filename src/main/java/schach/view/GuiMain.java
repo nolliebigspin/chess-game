@@ -84,7 +84,13 @@ public class GuiMain extends Application {
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.setGuiMain(this);
         gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
-        new ChessBoardController(gameScreen.getContainerPane());
+        ChessBoardController boardController;
+        if (vsPlayer){
+            boardController = new ChessBoardHuman(gameScreen.getContainerPane());
+        } else {
+            boardController = new ChessBoardComputer(gameScreen.getContainerPane(),simpleAi, player1isWhite);
+        }
         new LastMoveController(gameScreen.getControllerContainerPane());
+        gameScreen.setBoardController(boardController);
     }
 }
