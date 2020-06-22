@@ -246,7 +246,8 @@ public abstract class ChessBoardController {
             }
         }
         Image image = imageView.getImage();
-        String imgName = image.getUrl().substring(112);
+        String[] urls = image.getUrl().split("/");
+        String imgName = urls[urls.length - 1];
         String prom = imgName.substring(5, 6);
         if (prom.equals("K")){
             prom = "N";
