@@ -218,8 +218,8 @@
         <menus>
           <Menu fx:id="menuGame" mnemonicParsing="false" text="Game">
             <items>
-              <MenuItem fx:id="buttonRestart" mnemonicParsing="false" onAction="#handleButtonRestart" text="Restart" />
-                  <MenuItem fx:id="buttonGiveUp" mnemonicParsing="false" onAction="#handleGiveUp" text="Give up" />
+              <MenuItem fx:id="buttonRestart" mnemonicParsing="false" onAction="#handleButtonRestart" text="Restart Session" />
+                  <MenuItem fx:id="buttonBackToStartMenu" mnemonicParsing="false" onAction="#handleBackToStartMenu" text="Start Menu" />
             </items>
           </Menu>
           <Menu fx:id="menuSettings" mnemonicParsing="false" text="Settings">
@@ -227,7 +227,7 @@
                   <CheckMenuItem fx:id="checkShowPossibleMoves" mnemonicParsing="false" onAction="#handleShowPossibleMoves" text="Show possible moves" />
                   <CheckMenuItem fx:id="checkAllowMultipleSelect" mnemonicParsing="false" onAction="#handleAllowMultipleSelect" text="Enable clicking on multiple pieces" />
                   <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" text="Show if player is in check" />
-                  <MenuItem fx:id="buttonTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" text="Turn board" />
+                  <CheckMenuItem fx:id="checkTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" selected="true" text="Turn board" />
             </items>
           </Menu>
           <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">

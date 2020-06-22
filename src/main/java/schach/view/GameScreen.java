@@ -25,6 +25,7 @@ public class GameScreen {
     private boolean showPossibleMoves = false;
     private boolean allowMultipleSelect = false;
     private boolean showIsInCheck = false;
+    private boolean turnBoard = true;
 
     private boolean vsPlayer;
     private boolean playerOneIsWhite;
@@ -65,15 +66,12 @@ public class GameScreen {
         guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi);
     }
 
-    public void handleGiveUp(ActionEvent actionEvent) {
+
+    public void handleBackToStartMenu(ActionEvent e) {
         //
     }
 
-    public void handleOpenManual(ActionEvent actionEvent) {
-        //
-    }
-
-    public void handleTurnBoard(ActionEvent actionEvent) {
+    public void handleOpenManual(ActionEvent e) {
         //
     }
 
@@ -87,6 +85,11 @@ public class GameScreen {
 
     public void handleIsInCheck(ActionEvent e) {
         this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
+    }
+
+    public void handleTurnBoard(ActionEvent e) {
+        this.turnBoard = ((CheckMenuItem)e.getSource()).isSelected();
+        boardController.setRotate(turnBoard);
     }
 
 }
