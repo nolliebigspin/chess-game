@@ -18,7 +18,7 @@
    <children>
       <Pane fx:id="boardContainerPane" layoutX="68.0" layoutY="113.0">
          <children>
-            <GridPane fx:id="gridPane" gridLinesVisible="true" prefHeight="500.0" prefWidth="500.0">
+            <GridPane fx:id="chessBoardGrid" gridLinesVisible="true" prefHeight="500.0" prefWidth="500.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

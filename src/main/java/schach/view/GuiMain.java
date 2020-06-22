@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -84,11 +85,12 @@ public class GuiMain extends Application {
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.setGuiMain(this);
         gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
+        Pane boardPane = gameScreen.getContainerPane();
         ChessBoardController boardController;
         if (vsPlayer){
-            boardController = new ChessBoardHuman(gameScreen.getContainerPane());
+            boardController = new ChessBoardHuman(boardPane);
         } else {
-            boardController = new ChessBoardComputer(gameScreen.getContainerPane(),simpleAi, player1isWhite);
+            boardController = new ChessBoardComputer(boardPane,simpleAi, player1isWhite);
         }
         new LastMoveController(gameScreen.getControllerContainerPane());
         gameScreen.setBoardController(boardController);
