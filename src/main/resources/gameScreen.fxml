@@ -231,5 +231,14 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Pane layoutX="68.0" layoutY="42.0" prefHeight="63.0" prefWidth="500.0">
+         <children>
+            <Text fx:id="checkWarning" fill="#ff4d00" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK!" visible="false" wrappingWidth="80.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </Pane>

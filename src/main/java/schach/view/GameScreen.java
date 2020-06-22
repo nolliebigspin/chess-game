@@ -7,6 +7,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 /**
  * Controller for gameScreen.fxml
@@ -21,9 +22,10 @@ public class GameScreen {
     public Pane controllerContainerPane;
     @FXML
     public MenuBar topMenuBar;
+    public Text checkWarning;
 
     private boolean allowMultipleSelect = false;
-    private boolean showIsInCheck = false;
+    private boolean showIsInCheck = true;
     private boolean turnBoard = true;
 
     private boolean vsPlayer;
@@ -83,6 +85,7 @@ public class GameScreen {
 
     public void handleIsInCheck(ActionEvent e) {
         this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
+        checkWarning.setVisible(showIsInCheck);
     }
 
     /**
