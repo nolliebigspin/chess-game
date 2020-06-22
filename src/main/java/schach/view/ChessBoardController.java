@@ -483,6 +483,19 @@ public abstract class ChessBoardController {
                     }
                 }
             }
+        } else if (!whitesTurn){
+            boardGridPane.setRotate(180);
+            for (Node node: boardGridPane.getChildren()){
+                if (node instanceof StackPane){
+                    StackPane stackPane = (StackPane) node;
+                    for (Node innerNode: stackPane.getChildren()){
+                        if (innerNode instanceof ImageView){
+                            ImageView view = (ImageView) innerNode;
+                            view.setRotate(180);
+                        }
+                    }
+                }
+            }
         }
     }
 

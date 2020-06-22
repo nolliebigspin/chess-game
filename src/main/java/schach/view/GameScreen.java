@@ -20,11 +20,6 @@ public class GameScreen {
     public Button button;
 
     ChessBoardController boardController;
-    boolean rotation;
-
-    public GameScreen(){
-        this.rotation = true;
-    }
 
     /**
      * getter for the pane containing the gridPane representing the chess board
@@ -40,11 +35,6 @@ public class GameScreen {
 
     public void setBoardController(ChessBoardController boardController){
         this.boardController = boardController;
-    }
-
-    public void setRotation(){
-        this.rotation = !rotation;
-        boardController.setRotate(rotation);
     }
 
 }
