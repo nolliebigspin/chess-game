@@ -69,10 +69,6 @@ public class GameScreen {
         //
     }
 
-    public void handleOpenManual(ActionEvent e) {
-        //
-    }
-
     /**
      * Toggles if the possible moves are shown or not
      * @param e describes the event of the mouse click for this event

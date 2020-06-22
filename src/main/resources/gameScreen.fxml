@@ -212,7 +212,6 @@
             </GridPane>
          </children>
       </Pane>
-      <Pane layoutX="68.0" layoutY="14.0" prefHeight="62.0" prefWidth="1048.0" />
       <Pane fx:id="controllerContainerPane" layoutX="656.0" layoutY="110.0" prefHeight="506.0" prefWidth="237.0" />
       <MenuBar fx:id="topMenuBar" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="1311.0">
         <menus>
@@ -228,11 +227,6 @@
                   <CheckMenuItem fx:id="checkAllowMultipleSelect" mnemonicParsing="false" onAction="#handleAllowMultipleSelect" text="Enable clicking on multiple pieces" />
                   <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" text="Show if player is in check" />
                   <CheckMenuItem fx:id="checkTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" selected="true" text="Turn board" />
-            </items>
-          </Menu>
-          <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem fx:id="buttonManual" mnemonicParsing="false" onAction="#handleOpenManual" text="Manual" />
             </items>
           </Menu>
         </menus>
