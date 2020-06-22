@@ -22,7 +22,6 @@ public class GameScreen {
     @FXML
     public MenuBar topMenuBar;
 
-    private boolean showPossibleMoves = true;
     private boolean allowMultipleSelect = false;
     private boolean showIsInCheck = false;
     private boolean turnBoard = true;
@@ -79,8 +78,7 @@ public class GameScreen {
      * @param e describes the event of the mouse click for this event
      */
     public void handleShowPossibleMoves(ActionEvent e) {
-        this.showPossibleMoves = ((CheckMenuItem)e.getSource()).isSelected();
-        boardController.setPossibleMoves(showPossibleMoves);
+        boardController.setPossibleMoves(((CheckMenuItem)e.getSource()).isSelected());
     }
 
     public void handleAllowMultipleSelect(ActionEvent e) {
