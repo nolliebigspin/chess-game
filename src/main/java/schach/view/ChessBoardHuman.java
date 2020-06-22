@@ -1,5 +1,6 @@
 package schach.view;
 
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import schach.model.Piece;
@@ -18,6 +19,7 @@ public class ChessBoardHuman extends ChessBoardController{
 
     @Override
     protected void move(StackPane lastClickedPane) {
+        checkPane.setVisible(false);
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
@@ -30,6 +32,12 @@ public class ChessBoardHuman extends ChessBoardController{
 
         printBoard();
         inMove = false;
+
+        if (showIsCheck) {
+            if (board.getCheck().kingInCheck(!whitesTurn)) {
+                checkPane.setVisible(true);
+            }
+        }
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
         }

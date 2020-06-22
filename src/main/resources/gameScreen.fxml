@@ -225,7 +225,7 @@
             <items>
                   <CheckMenuItem fx:id="checkShowPossibleMoves" mnemonicParsing="false" onAction="#handleShowPossibleMoves" selected="true" text="Show possible moves" />
                   <CheckMenuItem fx:id="checkAllowMultipleSelect" mnemonicParsing="false" onAction="#handleAllowMultipleSelect" text="Enable clicking on multiple pieces" />
-                  <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" text="Show if player is in check" />
+                  <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" selected="true" text="Show if player is in check" />
                   <CheckMenuItem fx:id="checkTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" selected="true" text="Turn board" />
             </items>
           </Menu>

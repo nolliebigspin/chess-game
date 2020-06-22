@@ -34,9 +34,20 @@ public class GameScreen {
 
     private GuiMain guimain;
 
+
+
+    // Getter + Setter
     public void setGuiMain(GuiMain newGuiMan) {
         this.guimain = newGuiMan;
     }
+    public boolean getIsInCheck() {
+        return showIsInCheck;
+    }
+
+    public void setShowIsInCheck(boolean newBool) {
+        this.showIsInCheck = newBool;
+    }
+
 
     public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi) {
         this.vsPlayer = newVsPlayer;
@@ -83,9 +94,12 @@ public class GameScreen {
         this.allowMultipleSelect = ((CheckMenuItem)e.getSource()).isSelected();
     }
 
+    /**
+     * Toggles warning that is shown if a player is in a check position
+     * @param e describes the event of the mouse click for this event
+     */
     public void handleIsInCheck(ActionEvent e) {
-        this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
-        checkWarning.setVisible(showIsInCheck);
+        boardController.setShowIsCheck(((CheckMenuItem)e.getSource()).isSelected());
     }
 
     /**

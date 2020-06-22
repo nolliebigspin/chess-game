@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import schach.model.*;
 
@@ -74,6 +75,8 @@ public abstract class ChessBoardController {
 
     protected Boolean rotate;
     protected Boolean possibleMoves = true;
+    protected boolean showIsCheck = true;
+    Text checkPane;
 
     /**
      * Constructor initializing fields, maps and event handler
@@ -91,6 +94,8 @@ public abstract class ChessBoardController {
         initHashMap();
         printBoard();
         initEventHandler();
+        Node parentCheck = container.getParent();
+        checkPane = (Text) (parentCheck.lookup("#checkWarning"));
     }
 
     /**
@@ -99,6 +104,14 @@ public abstract class ChessBoardController {
      */
     public void setPossibleMoves(boolean newValue) {
         this.possibleMoves = newValue;
+    }
+
+    /**
+     * Sets the information to visible if a playyer is in check
+     * @param newBool boolean if any player is in check
+     */
+    public void setShowIsCheck(boolean newBool) {
+        this.showIsCheck = newBool;
     }
 
     /**
