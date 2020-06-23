@@ -89,6 +89,7 @@ public class ChessBoardComputer extends ChessBoardController{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                checkPane.setVisible(false);
                 printBoard();
                 if (board.getCheck().isCheckMate(!whitesTurn)){
                     gameOver();
@@ -109,6 +110,7 @@ public class ChessBoardComputer extends ChessBoardController{
 
     @Override
     protected void move(StackPane lastClickedPane){
+        checkPane.setVisible(false);
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
@@ -118,6 +120,11 @@ public class ChessBoardComputer extends ChessBoardController{
             promHistory.add(0, false);
         }
         inMove = false;
+        if (showIsCheck) {
+            if (board.getCheck().kingInCheck(!whitesTurn)) {
+                checkPane.setVisible(true);
+            }
+        }
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
         }
