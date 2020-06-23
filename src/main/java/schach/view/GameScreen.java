@@ -24,7 +24,7 @@ public class GameScreen {
     public MenuBar topMenuBar;
     public Text checkWarning;
 
-    private boolean allowMultipleSelect = false;
+    private boolean allowMultipleSelect = true;
     private boolean showIsInCheck = true;
     private boolean turnBoard = true;
 
