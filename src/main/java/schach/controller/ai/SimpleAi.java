@@ -26,6 +26,7 @@ public class SimpleAi extends AiInterface {
     @Override
     public String getNextMove(){
         Move move = randomMove();
+        this.nextMove = move.moveAsString();
         return move.moveAsString();
     }
 

@@ -82,11 +82,13 @@ public class Check {
      * @return true if Piece would allow the king to be in a check-situatio, false if move is safe for king
      */
     public boolean inCheckIfMoved(Piece movingPiece, Square target){
+        Piece realLastMoved = board.getLastMoved();
         movingPiece.acceptMove(target);
         board.updateAllLegalSquares();
         //List<Square> currentlyAttacked = board.attackedSquares(!movingPiece.getIsWhite());
         boolean inCheck = kingInCheck(movingPiece.isWhite()/**TODO delete: , currentlyAttacked*/);
         movingPiece.undoMove();
+        board.setLastMoved(realLastMoved);
         board.updateAllLegalSquares();
         return inCheck;
     }
@@ -107,7 +109,7 @@ public class Check {
         List<Square> legals;
         if (attacker instanceof Pawn){
             Pawn pawn = (Pawn) attacker;
-            legals = pawn.getAttackedSquares();
+            legals = pawn.getAttackedSquaresAll();
         } else {
             legals = attacker.getLegalNextSquares();
         }
@@ -143,7 +145,7 @@ public class Check {
         List<Square> legals = piece.getLegalNextSquares();
         if (piece instanceof Pawn){
             Pawn pawn = (Pawn) piece;
-            legals.addAll(pawn.getAttackedSquares());
+            legals.addAll(pawn.getAttackedSquaresAttacked());
             int oneUp = 1;
             if (!pawn.isWhite()){
                 oneUp = -1;
