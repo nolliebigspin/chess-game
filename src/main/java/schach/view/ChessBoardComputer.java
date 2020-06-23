@@ -67,10 +67,9 @@ public class ChessBoardComputer extends ChessBoardController{
             public void run() {
                 resetBackground();
                 printBoard();
-                if(!inFirstMove){
+                if(!inFirstMove || inFirstMove && playerIsWhite){
                     rotateGame();
                 }
-
             }
         });
         disabledMouseOnBoard = true;
