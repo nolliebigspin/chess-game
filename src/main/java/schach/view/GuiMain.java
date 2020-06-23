@@ -95,4 +95,17 @@ public class GuiMain extends Application {
         new LastMoveController(gameScreen.getControllerContainerPane());
         gameScreen.setBoardController(boardController);
     }
+
+    public void loadStartScreen() throws Exception {
+        URL url = Paths.get("src/main/resources/startMenu.fxml").toUri().toURL();
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);
+        startMenu = (StartMenu) fxmlLoader.getController();
+        startMenu.setGuiMain(this);
+        initStartMenuHandler();
+    }
 }

@@ -78,8 +78,8 @@ public class GameScreen {
         guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi);
     }
 
-    public void handleBackToStartMenu(ActionEvent e) {
-        //
+    public void handleBackToStartMenu(ActionEvent e) throws Exception {
+        guimain.loadStartScreen();
     }
 
     /**
