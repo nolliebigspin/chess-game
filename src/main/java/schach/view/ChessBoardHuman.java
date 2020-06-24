@@ -1,16 +1,16 @@
 package schach.view;
 
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import schach.model.Piece;
 import schach.model.Square;
 
+/**
+ * Class extending the ChessBoardController to implement concrete functions for the PvP game mode
+ */
 public class ChessBoardHuman extends ChessBoardController{
 
     /**
      * Constructor initializing fields, maps and event handler
-     *
      * @param container the Pane that contains the Chessboard and all belonging Panes
      */
     public ChessBoardHuman(Pane container) {
@@ -32,11 +32,8 @@ public class ChessBoardHuman extends ChessBoardController{
 
         printBoard();
         inMove = false;
-
-        if (showIsCheck) {
-            if (board.getCheck().kingInCheck(!whitesTurn)) {
-                checkPane.setVisible(true);
-            }
+        if (showIsCheck && board.getCheck().kingInCheck(!whitesTurn)) {
+            checkPane.setVisible(true);
         }
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
