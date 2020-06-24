@@ -77,7 +77,7 @@ public abstract class ChessBoardController {
     protected boolean possibleMoves = true;
     protected boolean showIsCheck = true;
     protected boolean multipleSelect = true;
-    Text checkPane;
+    protected Text checkPane;
 
     /**
      * Constructor initializing fields, maps and event handler
@@ -97,28 +97,6 @@ public abstract class ChessBoardController {
         initEventHandler();
         Node parentCheck = container.getParent();
         checkPane = (Text) (parentCheck.lookup("#checkWarning"));
-    }
-
-    /**
-     * Setter to toggle if possible moves are shown or not
-     * @param newValue new bool value if possible moves should be shown or not
-     */
-    public void setPossibleMoves(boolean newValue) {
-        this.possibleMoves = newValue;
-    }
-
-    /**
-     * Sets the information to visible if a playyer is in check
-     * @param newBool boolean if any player is in check
-     */
-    public void setShowIsCheck(boolean newBool) {
-        this.showIsCheck = newBool;
-    }
-
-    public void setMultipleSelect(boolean multipleSelect){
-        this.multipleSelect = multipleSelect;
-        resetBackground();
-        inMove = false;
     }
 
     /**
@@ -184,6 +162,7 @@ public abstract class ChessBoardController {
      * @param pane the pane that was clicked on
      */
     private void paneClicked(StackPane pane){
+        inMove = false;
         resetBackground();
         pane.setStyle("-fx-background-color: blue;");
         Piece piece;
@@ -529,5 +508,36 @@ public abstract class ChessBoardController {
                 }
             }
         }
+    }
+
+
+    /**
+     * Setter to toggle if possible moves are shown or not
+     * @param newValue new bool value if possible moves should be shown or not
+     */
+    public void setPossibleMoves(boolean newValue) {
+        this.possibleMoves = newValue;
+        if (inMove){
+            if (!newValue){
+                resetBackground();
+                squareToPaneMap.get(toBeMoved.getPosition()).setStyle("-fx-background-color: blue;");
+            } else {
+                colorLegals(toBeMoved);
+            }
+        }
+    }
+
+    /**
+     * Sets the information to visible if a playyer is in check
+     * @param newBool boolean if any player is in check
+     */
+    public void setShowIsCheck(boolean newBool) {
+        this.showIsCheck = newBool;
+    }
+
+    public void setMultipleSelect(boolean multipleSelect){
+        this.multipleSelect = multipleSelect;
+        resetBackground();
+        inMove = false;
     }
 }
