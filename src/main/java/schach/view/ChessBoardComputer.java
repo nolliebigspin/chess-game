@@ -67,6 +67,9 @@ public class ChessBoardComputer extends ChessBoardController{
             public void run() {
                 resetBackground();
                 printBoard();
+                if (board.getCheck().isCheckMate(!playerIsWhite)){
+                    return;
+                }
                 if(!inFirstMove || inFirstMove && playerIsWhite){
                     rotateGame();
                 }

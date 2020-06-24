@@ -92,6 +92,7 @@ public class GameScreen {
 
     public void handleAllowMultipleSelect(ActionEvent e) {
         this.allowMultipleSelect = ((CheckMenuItem)e.getSource()).isSelected();
+        boardController.setMultipleSelect(allowMultipleSelect);
     }
 
     /**

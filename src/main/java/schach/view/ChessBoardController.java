@@ -73,9 +73,10 @@ public abstract class ChessBoardController {
      */
     protected String backgroundGreen = "-fx-background-color: green;";
 
-    protected Boolean rotate;
-    protected Boolean possibleMoves = true;
+    protected boolean rotate;
+    protected boolean possibleMoves = true;
     protected boolean showIsCheck = true;
+    protected boolean multipleSelect = true;
     Text checkPane;
 
     /**
@@ -112,6 +113,12 @@ public abstract class ChessBoardController {
      */
     public void setShowIsCheck(boolean newBool) {
         this.showIsCheck = newBool;
+    }
+
+    public void setMultipleSelect(boolean multipleSelect){
+        this.multipleSelect = multipleSelect;
+        resetBackground();
+        inMove = false;
     }
 
     /**
@@ -203,7 +210,7 @@ public abstract class ChessBoardController {
         List<Square> legals = toBeMoved.filteredLegals();
         if (legals.contains(paneToSquareMap.get(lastClickedPane))){
             move(lastClickedPane);
-        } else {
+        } else if (multipleSelect) {
             paneClicked(lastClickedPane);
         }
     }
