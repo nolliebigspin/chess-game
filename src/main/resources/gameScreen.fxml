@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -250,14 +249,24 @@
                         <Font size="23.0" />
                     </font>
                 </Label>
-                <TableView layoutX="21.0" layoutY="72.0" prefHeight="320.0" prefWidth="222.0">
-                    <columns>
-                        <TableColumn prefWidth="108.66668701171875" text="Player" />
-                        <TableColumn prefWidth="112.0" text="Move" />
-                    </columns>
+                <TableView fx:id="lasMoveTable" layoutX="21.0" layoutY="72.0" prefHeight="320.0" prefWidth="222.0">
+<!--                    <columns>-->
+<!--                        <TableColumn fx:id="playerColumn" prefWidth="108.66668701171875" text="Player" />-->
+<!--                        <TableColumn fx:id="moveCollumn" prefWidth="112.0" text="Move" />-->
+<!--                    </columns>-->
                 </TableView>
-                <Button layoutX="31.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Back" />
-                <Button layoutX="150.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Forward" />
+                <Button fx:id="undo" layoutX="31.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Back" />
+                <Button fx:id="forward" layoutX="150.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Forward" />
+            <Label layoutX="32.0" layoutY="446.0" prefHeight="30.0" prefWidth="46.0" text="Time:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="timeLabel" layoutX="91.0" layoutY="446.0" prefHeight="30.0" prefWidth="46.0" text="00:00">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
             </children>
         </Pane>
         <Pane fx:id="cemeteryPane" layoutX="77.0" layoutY="634.0" prefHeight="134.0" prefWidth="841.0" style="-fx-border-style: solid; -fx-border-radius: 20;">

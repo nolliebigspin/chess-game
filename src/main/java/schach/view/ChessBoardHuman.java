@@ -8,13 +8,16 @@ import schach.model.Square;
 
 public class ChessBoardHuman extends ChessBoardController{
 
+    private GameScreen gameScreen;
+
     /**
      * Constructor initializing fields, maps and event handler
      *
      * @param container the Pane that contains the Chessboard and all belonging Panes
      */
-    public ChessBoardHuman(Pane container) {
+    public ChessBoardHuman(Pane container, GameScreen gameScreen) {
         super(container);
+       this.gameScreen = gameScreen;
     }
 
     @Override
@@ -27,6 +30,14 @@ public class ChessBoardHuman extends ChessBoardController{
         if (isPromotion(toBeMoved)){
             showPromotion(toBeMoved.isWhite());
         } else {
+            String playerName = "";
+            if(this.gameScreen.getPlayers().get(0).isActive())
+                playerName = this.gameScreen.getPlayers().get(0).getName();
+            else{
+                playerName = this.gameScreen.getPlayers().get(1).getName();
+            }
+            this.gameScreen.getLastMoveController().saveMove(board,playerName,start.getDenotation()+"-"+target.getDenotation());
+           this.togglePlayer();
             rotateGame();
         }
 
@@ -51,4 +62,13 @@ public class ChessBoardHuman extends ChessBoardController{
         rotateGame();
     }
 
+    private void togglePlayer(){
+        if(this.gameScreen.getPlayers().get(0).isActive()){
+            this.gameScreen.getPlayers().get(0).setActive(false);
+            this.gameScreen.getPlayers().get(1).setActive(true);
+        }else{
+            this.gameScreen.getPlayers().get(0).setActive(true);
+            this.gameScreen.getPlayers().get(1).setActive(false);
+        }
+    }
 }

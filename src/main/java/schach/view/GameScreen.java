@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import schach.model.Player;
+
+import java.util.ArrayList;
 
 /**
  * Controller for gameScreen.fxml
@@ -34,6 +37,11 @@ public class GameScreen {
 
     private GuiMain guimain;
 
+    private LastMoveController lastMoveController;
+
+
+
+    private ArrayList<Player> players;
 
 
     // Getter + Setter
@@ -75,7 +83,7 @@ public class GameScreen {
 
     //TopMenuBar button handling
     public void handleButtonRestart() throws Exception {
-        guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi);
+        guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi,this.players);
     }
 
     public void handleBackToStartMenu(ActionEvent e) {
@@ -112,4 +120,22 @@ public class GameScreen {
         boardController.setRotate(turnBoard);
     }
 
+    public void setLastMoveController(LastMoveController lastMoveController){
+        this.lastMoveController = lastMoveController;
+    }
+    public LastMoveController getLastMoveController(){
+        return this.lastMoveController;
+    }
+
+    public GuiMain getGuimain(){
+        return this.guimain;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players){
+        this.players = players;
+    }
 }

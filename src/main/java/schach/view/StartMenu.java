@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
+import schach.model.Player;
+
+import java.util.ArrayList;
 
 /**
  * Controller for startMenu.fxml
@@ -41,7 +44,7 @@ public class StartMenu {
     private Boolean player1isWhite;
     private Boolean simpleAi;
     private GuiMain guiMain;
-
+    private ArrayList<Player> players;
     /**
      * Constructor setting Game Mode Booleans true
      */
@@ -49,6 +52,7 @@ public class StartMenu {
         vsPlayer = true;
         player1isWhite = true;
         simpleAi = true;
+        this.players = new ArrayList<>();
     }
 
     /**
@@ -59,6 +63,7 @@ public class StartMenu {
         vsPlayer = false;
         playerName2.setVisible(false);
         aiContainerPane.setVisible(true);
+
     }
 
     /**
@@ -178,7 +183,27 @@ public class StartMenu {
      * @throws Exception
      */
     public void start() throws Exception {
-        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi);
+        Player playerOne;
+        Player playerTwo;
+        if(this.player1isWhite){
+            playerOne = new Player(this.player1, "White");
+            if(this.vsPlayer)
+            playerTwo = new Player(this.player2, "Black");
+            else {
+                playerTwo = new Player("CPU", "Black");
+            }
+        }else{
+            playerOne = new Player(this.player1, "Black");
+            if(this.vsPlayer)
+            playerTwo = new Player(this.player2, "White");
+            else{
+                playerTwo = new Player("CPU", "White");
+            }
+        }
+        this.players.add(playerOne);
+        this.players.add(playerTwo);
+        //
+        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.players);
     }
 
 

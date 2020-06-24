@@ -8,9 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import schach.model.Player;
 
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 /**
  * Starts the JavaFX GUI and handles transitions between scenes as well as events that cant be implemented in the
@@ -76,7 +78,7 @@ public class GuiMain extends Application {
      * @param simpleAi true if AI is simple, false if AI should be Minmax
      * @throws Exception
      */
-    public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi) throws Exception {
+    public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi, ArrayList<Player> players) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -84,15 +86,18 @@ public class GuiMain extends Application {
         stage.setResizable(true);
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.setGuiMain(this);
+        gameScreen.setPlayers(players);
         gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
         Pane boardPane = gameScreen.getContainerPane();
         ChessBoardController boardController;
+        //new LastMoveController(gameScreen.getControllerContainerPane());
+        gameScreen.setLastMoveController(new LastMoveController(gameScreen.getControllerContainerPane()));
         if (vsPlayer){
-            boardController = new ChessBoardHuman(boardPane);
+            boardController = new ChessBoardHuman(boardPane,gameScreen );
         } else {
             boardController = new ChessBoardComputer(boardPane,simpleAi, player1isWhite);
         }
-        new LastMoveController(gameScreen.getControllerContainerPane());
+
         gameScreen.setBoardController(boardController);
     }
 }
