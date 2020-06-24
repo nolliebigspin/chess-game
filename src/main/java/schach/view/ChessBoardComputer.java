@@ -13,6 +13,9 @@ import schach.model.Square;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class extending the ChessBoardController containing concrete implementations for vsAi game mode
+ */
 public class ChessBoardComputer extends ChessBoardController{
 
     private AiInterface ai;
@@ -123,10 +126,8 @@ public class ChessBoardComputer extends ChessBoardController{
             promHistory.add(0, false);
         }
         inMove = false;
-        if (showIsCheck) {
-            if (board.getCheck().kingInCheck(!whitesTurn)) {
-                checkPane.setVisible(true);
-            }
+        if (showIsCheck && board.getCheck().kingInCheck(!whitesTurn)) {
+            checkPane.setVisible(true);
         }
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
