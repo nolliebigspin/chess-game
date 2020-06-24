@@ -4,8 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -15,47 +13,60 @@ import javafx.scene.text.Text;
 public class GameScreen {
 
     @FXML
-    public GridPane gridPane;
-    @FXML
     public Pane boardContainerPane;
-    @FXML
     public Pane controllerContainerPane;
-    @FXML
     public MenuBar topMenuBar;
     public Text checkWarning;
 
-    private boolean allowMultipleSelect = true;
-    private boolean showIsInCheck = true;
-    private boolean turnBoard = true;
+    private ChessBoardController boardController;
+    private GuiMain guimain;
 
     private boolean vsPlayer;
     private boolean playerOneIsWhite;
     private boolean simpleAi;
 
-    private GuiMain guimain;
+    private boolean allowMultipleSelect;
+    private boolean showIsInCheck;
+    private boolean turnBoard;
+    private boolean displayPossibles;
 
-
-
-    // Getter + Setter
-    public void setGuiMain(GuiMain newGuiMan) {
-        this.guimain = newGuiMan;
+    /**
+     * Constructor initializing settings to true
+     */
+    public GameScreen(){
+        this.allowMultipleSelect = true;
+        this.showIsInCheck = true;
+        this.turnBoard = true;
+        displayPossibles = true;
     }
-    public boolean getIsInCheck() {
-        return showIsInCheck;
-    }
 
-    public void setShowIsInCheck(boolean newBool) {
-        this.showIsInCheck = newBool;
-    }
-
-
+    /**
+     * initializing the game mode options
+     * @param newVsPlayer true if game mode pvp, false if opponent is ai
+     * @param newPlayerOneIsWhite true if player 1 is white, false if player 1 is black (Player 2 = Ai if player picked Ai as a Opponent)
+     * @param newSimpleAi true if Ai is simple, false if Ai is minmax AI
+     */
     public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi) {
         this.vsPlayer = newVsPlayer;
         this.playerOneIsWhite = newPlayerOneIsWhite;
         this.simpleAi = newSimpleAi;
     }
 
-    ChessBoardController boardController;
+    /**
+     * Setter for the GuiMain reference
+     * @param newGuiMan the guiMain
+     */
+    public void setGuiMain(GuiMain newGuiMan) {
+        this.guimain = newGuiMan;
+    }
+
+    /**
+     * Setter for the ChessBoardController reference
+     * @param boardController the ChessBoardController
+     */
+    public void setBoardController(ChessBoardController boardController){
+        this.boardController = boardController;
+    }
 
     /**
      * getter for the pane containing the gridPane representing the chess board
@@ -65,21 +76,34 @@ public class GameScreen {
         return this.boardContainerPane;
     }
 
+    /**
+     * getter for Pane containing the some other things?!
+     * @return
+     */
     public Pane getControllerContainerPane(){
         return this.controllerContainerPane;
     }
 
-    public void setBoardController(ChessBoardController boardController){
-        this.boardController = boardController;
+    /**
+     * Handler for the Restart Button in the Menu Bar
+     */
+    public void handleButtonRestart(){
+        try {
+            guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    //TopMenuBar button handling
-    public void handleButtonRestart() throws Exception {
-        guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi);
-    }
-
-    public void handleBackToStartMenu(ActionEvent e) throws Exception {
-        guimain.loadStartScreen();
+    /**
+     * Handler for the Back to Startmenu Button in the Menu Bar
+     */
+    public void handleBackToStartMenu(){
+        try {
+            guimain.loadStartScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -87,9 +111,14 @@ public class GameScreen {
      * @param e describes the event of the mouse click for this event
      */
     public void handleShowPossibleMoves(ActionEvent e) {
-        boardController.setPossibleMoves(((CheckMenuItem)e.getSource()).isSelected());
+        this.displayPossibles = ((CheckMenuItem)e.getSource()).isSelected();
+        boardController.setPossibleMoves(displayPossibles);
     }
 
+    /**
+     * Toggles if player is allowed to switch piece after already chosen a piece
+     * @param e describes the event of the mouse click for this event
+     */
     public void handleAllowMultipleSelect(ActionEvent e) {
         this.allowMultipleSelect = ((CheckMenuItem)e.getSource()).isSelected();
         boardController.setMultipleSelect(allowMultipleSelect);
@@ -100,7 +129,8 @@ public class GameScreen {
      * @param e describes the event of the mouse click for this event
      */
     public void handleIsInCheck(ActionEvent e) {
-        boardController.setShowIsCheck(((CheckMenuItem)e.getSource()).isSelected());
+        this.showIsInCheck = ((CheckMenuItem)e.getSource()).isSelected();
+        boardController.setShowIsCheck(showIsInCheck);
     }
 
     /**
