@@ -1,9 +1,7 @@
 package schach.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Class that can read and write the Positions of Pieces on a Board

@@ -1,8 +1,5 @@
 package schach.controller.interfaces;
 
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import schach.model.Board;
 import schach.model.Pawn;
 import schach.model.Piece;
@@ -16,7 +13,6 @@ import java.util.Scanner;
 public class Input {
 
     private Board board;
-
 
     public int currentMove;
 
@@ -62,12 +58,6 @@ public class Input {
 
                 if (movingPiece.isValidMove() && board.getCheck().isCheckMate(!movingPiece.isWhite())) {
                     System.out.println("CHECKMATE.");
-                    String color = "";
-                    if (board.getCheck().isCheckMate((true))) {
-                        color = "White";
-                    } else {
-                        color = "Black";
-                    }
                     running = false;
                 }
 
