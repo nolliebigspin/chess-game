@@ -95,7 +95,7 @@ public class GuiMain extends Application {
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane,gameScreen );
         } else {
-            boardController = new ChessBoardComputer(boardPane,simpleAi, player1isWhite);
+            boardController = new ChessBoardComputer(boardPane,simpleAi,gameScreen, player1isWhite);
         }
 
         gameScreen.setBoardController(boardController);

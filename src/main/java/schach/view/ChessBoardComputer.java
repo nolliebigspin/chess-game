@@ -25,12 +25,15 @@ public class ChessBoardComputer extends ChessBoardController{
 
     private boolean inFirstMove;
 
+    private GameScreen gameScreen;
+
     /**
      * Constructor initializing fields, maps and event handler
      * @param container the Pane that contains the Chessboard and all belonging Panes
      */
-    public ChessBoardComputer(Pane container, boolean simpleAi, boolean playerIsWhite) {
+    public ChessBoardComputer(Pane container, boolean simpleAi,GameScreen gameScreen, boolean playerIsWhite) {
         super(container);
+        this.gameScreen = gameScreen;
         this.playerIsWhite = playerIsWhite;
         if (simpleAi){
             ai = new SimpleAi(board, !playerIsWhite);
@@ -86,6 +89,7 @@ public class ChessBoardComputer extends ChessBoardController{
         String aiMove = ai.getNextMove();
         String[] squares = aiMove.split("-");
         board.movePiece(squares[0], squares[1]);
+        this.togglePlayer(squares[0], squares[1]);
         //runLater to address JavaFX application Thread
         Platform.runLater(new Runnable() {
             @Override
@@ -104,6 +108,7 @@ public class ChessBoardComputer extends ChessBoardController{
             }
         });
         whitesTurn = !whitesTurn;
+
         disabledMouseOnBoard = false;
         inFirstMove = false;
     }
@@ -118,6 +123,7 @@ public class ChessBoardComputer extends ChessBoardController{
         } else {
             promHistory.add(0, false);
         }
+        this.togglePlayer(start.getDenotation(),target.getDenotation() );
         inMove = false;
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
@@ -173,5 +179,22 @@ public class ChessBoardComputer extends ChessBoardController{
     @Override
     protected boolean correctTurn(Piece clickedPiece) {
         return clickedPiece.isWhite() == whitesTurn && clickedPiece.isWhite() == playerIsWhite;
+    }
+
+    private void togglePlayer(String start,String target){
+        String playerName = "";
+        if(this.gameScreen.getPlayers().get(0).isActive())
+            playerName = this.gameScreen.getPlayers().get(0).getName();
+        else{
+            playerName = this.gameScreen.getPlayers().get(1).getName();
+        }
+        this.gameScreen.getLastMoveController().saveMove(board,playerName,start+"-"+target);
+        if(this.gameScreen.getPlayers().get(0).isActive()){
+            this.gameScreen.getPlayers().get(0).setActive(false);
+            this.gameScreen.getPlayers().get(1).setActive(true);
+        }else{
+            this.gameScreen.getPlayers().get(0).setActive(true);
+            this.gameScreen.getPlayers().get(1).setActive(false);
+        }
     }
 }
