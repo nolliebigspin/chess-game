@@ -96,6 +96,10 @@ public class GuiMain extends Application {
         gameScreen.setBoardController(boardController);
     }
 
+    /**
+     * loads the gameScreen scene in the stage
+     * @throws Exception
+     */
     public void loadStartScreen() throws Exception {
         URL url = Paths.get("src/main/resources/startMenu.fxml").toUri().toURL();
         FXMLLoader fxmlLoader = new FXMLLoader(url);

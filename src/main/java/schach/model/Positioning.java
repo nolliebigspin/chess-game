@@ -15,15 +15,12 @@ public class Positioning {
      */
     Board board;
 
-    Map<Square, String> hashMap;
-
     /**
      * Constructor initializing the board
      * @param board the Piece will be written on / read
      */
     public Positioning(Board board){
         this.board = board;
-        hashMap = new HashMap<>();
     }
 
     /**
@@ -42,13 +39,8 @@ public class Positioning {
             }
             String pieceString = color + "-" + piece.print() + "-" + piece.getPosition().getDenotation();
             place.add(pieceString);
-            hashMap.put(piece.getPosition(), piece.print());
         }
         return place;
-    }
-
-    public Map<Square, String> getPositioningMap(){
-        return this.hashMap;
     }
 
     /**
