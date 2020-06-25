@@ -38,38 +38,6 @@ class KingTest {
         assertEquals(expected, actual);
     }
 
-
-    @Test
-    void scenario1() {
-        Board testBoard = new Board();
-        testBoard.addPiece(king, "d3", false);
-
-        King k = new King(testBoard.getSquare(4,3),false,testBoard);
-        k.updateLegals();
-        List<Square> Actual =k.getLegalNextSquares();
-        Square en1 = testBoard.getSquare(4 , 4);
-        Square en2 = testBoard.getSquare(4 , 2);
-        Square en3 = testBoard.getSquare(3 , 3);
-        Square en4 = testBoard.getSquare(5 , 3);
-        Square en5 = testBoard.getSquare(5 , 4);
-        Square en6 = testBoard.getSquare(5 , 2);
-        Square en7 = testBoard.getSquare(3 , 2);
-        Square en8 = testBoard.getSquare(3 , 4);
-        List<Square> legals = new ArrayList<Square>();
-        legals.add(en1);
-        legals.add(en2);
-        legals.add(en3);
-        legals.add(en4);
-        legals.add(en5);
-        legals.add(en6);
-        legals.add(en7);
-        legals.add(en8);
-
-        // test the CheckUpLeft method
-        assertEquals(legals,Actual);
-    }
-
-
     @Test
     void scenario2() {
         Board testBoard = new Board();
@@ -78,23 +46,23 @@ class KingTest {
         King k = new King(testBoard.getSquare(4,3),false,testBoard);
         k.updateLegals();
         List<Square> Actual =k.getLegalNextSquares();
-        Square en1 = testBoard.getSquare(4 , 4);
-        Square en2 = testBoard.getSquare(4 , 2);
-        Square en3 = testBoard.getSquare(3 , 3);
-        Square en4 = testBoard.getSquare(5 , 3);
-        Square en5 = testBoard.getSquare(5 , 4);
-        Square en6 = testBoard.getSquare(5 , 2);
-        Square en7 = testBoard.getSquare(3 , 2);
-        Square en8 = testBoard.getSquare(3 , 4);
+        Square n1 = testBoard.getSquare(4 , 4);
+        Square n2 = testBoard.getSquare(4 , 2);
+        Square n3 = testBoard.getSquare(3 , 3);
+        Square n4 = testBoard.getSquare(5 , 3);
+        Square n5 = testBoard.getSquare(5 , 4);
+        Square n6 = testBoard.getSquare(5 , 2);
+        Square n7 = testBoard.getSquare(3 , 2);
+        Square n8 = testBoard.getSquare(3 , 4);
         List<Square> legals = new ArrayList<Square>();
-        legals.add(en1);
-        legals.add(en2);
-        legals.add(en3);
-        legals.add(en4);
-        legals.add(en5);
-        legals.add(en6);
-        legals.add(en7);
-        legals.add(en8);
+        legals.add(n1);
+        legals.add(n2);
+        legals.add(n3);
+        legals.add(n4);
+        legals.add(n5);
+        legals.add(n6);
+        legals.add(n7);
+        legals.add(n8);
 
         // test the CheckUpLeft method
         assertEquals(legals,Actual);
@@ -182,23 +150,23 @@ class KingTest {
         King k = new King(testBoard.getSquare(4,3),false,testBoard);
         k.updateLegals();
         List<Square> Actual =k.getLegalNextSquares();
-        Square en1 = testBoard.getSquare(4 , 4);
-        Square en2 = testBoard.getSquare(4 , 2);
-        Square en3 = testBoard.getSquare(3 , 3);
-        Square en4 = testBoard.getSquare(5 , 3);
-        Square en5 = testBoard.getSquare(5 , 4);
-        Square en6 = testBoard.getSquare(5 , 2);
-        Square en7 = testBoard.getSquare(3 , 2);
-        Square en8 = testBoard.getSquare(3 , 4);
+        Square e1 = testBoard.getSquare(4 , 4);
+        Square e2 = testBoard.getSquare(4 , 2);
+        Square e3 = testBoard.getSquare(3 , 3);
+        Square e4 = testBoard.getSquare(5 , 3);
+        Square e5 = testBoard.getSquare(5 , 4);
+        Square e6 = testBoard.getSquare(5 , 2);
+        Square e7 = testBoard.getSquare(3 , 2);
+        Square e8 = testBoard.getSquare(3 , 4);
         List<Square> legals = new ArrayList<Square>();
-        legals.add(en1);
-        legals.add(en2);
-        legals.add(en3);
-        legals.add(en4);
-        legals.add(en5);
-        legals.add(en6);
-        legals.add(en7);
-        legals.add(en8);
+        legals.add(e1);
+        legals.add(e2);
+        legals.add(e3);
+        legals.add(e4);
+        legals.add(e5);
+        legals.add(e6);
+        legals.add(e7);
+        legals.add(e8);
 
         // test the CheckUpLeft method
         assertEquals(legals,Actual);

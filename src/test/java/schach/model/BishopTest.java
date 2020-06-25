@@ -32,11 +32,11 @@ class BishopTest {
         Bishop b1 = new Bishop(testBoard.getSquare(4,3),true,testBoard);
         b1.updateLegals();
         List<Square> Actual =b1.getLegalNextSquares();
-        Square empty1 = testBoard.getSquare(5 , 4);
-        Square empty2 = testBoard.getSquare(6 , 5);
+        Square empt1 = testBoard.getSquare(5 , 4);
+        Square empt2 = testBoard.getSquare(6 , 5);
         List<Square> legals = new ArrayList<Square>();
-        legals.add(empty1);
-        legals.add(empty2);
+        legals.add(empt1);
+        legals.add(empt2);
         legals.add(testBoard.squareByDenotation("e2"));
         legals.add(testBoard.squareByDenotation("c2"));
         legals.add(testBoard.squareByDenotation("c4"));

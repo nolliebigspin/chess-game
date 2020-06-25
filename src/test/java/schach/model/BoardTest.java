@@ -95,10 +95,10 @@ class BoardTest {
         testBoard.addPiece(rook, "c7", false);
         testBoard.addPiece(king, "g4", true);
         testBoard.addPiece(king, "e5", false);
-        Rook r1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
-        Rook r2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
-        r1.updateLegals();
-        r2.updateLegals();
+        Rook ro1 = new Rook(testBoard.getSquare(3,2),true,testBoard);
+        Rook ro2 = new Rook(testBoard.getSquare(3,7),false,testBoard);
+        ro1.updateLegals();
+        ro2.updateLegals();
         assertTrue(testBoard.isUnderAttack("c2",false));
 
     }

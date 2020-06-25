@@ -63,16 +63,16 @@ class RookTest {
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
 
-        Square empty2 = testBoard.getSquare(5 , 5);
-        Square empty3 = testBoard.getSquare(6 , 5);
-        Square enemy1 = testBoard.getSquare(7 , 4);
-        Square enemy2 = testBoard.getSquare(4 , 5);
+        Square empty2a = testBoard.getSquare(5 , 5);
+        Square empty3a = testBoard.getSquare(6 , 5);
+        Square enemy1a = testBoard.getSquare(7 , 4);
+        Square enemy2a = testBoard.getSquare(4 , 5);
         List<Square> legals = new ArrayList<Square>();
-        legals.add(enemy1);
+        legals.add(enemy1a);
 
-        legals.add(empty3);
-        legals.add(empty2);
-        legals.add(enemy2);
+        legals.add(empty3a);
+        legals.add(empty2a);
+        legals.add(enemy2a);
         legals.add(testBoard.squareByDenotation("g3"));
         legals.add(testBoard.squareByDenotation("h5"));
         legals.add(testBoard.squareByDenotation("g6"));
@@ -124,17 +124,17 @@ class RookTest {
         r1.updateLegals();
         List<Square> Actual =r1.getLegalNextSquares();
 
-        Square empty2 = testBoard.getSquare(5 , 5);
-        Square empty3 = testBoard.getSquare(6 , 5);
-        Square empty1 = testBoard.getSquare(7 , 4);
-        Square enemy2 = testBoard.getSquare(4 , 5);
-        Square enemy3 = testBoard.getSquare(8 , 5);
+        Square empty2a = testBoard.getSquare(5 , 5);
+        Square empty3a = testBoard.getSquare(6 , 5);
+        Square empty1a = testBoard.getSquare(7 , 4);
+        Square enemy2a = testBoard.getSquare(4 , 5);
+        Square enemy3a = testBoard.getSquare(8 , 5);
         List<Square> legals = new ArrayList<Square>();
-        legals.add(empty1);
-        legals.add(enemy3);
-        legals.add(empty3);
-        legals.add(empty2);
-        legals.add(enemy2);
+        legals.add(empty1a);
+        legals.add(enemy3a);
+        legals.add(empty3a);
+        legals.add(empty2a);
+        legals.add(enemy2a);
         legals.add(testBoard.squareByDenotation("g6"));
         legals.add(testBoard.squareByDenotation("g3"));
         // test the CheckUpLeft method
