@@ -118,7 +118,7 @@
                         </Text>
                     </children>
                 </Pane>
-                <GridPane fx:id="promBlackGrid" gridLinesVisible="true" layoutX="537.0" layoutY="250.0" prefHeight="250.0" prefWidth="62.5" visible="false">
+                <GridPane fx:id="promBlackGrid" gridLinesVisible="true" layoutX="510.0" layoutY="250.0" prefHeight="250.0" prefWidth="62.5" visible="false">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="62.5" />
                     </columnConstraints>
@@ -167,7 +167,7 @@
                         </StackPane>
                     </children>
                 </GridPane>
-                <GridPane fx:id="promWhiteGrid" gridLinesVisible="true" layoutX="537.0" prefHeight="250.0" prefWidth="62.5" visible="false">
+                <GridPane fx:id="promWhiteGrid" gridLinesVisible="true" layoutX="510.0" prefHeight="250.0" prefWidth="62.5" visible="false">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="62.5" />
                     </columnConstraints>
