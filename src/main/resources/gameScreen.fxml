@@ -244,7 +244,7 @@
         </Pane>
         <Pane fx:id="controllerContainerPane" layoutX="650.0" layoutY="107.0" prefHeight="506.0" prefWidth="264.0" style="-fx-border-insets: 2,2,2,2; -fx-border-style: solid; -fx-border-radius: 20;">
             <children>
-                <Label alignment="CENTER" layoutX="27.0" layoutY="27.0" prefHeight="39.0" prefWidth="193.0" text="Last Move" textAlignment="CENTER">
+                <Label alignment="CENTER" layoutX="27.0" layoutY="27.0" prefHeight="39.0" prefWidth="193.0" text="Last Moves" textAlignment="CENTER">
                     <font>
                         <Font size="23.0" />
                     </font>
@@ -255,8 +255,8 @@
                     <!--                        <TableColumn fx:id="moveCollumn" prefWidth="112.0" text="Move" />-->
                     <!--                    </columns>-->
                 </TableView>
-                <Button fx:id="undo" layoutX="31.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="Back" />
-                <Button fx:id="forward" layoutX="150.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Forward" />
+                <Button fx:id="undo" layoutX="31.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="undo move" />
+                <Button fx:id="forward" layoutX="156.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="redo move" />
                 <Label layoutX="32.0" layoutY="446.0" prefHeight="30.0" prefWidth="46.0" text="Time:">
                     <font>
                         <Font size="18.0" />
