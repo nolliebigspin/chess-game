@@ -17,7 +17,7 @@ public class ChessBoardHuman extends ChessBoardController{
      */
     public ChessBoardHuman(Pane container, GameScreen gameScreen) {
         super(container);
-       this.gameScreen = gameScreen;
+        this.gameScreen = gameScreen;
     }
 
     @Override
@@ -30,18 +30,12 @@ public class ChessBoardHuman extends ChessBoardController{
         if (isPromotion(toBeMoved)){
             showPromotion(toBeMoved.isWhite());
         } else {
-            String playerName = "";
-            if(this.gameScreen.getPlayers().get(0).isActive())
-                playerName = this.gameScreen.getPlayers().get(0).getName();
-            else{
-                playerName = this.gameScreen.getPlayers().get(1).getName();
-            }
-            this.gameScreen.getLastMoveController().saveMove(board,playerName,start.getDenotation()+"-"+target.getDenotation());
-           this.togglePlayer();
+            this.togglePlayer(start.getDenotation(),target.getDenotation() );
             rotateGame();
         }
 
         printBoard();
+        gameScreen.getCemeteryController().updateCemetery(this);
         inMove = false;
 
         if (showIsCheck) {
@@ -62,7 +56,14 @@ public class ChessBoardHuman extends ChessBoardController{
         rotateGame();
     }
 
-    private void togglePlayer(){
+    private void togglePlayer(String start,String target){
+        String playerName = "";
+        if(this.gameScreen.getPlayers().get(0).isActive())
+            playerName = this.gameScreen.getPlayers().get(0).getName();
+        else{
+            playerName = this.gameScreen.getPlayers().get(1).getName();
+        }
+        this.gameScreen.getLastMoveController().saveMove(board,playerName,start+"-"+target);
         if(this.gameScreen.getPlayers().get(0).isActive()){
             this.gameScreen.getPlayers().get(0).setActive(false);
             this.gameScreen.getPlayers().get(1).setActive(true);

@@ -25,20 +25,18 @@ public class GameScreen {
     public Pane controllerContainerPane;
     @FXML
     public MenuBar topMenuBar;
+    @FXML
+    public Pane cemeteryPane;
     public Text checkWarning;
-
     private boolean allowMultipleSelect = true;
     private boolean showIsInCheck = true;
     private boolean turnBoard = true;
-
     private boolean vsPlayer;
     private boolean playerOneIsWhite;
     private boolean simpleAi;
-
     private GuiMain guimain;
-
     private LastMoveController lastMoveController;
-
+    private CemeteryController cemeteryController;
 
 
     private ArrayList<Player> players;
@@ -73,6 +71,10 @@ public class GameScreen {
         return this.boardContainerPane;
     }
 
+    public Pane getCemeteryPane(){
+        return this.cemeteryPane;
+    }
+
     public Pane getControllerContainerPane(){
         return this.controllerContainerPane;
     }
@@ -80,6 +82,7 @@ public class GameScreen {
     public void setBoardController(ChessBoardController boardController){
         this.boardController = boardController;
     }
+
 
     //TopMenuBar button handling
     public void handleButtonRestart() throws Exception {
@@ -123,8 +126,15 @@ public class GameScreen {
     public void setLastMoveController(LastMoveController lastMoveController){
         this.lastMoveController = lastMoveController;
     }
+
+    public void setCemeteryController(CemeteryController cemeteryController){this.cemeteryController = cemeteryController;}
+
     public LastMoveController getLastMoveController(){
         return this.lastMoveController;
+    }
+
+    public CemeteryController getCemeteryController(){
+        return this.cemeteryController;
     }
 
     public GuiMain getGuimain(){

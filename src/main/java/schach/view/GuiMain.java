@@ -84,6 +84,8 @@ public class GuiMain extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(true);
+        stage.setX(100);
+        stage.setY(50);
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.setGuiMain(this);
         gameScreen.setPlayers(players);
@@ -92,6 +94,7 @@ public class GuiMain extends Application {
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
         gameScreen.setLastMoveController(new LastMoveController(gameScreen.getControllerContainerPane()));
+        gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane,gameScreen );
         } else {

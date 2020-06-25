@@ -124,6 +124,7 @@ public class ChessBoardComputer extends ChessBoardController{
             promHistory.add(0, false);
         }
         this.togglePlayer(start.getDenotation(),target.getDenotation() );
+        gameScreen.getCemeteryController().updateCemetery(this);
         inMove = false;
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
@@ -196,5 +197,6 @@ public class ChessBoardComputer extends ChessBoardController{
             this.gameScreen.getPlayers().get(0).setActive(true);
             this.gameScreen.getPlayers().get(1).setActive(false);
         }
+        gameScreen.getCemeteryController().updateCemetery(this);
     }
 }

@@ -322,7 +322,7 @@ public abstract class ChessBoardController {
      * @param unicode the unicode representing the piece
      * @return image displaying the piece
      */
-    private Image unicodeToImage(String unicode){
+    public Image unicodeToImage(String unicode){
         String path = null;
         switch (unicode){
             case "\u2654":
