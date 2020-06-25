@@ -70,7 +70,7 @@ public class LastMoveController {
             @Override
             public void handle(ActionEvent event){
                 System.out.println("Undo");
-                data.add(new Step("Odai","e2-e3","00:00"));
+                data.add(new Step("Player","e2-e3","00:00"));
                 if (timeline != null) {
                     timeline.stop();
                 }
