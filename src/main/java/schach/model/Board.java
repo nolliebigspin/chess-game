@@ -379,9 +379,13 @@ public class Board {
         }
     }
 
-
+    /**
+     * getter for the square matrix
+     * @return the square matrix
+     */
     public Square[][] getSquares() {
-    	return this.squareMatrix;
+        Square[][] sMatrix = this.squareMatrix;
+    	return sMatrix;
     }
 
 }

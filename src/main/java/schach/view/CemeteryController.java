@@ -45,7 +45,7 @@ public class CemeteryController {
 
     public void updateCemetery(ChessBoardController chessBoardController){
         for(int i = 0; i<chessBoardController.board.getCemetery().size();i++){
-            Image image = chessBoardController.unicodeToImage(chessBoardController.board.getCemetery().get(i).print());
+            Image image = chessBoardController.unicodeToImage(chessBoardController.board.getCemetery().get(i));
             ImageView im = new ImageView(image);
             im.setFitHeight(30);
             im.setFitWidth(50);

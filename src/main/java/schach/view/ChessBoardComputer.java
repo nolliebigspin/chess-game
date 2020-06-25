@@ -13,6 +13,9 @@ import schach.model.Square;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class extending the ChessBoardController containing concrete implementations for vsAi game mode
+ */
 public class ChessBoardComputer extends ChessBoardController{
 
     private AiInterface ai;
@@ -70,10 +73,12 @@ public class ChessBoardComputer extends ChessBoardController{
             public void run() {
                 resetBackground();
                 printBoard();
-                if(!inFirstMove){
+                if (board.getCheck().isCheckMate(!playerIsWhite)){
+                    return;
+                }
+                if(!inFirstMove || inFirstMove && playerIsWhite){
                     rotateGame();
                 }
-
             }
         });
         disabledMouseOnBoard = true;
@@ -94,6 +99,7 @@ public class ChessBoardComputer extends ChessBoardController{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                checkPane.setVisible(false);
                 printBoard();
                 if (board.getCheck().isCheckMate(!whitesTurn)){
                     gameOver();
@@ -115,6 +121,7 @@ public class ChessBoardComputer extends ChessBoardController{
 
     @Override
     protected void move(StackPane lastClickedPane){
+        checkPane.setVisible(false);
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
@@ -126,6 +133,9 @@ public class ChessBoardComputer extends ChessBoardController{
         this.togglePlayer(start.getDenotation(),target.getDenotation() );
         gameScreen.getCemeteryController().updateCemetery(this);
         inMove = false;
+        if (showIsCheck && board.getCheck().kingInCheck(!whitesTurn)) {
+            checkPane.setVisible(true);
+        }
         if (board.getCheck().isCheckMate(!whitesTurn)){
             gameOver();
         }

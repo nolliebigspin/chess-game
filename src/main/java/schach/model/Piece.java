@@ -167,7 +167,6 @@ public abstract class Piece {
      * TODO delete possible beaten from cemetery
      */
     public void undoMove(){
-        Square newPos = position;
         position.setOccupied(false);
         position.setOccupier(null);
         this.position = previousPos;

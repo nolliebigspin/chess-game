@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Abstract class that contains functions to handle the gui chessboard representation
+ */
 public abstract class ChessBoardController {
 
     /**
@@ -73,10 +76,11 @@ public abstract class ChessBoardController {
      */
     protected String backgroundGreen = "-fx-background-color: green;";
 
-    protected Boolean rotate;
-    protected Boolean possibleMoves = true;
+    protected boolean rotate;
+    protected boolean possibleMoves = true;
     protected boolean showIsCheck = true;
-    Text checkPane;
+    protected boolean multipleSelect = true;
+    protected Text checkPane;
 
     /**
      * Constructor initializing fields, maps and event handler
@@ -96,22 +100,6 @@ public abstract class ChessBoardController {
         initEventHandler();
         Node parentCheck = container.getParent();
         checkPane = (Text) (parentCheck.lookup("#checkWarning"));
-    }
-
-    /**
-     * Setter to toggle if possible moves are shown or not
-     * @param newValue new bool value if possible moves should be shown or not
-     */
-    public void setPossibleMoves(boolean newValue) {
-        this.possibleMoves = newValue;
-    }
-
-    /**
-     * Sets the information to visible if a playyer is in check
-     * @param newBool boolean if any player is in check
-     */
-    public void setShowIsCheck(boolean newBool) {
-        this.showIsCheck = newBool;
     }
 
     /**
@@ -177,6 +165,7 @@ public abstract class ChessBoardController {
      * @param pane the pane that was clicked on
      */
     private void paneClicked(StackPane pane){
+        inMove = false;
         resetBackground();
         pane.setStyle("-fx-background-color: blue;");
         Piece piece;
@@ -203,7 +192,7 @@ public abstract class ChessBoardController {
         List<Square> legals = toBeMoved.filteredLegals();
         if (legals.contains(paneToSquareMap.get(lastClickedPane))){
             move(lastClickedPane);
-        } else {
+        } else if (multipleSelect) {
             paneClicked(lastClickedPane);
         }
     }
@@ -292,26 +281,19 @@ public abstract class ChessBoardController {
         allPieces.addAll(board.allActivePieces(true));
         allPieces.addAll(board.allActivePieces(false));
         for (Piece piece: allPieces){
-
-        }
-        Positioning positioning = new Positioning(board);
-        positioning.readPositioning();
-        Map<Square, String> pos = positioning.getPositioningMap();
-        for (Map.Entry<Square, String> entry: pos.entrySet()){
-            String unicode = entry.getValue();
-            Square square = entry.getKey();
+            Square square = piece.getPosition();
             StackPane pane = squareToPaneMap.get(square);
-            placeImageOnPane(unicode, pane);
+            placeImageOnPane(piece, pane);
         }
     }
 
     /**
      * Places image of a wanted piece on a StackPane via a ImageView
-     * @param unicode the unicode of the piece that should be displayed as a image
+     * @param piece the piece the image should be drawn
      * @param pane the pane the image will be place on
      */
-    private void placeImageOnPane(String unicode, StackPane pane){
-        Image img = unicodeToImage(unicode);
+    private void placeImageOnPane(Piece piece, StackPane pane){
+        Image img = unicodeToImage(piece);
         ImageView imageView = new ImageView(img);
         imageView.setRotate(boardGridPane.getRotate());
         pane.getChildren().add(imageView);
@@ -319,50 +301,53 @@ public abstract class ChessBoardController {
 
     /**
      * 'Converts' a unicode of a piece to the belonging image
-     * @param unicode the unicode representing the piece
+     * @param piece the piece the image should be drawn
      * @return image displaying the piece
      */
-    public Image unicodeToImage(String unicode){
+    protected Image unicodeToImage(Piece piece){
         String path = null;
-        switch (unicode){
-            case "\u2654":
-                path = "assets/whiteKing.png";
-                break;
-            case "\u265A":
-                path = "assets/blackKing.png";
-                break;
-            case "\u2655":
-                path = "assets/whiteQueen.png";
-                break;
-            case "\u265B":
-                path = "assets/blackQueen.png";
-                break;
-            case "\u2656":
-                path = "assets/whiteRook.png";
-                break;
-            case "\u265C":
-                path = "assets/blackRook.png";
-                break;
-            case "\u2657":
-                path = "assets/whiteBishop.png";
-                break;
-            case "\u265D":
-                path = "assets/blackBishop.png";
-                break;
-            case "\u2658":
-                path = "assets/whiteKnight.png";
-                break;
-            case "\u265E":
-                path = "assets/blackKnight.png";
-                break;
-            case "\u2659":
-                path = "assets/whitePawn.png";
-                break;
-            case "\u265F":
-                path = "assets/blackPawn.png";
-                break;
+        if (piece.isWhite()){
+            path = unicodeToPathWhite(piece.print());
+        } else {
+            path = unicodeToPathBlack(piece.print());
         }
         return new Image(path);
+    }
+
+    private String unicodeToPathWhite(String unicode){
+        switch (unicode){
+            case "\u2654":
+                return "assets/whiteKing.png";
+            case "\u2655":
+                return "assets/whiteQueen.png";
+            case "\u2656":
+                return "assets/whiteRook.png";
+            case "\u2657":
+                return "assets/whiteBishop.png";
+            case "\u2658":
+                return "assets/whiteKnight.png";
+            case "\u2659":
+                return "assets/whitePawn.png";
+        }
+        return null;
+    }
+
+    private String unicodeToPathBlack(String unicode){
+        switch (unicode){
+            case "\u265A":
+                return "assets/blackKing.png";
+            case "\u265B":
+                return "assets/blackQueen.png";
+            case "\u265C":
+                return "assets/blackRook.png";
+            case "\u265D":
+                return "assets/blackBishop.png";
+            case "\u265E":
+                return "assets/blackKnight.png";
+            case "\u265F":
+                return "assets/blackPawn.png";
+        }
+        return null;
     }
 
     /**
@@ -401,6 +386,9 @@ public abstract class ChessBoardController {
         }
     }
 
+    /**
+     * Start a new thread rotating the chess board using transitions
+     */
     public void rotateGame(){
         if (!rotate){
             return;
@@ -444,7 +432,7 @@ public abstract class ChessBoardController {
                             imgRoation.setByAngle(180);
                             imageTransitions.add(imgRoation);
                         }
-
+                        
                         downsizeTransition.play();
                         downsizeTransition.setOnFinished(new EventHandler<ActionEvent>() {
                             @Override
@@ -493,6 +481,10 @@ public abstract class ChessBoardController {
         overlay.setVisible(true);
     }
 
+    /**
+     * Interface to toggle the rotate function
+     * @param rotate true if rotation should be enabled, false if disabled
+     */
     public void setRotate(Boolean rotate){
         this.rotate = rotate;
         if (!rotate){
@@ -522,5 +514,40 @@ public abstract class ChessBoardController {
                 }
             }
         }
+    }
+
+
+    /**
+     * Setter to toggle if possible moves are shown or not
+     * @param newValue new bool value if possible moves should be shown or not
+     */
+    public void setPossibleMoves(boolean newValue) {
+        this.possibleMoves = newValue;
+        if (inMove){
+            if (!newValue){
+                resetBackground();
+                squareToPaneMap.get(toBeMoved.getPosition()).setStyle("-fx-background-color: blue;");
+            } else {
+                colorLegals(toBeMoved);
+            }
+        }
+    }
+
+    /**
+     * Sets the information to visible if a player is in check
+     * @param newBool boolean if any player is in check
+     */
+    public void setShowIsCheck(boolean newBool) {
+        this.showIsCheck = newBool;
+    }
+
+    /**
+     * setter to toggle the multiple selection function
+     * @param multipleSelect true if multiple selection should be enabled, false if disabled
+     */
+    public void setMultipleSelect(boolean multipleSelect){
+        this.multipleSelect = multipleSelect;
+        resetBackground();
+        inMove = false;
     }
 }
