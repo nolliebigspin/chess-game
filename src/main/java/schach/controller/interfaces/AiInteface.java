@@ -5,16 +5,12 @@ import schach.model.Board;
 
 public class AiInteface {
 
-    private Board board;
-
     private SimpleAi ai;
 
     private boolean white;
 
-    private String nextMove;
 
     public AiInteface(Board board, boolean isWhite){
-        this.board = board;
         this.white = isWhite;
         this.ai = new SimpleAi(board, white);
     }

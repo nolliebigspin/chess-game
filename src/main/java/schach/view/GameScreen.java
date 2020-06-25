@@ -47,9 +47,6 @@ public class GameScreen {
     public void setGuiMain(GuiMain newGuiMan) {
         this.guimain = newGuiMan;
     }
-    public boolean getIsInCheck() {
-        return showIsInCheck;
-    }
 
     /**
      * Constructor initializing settings to true

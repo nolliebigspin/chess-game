@@ -2,7 +2,6 @@ package schach.view;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,15 +18,12 @@ import javafx.util.Duration;
 import schach.model.Board;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LastMoveController {
 
     private Pane containerPane;
     private TableView<Step> lastMoveTable;
     private ArrayList<Board> boards;
-    private ArrayList<String> moves;
     private TableColumn playerColumn;
     private TableColumn moveCollumn;
     private TableColumn timeCollumn;
@@ -41,7 +37,6 @@ public class LastMoveController {
 
     public LastMoveController(Pane containerPane){
         this.containerPane = containerPane;
-        this.moves = new ArrayList<String>();
         this.boards = new ArrayList<>();
         this.timeLabel = (Label)this.containerPane.lookup("#timeLabel");
         this.timeLabel.setText(timeSeconds.toString());

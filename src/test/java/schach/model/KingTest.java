@@ -116,25 +116,6 @@ class KingTest {
 
     }
 
-    // test rook castling
-    @Test
-    void rookCastlingLongWhite() {
-        Board testBoard = new Board();
-        testBoard.addPiece(king, "e1", true);
-        new King(testBoard.getSquare(5,1),true,testBoard);
-        testBoard.addPiece(rook, "a1", true);
-        Rook r = new Rook(testBoard.getSquare(1,1),true,testBoard);
-
-        int startColumnLong = 1;
-        int targetColumnLong = 4;
-
-        Square rookStart = testBoard.getSquare(startColumnLong , 1);
-        Square rookTarget = testBoard.getSquare(targetColumnLong, 1);
-        rookStart.getOccupier();
-        r.acceptMove(rookTarget);
-
-    }
-
     @Test
     void scenariowhatever() {
         Board testBoard = new Board();
