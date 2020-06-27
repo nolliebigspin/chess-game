@@ -38,7 +38,9 @@ public class Input {
                 board.printBeaten();
             } else if (input.equals("undo")){
                 board.loadState(3);
-            } else if (validMoveInput(input) && checkTurn(input, currentMove)) {
+            } else if (input.equals("printstates")){
+                board.printStates();
+            }else if (validMoveInput(input) && checkTurn(input, currentMove)) {
                 Piece movingPiece;
                 try {
                     movingPiece = board.squareByDenotation(input.substring(0,2)).getOccupier();

@@ -253,5 +253,9 @@ public abstract class Piece {
     public void setNeverMoved(boolean neverMoved) {
         this.neverMoved = neverMoved;
     }
+
+    public Square getPreviousPos() {
+        return previousPos;
+    }
 }
 

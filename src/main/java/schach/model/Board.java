@@ -400,15 +400,6 @@ public class Board {
         }
     }
 
-    /**
-     * getter for the square matrix
-     * @return the square matrix
-     */
-    public Square[][] getSquares() {
-        Square[][] sMatrix = this.squareMatrix;
-    	return sMatrix;
-    }
-
     public void loadState(int index){
         if (index < states.size()){
             BoardState state = states.get(index);
@@ -431,5 +422,11 @@ public class Board {
 
     public int getMoveCount() {
         return moveCount;
+    }
+
+    public void printStates(){
+        for (BoardState state: states){
+            state.print();
+        }
     }
 }
