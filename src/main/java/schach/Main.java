@@ -20,7 +20,7 @@ public class Main {
      */
     public static void main(String[] args) {
         List<String> arguments = Arrays.asList(args);
-        if (arguments.size() == 0 || !arguments.contains("--no-gui")){
+        if (arguments.size() == 0 || !arguments.contains("--no-gui") && !arguments.contains("--simple")){
             String[] guiArgs = null;
             GuiMain.main(guiArgs);
         } else if (arguments.contains("--simple")){

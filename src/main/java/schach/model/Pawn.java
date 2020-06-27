@@ -45,6 +45,7 @@ public class Pawn extends Piece {
             acceptMove(target);
             twoSquareOpener = movingTwoSquares(target);
             neverMoved = false; //TODO replace in to acceptMove()
+            stateHistory.add(new PieceState(this, board.getMoveCount()));
         } else {
             refuseMove();
         }
@@ -342,4 +343,7 @@ public class Pawn extends Piece {
         }
     }
 
+    public void setTwoSquareOpener(boolean twoSquareOpener) {
+        this.twoSquareOpener = twoSquareOpener;
+    }
 }

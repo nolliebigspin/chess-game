@@ -36,6 +36,8 @@ public class Input {
             String input = readInput();
             if (input.equals("beaten")){
                 board.printBeaten();
+            } else if (input.equals("undo")){
+                board.loadState(3);
             } else if (validMoveInput(input) && checkTurn(input, currentMove)) {
                 Piece movingPiece;
                 try {

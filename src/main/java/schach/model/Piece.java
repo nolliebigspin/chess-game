@@ -49,6 +49,8 @@ public abstract class Piece {
      */
     protected boolean neverMoved;
 
+    protected List<PieceState> stateHistory;
+
     /**
      * Constructor of Piece
      * the square where the piece is placed, marked and gets the Piece Object passed
@@ -63,6 +65,8 @@ public abstract class Piece {
         position.setOccupied(true);
         position.setOccupier(this);
         this.neverMoved = true;
+        this.stateHistory = new ArrayList<>();
+        stateHistory.add(new PieceState(this, board.getMoveCount()));
     }
 
     /**
@@ -100,6 +104,7 @@ public abstract class Piece {
         if (inList && !board.getCheck().inCheckIfMoved(this, target)){
             acceptMove(target);
             neverMoved = false; //TODO replace in to accept move
+            stateHistory.add(new PieceState(this, board.getMoveCount()));
         } else {
             refuseMove();
         }
@@ -231,6 +236,22 @@ public abstract class Piece {
             }
         }
         return filtered;
+    }
+
+    public List<PieceState> getStateHistory() {
+        return stateHistory;
+    }
+
+    public void setStateHistory(List<PieceState> stateHistory) {
+        this.stateHistory = stateHistory;
+    }
+
+    public void setPosition(Square position) {
+        this.position = position;
+    }
+
+    public void setNeverMoved(boolean neverMoved) {
+        this.neverMoved = neverMoved;
     }
 }
 

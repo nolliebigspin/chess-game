@@ -30,12 +30,19 @@ public class Board {
      */
     private Piece lastMoved;
 
+    private int moveCount;
+
+    private List<BoardState> states;
+
     /**
      * Constructor, initializes the Square Matrix
      */
     public Board() {
         initMatrix();
         this.check = new Check(this);
+        this.states = new ArrayList<>();
+        this.moveCount = 0;
+
     }
 
     /**
@@ -129,6 +136,10 @@ public class Board {
         check.updateKings();
 
         updateAllLegalSquares();
+
+        List<Piece> actives = allActivePieces(true);
+        actives.addAll(allActivePieces(false));
+        states.add(new BoardState(this, moveCount));
     }
 
     /**
@@ -212,7 +223,7 @@ public class Board {
      * @param row the integer value of the row of the wanted square
      * @return Square that is represented by the given coordinates
      */
-    public  Square getSquare(int column, int row){
+    public Square getSquare(int column, int row){
         return squareMatrix[column-1][row-1];
     }
 
@@ -228,8 +239,18 @@ public class Board {
             System.out.println("!Move not allowed");
             return;
         }
+        moveCount++;
+        Piece p = squareByDenotation(startingPos).getOccupier();
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
         updateAllLegalSquares();
+
+        if(p.isValidMove()){
+            List<Piece> actives = allActivePieces(true);
+            actives.addAll(allActivePieces(false));
+            states.add(new BoardState(this, moveCount));
+        } else {
+            moveCount--;
+        }
         //updateAllLegalSquares();  //Necessary because king has to filter again, after all moved: TODO FIX! DONE?
 
     }
@@ -388,4 +409,27 @@ public class Board {
     	return sMatrix;
     }
 
+    public void loadState(int index){
+        if (index < states.size()){
+            BoardState state = states.get(index);
+            state.load();
+        }
+        clearSquareMartrix();
+        printBoard();
+    }
+
+    public void clearSquareMartrix(){
+        for (Square[] squareArray: squareMatrix){
+            for (Square square: squareArray){
+                if (square.isOccupied() && square != square.getOccupier().getPosition()){
+                    square.setOccupied(false);
+                    square.setOccupier(null);
+                }
+            }
+        }
+    }
+
+    public int getMoveCount() {
+        return moveCount;
+    }
 }
