@@ -19,7 +19,11 @@ public class BoardState {
 
     private List<BoardState> stateHistory;
 
-    public BoardState(Board board, int stateCount){
+    private List<PieceState> pieceStates;
+
+    private List<Piece> cemetery;
+
+    public BoardState(Board board, int stateCount, List<PieceState> pieceStates){
         this.board = board;
         this.stateCount = stateCount;
         this.activePieces = board.allActivePieces(true);
@@ -27,44 +31,60 @@ public class BoardState {
         stateHistory = new ArrayList<>();
         stateHistory.addAll(board.getStates());
         stateHistory.add(this);
+
+        cemetery = new ArrayList<>();
+        cemetery.addAll(board.getCemetery());
+
         this.lastMoved = board.getLastMoved();
         if (lastMoved != null){
             this.lastMovedStartPos = lastMoved.getPreviousPos();
             this.lastMovedTargetPos = lastMoved.getPosition();
         }
+        this.pieceStates = new ArrayList<>();
+        this.pieceStates.addAll(pieceStates);
     }
 
+    public BoardState(Board board, int stateCount, List<PieceState> pieceStates, PieceState newPieceState){
+        this.board = board;
+        this.stateCount = stateCount;
+        this.activePieces = board.allActivePieces(true);
+        this.activePieces.addAll(board.allActivePieces(false));
+        stateHistory = new ArrayList<>();
+        stateHistory.addAll(board.getStates());
+        stateHistory.add(this);
+
+        cemetery = new ArrayList<>();
+        cemetery.addAll(board.getCemetery());
+
+        this.lastMoved = board.getLastMoved();
+        if (lastMoved != null){
+            this.lastMovedStartPos = lastMoved.getPreviousPos();
+            this.lastMovedTargetPos = lastMoved.getPosition();
+        }
+        this.pieceStates = new ArrayList<>();
+        this.pieceStates.addAll(pieceStates);
+        this.pieceStates.add(newPieceState);
+    }
+
+    //TODO filter not moved pieces
     public void load(){
-        for (Piece piece: activePieces){
-            PieceState pieceState = getState(piece);
-            if (pieceState != null){
+        List<Piece> loadPieces = new ArrayList<>();
+        loadPieces.addAll(cemetery);
+        for (int i = pieceStates.size()-1; i >= 0; i--){
+            PieceState pieceState = pieceStates.get(i);
+            if (!loadPieces.contains(pieceState.getPiece())){
                 pieceState.load();
+                loadPieces.add(pieceState.getPiece());
             }
         }
         board.setLastMoved(lastMoved);
         board.setStates(stateHistory);
         board.setMoveCount(stateCount);
-        board.setStates(stateHistory);
+        board.setCemetery(cemetery);
     }
 
-    private PieceState getState(Piece piece) {
-        if (piece.getStateHistory().size() == 1){
-            return null;
-        }
-        List<PieceState> states = piece.getStateHistory();
-        for (PieceState state : states) {
-            if (state.getMoveCount() == stateCount) {
-                return state;
-            }
-        }
-        for (int i = stateCount - 1; i >= 0; i--) {
-            for (PieceState state : states) {
-                if (state.getMoveCount() == i) {
-                    return state;
-                }
-            }
-        }
-        return null;
+    public List<PieceState> getPieceStates() {
+        return pieceStates;
     }
 
     public void print(){

@@ -45,7 +45,6 @@ public class King extends Piece {
                 }
                 acceptMove(target);
                 neverMoved = false;
-                stateHistory.add(new PieceState(this, board.getMoveCount()));
                 return;
             }
         }

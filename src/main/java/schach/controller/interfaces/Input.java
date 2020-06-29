@@ -32,15 +32,26 @@ public class Input {
         board.initLineUp();
         board.printBoard();
         boolean running = true;
+        boolean didUndo = false;
         while (running) {
             String input = readInput();
             if (input.equals("beaten")){
                 board.printBeaten();
             } else if (input.equals("undo")){
-                board.loadState(3);
+                didUndo = true;
+                board.undoLastMove();
+                currentMove--;
+            } else if (input.equals("redo")){
+                if (didUndo){
+                    board.redo();
+                    currentMove++;
+                    didUndo = false;
+                } else {
+                    System.out.println("no redo possible - no undo");
+                }
             } else if (input.equals("printstates")){
                 board.printStates();
-            }else if (validMoveInput(input) && checkTurn(input, currentMove)) {
+            } else if (validMoveInput(input) && checkTurn(input, currentMove)) {
                 Piece movingPiece;
                 try {
                     movingPiece = board.squareByDenotation(input.substring(0,2)).getOccupier();
@@ -64,6 +75,8 @@ public class Input {
                     System.out.println("CHECKMATE.");
                     running = false;
                 }
+
+                didUndo = false;
 
             }
 

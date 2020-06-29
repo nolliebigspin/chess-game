@@ -26,6 +26,8 @@ public class PlayerInput {
      */
     private String move;
 
+    private boolean inUndo;
+
     /**
      * Constructor initializing the board and white fields
      * @param board the board the games is played on
@@ -34,6 +36,7 @@ public class PlayerInput {
     public PlayerInput(Board board, boolean isWhite){
         this.board = board;
         this.white = isWhite;
+        inUndo = false;
     }
 
     /**
@@ -58,12 +61,22 @@ public class PlayerInput {
         if (in.equals("beaten")){
             board.printBeaten();
             return false;
+        } else if (in.equals("undo")){
+            board.undoLastTwoMoves();
+            inUndo = true;
+            return false;
+        } else if (in.equals("redo")){
+            if (inUndo){
+                board.redo();
+            }
+            return false;
         } else if (in.equals("help")){
             System.out.println(helpOut());
             return false;
         } else if (validMoveInput(in)) {
             if (pieceIsRightColor(in)){
                 this.move = in;
+                inUndo = false;
                 return true;
             }
         } else {

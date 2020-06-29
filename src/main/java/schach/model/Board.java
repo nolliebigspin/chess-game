@@ -34,6 +34,8 @@ public class Board {
 
     private List<BoardState> states;
 
+    private BoardState redoState;
+
     /**
      * Constructor, initializes the Square Matrix
      */
@@ -139,7 +141,11 @@ public class Board {
 
         List<Piece> actives = allActivePieces(true);
         actives.addAll(allActivePieces(false));
-        states.add(new BoardState(this, moveCount));
+        List<PieceState> pieceStates = new ArrayList<>();
+        for (Piece piece: actives){
+            pieceStates.add(new PieceState(piece, 0));
+        }
+        this.states.add(new BoardState(this, 0, pieceStates));
     }
 
     /**
@@ -245,9 +251,9 @@ public class Board {
         updateAllLegalSquares();
 
         if (p.isValidMove()){
-            List<Piece> actives = allActivePieces(true);
-            actives.addAll(allActivePieces(false));
-            states.add(new BoardState(this, moveCount));
+            List<PieceState> currentPieceStates = new ArrayList<>();
+            currentPieceStates.addAll(states.get(states.size() - 1).getPieceStates());
+            states.add(new BoardState(this, moveCount, currentPieceStates, new PieceState(p, moveCount)));
         } else {
             moveCount--;
         }
@@ -401,10 +407,24 @@ public class Board {
     }
 
     public void loadState(int index){
+        redoState = states.get(states.size() - 1);
         if (index < states.size()){
             BoardState state = states.get(index);
             state.load();
         }
+        clearSquareMartrix();
+        printBoard();
+    }
+    public void undoLastMove(){
+        loadState(states.size() - 2);
+    }
+
+    public void undoLastTwoMoves(){
+        loadState(states.size() - 3);
+    }
+
+    public void redo(){
+        redoState.load();
         clearSquareMartrix();
         printBoard();
     }
@@ -439,6 +459,12 @@ public class Board {
     }
 
     public void setStates(List<BoardState> states) {
-        this.states = states;
+        this.states.clear();
+        this.states.addAll(states);
+    }
+
+    public void setCemetery(List<Piece> cemetery) {
+        this.cemetery.clear();
+        this.cemetery.addAll(cemetery);
     }
 }
