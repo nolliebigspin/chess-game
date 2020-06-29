@@ -62,7 +62,7 @@ public class PlayerInput {
             board.printBeaten();
             return false;
         } else if (in.equals("undo")){
-            board.undoLastTwoMoves();
+            board.loadState(board.getStates().size() - 3);
             inUndo = true;
             return false;
         } else if (in.equals("redo")){

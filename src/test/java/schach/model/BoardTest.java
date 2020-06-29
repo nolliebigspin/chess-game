@@ -190,21 +190,6 @@ class BoardTest {
        // System.setOut(originalOut);
        //}
 
-      @Test
-      void PrintLegalsTest(){
-      final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-      final PrintStream originalOut = System.out;
-      System.setOut(new PrintStream(outContent));
-      Board testBoard = new Board();
-      testBoard.addPiece(pawn, "c3", true);
-      testBoard.addPiece(king, "g4", true);
-      testBoard.addPiece(king, "e5", false);
-      Pawn p1 = new Pawn(testBoard.getSquare(3,3),true,testBoard);
-      p1.updateLegals();
-      testBoard.printLegals();
-      assertEquals("c4", outContent.toString());
-       System.setOut(originalOut);
-    }
 
     @Test
     void testLastMoved(){

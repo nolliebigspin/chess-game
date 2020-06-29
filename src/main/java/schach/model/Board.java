@@ -30,10 +30,19 @@ public class Board {
      */
     private Piece lastMoved;
 
+    /**
+     * Indicates the number of moves already made
+     */
     private int moveCount;
 
+    /**
+     * List that contains all the states the board was in
+     */
     private List<BoardState> states;
 
+    /**
+     * The current state in before a earlier state will be loaded, used to redo the undo
+     */
     private BoardState redoState;
 
     /**
@@ -44,7 +53,6 @@ public class Board {
         this.check = new Check(this);
         this.states = new ArrayList<>();
         this.moveCount = 0;
-
     }
 
     /**
@@ -57,22 +65,6 @@ public class Board {
         pos.writePositioning(positioning);
         this.check = new Check(this);
         updateAllLegalSquares();
-    }
-
-    /**
-     * TODO maybe delete
-     * @return
-     */
-    public List<Piece> getCemetery() {
-        return cemetery;
-    }
-
-    /**
-     * Getter for the Check
-     * @return the check
-     */
-    public Check getCheck(){
-        return check;
     }
 
     /**
@@ -145,6 +137,7 @@ public class Board {
         for (Piece piece: actives){
             pieceStates.add(new PieceState(piece, 0));
         }
+        //creates the first state
         this.states.add(new BoardState(this, 0, pieceStates));
     }
 
@@ -361,6 +354,57 @@ public class Board {
     }
 
     /**
+     * loads a state contained in the list of states of the board
+     * @param index of the State in the list (0 is the initial (starting lineup) state)
+     */
+    public void loadState(int index){
+        redoState = states.get(states.size() - 1);
+        if (index < states.size()){
+            BoardState state = states.get(index);
+            state.load();
+        }
+        //clears the matrix - removes all pieces not connected correctly to its position square
+        for (Square[] squareArray: squareMatrix){
+            for (Square square: squareArray){
+                if (square.isOccupied() && square != square.getOccupier().getPosition()){
+                    square.setOccupied(false);
+                    square.setOccupier(null);
+                }
+            }
+        }
+        printBoard();
+    }
+
+    /**
+     * redoes the last move undone by a loadState() call
+     */
+    public void redo(){
+        redoState.load();
+        //clears the matrix - removes all pieces not connected correctly to its position square
+        for (Square[] squareArray: squareMatrix){
+            for (Square square: squareArray){
+                if (square.isOccupied() && square != square.getOccupier().getPosition()){
+                    square.setOccupied(false);
+                    square.setOccupier(null);
+                }
+            }
+        }
+        printBoard();
+    }
+
+    public List<Piece> getCemetery() {
+        return cemetery;
+    }
+
+    /**
+     * Getter for the Check
+     * @return the check
+     */
+    public Check getCheck(){
+        return check;
+    }
+
+    /**
      * getter to return the last moved piece
      * @return piece that was moved in the last move
      */
@@ -377,15 +421,6 @@ public class Board {
     }
 
     /**
-     * getter to return the squareMatrix
-     * @return Matrix of Squares
-     */
-    public Square[][] getSquareMatrix() {
-        Square[][] matrix = squareMatrix;
-        return matrix;
-    }
-
-    /**
      * gets the current positioning of the pieces on the board
      * @return Map containing the Piece and the belonging square both as Strings
      */
@@ -394,65 +429,10 @@ public class Board {
         return pos.readPositioning();
     }
 
-    /**
-     * debug
-     * TODO delete
-     */
-    public void printLegals(){
-        List<Piece> all = allActivePieces(true);
-        all.addAll(allActivePieces(false));
-        for (Piece piece: all){
-            piece.printLegals();
-        }
-    }
-
-    public void loadState(int index){
-        redoState = states.get(states.size() - 1);
-        if (index < states.size()){
-            BoardState state = states.get(index);
-            state.load();
-        }
-        clearSquareMartrix();
-        printBoard();
-    }
-    public void undoLastMove(){
-        loadState(states.size() - 2);
-    }
-
-    public void undoLastTwoMoves(){
-        loadState(states.size() - 3);
-    }
-
-    public void redo(){
-        redoState.load();
-        clearSquareMartrix();
-        printBoard();
-    }
-
-    public void clearSquareMartrix(){
-        for (Square[] squareArray: squareMatrix){
-            for (Square square: squareArray){
-                if (square.isOccupied() && square != square.getOccupier().getPosition()){
-                    square.setOccupied(false);
-                    square.setOccupier(null);
-                }
-            }
-        }
-    }
-
-    public int getMoveCount() {
-        return moveCount;
-    }
-
     public void setMoveCount(int moveCount) {
         this.moveCount = moveCount;
     }
 
-    public void printStates(){
-        for (BoardState state: states){
-            state.print();
-        }
-    }
 
     public List<BoardState> getStates() {
         return states;

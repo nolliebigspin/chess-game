@@ -39,7 +39,7 @@ public class Input {
                 board.printBeaten();
             } else if (input.equals("undo")){
                 didUndo = true;
-                board.undoLastMove();
+                board.loadState(board.getStates().size() - 2);
                 currentMove--;
             } else if (input.equals("redo")){
                 if (didUndo){
@@ -49,8 +49,6 @@ public class Input {
                 } else {
                     System.out.println("no redo possible - no undo");
                 }
-            } else if (input.equals("printstates")){
-                board.printStates();
             } else if (validMoveInput(input) && checkTurn(input, currentMove)) {
                 Piece movingPiece;
                 try {
