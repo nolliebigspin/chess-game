@@ -3,6 +3,9 @@ package schach.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that represents/saves the state of the board to a certain point in time
+ */
 public class BoardState {
 
     private Board board;
@@ -13,60 +16,55 @@ public class BoardState {
 
     private Piece lastMoved;
 
-    private Square lastMovedStartPos = null;
-
-    private Square lastMovedTargetPos = null;
-
     private List<BoardState> stateHistory;
 
     private List<PieceState> pieceStates;
 
     private List<Piece> cemetery;
 
+    /**
+     * Constructor initializing the state by declaring the fields
+     * @param board the belonging board to the state
+     * @param stateCount the int value counting the moves
+     * @param pieceStates List of all PieceStates of all Pieces existing at the time the BoardState is initialized
+     */
     public BoardState(Board board, int stateCount, List<PieceState> pieceStates){
-        this.board = board;
-        this.stateCount = stateCount;
-        this.activePieces = board.allActivePieces(true);
-        this.activePieces.addAll(board.allActivePieces(false));
-        stateHistory = new ArrayList<>();
-        stateHistory.addAll(board.getStates());
-        stateHistory.add(this);
-
-        cemetery = new ArrayList<>();
-        cemetery.addAll(board.getCemetery());
-
-        this.lastMoved = board.getLastMoved();
-        if (lastMoved != null){
-            this.lastMovedStartPos = lastMoved.getPreviousPos();
-            this.lastMovedTargetPos = lastMoved.getPosition();
-        }
-        this.pieceStates = new ArrayList<>();
-        this.pieceStates.addAll(pieceStates);
+        initState(board, stateCount, pieceStates);
     }
 
+    /**
+     * Constructor initializing the state by declaring the fields
+     * @param board the belonging board to the state
+     * @param stateCount the int value counting the moves
+     * @param pieceStates List of all PieceStates of all Pieces existing at the time the BoardState is initialized
+     */
     public BoardState(Board board, int stateCount, List<PieceState> pieceStates, PieceState newPieceState){
-        this.board = board;
-        this.stateCount = stateCount;
-        this.activePieces = board.allActivePieces(true);
-        this.activePieces.addAll(board.allActivePieces(false));
-        stateHistory = new ArrayList<>();
-        stateHistory.addAll(board.getStates());
-        stateHistory.add(this);
-
-        cemetery = new ArrayList<>();
-        cemetery.addAll(board.getCemetery());
-
-        this.lastMoved = board.getLastMoved();
-        if (lastMoved != null){
-            this.lastMovedStartPos = lastMoved.getPreviousPos();
-            this.lastMovedTargetPos = lastMoved.getPosition();
-        }
-        this.pieceStates = new ArrayList<>();
-        this.pieceStates.addAll(pieceStates);
+        initState(board, stateCount, pieceStates);
         this.pieceStates.add(newPieceState);
     }
 
+    private void initState(Board board, int stateCount, List<PieceState> pieceStates){
+        this.board = board;
+        this.stateCount = stateCount;
+        this.activePieces = board.allActivePieces(true);
+        this.activePieces.addAll(board.allActivePieces(false));
+        stateHistory = new ArrayList<>();
+        stateHistory.addAll(board.getStates());
+        stateHistory.add(this);
+
+        cemetery = new ArrayList<>();
+        cemetery.addAll(board.getCemetery());
+
+        this.lastMoved = board.getLastMoved();
+        this.pieceStates = new ArrayList<>();
+        this.pieceStates.addAll(pieceStates);
+    }
+
     //TODO filter not moved pieces
+    /**
+     * loads this state - for all pieces (excepting ones on cemetery) loads the last state of the piece that was existing
+     * when the Board state was initialized
+     */
     public void load(){
         List<Piece> loadPieces = new ArrayList<>();
         loadPieces.addAll(cemetery);
@@ -87,18 +85,4 @@ public class BoardState {
         return pieceStates;
     }
 
-    public void print(){
-        String sym;
-        String way = "";
-        if (lastMoved == null){
-            sym = "null";
-            way = "";
-        } else {
-            sym = lastMoved.print();
-            if (lastMovedTargetPos != null  && lastMovedStartPos != null){
-                way = "" + lastMovedStartPos.getDenotation() + "-" + lastMovedTargetPos.getDenotation();
-            }
-        }
-        System.out.println("Nr.: " + stateCount + " | Piece: " + sym + " | " + way);
-    }
 }
