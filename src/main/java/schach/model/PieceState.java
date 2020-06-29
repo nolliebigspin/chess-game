@@ -1,8 +1,8 @@
 package schach.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Class that represents/saves the state of piece at certain point
+ */
 public class PieceState {
 
     private Piece piece;
@@ -11,12 +11,15 @@ public class PieceState {
 
     private Square position;
 
-    private Square prevPosition;
-
     private boolean neverMoved;
 
     private boolean twoSquareOpener;
 
+    /**
+     * Constructor initializing the state by defining the fields
+     * @param piece the belonging piece to the state
+     * @param moveCount the int value counting the moves
+     */
     public PieceState(Piece piece, int moveCount){
         this.piece = piece;
         this.moveCount = moveCount;
@@ -28,14 +31,10 @@ public class PieceState {
         }
     }
 
-    public Square getPosition(){
-        return this.position;
-    }
-
-    public int getMoveCount() {
-        return moveCount;
-    }
-
+    /**
+     * loads the state - repositions the piece to the square it was occupying when the state was created
+     * sets fields to the value the state saved them in
+     */
     public void load(){
         position.setOccupier(piece);
         position.setOccupied(true);
@@ -45,6 +44,10 @@ public class PieceState {
             Pawn p = (Pawn) piece;
             p.setTwoSquareOpener(twoSquareOpener);
         }
+    }
+
+    public Square getPosition(){
+        return this.position;
     }
 
     public Piece getPiece() {
