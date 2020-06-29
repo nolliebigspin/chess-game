@@ -1,5 +1,6 @@
 package schach.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardState {
@@ -16,10 +17,16 @@ public class BoardState {
 
     private Square lastMovedTargetPos = null;
 
+    private List<BoardState> stateHistory;
+
     public BoardState(Board board, int stateCount){
+        this.board = board;
         this.stateCount = stateCount;
         this.activePieces = board.allActivePieces(true);
         this.activePieces.addAll(board.allActivePieces(false));
+        stateHistory = new ArrayList<>();
+        stateHistory.addAll(board.getStates());
+        stateHistory.add(this);
         this.lastMoved = board.getLastMoved();
         if (lastMoved != null){
             this.lastMovedStartPos = lastMoved.getPreviousPos();
@@ -29,20 +36,28 @@ public class BoardState {
 
     public void load(){
         for (Piece piece: activePieces){
-            getState(piece).load();
+            PieceState pieceState = getState(piece);
+            if (pieceState != null){
+                pieceState.load();
+            }
         }
         board.setLastMoved(lastMoved);
-
+        board.setStates(stateHistory);
+        board.setMoveCount(stateCount);
+        board.setStates(stateHistory);
     }
 
     private PieceState getState(Piece piece) {
+        if (piece.getStateHistory().size() == 1){
+            return null;
+        }
         List<PieceState> states = piece.getStateHistory();
         for (PieceState state : states) {
             if (state.getMoveCount() == stateCount) {
                 return state;
             }
         }
-        for (int i = stateCount; i >= 0; i--) {
+        for (int i = stateCount - 1; i >= 0; i--) {
             for (PieceState state : states) {
                 if (state.getMoveCount() == i) {
                     return state;

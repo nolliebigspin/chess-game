@@ -257,5 +257,7 @@ public abstract class Piece {
     public Square getPreviousPos() {
         return previousPos;
     }
+
+
 }
 

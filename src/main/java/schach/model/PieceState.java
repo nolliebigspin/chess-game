@@ -1,5 +1,6 @@
 package schach.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PieceState {
@@ -23,7 +24,8 @@ public class PieceState {
         this.moveCount = moveCount;
         this.position = piece.getPosition();
         this.neverMoved = piece.isNeverMoved();
-        this.stateHistory = piece.getStateHistory();
+        stateHistory = new ArrayList<>();
+        stateHistory.addAll(piece.getStateHistory());
         if (piece instanceof Pawn){
             Pawn p = (Pawn) piece;
             this.twoSquareOpener = p.isTwoSquareOpener();

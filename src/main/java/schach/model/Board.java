@@ -244,7 +244,7 @@ public class Board {
         squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
         updateAllLegalSquares();
 
-        if(p.isValidMove()){
+        if (p.isValidMove()){
             List<Piece> actives = allActivePieces(true);
             actives.addAll(allActivePieces(false));
             states.add(new BoardState(this, moveCount));
@@ -424,9 +424,21 @@ public class Board {
         return moveCount;
     }
 
+    public void setMoveCount(int moveCount) {
+        this.moveCount = moveCount;
+    }
+
     public void printStates(){
         for (BoardState state: states){
             state.print();
         }
+    }
+
+    public List<BoardState> getStates() {
+        return states;
+    }
+
+    public void setStates(List<BoardState> states) {
+        this.states = states;
     }
 }
