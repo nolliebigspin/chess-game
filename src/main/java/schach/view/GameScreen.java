@@ -28,6 +28,7 @@ public class GameScreen {
     private boolean vsPlayer;
     private boolean playerOneIsWhite;
     private boolean simpleAi;
+    private boolean withChessClock;
 
     private boolean allowMultipleSelect;
     private boolean showIsInCheck;
@@ -63,11 +64,14 @@ public class GameScreen {
      * @param newVsPlayer true if game mode pvp, false if opponent is ai
      * @param newPlayerOneIsWhite true if player 1 is white, false if player 1 is black (Player 2 = Ai if player picked Ai as a Opponent)
      * @param newSimpleAi true if Ai is simple, false if Ai is minmax AI
+     * @param newWithChessClock true if ChessClock is enabled or not
      */
-    public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi) {
+    public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi, boolean newWithChessClock) {
         this.vsPlayer = newVsPlayer;
         this.playerOneIsWhite = newPlayerOneIsWhite;
         this.simpleAi = newSimpleAi;
+        this.withChessClock = newWithChessClock;
+        System.out.println(this.withChessClock);
     }
 
     /**
@@ -104,7 +108,7 @@ public class GameScreen {
      */
     public void handleButtonRestart(){
         try {
-            guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi, players);
+            guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi, withChessClock, players);
         } catch (Exception e) {
             e.printStackTrace();
         }

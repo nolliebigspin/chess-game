@@ -64,7 +64,7 @@ public class StartMenu {
         vsPlayer = false;
         playerName2.setVisible(false);
         aiContainerPane.setVisible(true);
-        toggleChessClock.setSelected(false);
+        aiContainerPane.setVisible(true);
     }
 
     /**
@@ -219,7 +219,7 @@ public class StartMenu {
         this.players.add(playerOne);
         this.players.add(playerTwo);
         //
-        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.players);
+        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.withChessClock, this.players);
     }
 
 
