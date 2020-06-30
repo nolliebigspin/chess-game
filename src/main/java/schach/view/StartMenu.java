@@ -124,6 +124,14 @@ public class StartMenu {
     }
 
     /**
+     * Getter for boolean if the Player wants to play with a chess-clock
+     * @return
+     */
+    public boolean getToggleChessClock() {
+        return this.withChessClock;
+    }
+
+    /**
      * controls String length of Name input and limits name string if necessary
      * @param isPlayer1 true if name of player 1 should be controlled, false if name of player 2
      * @return cut version of the name
