@@ -1,10 +1,7 @@
 package schach.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import schach.model.Player;
 
@@ -37,12 +34,15 @@ public class StartMenu {
     private ToggleButton toggleButtonBlack;
     @FXML
     private Label playerNameColor;
+    @FXML
+    public CheckBox toggleChessClock;
 
     private Boolean vsPlayer;
     private String player1;
     private String player2;
     private Boolean player1isWhite;
     private Boolean simpleAi;
+    private boolean withChessClock;
     private GuiMain guiMain;
     private ArrayList<Player> players;
     /**
@@ -52,6 +52,7 @@ public class StartMenu {
         vsPlayer = true;
         player1isWhite = true;
         simpleAi = true;
+        withChessClock = false;
         this.players = new ArrayList<>();
     }
 
@@ -63,7 +64,7 @@ public class StartMenu {
         vsPlayer = false;
         playerName2.setVisible(false);
         aiContainerPane.setVisible(true);
-
+        toggleChessClock.setSelected(false);
     }
 
     /**
@@ -113,6 +114,13 @@ public class StartMenu {
         if (player2.length() == 0){
             player2 = "Player 2";
         }
+    }
+
+    /**
+     * sets boolean for chessClock to value of toggleChessClock Checkbox
+     */
+    public void setToggleChessClock() {
+        withChessClock = toggleChessClock.isSelected();
     }
 
     /**
