@@ -299,7 +299,7 @@
                </font>
             </Text>
             <Button fx:id="whiteButtonChessClock" layoutX="12.0" layoutY="464.0" mnemonicParsing="false" prefHeight="229.0" prefWidth="228.0" text="White" />
-            <Button fx:id="blackButtonChessClock" layoutX="12.0" layoutY="63.0" mnemonicParsing="false" prefHeight="229.0" prefWidth="228.0" text="Black" />
+            <Button fx:id="blackButtonChessClock" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" prefHeight="229.0" prefWidth="228.0" text="Black" />
             <Text fx:id="blackTimeChessClock" layoutX="95.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5:00" wrappingWidth="105.0">
                <font>
                   <Font size="32.0" />
@@ -310,6 +310,7 @@
                   <Font size="32.0" />
                </font>
             </Text>
+            <Button fx:id="startButtonChessClock" layoutX="67.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleStartChessClock" prefHeight="25.0" prefWidth="120.0" text="Start" />
          </children>
       </Pane>
     </children>

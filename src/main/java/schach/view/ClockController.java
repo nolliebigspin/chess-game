@@ -18,12 +18,18 @@ public class ClockController {
      * @param basePane Pane where the clock is placed
      */
     public ClockController(Pane basePane) {
-        GridPane gridPane = (GridPane) basePane.lookup("#chessClockBasePane");
+        GridPane clockPane = (GridPane) basePane.lookup("#chessClockBasePane");
         this.timeWhite = 600;
         this.timeBlack = 600;
         this.whitesTurn = false;
         this.blacksTurn = false;
-        setWhitesTurn();
+    }
+
+    /**
+     * Starts the countdown of chess clock for the first player (white)
+     */
+    public void start() {
+        System.out.println("Clock started!");
     }
 
 

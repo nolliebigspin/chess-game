@@ -550,6 +550,4 @@ public abstract class ChessBoardController {
         resetBackground();
         inMove = false;
     }
-
-
 }

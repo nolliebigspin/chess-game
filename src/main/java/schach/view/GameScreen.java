@@ -2,6 +2,7 @@ package schach.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.Pane;
@@ -22,6 +23,10 @@ public class GameScreen {
     public Pane cemeteryPane;
     public Text checkWarning;
 
+    // ChessClock
+    public Button startButtonChessClock;
+
+
     private ChessBoardController boardController;
     private GuiMain guimain;
 
@@ -29,6 +34,7 @@ public class GameScreen {
     private boolean playerOneIsWhite;
     private boolean simpleAi;
     private boolean withChessClock;
+    private ClockController clockController;
 
     private boolean allowMultipleSelect;
     private boolean showIsInCheck;
@@ -160,8 +166,20 @@ public class GameScreen {
         boardController.setRotate(turnBoard);
     }
 
+    public void handleStartChessClock() {
+        clockController.start();
+    }
+
     public void setLastMoveController(LastMoveController lastMoveController){
         this.lastMoveController = lastMoveController;
+    }
+
+    /**
+     * Setter fpr clock-controller
+     * @param clockController instance of a clock-controller
+     */
+    public void setClockController(ClockController clockController) {
+        this.clockController = clockController;
     }
 
     public void setCemeteryController(CemeteryController cemeteryController){this.cemeteryController = cemeteryController;}
