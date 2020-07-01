@@ -15,35 +15,58 @@ public class ClockController {
     private boolean whitesTurn;
     private boolean blacksTurn;
 
+    /**
+     * Constructor of the ClockController
+     * @param basePane Pane where the clock is placed
+     */
     public ClockController(Pane basePane) {
         this.gridPane = (GridPane) basePane.lookup("#chessClockBasePane");
         this.timeWhite = 600;
         this.timeBlack = 600;
         this.whitesTurn = false;
         this.blacksTurn = false;
-        toggleWhitesTurn();
+        setWhitesTurn();
     }
 
-    public void toggleWhitesTurn() {
+
+    /**
+     * Sets the turn to whites turn and starts the countdown-routine
+     */
+    public void setWhitesTurn() {
         whitesTurn = true;
         blacksTurn = false;
         countDownRoutine();
     }
 
-    public void toggleBlacksTurn() {
+    /**
+     * Sets the turn to blacks turn and starts the countdown-routine
+     */
+    public void setBlacksTurn() {
         blacksTurn = true;
         whitesTurn = false;
         countDownRoutine();
     }
 
+    /**
+     * Getter for whites rest time
+     * @return the left time of the white side
+     */
     public int getTimeWhite() {
         return timeWhite;
     }
 
+    /**
+     * Getter for blacks rest time
+     * @return the left time of the black side
+     */
     public int getTimeBlack() {
         return timeBlack;
     }
 
+    /**
+     * This Method is the countdown routine. If its whites turn
+     * it should count down the timeWhite and the other way round
+     */
     public void countDownRoutine() {
         if(whitesTurn) {
             while(timeWhite != 0 && whitesTurn) {
