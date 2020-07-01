@@ -1,9 +1,20 @@
 package schach.view;
 
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ClockController {
 
@@ -12,6 +23,7 @@ public class ClockController {
 
     private boolean whitesTurn;
     private boolean blacksTurn;
+    private Thread pauseThread;
 
     /**
      * Constructor of the ClockController
@@ -21,8 +33,9 @@ public class ClockController {
         GridPane clockPane = (GridPane) basePane.lookup("#chessClockBasePane");
         this.timeWhite = 600;
         this.timeBlack = 600;
-        this.whitesTurn = false;
+        this.whitesTurn = true;
         this.blacksTurn = false;
+        this.pauseThread = new Thread();
     }
 
     /**
@@ -30,6 +43,7 @@ public class ClockController {
      */
     public void start() {
         System.out.println("Clock started!");
+        countDownRoutine();
     }
 
 
@@ -75,20 +89,17 @@ public class ClockController {
         if(whitesTurn) {
             while(timeWhite != 0 && whitesTurn) {
                 try {
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println(convertToString(timeWhite));
                     this.timeWhite--;
-                    Thread.sleep(1000);
-                } catch(InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         } else if (blacksTurn) {
             while(timeBlack != 0 && blacksTurn) {
-                try {
-                    this.timeBlack--;
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                System.out.println(convertToString(timeBlack));
+                this.timeBlack--;
             }
         }
     }

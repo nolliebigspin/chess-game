@@ -212,7 +212,7 @@ public class StartMenu {
         this.players.add(playerOne);
         this.players.add(playerTwo);
         //
-        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, toggleChessClock.isSelected(), this.players);
+        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.players);
     }
 
 

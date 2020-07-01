@@ -28,6 +28,5 @@
          </children>
       </Pane>
       <Button id="startButton" fx:id="startButton" alignment="CENTER" layoutX="109.0" layoutY="439.0" mnemonicParsing="false" onAction="#start" text="Start Game" textAlignment="CENTER" />
-      <CheckBox fx:id="toggleChessClock" layoutX="103.0" layoutY="389.0" mnemonicParsing="false" text="Chess-Clock" />
    </children>
 </AnchorPane>

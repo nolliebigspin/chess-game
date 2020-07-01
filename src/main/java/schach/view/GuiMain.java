@@ -78,7 +78,7 @@ public class GuiMain extends Application {
      * @param simpleAi true if AI is simple, false if AI should be Minmax
      * @throws Exception
      */
-    public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi, boolean withChessClock, ArrayList<Player> players) throws Exception {
+    public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi, ArrayList<Player> players) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -89,7 +89,7 @@ public class GuiMain extends Application {
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.setGuiMain(this);
         gameScreen.setPlayers(players);
-        gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi, withChessClock);
+        gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
         Pane boardPane = gameScreen.getContainerPane();
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
