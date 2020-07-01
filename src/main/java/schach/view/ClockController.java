@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class ClockController {
 
-    private final GridPane gridPane;
-
     private int timeWhite;
     private int timeBlack;
 
@@ -20,7 +18,7 @@ public class ClockController {
      * @param basePane Pane where the clock is placed
      */
     public ClockController(Pane basePane) {
-        this.gridPane = (GridPane) basePane.lookup("#chessClockBasePane");
+        GridPane gridPane = (GridPane) basePane.lookup("#chessClockBasePane");
         this.timeWhite = 600;
         this.timeBlack = 600;
         this.whitesTurn = false;
