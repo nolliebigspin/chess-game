@@ -3,7 +3,7 @@ package schach.view;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-import java.time.Clock;
+import java.util.ArrayList;
 
 public class ClockController {
 
@@ -87,5 +87,23 @@ public class ClockController {
                 }
             }
         }
+    }
+
+    /**
+     * This method is used to convert the raw left time of a player to a nicer string.
+     * Example: 598 --> 9:58
+     * @param rawTimeLeft Raw input time that is left in seconds
+     * @return String of left time with a colon between minutes and seconds
+     */
+    public String convertToString(int rawTimeLeft) {
+        ArrayList<Integer> timeArray = new ArrayList<Integer>();
+
+        int minutesLeft = rawTimeLeft / 60;
+        int secondsLeft = rawTimeLeft % 60;
+
+        timeArray.add(minutesLeft);
+        timeArray.add(secondsLeft);
+
+        return timeArray.get(0) + ":" + timeArray.get(1);
     }
 }
