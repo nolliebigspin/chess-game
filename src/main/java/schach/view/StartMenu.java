@@ -117,18 +117,11 @@ public class StartMenu {
     }
 
     /**
-     * sets boolean for chessClock to value of toggleChessClock Checkbox
-     */
-    public void setToggleChessClock() {
-        withChessClock = toggleChessClock.isSelected();
-    }
-
-    /**
      * Getter for boolean if the Player wants to play with a chess-clock
      * @return
      */
     public boolean getToggleChessClock() {
-        return this.withChessClock;
+        return toggleChessClock.isSelected();
     }
 
     /**
@@ -219,7 +212,7 @@ public class StartMenu {
         this.players.add(playerOne);
         this.players.add(playerTwo);
         //
-        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.withChessClock, this.players);
+        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, toggleChessClock.isSelected(), this.players);
     }
 
 
