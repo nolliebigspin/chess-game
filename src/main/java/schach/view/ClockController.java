@@ -1,21 +1,39 @@
 package schach.view;
 
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+
+import java.time.Clock;
+
 public class ClockController {
 
-    private int timeWhite = 600;
-    private int timeBlack = 600;
+    private final GridPane gridPane;
 
-    private boolean whitesTurn = false;
-    private boolean blacksTurn = false;
+    private int timeWhite;
+    private int timeBlack;
 
-    public void setWhiteTurn() {
-        whitesTurn = true;
-        blacksTurn = false;
+    private boolean whitesTurn;
+    private boolean blacksTurn;
+
+    public ClockController(Pane basePane) {
+        this.gridPane = (GridPane) basePane.lookup("#chessClockBasePane");
+        this.timeWhite = 600;
+        this.timeBlack = 600;
+        this.whitesTurn = false;
+        this.blacksTurn = false;
+        toggleWhitesTurn();
     }
 
-    public void setBlacksTurn() {
+    public void toggleWhitesTurn() {
+        whitesTurn = true;
+        blacksTurn = false;
+        countDownRoutine();
+    }
+
+    public void toggleBlacksTurn() {
         blacksTurn = true;
         whitesTurn = false;
+        countDownRoutine();
     }
 
     public int getTimeWhite() {
@@ -26,22 +44,24 @@ public class ClockController {
         return timeBlack;
     }
 
-    public void countDown() {
+    public void countDownRoutine() {
         if(whitesTurn) {
             while(timeWhite != 0 && whitesTurn) {
                 try {
-                    timeWhite--;
+                    this.timeWhite--;
                     Thread.sleep(1000);
                 } catch(InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        } else if (timeBlack != 0 && blacksTurn) {
-            try {
-                timeBlack--;
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                e.printStackTrace();
+        } else if (blacksTurn) {
+            while(timeBlack != 0 && blacksTurn) {
+                try {
+                    this.timeBlack--;
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
