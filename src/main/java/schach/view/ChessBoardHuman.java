@@ -2,6 +2,8 @@ package schach.view;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import schach.model.Board;
+import schach.model.BoardState;
 import schach.model.Square;
 
 /**
@@ -9,15 +11,12 @@ import schach.model.Square;
  */
 public class ChessBoardHuman extends ChessBoardController{
 
-    private GameScreen gameScreen;
-
     /**
      * Constructor initializing fields, maps and event handler
      * @param container the Pane that contains the Chessboard and all belonging Panes
      */
-    public ChessBoardHuman(Pane container, GameScreen gameScreen) {
-        super(container);
-        this.gameScreen = gameScreen;
+    public ChessBoardHuman(Pane container, GameScreen gameScreen, String[] playerNames) {
+        super(container, gameScreen,playerNames);
     }
 
     @Override
@@ -26,6 +25,7 @@ public class ChessBoardHuman extends ChessBoardController{
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
+        updateHistory();
         resetBackground();
         if (isPromotion(toBeMoved)){
             showPromotion(toBeMoved.isWhite());
@@ -53,7 +53,7 @@ public class ChessBoardHuman extends ChessBoardController{
         rotateGame();
     }
 
-    private void togglePlayer(String start,String target){
+    private void togglePlayer(String start, String target){
         String playerName = "";
         if(this.gameScreen.getPlayers().get(0).isActive())
             playerName = this.gameScreen.getPlayers().get(0).getName();
@@ -68,5 +68,37 @@ public class ChessBoardHuman extends ChessBoardController{
             this.gameScreen.getPlayers().get(0).setActive(true);
             this.gameScreen.getPlayers().get(1).setActive(false);
         }
+    }
+
+    @Override
+    public void undo(int index) {
+        if (index == -1){
+            return;
+        }
+        if (index == 0){
+            whitesTurn = true;
+        } else if (board.getStates().get(index).getLastMoved().isWhite()){
+            whitesTurn = false;
+        } else {
+            whitesTurn = true;
+        }
+        board.loadState(index);
+        printBoard();
+        clearAndUpdateHistory();
+        gameScreen.setUndoDisabled(true);
+        gameScreen.setForwardDisabled(false);
+    }
+
+    @Override
+    public void redo() {
+        board.redo();
+        printBoard();
+        clearAndUpdateHistory();
+        if (board.getStates().get(board.getStates().size() - 1).getLastMoved().isWhite()){
+            whitesTurn = false;
+        } else {
+            whitesTurn = true;
+        }
+        gameScreen.setForwardDisabled(true);
     }
 }

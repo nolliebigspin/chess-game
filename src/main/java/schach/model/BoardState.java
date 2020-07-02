@@ -85,4 +85,11 @@ public class BoardState {
         return pieceStates;
     }
 
+    public Piece getLastMoved() {
+        return lastMoved;
+    }
+
+    public int getStateCount() {
+        return stateCount;
+    }
 }

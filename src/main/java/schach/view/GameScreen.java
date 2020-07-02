@@ -2,13 +2,12 @@ package schach.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import schach.model.Player;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller for gameScreen.fxml
@@ -21,6 +20,9 @@ public class GameScreen {
     public MenuBar topMenuBar;
     public Pane cemeteryPane;
     public Text checkWarning;
+    public ListView historyList;
+    public Button undo;
+    public Button forward;
 
     private ChessBoardController boardController;
     private GuiMain guimain;
@@ -37,7 +39,9 @@ public class GameScreen {
     private CemeteryController cemeteryController;
 
 
-    private ArrayList<Player> players;
+    private List<Player> players;
+
+    private String[] playerNames;
 
 
     /**
@@ -64,10 +68,12 @@ public class GameScreen {
      * @param newPlayerOneIsWhite true if player 1 is white, false if player 1 is black (Player 2 = Ai if player picked Ai as a Opponent)
      * @param newSimpleAi true if Ai is simple, false if Ai is minmax AI
      */
-    public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi) {
+    public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi, String[] playerNames) {
         this.vsPlayer = newVsPlayer;
         this.playerOneIsWhite = newPlayerOneIsWhite;
         this.simpleAi = newSimpleAi;
+        String[] newArray = playerNames;
+        this.playerNames = newArray;
     }
 
     /**
@@ -104,7 +110,7 @@ public class GameScreen {
      */
     public void handleButtonRestart(){
         try {
-            guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi, players);
+            guimain.loadGameScreen(vsPlayer, playerOneIsWhite, simpleAi, players, playerNames);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,6 +168,61 @@ public class GameScreen {
         this.lastMoveController = lastMoveController;
     }
 
+    /**
+     * Adds a string representing a move to the History List
+     * @param unicode the unicode representing the piece
+     * @param move String representing a move
+     */
+    public void addMoveToHistory(String unicode, String move){
+        String line = unicode + "   " + move;
+        historyList.getItems().add(line);
+    }
+
+    /**
+     * Clears all List Elements of the History List
+     */
+    public void clearHistoryList(){
+        historyList.getItems().clear();
+    }
+
+    /**
+     * gets the index of the Item that is selected in the history list
+     * @return index int
+     */
+    public int getSelectedMoveIndex(){
+        return historyList.getItems().indexOf(historyList.getSelectionModel().getSelectedItem());
+    }
+
+    /**
+     * Called via fxml, calls the undo() method in BoardController
+     */
+    public void undoButtonHandler(){
+        boardController.undo(getSelectedMoveIndex());
+    }
+
+    /**
+     * Disables or enables the undo button
+     * @param disabled true if button should be disabled, false if enabled
+     */
+    public void setUndoDisabled(boolean disabled){
+        undo.setDisable(disabled);
+    }
+
+    /**
+     * Called via fxml, call the redo() method in BoardController
+     */
+    public void forwardButtonHandler(){
+        boardController.redo();
+    }
+
+    /**
+     * Disables or enables the forward/redo button
+     * @param disabled true if button should be disabled, false if enabled
+     */
+    public void setForwardDisabled(boolean disabled){
+        forward.setDisable(disabled);
+    }
+
     public void setCemeteryController(CemeteryController cemeteryController){this.cemeteryController = cemeteryController;}
 
     public LastMoveController getLastMoveController(){
@@ -176,11 +237,11 @@ public class GameScreen {
         return this.guimain;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ArrayList<Player> players){
+    public void setPlayers(List<Player> players){
         this.players = players;
     }
 }

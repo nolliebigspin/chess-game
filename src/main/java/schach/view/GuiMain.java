@@ -13,6 +13,7 @@ import schach.model.Player;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Starts the JavaFX GUI and handles transitions between scenes as well as events that cant be implemented in the
@@ -78,7 +79,7 @@ public class GuiMain extends Application {
      * @param simpleAi true if AI is simple, false if AI should be Minmax
      * @throws Exception
      */
-    public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi, ArrayList<Player> players) throws Exception {
+    public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi, List<Player> players, String[] playerNames ) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -89,18 +90,17 @@ public class GuiMain extends Application {
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.setGuiMain(this);
         gameScreen.setPlayers(players);
-        gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
+        gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi, playerNames);
         Pane boardPane = gameScreen.getContainerPane();
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
-        gameScreen.setLastMoveController(new LastMoveController(gameScreen.getControllerContainerPane()));
+        gameScreen.setLastMoveController(new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen));
         gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
         if (vsPlayer){
-            boardController = new ChessBoardHuman(boardPane,gameScreen );
+            boardController = new ChessBoardHuman(boardPane, gameScreen, playerNames);
         } else {
-            boardController = new ChessBoardComputer(boardPane,simpleAi,gameScreen, player1isWhite);
+            boardController = new ChessBoardComputer(boardPane, gameScreen, playerNames, simpleAi, player1isWhite);
         }
-
         gameScreen.setBoardController(boardController);
     }
 

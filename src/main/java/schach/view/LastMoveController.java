@@ -8,11 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import schach.model.Board;
@@ -34,18 +32,25 @@ public class LastMoveController {
     ObservableList<Step> data = FXCollections.observableArrayList();
     ObservableList<Step> storedData = FXCollections.observableArrayList();
 
+    private ListView historyList;
+    private GameScreen gameScreen;
 
-    public LastMoveController(Pane containerPane){
+
+    public LastMoveController(Pane containerPane, GameScreen gameScreen){
         this.containerPane = containerPane;
         this.boards = new ArrayList<>();
         this.timeLabel = (Label)this.containerPane.lookup("#timeLabel");
         this.timeLabel.setText(timeSeconds.toString());
 
+        this.historyList = (ListView) containerPane.lookup("#historyList");
+        this.gameScreen = gameScreen;
+        this.historyList.setOnMouseClicked(listViewHandler());
+
         this.lastMoveTable = (TableView)this.containerPane.lookup("#lasMoveTable");
         Button undo = (Button)this.containerPane.lookup("#undo");
         Button forward = (Button)this.containerPane.lookup("#forward");
-        undo.setOnAction(undoHandler());
-        forward.setOnAction(forwardHandler());
+        //undo.setOnAction(undoHandler());
+        //forward.setOnAction(forwardHandler());
         this.playerColumn =new TableColumn("Player");
         this.moveCollumn =new TableColumn("Move");
         this.timeCollumn =new TableColumn("Timer");
@@ -58,6 +63,17 @@ public class LastMoveController {
         this.lastMoveTable.getColumns().addAll(this.playerColumn,this.moveCollumn, this.timeCollumn);
         this.lastMoveTable.setItems(this.data);
         
+    }
+
+    private EventHandler<MouseEvent> listViewHandler(){
+        return new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (historyList.getSelectionModel().getSelectedItem() != null){
+                    gameScreen.setUndoDisabled(false);
+                }
+            }
+        };
     }
 
     private EventHandler<ActionEvent>undoHandler(){
@@ -151,6 +167,8 @@ public void saveMove(Board board,String playerName, String move){
         }
 
     }
+
+
 
 }
 

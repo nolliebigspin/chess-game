@@ -26,6 +26,8 @@ import java.util.Map;
  */
 public abstract class ChessBoardController {
 
+    protected GameScreen gameScreen;
+
     /**
      * the Pane containing the BoardGrid and other needed FXML objects
      */
@@ -76,6 +78,8 @@ public abstract class ChessBoardController {
      */
     protected String backgroundGreen = "-fx-background-color: green;";
 
+    protected String[] playerNames;
+
     protected boolean rotate;
     protected boolean possibleMoves = true;
     protected boolean showIsCheck = true;
@@ -86,8 +90,10 @@ public abstract class ChessBoardController {
      * Constructor initializing fields, maps and event handler
      * @param container the Pane that contains the Chessboard and all belonging Panes
      */
-    public ChessBoardController(Pane container){
+    public ChessBoardController(Pane container, GameScreen gameScreen, String[] playerNames){
+        this.gameScreen = gameScreen;
         this.container = container;
+        this.playerNames = playerNames;
         boardGridPane = (GridPane) container.lookup("#chessBoardGrid");
         this.board = new Board();
         board.initLineUp();
@@ -549,6 +555,39 @@ public abstract class ChessBoardController {
         this.multipleSelect = multipleSelect;
         resetBackground();
         inMove = false;
+    }
+
+    public abstract void undo(int index);
+
+    public abstract void redo();
+
+    protected void updateHistory(){
+        List<BoardState> states = board.getStates();
+        BoardState lastState = states.get(states.size() - 1);
+        String unicode = lastState.getLastMoved().print();
+        String start = lastState.getLastMoved().getPreviousPos().getDenotation();
+        String target = lastState.getLastMoved().getPosition().getDenotation();
+        String move = start + "-" + target;
+        String playerName = playerNames[0];
+        if (!whitesTurn){
+            playerName = playerNames[1];
+        }
+        gameScreen.addMoveToHistory(unicode, move);
+    }
+
+    protected void clearAndUpdateHistory(){
+        gameScreen.clearHistoryList();
+        for (int i = 1; i < board.getStates().size(); i++){
+            String unicode = board.getStates().get(i).getLastMoved().print();
+            String start = board.getStates().get(i).getLastMoved().getPreviousPos().getDenotation();
+            String target = board.getStates().get(i).getLastMoved().getPosition().getDenotation();
+            String move = start + "-" + target;
+            String playerName = playerNames[0];
+            if (!whitesTurn){
+                playerName = playerNames[1];
+            }
+            gameScreen.addMoveToHistory(unicode, move);
+        }
     }
 
 

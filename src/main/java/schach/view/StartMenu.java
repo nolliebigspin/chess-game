@@ -53,6 +53,8 @@ public class StartMenu {
         player1isWhite = true;
         simpleAi = true;
         this.players = new ArrayList<>();
+        player1 = "Player 1";
+        player2 = "Player 2";
     }
 
     /**
@@ -63,7 +65,7 @@ public class StartMenu {
         vsPlayer = false;
         playerName2.setVisible(false);
         aiContainerPane.setVisible(true);
-
+        player2 = "CPU";
     }
 
     /**
@@ -74,6 +76,7 @@ public class StartMenu {
         vsPlayer = true;
         playerName2.setVisible(true);
         aiContainerPane.setVisible(false);
+        player2 = "Player 2";
     }
 
     /**
@@ -203,8 +206,8 @@ public class StartMenu {
         this.players.add(playerOne);
         this.players.add(playerTwo);
         //
-        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.players);
+        String[] playerNames = {player1, player2};
+        guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.players, playerNames);
     }
-
 
 }

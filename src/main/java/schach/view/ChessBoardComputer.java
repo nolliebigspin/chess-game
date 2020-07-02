@@ -34,8 +34,8 @@ public class ChessBoardComputer extends ChessBoardController{
      * Constructor initializing fields, maps and event handler
      * @param container the Pane that contains the Chessboard and all belonging Panes
      */
-    public ChessBoardComputer(Pane container, boolean simpleAi,GameScreen gameScreen, boolean playerIsWhite) {
-        super(container);
+    public ChessBoardComputer(Pane container, GameScreen gameScreen, String[] playerNames, boolean simpleAi, boolean playerIsWhite) {
+        super(container, gameScreen, playerNames);
         this.gameScreen = gameScreen;
         this.playerIsWhite = playerIsWhite;
         if (simpleAi){
@@ -208,5 +208,15 @@ public class ChessBoardComputer extends ChessBoardController{
             this.gameScreen.getPlayers().get(1).setActive(false);
         }
         gameScreen.getCemeteryController().updateCemetery(this);
+    }
+
+    @Override
+    public void undo(int index) {
+
+    }
+
+    @Override
+    public void redo() {
+
     }
 }
