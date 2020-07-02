@@ -101,6 +101,7 @@ public class ChessBoardComputer extends ChessBoardController{
             public void run() {
                 checkPane.setVisible(false);
                 printBoard();
+                updateHistory();
                 if (board.getCheck().isCheckMate(!whitesTurn)){
                     gameOver();
                 }
@@ -125,6 +126,7 @@ public class ChessBoardComputer extends ChessBoardController{
         Square start = toBeMoved.getPosition();
         Square target = paneToSquareMap.get(lastClickedPane);
         board.movePiece(start.getDenotation(), target.getDenotation());
+        updateHistory();
         if (isPromotion(toBeMoved)){
             showPromotion(toBeMoved.isWhite());
         } else {
@@ -156,6 +158,7 @@ public class ChessBoardComputer extends ChessBoardController{
         if (!computerThread.isAlive()){
             printBoard();
         }
+        gameScreen.setForwardDisabled(true);
     }
 
     @Override
@@ -212,11 +215,22 @@ public class ChessBoardComputer extends ChessBoardController{
 
     @Override
     public void undo(int index) {
-
+        board.loadState(index);
+        printBoard();
+        clearAndUpdateHistory();
+        gameScreen.setUndoDisabled(true);
+        gameScreen.setForwardDisabled(false);
     }
 
     @Override
     public void redo() {
+        board.redo();
+        printBoard();
+        clearAndUpdateHistory();
+        gameScreen.setForwardDisabled(true);
+    }
 
+    public boolean isPlayerIsWhite() {
+        return playerIsWhite;
     }
 }

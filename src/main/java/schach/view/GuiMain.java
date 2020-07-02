@@ -94,13 +94,15 @@ public class GuiMain extends Application {
         Pane boardPane = gameScreen.getContainerPane();
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
-        gameScreen.setLastMoveController(new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen));
+        LastMoveController lastMoveController = new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen);
+        gameScreen.setLastMoveController(lastMoveController);
         gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane, gameScreen, playerNames);
         } else {
             boardController = new ChessBoardComputer(boardPane, gameScreen, playerNames, simpleAi, player1isWhite);
         }
+        lastMoveController.setBoardController(boardController);
         gameScreen.setBoardController(boardController);
     }
 

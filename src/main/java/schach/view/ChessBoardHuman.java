@@ -2,8 +2,6 @@ package schach.view;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import schach.model.Board;
-import schach.model.BoardState;
 import schach.model.Square;
 
 /**
@@ -33,7 +31,6 @@ public class ChessBoardHuman extends ChessBoardController{
             this.togglePlayer(start.getDenotation(),target.getDenotation() );
             rotateGame();
         }
-
         printBoard();
         gameScreen.getCemeteryController().updateCemetery(this);
         inMove = false;
@@ -44,6 +41,7 @@ public class ChessBoardHuman extends ChessBoardController{
             gameOver();
         }
         whitesTurn = !whitesTurn;
+        gameScreen.setForwardDisabled(true);
     }
 
     @Override
@@ -55,16 +53,16 @@ public class ChessBoardHuman extends ChessBoardController{
 
     private void togglePlayer(String start, String target){
         String playerName = "";
-        if(this.gameScreen.getPlayers().get(0).isActive())
+        if (this.gameScreen.getPlayers().get(0).isActive()) {
             playerName = this.gameScreen.getPlayers().get(0).getName();
-        else{
+        } else {
             playerName = this.gameScreen.getPlayers().get(1).getName();
         }
         this.gameScreen.getLastMoveController().saveMove(board,playerName,start+"-"+target);
-        if(this.gameScreen.getPlayers().get(0).isActive()){
+        if (this.gameScreen.getPlayers().get(0).isActive()) {
             this.gameScreen.getPlayers().get(0).setActive(false);
             this.gameScreen.getPlayers().get(1).setActive(true);
-        }else{
+        } else {
             this.gameScreen.getPlayers().get(0).setActive(true);
             this.gameScreen.getPlayers().get(1).setActive(false);
         }

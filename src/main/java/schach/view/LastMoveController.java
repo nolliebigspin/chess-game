@@ -34,6 +34,7 @@ public class LastMoveController {
 
     private ListView historyList;
     private GameScreen gameScreen;
+    private ChessBoardController boardController;
 
 
     public LastMoveController(Pane containerPane, GameScreen gameScreen){
@@ -65,13 +66,31 @@ public class LastMoveController {
         
     }
 
+    public void setBoardController(ChessBoardController boardController) {
+        this.boardController = boardController;
+    }
+
     private EventHandler<MouseEvent> listViewHandler(){
         return new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (historyList.getSelectionModel().getSelectedItem() != null){
-                    gameScreen.setUndoDisabled(false);
+                if (boardController instanceof ChessBoardHuman){
+                    if (historyList.getSelectionModel().getSelectedItem() != null){
+                        gameScreen.setUndoDisabled(false);
+
+                    }
+                } else {
+                    ChessBoardComputer boardComputer = (ChessBoardComputer) boardController;
+                    if (boardComputer.isPlayerIsWhite() && historyList.getSelectionModel().getSelectedIndex() % 2 == 1 ||
+                    !boardComputer.isPlayerIsWhite() && historyList.getSelectionModel().getSelectedIndex() % 2 == 0){
+                        System.out.println(historyList.getSelectionModel().getSelectedItem());
+                        historyList.getSelectionModel().select(-1);
+                        gameScreen.setUndoDisabled(true);
+                    } else if (historyList.getSelectionModel().getSelectedItem() != null) {
+                        gameScreen.setUndoDisabled(false);
+                    }
                 }
+
             }
         };
     }

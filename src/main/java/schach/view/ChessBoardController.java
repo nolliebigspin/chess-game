@@ -93,7 +93,8 @@ public abstract class ChessBoardController {
     public ChessBoardController(Pane container, GameScreen gameScreen, String[] playerNames){
         this.gameScreen = gameScreen;
         this.container = container;
-        this.playerNames = playerNames;
+        String[] newArray = playerNames;
+        this.playerNames = newArray;
         boardGridPane = (GridPane) container.lookup("#chessBoardGrid");
         this.board = new Board();
         board.initLineUp();
@@ -557,10 +558,20 @@ public abstract class ChessBoardController {
         inMove = false;
     }
 
+    /**
+     * Undoes the selected move
+     * @param index selected index
+     */
     public abstract void undo(int index);
 
+    /**
+     * redoes the last undone move
+     */
     public abstract void redo();
 
+    /**
+     * updates the history list by getting the last added board state and displaying it
+     */
     protected void updateHistory(){
         List<BoardState> states = board.getStates();
         BoardState lastState = states.get(states.size() - 1);
@@ -568,13 +579,12 @@ public abstract class ChessBoardController {
         String start = lastState.getLastMoved().getPreviousPos().getDenotation();
         String target = lastState.getLastMoved().getPosition().getDenotation();
         String move = start + "-" + target;
-        String playerName = playerNames[0];
-        if (!whitesTurn){
-            playerName = playerNames[1];
-        }
         gameScreen.addMoveToHistory(unicode, move);
     }
 
+    /**
+     * Clears the history list and and adds all states to the list again
+     */
     protected void clearAndUpdateHistory(){
         gameScreen.clearHistoryList();
         for (int i = 1; i < board.getStates().size(); i++){
@@ -582,10 +592,6 @@ public abstract class ChessBoardController {
             String start = board.getStates().get(i).getLastMoved().getPreviousPos().getDenotation();
             String target = board.getStates().get(i).getLastMoved().getPosition().getDenotation();
             String move = start + "-" + target;
-            String playerName = playerNames[0];
-            if (!whitesTurn){
-                playerName = playerNames[1];
-            }
             gameScreen.addMoveToHistory(unicode, move);
         }
     }
