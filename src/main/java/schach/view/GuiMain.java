@@ -3,9 +3,11 @@ package schach.view;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import schach.model.Player;
@@ -23,6 +25,7 @@ public class GuiMain extends Application {
 
     private StartMenu startMenu;
     private Stage stage;
+    private Scene gameScreenContainerPane;
 
     /**
      * main method, starts the gui
@@ -45,7 +48,7 @@ public class GuiMain extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         stage = primaryStage;
         startMenu = (StartMenu) fxmlLoader.getController();
         startMenu.setGuiMain(this);
@@ -71,6 +74,70 @@ public class GuiMain extends Application {
         });
     }
 
+    private void initGameScreenListner(Pane container){
+        double initWidht = 1150;
+        double initHeight = 770;
+        double heightFactor;
+        double widhtFactor;
+        stage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                double factor = stage.getWidth()/initWidht;
+                setStageHeight(initHeight*(stage.getWidth()/initWidht));
+                stage.setMinWidth(1159);
+                stage.setMinHeight(810);
+                setMenuBarWidht();
+                centerChessBoard(factor);
+                centerLastMoves(factor);
+                centerCemetery(factor);
+
+
+            }
+        });
+        stage.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                double factor = stage.getHeight()/initHeight;
+
+
+
+            }
+        });
+    }
+
+    private void centerChessBoard(double ratio){
+        Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#boardContainerPane");
+        double initXpos = 287;
+        chessBoardPane.setLayoutX(initXpos*ratio);
+    }
+
+    private void centerLastMoves(double ratio){
+        Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#controllerContainerPane");
+        double initXpos = 834;
+        chessBoardPane.setLayoutX(initXpos*ratio);
+    }
+
+    private void centerCemetery(double ratio){
+        Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#cemeteryPane");
+        double initXpos = 287;
+        chessBoardPane.setLayoutX(initXpos*ratio);
+    }
+
+
+
+    private void setMenuBarWidht(){
+       MenuBar menuBar = (MenuBar) gameScreenContainerPane.lookup("#topMenuBar");
+       menuBar.setPrefWidth(stage.getWidth());
+    }
+
+    private void setStageWidth(double width){
+        stage.setWidth(width);
+    }
+
+    private void setStageHeight(double height){
+        stage.setHeight(height);
+    }
+
     /**
      * loads the main Game Screen as a scene in the stage and initializes a ChessBoardController Class to handles and
      * control events in the chess board pane
@@ -92,6 +159,7 @@ public class GuiMain extends Application {
         gameScreen.setPlayers(players);
         gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
         Pane boardPane = gameScreen.getContainerPane();
+        this.gameScreenContainerPane = scene;
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
         LastMoveController lastMoveController = new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen);
@@ -105,6 +173,7 @@ public class GuiMain extends Application {
         }
         lastMoveController.setBoardController(boardController);
         gameScreen.setBoardController(boardController);
+        initGameScreenListner(new Pane());
     }
 
     /**
