@@ -51,13 +51,13 @@ public class ClockController {
         countDownRoutine();
     }
 
-
     /**
      * Sets the turn to whites turn and starts the countdown-routine
      */
     public void setWhitesTurn() {
         whitesTurn = true;
         blacksTurn = false;
+        timeBlack += 5;
         countDownRoutine();
     }
 
@@ -67,23 +67,8 @@ public class ClockController {
     public void setBlacksTurn() {
         blacksTurn = true;
         whitesTurn = false;
+        timeWhite += 5;
         countDownRoutine();
-    }
-
-    /**
-     * Getter for whites rest time
-     * @return the left time of the white side
-     */
-    public int getTimeWhite() {
-        return timeWhite;
-    }
-
-    /**
-     * Getter for blacks rest time
-     * @return the left time of the black side
-     */
-    public int getTimeBlack() {
-        return timeBlack;
     }
 
     /**
@@ -95,7 +80,7 @@ public class ClockController {
             Thread delayThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while(timeWhite != 0 && whitesTurn) {
+                    while(timeWhite >= 0 && whitesTurn) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -103,6 +88,9 @@ public class ClockController {
                         }
                         timerTextWhite.setText(convertToString(timeWhite));
                         timeWhite--;
+                        if(timeWhite == 0) {
+                            handleGameOver();
+                        }
                     }
                 }
             });
@@ -112,7 +100,7 @@ public class ClockController {
             Thread delayThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while(timeBlack != 0 && blacksTurn) {
+                    while(timeBlack >= 0 && blacksTurn) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -120,10 +108,26 @@ public class ClockController {
                         }
                         timerTextBlack.setText(convertToString(timeBlack));
                         timeBlack--;
+                        if(timeBlack == 0) {
+                            handleGameOver();
+                        }
                     }
                 }
             });
             delayThread.start();
+        }
+    }
+
+    /**
+     * This Method calls the game-over if one player runs out of time
+     */
+    public void handleGameOver() {
+        if (timeWhite <= 0) {
+            // TODO
+            System.out.println("Black wins the game!");
+        } else if (timeBlack <= 0) {
+            //TODO
+            System.out.println("White wins the game!");
         }
     }
 
