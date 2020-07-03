@@ -2,6 +2,9 @@ package schach.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -24,12 +27,17 @@ public class GameScreen {
     public Button undo;
     public Button forward;
 
+    // ChessClock
+    public Button startButtonChessClock;
+
+
     private ChessBoardController boardController;
     private GuiMain guimain;
 
     private boolean vsPlayer;
     private boolean playerOneIsWhite;
     private boolean simpleAi;
+    private ClockController clockController;
 
     private boolean allowMultipleSelect;
     private boolean showIsInCheck;
@@ -68,12 +76,10 @@ public class GameScreen {
      * @param newPlayerOneIsWhite true if player 1 is white, false if player 1 is black (Player 2 = Ai if player picked Ai as a Opponent)
      * @param newSimpleAi true if Ai is simple, false if Ai is minmax AI
      */
-    public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi, String[] playerNames) {
+    public void InitGameMode(boolean newVsPlayer, boolean newPlayerOneIsWhite, boolean newSimpleAi) {
         this.vsPlayer = newVsPlayer;
         this.playerOneIsWhite = newPlayerOneIsWhite;
         this.simpleAi = newSimpleAi;
-        String[] newArray = playerNames;
-        this.playerNames = newArray;
     }
 
     /**
@@ -164,6 +170,27 @@ public class GameScreen {
         boardController.setRotate(turnBoard);
     }
 
+    /**
+     * Method to handle chess-clock start button
+     */
+    public void handleStartChessClock() {
+        clockController.start();
+    }
+
+    /**
+     * Method to handle white clicked the button on chess-clock
+     */
+    public void handlePressWhiteClock() {
+        clockController.setBlacksTurn();
+    }
+
+    /**
+     * Method to handle black clicked the button on chess-clock
+     */
+    public void handlePressBlackClock() {
+        clockController.setWhitesTurn();
+    }
+
     public void setLastMoveController(LastMoveController lastMoveController){
         this.lastMoveController = lastMoveController;
     }
@@ -221,6 +248,14 @@ public class GameScreen {
      */
     public void setForwardDisabled(boolean disabled){
         forward.setDisable(disabled);
+    }
+
+    /**
+     * Setter fpr clock-controller
+     * @param clockController instance of a clock-controller
+     */
+    public void setClockController(ClockController clockController) {
+        this.clockController = clockController;
     }
 
     public void setCemeteryController(CemeteryController cemeteryController){this.cemeteryController = cemeteryController;}

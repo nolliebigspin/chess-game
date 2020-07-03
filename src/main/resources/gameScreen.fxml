@@ -18,9 +18,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.GameScreen">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1274.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.GameScreen">
     <children>
-        <Pane fx:id="boardContainerPane" layoutX="68.0" layoutY="113.0">
+        <Pane fx:id="boardContainerPane" layoutX="287.0" layoutY="116.0">
             <children>
                 <GridPane fx:id="chessBoardGrid" gridLinesVisible="true" prefHeight="500.0" prefWidth="500.0">
                     <columnConstraints>
@@ -216,7 +216,7 @@
                 </GridPane>
             </children>
         </Pane>
-        <MenuBar fx:id="topMenuBar" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="1000.0">
+        <MenuBar fx:id="topMenuBar" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="1274.0">
             <menus>
                 <Menu fx:id="menuGame" mnemonicParsing="false" text="Game">
                     <items>
@@ -234,7 +234,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Pane layoutX="68.0" layoutY="42.0" prefHeight="63.0" prefWidth="500.0">
+        <Pane layoutX="289.0" layoutY="45.0" prefHeight="63.0" prefWidth="500.0">
             <children>
                 <Text fx:id="checkWarning" fill="#ff4d00" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK!" visible="false" wrappingWidth="80.0">
                     <font>
@@ -243,7 +243,7 @@
                 </Text>
             </children>
         </Pane>
-        <Pane fx:id="controllerContainerPane" layoutX="650.0" layoutY="107.0" prefHeight="506.0" prefWidth="264.0" style="-fx-border-insets: 2,2,2,2; -fx-border-style: solid; -fx-border-radius: 20;">
+        <Pane fx:id="controllerContainerPane" layoutX="834.0" layoutY="113.0" prefHeight="506.0" prefWidth="264.0" style="-fx-border-insets: 2,2,2,2; -fx-border-style: solid; -fx-border-radius: 20;">
             <children>
                 <Label alignment="CENTER" layoutX="27.0" layoutY="27.0" prefHeight="39.0" prefWidth="193.0" text="Last Moves" textAlignment="CENTER">
                     <font>
@@ -271,7 +271,7 @@
             <ListView fx:id="historyList" layoutX="21.0" layoutY="72.0" prefHeight="320.0" prefWidth="222.0" />
             </children>
         </Pane>
-        <Pane id="cemeteryPane" fx:id="cemeteryPane" layoutX="66.0" layoutY="627.0" prefHeight="134.0" prefWidth="841.0" style="-fx-border-style: solid; -fx-border-radius: 20;">
+        <Pane id="cemeteryPane" fx:id="cemeteryPane" layoutX="287.0" layoutY="629.0" prefHeight="134.0" prefWidth="841.0" style="-fx-border-style: solid; -fx-border-radius: 20;">
             <children>
                 <GridPane fx:id="cemeteryGridPane" layoutX="5.0" layoutY="5.0" prefHeight="126.0" prefWidth="830.0">
                     <columnConstraints>
@@ -293,5 +293,27 @@
                 </GridPane>
             </children>
         </Pane>
+      <Pane fx:id="chessClockBasePane" layoutX="14.0" layoutY="38.0" prefHeight="707.0" prefWidth="252.0">
+         <children>
+            <Text layoutX="60.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chess-Clock" wrappingWidth="132.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button fx:id="whiteButtonChessClock" layoutX="12.0" layoutY="464.0" mnemonicParsing="false" onAction="#handlePressWhiteClock" prefHeight="229.0" prefWidth="228.0" text="White" />
+            <Button fx:id="blackButtonChessClock" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#handlePressBlackClock" prefHeight="229.0" prefWidth="228.0" text="Black" />
+            <Text fx:id="blackTimeChessClock" layoutX="95.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+            <Text fx:id="whiteTimeChessClock" layoutX="95.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+            <Button fx:id="startButtonChessClock" layoutX="66.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleStartChessClock" prefHeight="25.0" prefWidth="120.0" text="Start" />
+         </children>
+      </Pane>
     </children>
 </Pane>

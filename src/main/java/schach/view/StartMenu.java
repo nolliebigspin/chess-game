@@ -1,10 +1,7 @@
 package schach.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import schach.model.Player;
 
@@ -209,5 +206,6 @@ public class StartMenu {
         String[] playerNames = {player1, player2};
         guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.players, playerNames);
     }
+
 
 }

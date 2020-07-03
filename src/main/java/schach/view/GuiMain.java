@@ -90,13 +90,14 @@ public class GuiMain extends Application {
         GameScreen gameScreen = (GameScreen) fxmlLoader.getController();
         gameScreen.setGuiMain(this);
         gameScreen.setPlayers(players);
-        gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi, playerNames);
+        gameScreen.InitGameMode(vsPlayer, player1isWhite, simpleAi);
         Pane boardPane = gameScreen.getContainerPane();
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
         LastMoveController lastMoveController = new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen);
         gameScreen.setLastMoveController(lastMoveController);
         gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
+        gameScreen.setClockController(new ClockController((Pane) scene.lookup("#chessClockBasePane")));
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane, gameScreen, playerNames);
         } else {
