@@ -1,23 +1,13 @@
 package schach.view;
 
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+/**
+ * This class is the controller class for the chess-clock
+ */
 public class ClockController {
 
     private int timeWhite;
@@ -36,7 +26,7 @@ public class ClockController {
      */
     public ClockController(Pane basePane) {
         this.timerTextWhite = (Text) basePane.lookup("#whiteTimeChessClock");
-        this.timerTextBlack = (Text) basePane.lookup(("#blackTimeChessClock"));
+        this.timerTextBlack = (Text) basePane.lookup("#blackTimeChessClock");
         this.timeWhite = 599;
         this.timeBlack = 599;
         this.whitesTurn = true;
