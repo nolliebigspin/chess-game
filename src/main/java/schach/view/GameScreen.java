@@ -168,6 +168,14 @@ public class GameScreen {
         clockController.start();
     }
 
+    public void handlePressWhiteClock() {
+        clockController.setBlacksTurn();
+    }
+
+    public void handlePressBlackClock() {
+        clockController.setWhitesTurn();
+    }
+
     public void setLastMoveController(LastMoveController lastMoveController){
         this.lastMoveController = lastMoveController;
     }
