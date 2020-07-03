@@ -164,14 +164,23 @@ public class GameScreen {
         boardController.setRotate(turnBoard);
     }
 
+    /**
+     * Method to handle chess-clock start button
+     */
     public void handleStartChessClock() {
         clockController.start();
     }
 
+    /**
+     * Method to handle white clicked the button on chess-clock
+     */
     public void handlePressWhiteClock() {
         clockController.setBlacksTurn();
     }
 
+    /**
+     * Method to handle black clicked the button on chess-clock
+     */
     public void handlePressBlackClock() {
         clockController.setWhitesTurn();
     }
