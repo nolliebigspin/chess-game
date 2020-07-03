@@ -5,11 +5,13 @@ import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -23,19 +25,20 @@ public class ClockController {
 
     private boolean whitesTurn;
     private boolean blacksTurn;
-    private Thread pauseThread;
+
+    @FXML
+    private Text timerTextWhite;
 
     /**
      * Constructor of the ClockController
      * @param basePane Pane where the clock is placed
      */
     public ClockController(Pane basePane) {
-        GridPane clockPane = (GridPane) basePane.lookup("#chessClockBasePane");
+        this.timerTextWhite = (Text) basePane.lookup("#whiteTimeChessClock");
         this.timeWhite = 600;
         this.timeBlack = 600;
         this.whitesTurn = true;
         this.blacksTurn = false;
-        this.pauseThread = new Thread();
     }
 
     /**
@@ -96,7 +99,7 @@ public class ClockController {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        System.out.println(convertToString(timeWhite));
+                        timerTextWhite.setText(convertToString(timeWhite));
                         timeWhite--;
                     }
                 }

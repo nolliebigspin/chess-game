@@ -95,7 +95,7 @@ public class GuiMain extends Application {
         //new LastMoveController(gameScreen.getControllerContainerPane());
         gameScreen.setLastMoveController(new LastMoveController(gameScreen.getControllerContainerPane()));
         gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
-        gameScreen.setClockController(new ClockController(boardPane));
+        gameScreen.setClockController(new ClockController((Pane) scene.lookup("#chessClockBasePane")));
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane,gameScreen );
         } else {
