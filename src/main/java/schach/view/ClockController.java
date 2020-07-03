@@ -87,7 +87,6 @@ public class ClockController {
      */
     public void countDownRoutine() {
         if(whitesTurn) {
-
             Thread delayThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -102,13 +101,24 @@ public class ClockController {
                     }
                 }
             });
-                delayThread.start();
+            delayThread.start();
 
         } else if (blacksTurn) {
-            while(timeBlack != 0 && blacksTurn) {
-                System.out.println(convertToString(timeBlack));
-                this.timeBlack--;
-            }
+            Thread delayThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(timeBlack != 0 && blacksTurn) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(convertToString(timeBlack));
+                        timeBlack--;
+                    }
+                }
+            });
+            delayThread.start();
         }
     }
 
