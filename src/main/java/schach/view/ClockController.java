@@ -87,15 +87,23 @@ public class ClockController {
      */
     public void countDownRoutine() {
         if(whitesTurn) {
-            while(timeWhite != 0 && whitesTurn) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                    System.out.println(convertToString(timeWhite));
-                    this.timeWhite--;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+            Thread delayThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(timeWhite != 0 && whitesTurn) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(convertToString(timeWhite));
+                        timeWhite--;
+                    }
                 }
-            }
+            });
+                delayThread.start();
+
         } else if (blacksTurn) {
             while(timeBlack != 0 && blacksTurn) {
                 System.out.println(convertToString(timeBlack));
