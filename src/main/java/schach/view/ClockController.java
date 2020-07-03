@@ -134,13 +134,13 @@ public class ClockController {
      * @return String of left time with a colon between minutes and seconds
      */
     public String convertToString(int rawTimeLeft) {
-        ArrayList<Integer> timeArray = new ArrayList<Integer>();
+        ArrayList<String> timeArray = new ArrayList<String>();
 
         int minutesLeft = rawTimeLeft / 60;
         int secondsLeft = rawTimeLeft % 60;
 
-        timeArray.add(minutesLeft);
-        timeArray.add(secondsLeft);
+        timeArray.add(String.format("%02d", minutesLeft));
+        timeArray.add(String.format("%02d", secondsLeft));
 
         return timeArray.get(0) + ":" + timeArray.get(1);
     }
