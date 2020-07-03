@@ -95,9 +95,10 @@ public class GuiMain extends Application {
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
         LastMoveController lastMoveController = new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen);
+        ClockController clockController = new ClockController((Pane) scene.lookup("#chessClockBasePane"));
         gameScreen.setLastMoveController(lastMoveController);
         gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
-        gameScreen.setClockController(new ClockController((Pane) scene.lookup("#chessClockBasePane")));
+        gameScreen.setClockController(clockController);
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane, gameScreen, playerNames);
         } else {
@@ -105,6 +106,7 @@ public class GuiMain extends Application {
         }
         lastMoveController.setBoardController(boardController);
         gameScreen.setBoardController(boardController);
+        boardController.setClock(clockController);
     }
 
     /**

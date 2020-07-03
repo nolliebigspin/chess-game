@@ -74,6 +74,11 @@ public abstract class ChessBoardController {
     protected boolean disabledMouseOnBoard;
 
     /**
+     * new clock instance
+     */
+    protected ClockController clock;
+
+    /**
      * String to save space, PMD forced me to do that :/
      */
     protected String backgroundGreen = "-fx-background-color: green;";
@@ -596,5 +601,11 @@ public abstract class ChessBoardController {
         }
     }
 
-
+    /**
+     * setter for clock controller
+     * @param clock instance of clock-controller
+     */
+    public void setClock(ClockController clock) {
+        this.clock = clock;
+    }
 }

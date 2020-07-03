@@ -112,6 +112,7 @@ public class ChessBoardComputer extends ChessBoardController{
             @Override
             public void run() {
                 rotateGame();
+                clock.setWhitesTurn();
             }
         });
         whitesTurn = !whitesTurn;
