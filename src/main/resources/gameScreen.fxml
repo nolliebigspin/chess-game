@@ -295,7 +295,7 @@
         </Pane>
       <Pane fx:id="chessClockBasePane" layoutX="14.0" layoutY="38.0" prefHeight="707.0" prefWidth="252.0">
          <children>
-            <Text layoutX="60.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chess-Clock" wrappingWidth="132.0">
+            <Text layoutX="53.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chess-Clock" wrappingWidth="146.0">
                <font>
                   <Font size="24.0" />
                </font>
