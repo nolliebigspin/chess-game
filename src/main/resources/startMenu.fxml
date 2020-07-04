@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.StartMenu">
    <children>
       <ToggleButton id="toggle_computer" fx:id="toggleComputer" layoutX="151.0" layoutY="59.0" mnemonicParsing="false" onAction="#setToggleComputer" prefHeight="30.0" prefWidth="120.0" text="Computer" AnchorPane.rightAnchor="29.0" />

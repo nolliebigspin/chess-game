@@ -4,6 +4,7 @@ import schach.controller.Check;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Class Board representing the chess board
@@ -245,7 +246,11 @@ public class Board {
 
         if (p.isValidMove()){
             List<PieceState> currentPieceStates = new ArrayList<>();
-            currentPieceStates.addAll(states.get(states.size() - 1).getPieceStates());
+            try {
+                currentPieceStates.addAll(states.get(states.size() - 1).getPieceStates());
+            } catch (Exception e){
+                currentPieceStates = new ArrayList<>();
+            }
             states.add(new BoardState(this, moveCount, currentPieceStates, new PieceState(p, moveCount)));
         } else {
             moveCount--;

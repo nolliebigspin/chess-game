@@ -59,6 +59,19 @@ public class GuiMain extends Application {
      * Initializes EventHandler for the StartMenu which cant be initialized in StartMenu controller class
      */
     private void initStartMenuHandler(){
+        double initWidth = 300;
+        double initHeight = 495;
+        stage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                double factor = stage.getWidth()/initWidth;
+                setStageHeight(initHeight*(stage.getWidth()/initWidth));
+                stage.setResizable(true);
+                stage.setMinWidth(320);
+                stage.setMinHeight(530);
+
+            }
+        });
         startMenu.getPlayerName1().textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -74,7 +87,7 @@ public class GuiMain extends Application {
         });
     }
 
-    private void initGameScreenListner(Pane container){
+    private void initGameScreenListener(Pane container){
         double initWidht = 1150;
         double initHeight = 770;
         double heightFactor;
@@ -84,13 +97,13 @@ public class GuiMain extends Application {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 double factor = stage.getWidth()/initWidht;
                 setStageHeight(initHeight*(stage.getWidth()/initWidht));
-                stage.setMinWidth(1159);
+                stage.setMinWidth(1150);
                 stage.setMinHeight(810);
-                setMenuBarWidht();
+                setMenuBarWidth();
                 centerChessBoard(factor);
                 centerLastMoves(factor);
                 centerCemetery(factor);
-
+          
 
             }
         });
@@ -120,12 +133,16 @@ public class GuiMain extends Application {
     private void centerCemetery(double ratio){
         Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#cemeteryPane");
         double initXpos = 287;
+        double initYpos = 629;
         chessBoardPane.setLayoutX(initXpos*ratio);
+
     }
 
 
 
-    private void setMenuBarWidht(){
+
+
+    private void setMenuBarWidth(){
        MenuBar menuBar = (MenuBar) gameScreenContainerPane.lookup("#topMenuBar");
        menuBar.setPrefWidth(stage.getWidth());
     }
@@ -163,9 +180,10 @@ public class GuiMain extends Application {
         ChessBoardController boardController;
         //new LastMoveController(gameScreen.getControllerContainerPane());
         LastMoveController lastMoveController = new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen);
+        ClockController clockController = new ClockController((Pane) scene.lookup("#chessClockBasePane"));
         gameScreen.setLastMoveController(lastMoveController);
         gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
-        gameScreen.setClockController(new ClockController((Pane) scene.lookup("#chessClockBasePane")));
+        gameScreen.setClockController(clockController);
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane, gameScreen, playerNames);
         } else {
@@ -173,7 +191,8 @@ public class GuiMain extends Application {
         }
         lastMoveController.setBoardController(boardController);
         gameScreen.setBoardController(boardController);
-        initGameScreenListner(new Pane());
+        initGameScreenListener(new Pane());
+        boardController.setClock(clockController);
     }
 
     /**
