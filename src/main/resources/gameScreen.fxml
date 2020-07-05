@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,8 +19,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<?import javafx.scene.control.SeparatorMenuItem?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.GameScreen">
     <children>
         <Pane fx:id="boardContainerPane" layoutX="287.0" layoutY="116.0">
@@ -112,14 +111,14 @@
                         <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="6" GridPane.rowIndex="7" />
                     </children>
                 </GridPane>
-                <Pane fx:id="gameOverOverlay" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: white; -fx-opacity: 0.5;" visible="false" >
-                    <Text fx:id="checkMateText" layoutX="141.0" layoutY="267.0" strokeType="OUTSIDE" text="%key.Checkmate" >
+                <Pane fx:id="gameOverOverlay" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: white; -fx-opacity: 0.5;" visible="false">
+                    <Text fx:id="checkMateText" layoutX="141.0" layoutY="267.0" strokeType="OUTSIDE" text="%key.Checkmate">
                         <font>
                             <Font size="42.0" />
                         </font>
                     </Text>
 
-                </Pane>
+                      </Pane>
                 <GridPane fx:id="promBlackGrid" gridLinesVisible="true" layoutX="510.0" layoutY="250.0" prefHeight="250.0" prefWidth="62.5" visible="false">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="62.5" />
@@ -220,14 +219,14 @@
                 </GridPane>
             </children>
         </Pane>
-        <MenuBar fx:id="topMenuBar" layoutY="2.0" prefHeight="25.0" prefWidth="1150.0">
+        <MenuBar fx:id="topMenuBar" layoutY="2.0" minHeight="25.0" minWidth="1150.0" prefHeight="25.0" prefWidth="1150.0">
             <menus>
                 <Menu fx:id="menuGame" mnemonicParsing="false" text="%key.Game">
                     <items>
                         <MenuItem fx:id="buttonRestart" mnemonicParsing="false" onAction="#handleButtonRestart" text="%key.restartSession" />
                         <MenuItem fx:id="buttonBackToStartMenu" mnemonicParsing="false" onAction="#handleBackToStartMenu" text="%key.startMenu" />
-                        <SeparatorMenuItem/>
-                        <MenuItem fx:id="closeMenu" mnemonicParsing="false" text="%key.close" onAction="#close" />
+                        <SeparatorMenuItem />
+                        <MenuItem fx:id="closeMenu" mnemonicParsing="false" onAction="#close" text="%key.close" />
                     </items>
                 </Menu>
                 <Menu fx:id="menuSettings" mnemonicParsing="false" text="%key.Settings">
@@ -240,9 +239,9 @@
                 </Menu>
                 <Menu fx:id="languageMenu" mnemonicParsing="false" text="%key.language">
                     <items>
-                        <MenuItem fx:id="english" mnemonicParsing="false" text="%key.english" onAction="#changeLanguage" />
-                        <SeparatorMenuItem/>
-                        <MenuItem fx:id="german" mnemonicParsing="false" text="%key.german" onAction="#changeLanguage" />
+                        <MenuItem fx:id="english" mnemonicParsing="false" onAction="#changeLanguage" text="%key.english" />
+                        <SeparatorMenuItem />
+                        <MenuItem fx:id="german" mnemonicParsing="false" onAction="#changeLanguage" text="%key.german" />
                     </items>
                 </Menu>
             </menus>

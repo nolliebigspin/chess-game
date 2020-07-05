@@ -2,16 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 
 <AnchorPane maxHeight="1080.0" maxWidth="1920.0" minHeight="770.0" minWidth="1150.0" prefHeight="770.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.StartMenu">
    <children>
@@ -19,7 +18,7 @@
       <ToggleButton id="toggle_player" fx:id="togglePlayer" layoutX="64.0" layoutY="59.0" mnemonicParsing="false" onAction="#setTogglePlayer" prefHeight="30.0" prefWidth="501.0" selected="true" text="%key.playerVsPlayer" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="59.0" />
       <TextField id="playerName1" fx:id="playerName1" layoutX="64.0" layoutY="325.0" prefHeight="25.0" prefWidth="1012.0" promptText="%key.firstPlayer" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="74.0" />
       <TextField id="playerName2" fx:id="playerName2" layoutX="64.0" layoutY="373.0" prefHeight="25.0" prefWidth="1012.0" promptText="%key.secondPlayer" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="74.0" />
-      <Label fx:id="gameModeLabel" layoutX="64.0" layoutY="28.0" prefHeight="17.0" prefWidth="300.0" text="%key.gameMode" textAlignment="CENTER" />
+      <Label fx:id="gameModeLabel" layoutX="64.0" layoutY="42.0" prefHeight="17.0" prefWidth="300.0" text="%key.gameMode" textAlignment="CENTER" />
       <Label fx:id="playerNameLabel" layoutX="64.0" layoutY="291.0" prefHeight="18.0" prefWidth="180.0" text="%key.playersName" textAlignment="CENTER" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="855.0" />
       <Label fx:id="choseColorLabel" layoutX="64.0" layoutY="408.0" prefHeight="18.0" prefWidth="300.0" text="%key.chooseColorToPlay" textAlignment="CENTER" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="786.0" />
       <ToggleButton id="toggleButtonWhite" fx:id="toggleButtonWhite" layoutX="70.0" layoutY="439.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonWhite" prefHeight="26.0" prefWidth="501.0" selected="true" text="%key.white" AnchorPane.leftAnchor="64.0" />
@@ -35,18 +34,18 @@
          <font>
             <Font size="33.0" />
          </font></Button>
-      <MenuBar layoutX="4.0" layoutY="7.0" prefHeight="25.0" prefWidth="1150.0">
+      <MenuBar prefHeight="25.0" prefWidth="1150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <menus>
             <Menu fx:id="fileMenu" mnemonicParsing="false" text="%key.file">
                <items>
-                  <SeparatorMenuItem/>
-                  <MenuItem fx:id="closeMenu" mnemonicParsing="false" onAction="#close" text="%key.close"  />
+                  <SeparatorMenuItem />
+                  <MenuItem fx:id="closeMenu" mnemonicParsing="false" onAction="#close" text="%key.close" />
                </items>
             </Menu>
-            <Menu fx:id="languageMenu" mnemonicParsing="false" text="%key.language" >
+            <Menu fx:id="languageMenu" mnemonicParsing="false" text="%key.language">
                <items>
                   <MenuItem fx:id="english" mnemonicParsing="false" onAction="#changeLanguage" text="%key.english" />
-                  <SeparatorMenuItem/>
+                  <SeparatorMenuItem />
                   <MenuItem fx:id="german" mnemonicParsing="false" onAction="#changeLanguage" text="%key.german" />
                </items>
             </Menu>
