@@ -50,8 +50,10 @@ public class GuiMain extends Application {
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.setMinWidth(1150);
+        primaryStage.setMinHeight(795);
         primaryStage.setResizable(true);
+        primaryStage.show();
         stage = primaryStage;
         startMenu = (StartMenu) fxmlLoader.getController();
         startMenu.setGuiMain(this);
@@ -62,17 +64,13 @@ public class GuiMain extends Application {
      * Initializes EventHandler for the StartMenu which cant be initialized in StartMenu controller class
      */
     private void initStartMenuHandler(){
-        double initWidth = 1170;
-        double initHeight = 810;
+        double initWidth = 1150;
+        double initHeight = 795;
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 double factor = stage.getWidth()/initWidth;
                 setStageHeight(initHeight*(stage.getWidth()/initWidth));
-                stage.setResizable(true);
-                stage.setMinWidth(1170);
-                stage.setMinHeight(810);
-
             }
         });
         startMenu.getPlayerName1().textProperty().addListener(new ChangeListener<String>() {
@@ -92,30 +90,17 @@ public class GuiMain extends Application {
 
     // initialize the game screen listener for window resizing
     private void initGameScreenListener(Pane container){
-        double initWidth = 1170;
-        double initHeight = 810;
-        double heightFactor;
-        double widthFactor;
+        double initWidth = 1150;
+        double initHeight = 795;
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 double factor = stage.getWidth()/initWidth;
                 setStageHeight(initHeight*(stage.getWidth()/initWidth));
-                stage.setMinWidth(1170);
-                stage.setMinHeight(810);
                 setMenuBarWidth();
                 centerChessBoard(factor);
                 centerLastMoves(factor);
                 centerCemetery(factor);
-
-
-            }
-        });
-        stage.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                double factor = stage.getHeight()/initHeight;
-
 
 
             }
@@ -139,7 +124,6 @@ public class GuiMain extends Application {
     private void centerCemetery(double ratio){
         Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#cemeteryPane");
         double initXpos = 287;
-        double initYpos = 629;
         chessBoardPane.setLayoutX(initXpos*ratio);
 
     }
@@ -210,6 +194,8 @@ public class GuiMain extends Application {
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setX(100);
+        stage.setY(50);
         stage.show();
         stage.setResizable(true);
         startMenu = (StartMenu) fxmlLoader.getController();
