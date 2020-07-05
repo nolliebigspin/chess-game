@@ -50,8 +50,8 @@ public class GuiMain extends Application {
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(1150);
-        primaryStage.setMinHeight(795);
+        primaryStage.setMinWidth(1160);
+        primaryStage.setMinHeight(800);
         primaryStage.setResizable(true);
         primaryStage.show();
         stage = primaryStage;
@@ -64,8 +64,8 @@ public class GuiMain extends Application {
      * Initializes EventHandler for the StartMenu which cant be initialized in StartMenu controller class
      */
     private void initStartMenuHandler(){
-        double initWidth = 1150;
-        double initHeight = 795;
+        double initWidth = 1160;
+        double initHeight = 800;
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -90,8 +90,8 @@ public class GuiMain extends Application {
 
     // initialize the game screen listener for window resizing
     private void initGameScreenListener(Pane container){
-        double initWidth = 1150;
-        double initHeight = 795;
+        double initWidth = 1160;
+        double initHeight = 800;
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
