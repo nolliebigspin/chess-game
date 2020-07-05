@@ -101,7 +101,7 @@ public class StartMenu {
         if (player1.length() == 0){
             player1 = "Player 1";
         }
-        playerNameColor.setText(player1);
+    //    playerNameColor.setText(player1);
     }
 
     /**

@@ -6,26 +6,29 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.StartMenu">
+<AnchorPane maxHeight="1080.0" maxWidth="1920.0" minHeight="770.0" minWidth="1150.0" prefHeight="770.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.StartMenu">
    <children>
-      <ToggleButton id="toggle_computer" fx:id="toggleComputer" layoutX="151.0" layoutY="59.0" mnemonicParsing="false" onAction="#setToggleComputer" prefHeight="30.0" prefWidth="120.0" text="Computer" AnchorPane.rightAnchor="29.0" />
-      <ToggleButton id="toggle_player" fx:id="togglePlayer" layoutX="25.0" layoutY="59.0" mnemonicParsing="false" onAction="#setTogglePlayer" prefHeight="30.0" prefWidth="120.0" selected="true" text="Player vs Player" AnchorPane.leftAnchor="25.0" />
-      <TextField id="playerName1" fx:id="playerName1" layoutX="70.0" layoutY="233.0" promptText="Player 1" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="81.0" />
-      <TextField id="playerName2" fx:id="playerName2" layoutX="70.0" layoutY="269.0" promptText="Player 2" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="81.0" />
-      <Label layoutX="110.0" layoutY="32.0" text="Game Mode" textAlignment="CENTER" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="110.0" />
-      <Label layoutX="104.0" layoutY="209.0" prefHeight="18.0" prefWidth="86.0" text="Players Name" textAlignment="CENTER" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="110.0" />
-      <Label layoutX="85.0" layoutY="311.0" prefHeight="18.0" prefWidth="120.0" text="choose a color to play" textAlignment="CENTER" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="95.0" />
-      <Label id="PlayerNameColor" fx:id="playerNameColor" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="30.0" layoutY="342.0" prefHeight="18.0" prefWidth="109.0" text="Player 1" />
-      <ToggleButton id="toggleButtonWhite" fx:id="toggleButtonWhite" layoutX="156.0" layoutY="338.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonWhite" prefHeight="26.0" prefWidth="59.0" selected="true" text="White" AnchorPane.leftAnchor="156.0" />
-      <ToggleButton id="toggleButtonBlack" fx:id="toggleButtonBlack" layoutX="219.0" layoutY="338.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonBlack" prefHeight="26.0" prefWidth="59.0" text="Black" AnchorPane.rightAnchor="22.0" />
-      <Pane fx:id="aiContainerPane" layoutX="1.0" layoutY="112.0" prefHeight="89.0" prefWidth="300.0" visible="false">
+      <ToggleButton id="toggle_computer" fx:id="toggleComputer" layoutX="572.0" layoutY="59.0" mnemonicParsing="false" onAction="#setToggleComputer" prefHeight="30.0" prefWidth="501.0" text="Computer" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="59.0" />
+      <ToggleButton id="toggle_player" fx:id="togglePlayer" layoutX="64.0" layoutY="59.0" mnemonicParsing="false" onAction="#setTogglePlayer" prefHeight="30.0" prefWidth="501.0" selected="true" text="Player vs Player" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="59.0" />
+      <TextField id="playerName1" fx:id="playerName1" layoutX="64.0" layoutY="325.0" prefHeight="25.0" prefWidth="1012.0" promptText="Player 1" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="74.0" />
+      <TextField id="playerName2" fx:id="playerName2" layoutX="64.0" layoutY="373.0" prefHeight="25.0" prefWidth="1012.0" promptText="Player 2" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="74.0" />
+      <Label layoutX="64.0" layoutY="28.0" prefHeight="17.0" prefWidth="300.0" text="Game Mode" textAlignment="CENTER" />
+      <Label layoutX="64.0" layoutY="291.0" prefHeight="18.0" prefWidth="180.0" text="Players Name" textAlignment="CENTER" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="855.0" />
+      <Label layoutX="64.0" layoutY="408.0" prefHeight="18.0" prefWidth="300.0" text="Choose a color for the first player" textAlignment="CENTER" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="786.0" />
+      <ToggleButton id="toggleButtonWhite" fx:id="toggleButtonWhite" layoutX="70.0" layoutY="439.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonWhite" prefHeight="26.0" prefWidth="501.0" selected="true" text="White" AnchorPane.leftAnchor="64.0" />
+      <ToggleButton id="toggleButtonBlack" fx:id="toggleButtonBlack" layoutX="572.0" layoutY="439.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonBlack" prefHeight="26.0" prefWidth="501.0" text="Black" AnchorPane.rightAnchor="74.0" />
+      <Pane fx:id="aiContainerPane" layoutX="71.0" layoutY="112.0" prefHeight="132.0" prefWidth="999.0" visible="false">
          <children>
-            <ToggleButton id="toggleButtonSimple" fx:id="toggleButtonSimple" layoutX="30.0" layoutY="31.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonSimple" prefHeight="30.0" prefWidth="120.0" selected="true" text="Simple AI" />
-            <ToggleButton id="toggleButtonMinMax" fx:id="toggleButtonMinMax" layoutX="152.0" layoutY="31.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonMinMax" prefHeight="30.0" prefWidth="120.0" text="Min-Max AI" />
-            <Label layoutX="115.0" layoutY="5.0" text="Pick the AI" textAlignment="CENTER" />
+            <ToggleButton id="toggleButtonSimple" fx:id="toggleButtonSimple" layoutX="-1.0" layoutY="72.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonSimple" prefHeight="30.0" prefWidth="492.0" selected="true" text="Simple AI" />
+            <ToggleButton id="toggleButtonMinMax" fx:id="toggleButtonMinMax" layoutX="508.0" layoutY="72.0" minHeight="18.0" mnemonicParsing="false" onAction="#setToggleButtonMinMax" prefHeight="30.0" prefWidth="492.0" text="Min-Max AI" />
+            <Label layoutX="-7.0" layoutY="5.0" prefHeight="30.0" prefWidth="125.0" text="Pick the AI" textAlignment="CENTER" />
          </children>
       </Pane>
-      <Button id="startButton" fx:id="startButton" alignment="CENTER" layoutX="109.0" layoutY="439.0" mnemonicParsing="false" onAction="#start" text="Start Game" textAlignment="CENTER" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="439.0" />
+      <Button id="startButton" fx:id="startButton" alignment="CENTER" layoutX="65.0" layoutY="515.0" mnemonicParsing="false" onAction="#start" prefHeight="225.0" prefWidth="1012.0" text="Start Game" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="74.0">
+         <font>
+            <Font size="33.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -59,16 +59,16 @@ public class GuiMain extends Application {
      * Initializes EventHandler for the StartMenu which cant be initialized in StartMenu controller class
      */
     private void initStartMenuHandler(){
-        double initWidth = 300;
-        double initHeight = 495;
+        double initWidth = 1170;
+        double initHeight = 810;
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 double factor = stage.getWidth()/initWidth;
                 setStageHeight(initHeight*(stage.getWidth()/initWidth));
                 stage.setResizable(true);
-                stage.setMinWidth(320);
-                stage.setMinHeight(530);
+                stage.setMinWidth(1170);
+                stage.setMinHeight(810);
 
             }
         });
@@ -87,17 +87,18 @@ public class GuiMain extends Application {
         });
     }
 
+    // initialize the game screen listener for window resizing
     private void initGameScreenListener(Pane container){
-        double initWidht = 1150;
-        double initHeight = 770;
+        double initWidth = 1170;
+        double initHeight = 810;
         double heightFactor;
-        double widhtFactor;
+        double widthFactor;
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                double factor = stage.getWidth()/initWidht;
-                setStageHeight(initHeight*(stage.getWidth()/initWidht));
-                stage.setMinWidth(1150);
+                double factor = stage.getWidth()/initWidth;
+                setStageHeight(initHeight*(stage.getWidth()/initWidth));
+                stage.setMinWidth(1170);
                 stage.setMinHeight(810);
                 setMenuBarWidth();
                 centerChessBoard(factor);
@@ -118,18 +119,20 @@ public class GuiMain extends Application {
         });
     }
 
+    // this method will align the chessBoard pane accordingly when the window is resized
     private void centerChessBoard(double ratio){
         Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#boardContainerPane");
         double initXpos = 287;
         chessBoardPane.setLayoutX(initXpos*ratio);
     }
-
+    // this method will align the lastMove pane accordingly when the window is resized
     private void centerLastMoves(double ratio){
         Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#controllerContainerPane");
         double initXpos = 834;
         chessBoardPane.setLayoutX(initXpos*ratio);
     }
 
+    // this method will align the cemetery pane accordingly when the window is resized
     private void centerCemetery(double ratio){
         Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#cemeteryPane");
         double initXpos = 287;
@@ -138,10 +141,7 @@ public class GuiMain extends Application {
 
     }
 
-
-
-
-
+    // this method will align the menu bar accordingly when the window is resized
     private void setMenuBarWidth(){
        MenuBar menuBar = (MenuBar) gameScreenContainerPane.lookup("#topMenuBar");
        menuBar.setPrefWidth(stage.getWidth());
@@ -206,7 +206,7 @@ public class GuiMain extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(false);
+        stage.setResizable(true);
         startMenu = (StartMenu) fxmlLoader.getController();
         startMenu.setGuiMain(this);
         initStartMenuHandler();
