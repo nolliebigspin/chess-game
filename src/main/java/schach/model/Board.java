@@ -372,7 +372,6 @@ public class Board {
                 }
             }
         }
-        printBoard();
     }
 
     /**
