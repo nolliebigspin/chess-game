@@ -19,6 +19,7 @@
 <?import javafx.scene.text.Text?>
 
 
+<?import javafx.scene.control.SeparatorMenuItem?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schach.view.GameScreen">
     <children>
         <Pane fx:id="boardContainerPane" layoutX="287.0" layoutY="116.0">
@@ -111,14 +112,13 @@
                         <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.columnIndex="6" GridPane.rowIndex="7" />
                     </children>
                 </GridPane>
-                <Pane fx:id="gameOverOverlay" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: white; -fx-opacity: 0.5;" visible="false">
-                    <children>
-                        <Text layoutX="141.0" layoutY="267.0" strokeType="OUTSIDE" text="Checkmate!">
-                            <font>
-                                <Font size="42.0" />
-                            </font>
-                        </Text>
-                    </children>
+                <Pane fx:id="gameOverOverlay" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: white; -fx-opacity: 0.5;" visible="false" >
+                    <Text fx:id="checkMateText" layoutX="141.0" layoutY="267.0" strokeType="OUTSIDE" text="%key.Checkmate" >
+                        <font>
+                            <Font size="42.0" />
+                        </font>
+                    </Text>
+
                 </Pane>
                 <GridPane fx:id="promBlackGrid" gridLinesVisible="true" layoutX="510.0" layoutY="250.0" prefHeight="250.0" prefWidth="62.5" visible="false">
                     <columnConstraints>
@@ -197,7 +197,7 @@
                                     </image>
                                 </ImageView>
                             </children>
-                  </StackPane>
+                        </StackPane>
                         <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.rowIndex="2">
                             <children>
                                 <ImageView fitHeight="62.5" fitWidth="62.5" pickOnBounds="true" preserveRatio="true">
@@ -206,7 +206,7 @@
                                     </image>
                                 </ImageView>
                             </children>
-                  </StackPane>
+                        </StackPane>
                         <StackPane prefHeight="62.5" prefWidth="62.5" style="-fx-background-color: grey;" GridPane.rowIndex="3">
                             <children>
                                 <ImageView fitHeight="62.5" fitWidth="62.5" pickOnBounds="true" preserveRatio="true">
@@ -215,32 +215,41 @@
                                     </image>
                                 </ImageView>
                             </children>
-                  </StackPane>
+                        </StackPane>
                     </children>
                 </GridPane>
             </children>
         </Pane>
         <MenuBar fx:id="topMenuBar" layoutY="2.0" prefHeight="25.0" prefWidth="1150.0">
             <menus>
-                <Menu fx:id="menuGame" mnemonicParsing="false" text="Game">
+                <Menu fx:id="menuGame" mnemonicParsing="false" text="%key.Game">
                     <items>
-                        <MenuItem fx:id="buttonRestart" mnemonicParsing="false" onAction="#handleButtonRestart" text="Restart Session" />
-                        <MenuItem fx:id="buttonBackToStartMenu" mnemonicParsing="false" onAction="#handleBackToStartMenu" text="Start Menu" />
+                        <MenuItem fx:id="buttonRestart" mnemonicParsing="false" onAction="#handleButtonRestart" text="%key.restartSession" />
+                        <MenuItem fx:id="buttonBackToStartMenu" mnemonicParsing="false" onAction="#handleBackToStartMenu" text="%key.startMenu" />
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="closeMenu" mnemonicParsing="false" text="%key.close" onAction="#close" />
                     </items>
                 </Menu>
-                <Menu fx:id="menuSettings" mnemonicParsing="false" text="Settings">
+                <Menu fx:id="menuSettings" mnemonicParsing="false" text="%key.Settings">
                     <items>
-                        <CheckMenuItem fx:id="checkShowPossibleMoves" mnemonicParsing="false" onAction="#handleShowPossibleMoves" selected="true" text="Show possible moves" />
-                        <CheckMenuItem fx:id="checkAllowMultipleSelect" mnemonicParsing="false" onAction="#handleAllowMultipleSelect" selected="true" text="Enable clicking on multiple pieces" />
-                        <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" selected="true" text="Show if player is in check" />
-                        <CheckMenuItem fx:id="checkTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" selected="true" text="Turn board" />
+                        <CheckMenuItem fx:id="checkShowPossibleMoves" mnemonicParsing="false" onAction="#handleShowPossibleMoves" selected="true" text="%key.showPossibleMoves" />
+                        <CheckMenuItem fx:id="checkAllowMultipleSelect" mnemonicParsing="false" onAction="#handleAllowMultipleSelect" selected="true" text="%key.enableClickingOnMultiplePieces" />
+                        <CheckMenuItem fx:id="checkIsInCheck" mnemonicParsing="false" onAction="#handleIsInCheck" selected="true" text="%key.showIfPlayerIsInCheck" />
+                        <CheckMenuItem fx:id="checkTurnBoard" mnemonicParsing="false" onAction="#handleTurnBoard" selected="true" text="%key.turnBoard" />
+                    </items>
+                </Menu>
+                <Menu fx:id="languageMenu" mnemonicParsing="false" text="%key.language">
+                    <items>
+                        <MenuItem fx:id="english" mnemonicParsing="false" text="%key.english" onAction="#changeLanguage" />
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="german" mnemonicParsing="false" text="%key.german" onAction="#changeLanguage" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
         <Pane layoutX="289.0" layoutY="45.0" prefHeight="63.0" prefWidth="500.0">
             <children>
-                <Text fx:id="checkWarning" fill="#ff4d00" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK!" visible="false" wrappingWidth="80.0">
+                <Text fx:id="checkWarning" fill="#ff4d00" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%key.check" visible="false" wrappingWidth="80.0">
                     <font>
                         <Font size="21.0" />
                     </font>
@@ -249,7 +258,7 @@
         </Pane>
         <Pane fx:id="controllerContainerPane" layoutX="834.0" layoutY="113.0" prefHeight="506.0" prefWidth="264.0" style="-fx-border-insets: 2,2,2,2; -fx-border-style: solid; -fx-border-radius: 20;">
             <children>
-                <Label alignment="CENTER" layoutX="27.0" layoutY="27.0" prefHeight="39.0" prefWidth="193.0" text="Last Moves" textAlignment="CENTER">
+                <Label fx:id="lastMoveLabel" alignment="CENTER" layoutX="27.0" layoutY="27.0" prefHeight="39.0" prefWidth="193.0" text="%key.lastMoves" textAlignment="CENTER">
                     <font>
                         <Font size="23.0" />
                     </font>
@@ -260,19 +269,11 @@
                     <!--                        <TableColumn fx:id="moveCollumn" prefWidth="112.0" text="Move" />-->
                     <!--                    </columns>-->
                 </TableView>
-                <Button fx:id="undo" disable="true" layoutX="31.0" layoutY="406.0" mnemonicParsing="false" onAction="#undoButtonHandler" prefHeight="25.0" prefWidth="83.0" text="undo move" />
-                <Button fx:id="forward" disable="true" layoutX="156.0" layoutY="406.0" mnemonicParsing="false" onAction="#forwardButtonHandler" prefHeight="25.0" prefWidth="80.0" text="redo move" />
-                <Label layoutX="32.0" layoutY="446.0" prefHeight="30.0" prefWidth="46.0" text="Time:">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
-                <Label fx:id="timeLabel" layoutX="91.0" layoutY="446.0" prefHeight="30.0" prefWidth="46.0" text="00:00">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
-            <ListView fx:id="historyList" layoutX="21.0" layoutY="72.0" prefHeight="320.0" prefWidth="222.0" />
+                <Button fx:id="undo" disable="true" layoutX="31.0" layoutY="406.0" mnemonicParsing="false" onAction="#undoButtonHandler" prefHeight="25.0" prefWidth="83.0" text="%key.undoMove" />
+                <Button fx:id="forward" disable="true" layoutX="156.0" layoutY="406.0" mnemonicParsing="false" onAction="#forwardButtonHandler" prefHeight="25.0" prefWidth="80.0" text="%key.redoMove" />
+
+
+                <ListView fx:id="historyList" layoutX="21.0" layoutY="72.0" prefHeight="320.0" prefWidth="222.0" />
             </children>
         </Pane>
         <Pane id="cemeteryPane" fx:id="cemeteryPane" layoutX="287.0" layoutY="629.0" prefHeight="134.0" prefWidth="841.0" style="-fx-border-style: solid; -fx-border-radius: 20;">
@@ -297,27 +298,27 @@
                 </GridPane>
             </children>
         </Pane>
-      <Pane fx:id="chessClockBasePane" layoutX="14.0" layoutY="38.0" prefHeight="707.0" prefWidth="252.0">
-         <children>
-            <Text layoutX="53.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chess-Clock" wrappingWidth="146.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Button fx:id="whiteButtonChessClock" layoutX="12.0" layoutY="464.0" mnemonicParsing="false" onAction="#handlePressWhiteClock" prefHeight="229.0" prefWidth="228.0" text="White" />
-            <Button fx:id="blackButtonChessClock" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#handlePressBlackClock" prefHeight="229.0" prefWidth="228.0" text="Black" />
-            <Text fx:id="blackTimeChessClock" layoutX="95.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Text>
-            <Text fx:id="whiteTimeChessClock" layoutX="95.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Text>
-            <Button fx:id="startButtonChessClock" layoutX="66.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleStartChessClock" prefHeight="25.0" prefWidth="120.0" text="Start" />
-         </children>
-      </Pane>
+        <Pane fx:id="chessClockBasePane" layoutX="14.0" layoutY="38.0" prefHeight="707.0" prefWidth="252.0">
+            <children>
+                <Text fx:id="chessClockText" layoutX="53.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%key.chessClock" wrappingWidth="146.0">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Text>
+                <Button fx:id="whiteButtonChessClock" layoutX="12.0" layoutY="464.0" mnemonicParsing="false" onAction="#handlePressWhiteClock" prefHeight="229.0" prefWidth="228.0" text="%key.white" />
+                <Button fx:id="blackButtonChessClock" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#handlePressBlackClock" prefHeight="229.0" prefWidth="228.0" text="%key.black" />
+                <Text fx:id="blackTimeChessClock" layoutX="95.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                </Text>
+                <Text fx:id="whiteTimeChessClock" layoutX="95.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                </Text>
+                <Button fx:id="startButtonChessClock" layoutX="66.0" layoutY="354.0" mnemonicParsing="false" onAction="#handleStartChessClock" prefHeight="25.0" prefWidth="120.0" text="%key.start" />
+            </children>
+        </Pane>
     </children>
 </Pane>

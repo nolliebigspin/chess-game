@@ -25,7 +25,6 @@ public class LastMoveController {
     private TableColumn playerColumn;
     private TableColumn moveCollumn;
     private TableColumn timeCollumn;
-    private Label timeLabel;
     private Timeline timeline;
     private static final Integer STARTTIME = 15;
     private Integer timeSeconds = STARTTIME;
@@ -40,8 +39,8 @@ public class LastMoveController {
     public LastMoveController(Pane containerPane, GameScreen gameScreen){
         this.containerPane = containerPane;
         this.boards = new ArrayList<>();
-        this.timeLabel = (Label)this.containerPane.lookup("#timeLabel");
-        this.timeLabel.setText(timeSeconds.toString());
+
+
 
         this.historyList = (ListView) containerPane.lookup("#historyList");
         this.gameScreen = gameScreen;
@@ -63,7 +62,7 @@ public class LastMoveController {
                 new PropertyValueFactory<>("time"));
         this.lastMoveTable.getColumns().addAll(this.playerColumn,this.moveCollumn, this.timeCollumn);
         this.lastMoveTable.setItems(this.data);
-        
+
     }
 
     public void setBoardController(ChessBoardController boardController) {
@@ -82,7 +81,7 @@ public class LastMoveController {
                 } else {
                     ChessBoardComputer boardComputer = (ChessBoardComputer) boardController;
                     if (boardComputer.isPlayerIsWhite() && historyList.getSelectionModel().getSelectedIndex() % 2 == 1 ||
-                    !boardComputer.isPlayerIsWhite() && historyList.getSelectionModel().getSelectedIndex() % 2 == 0){
+                            !boardComputer.isPlayerIsWhite() && historyList.getSelectionModel().getSelectedIndex() % 2 == 0){
                         System.out.println(historyList.getSelectionModel().getSelectedItem());
                         historyList.getSelectionModel().select(-1);
                         gameScreen.setUndoDisabled(true);
@@ -95,59 +94,16 @@ public class LastMoveController {
         };
     }
 
-    private EventHandler<ActionEvent>undoHandler(){
-        return new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                System.out.println("Undo");
-                data.add(new Step("Player","e2-e3","00:00"));
-                if (timeline != null) {
-                    timeline.stop();
-                }
-                timeSeconds = STARTTIME;
-                timeline = new Timeline();
-                timeline.setCycleCount(Timeline.INDEFINITE);
-                timeline.getKeyFrames().add(
-                        new KeyFrame(Duration.seconds(1),
-                                new EventHandler() {
-                                    @Override
-                                    public void handle(Event event) {
-
-                                    }
-
-                                    // KeyFrame event handler
-                                    public void handle(ActionEvent event) {
-                                        timeSeconds--;
-                                        // update timerLabel
-                                        timeLabel.setText(
-                                                timeSeconds.toString());
-                                        if (timeSeconds <= 0) {
-                                            timeline.stop();
-                                        }
-                                    }
-                                }));
-                timeline.playFromStart();
-            }
-        };
-    }
 
 
-    private EventHandler<ActionEvent>forwardHandler(){
-        return new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                System.out.println("Forward");
-                if(data.size()>0)
-                data.remove(data.get(data.size()-1));
-            }
-        };
-    }
 
-public void saveMove(Board board,String playerName, String move){
+
+
+    public void saveMove(Board board,String playerName, String move){
         Step step = new Step(playerName, move, "00,00");
         this.data.add(step);
         this.boards.add(board);
-}
+    }
 
 
     public static class Step {
@@ -190,5 +146,3 @@ public void saveMove(Board board,String playerName, String move){
 
 
 }
-
-

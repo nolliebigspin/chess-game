@@ -8,9 +8,12 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import schach.model.Constants;
 import schach.model.Player;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Controller for gameScreen.fxml
@@ -29,6 +32,12 @@ public class GameScreen {
 
     // ChessClock
     public Button startButtonChessClock;
+    @FXML
+    public Button whiteButtonChessClock;
+    @FXML
+    public Button blackButtonChessClock;
+    @FXML
+    public Text chessClockText;
 
 
     private ChessBoardController boardController;
@@ -46,6 +55,37 @@ public class GameScreen {
     private LastMoveController lastMoveController;
     private CemeteryController cemeteryController;
 
+    @FXML
+    public Label lastMoveLabel;
+    @FXML
+    public MenuItem english;
+    @FXML
+    public MenuItem german;
+    @FXML
+    public Menu languageMenu;
+    @FXML
+    public Label timeLabel;
+    @FXML
+    public Label timerLabel;
+    @FXML
+    public Menu menuSettings;
+    @FXML
+    public CheckMenuItem checkShowPossibleMoves;
+    @FXML
+    public CheckMenuItem checkAllowMultipleSelect;
+    @FXML
+    public CheckMenuItem checkIsInCheck;
+    @FXML
+    public CheckMenuItem checkTurnBoard;
+    @FXML
+    public Menu menuGame;
+    @FXML
+    public MenuItem buttonRestart;
+    @FXML
+    public MenuItem buttonBackToStartMenu;
+    @FXML
+    public Text checkMateText;
+    private ResourceBundle bundle;
 
     private List<Player> players;
 
@@ -64,6 +104,7 @@ public class GameScreen {
      * Constructor initializing settings to true
      */
     public GameScreen(){
+        this.bundle = ResourceBundle.getBundle("Language", Constants.LANGUAGE);
         this.allowMultipleSelect = true;
         this.showIsInCheck = true;
         this.turnBoard = true;
@@ -278,5 +319,58 @@ public class GameScreen {
 
     public void setPlayers(List<Player> players){
         this.players = players;
+    }
+
+    /**
+     *
+     * @param evt
+     */
+    @FXML
+    private void changeLanguage(ActionEvent evt){
+        if (evt.getSource().equals(this.english)) {
+            this.english.setDisable(true);
+            this.german.setDisable(false);
+            Constants.LANGUAGE = new Locale("en", "EN");
+        } else if (evt.getSource().equals(this.german)) {
+            this.english.setDisable(false);
+            this.german.setDisable(true);
+            Constants.LANGUAGE = new Locale("de", "DE");
+        }
+        this.bundle = ResourceBundle.getBundle("Language", Constants.LANGUAGE);
+        //this.lastMoveController.update();
+        this.initializeComponents();
+    }
+
+    public void initializeComponents(){
+        this.undo.setText(this.bundle.getString("key.undoMove"));
+        this.forward.setText(this.bundle.getString("key.redoMove"));
+        this.startButtonChessClock.setText(this.bundle.getString("key.start"));
+        this.chessClockText.setText(this.bundle.getString("key.chessClock"));
+        this.whiteButtonChessClock.setText(this.bundle.getString("key.white"));
+        this.blackButtonChessClock.setText(this.bundle.getString("key.black"));
+        this.lastMoveLabel.setText(this.bundle.getString("key.lastMoves"));
+        this.languageMenu.setText(this.bundle.getString("key.language"));
+        this.english.setText(this.bundle.getString("key.english"));
+        this.german.setText(this.bundle.getString("key.german"));
+        //this.timeLabel.setText(this.bundle.getString("key.time"));
+        //this.timerLabel.setText(this.bundle.getString("key.timer"));
+        this.checkWarning.setText(this.bundle.getString("key.timer"));
+        this.menuSettings.setText(this.bundle.getString("key.Settings"));
+        this.checkShowPossibleMoves.setText(this.bundle.getString("key.showPossibleMoves"));
+        this.checkAllowMultipleSelect.setText(this.bundle.getString("key.enableClickingOnMultiplePieces"));
+        this.checkIsInCheck.setText(this.bundle.getString("key.showIfPlayerIsInCheck"));
+        this.checkTurnBoard.setText(this.bundle.getString("key.turnBoard"));
+        this.menuGame.setText(this.bundle.getString("key.Game"));
+        this.buttonRestart.setText(this.bundle.getString("key.restartSession"));
+        this.buttonBackToStartMenu.setText(this.bundle.getString("key.startMenu"));
+        this.checkMateText.setText(this.bundle.getString("key.Checkmate"));
+    }
+
+    /**
+     *
+     */
+    @FXML
+    private void close(){
+        System.exit(1);
     }
 }

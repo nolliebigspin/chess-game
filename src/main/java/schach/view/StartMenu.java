@@ -1,11 +1,15 @@
 package schach.view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import schach.model.Constants;
 import schach.model.Player;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Controller for startMenu.fxml
@@ -32,6 +36,26 @@ public class StartMenu {
     private ToggleButton toggleButtonWhite;
     @FXML
     private ToggleButton toggleButtonBlack;
+
+    private ResourceBundle bundle;
+    @FXML
+    public MenuItem english;
+    @FXML
+    public MenuItem german;
+    @FXML
+    public Menu fileMenu;
+    @FXML
+    public MenuItem closeMenu;
+    @FXML
+    public Menu languageMenu;
+    @FXML
+    public Label gameModeLabel;
+    @FXML
+    public Label playerNameLabel;
+    @FXML
+    public Label choseColorLabel;
+    @FXML
+    public Label pickAILabel;
     @FXML
     private Label playerNameColor;
 
@@ -46,6 +70,7 @@ public class StartMenu {
      * Constructor setting Game Mode Booleans true
      */
     public StartMenu(){
+        this.bundle = ResourceBundle.getBundle("Language", Constants.LANGUAGE);
         vsPlayer = true;
         player1isWhite = true;
         simpleAi = true;
@@ -101,7 +126,7 @@ public class StartMenu {
         if (player1.length() == 0){
             player1 = "Player 1";
         }
-    //    playerNameColor.setText(player1);
+        //    playerNameColor.setText(player1);
     }
 
     /**
@@ -188,14 +213,14 @@ public class StartMenu {
         if(this.player1isWhite){
             playerOne = new Player(this.player1, "White");
             if(this.vsPlayer)
-            playerTwo = new Player(this.player2, "Black");
+                playerTwo = new Player(this.player2, "Black");
             else {
                 playerTwo = new Player("CPU", "Black");
             }
         }else{
             playerOne = new Player(this.player1, "Black");
             if(this.vsPlayer)
-            playerTwo = new Player(this.player2, "White");
+                playerTwo = new Player(this.player2, "White");
             else{
                 playerTwo = new Player("CPU", "White");
             }
@@ -205,6 +230,48 @@ public class StartMenu {
         //
         String[] playerNames = {player1, player2};
         guiMain.loadGameScreen(vsPlayer, player1isWhite, simpleAi, this.players, playerNames);
+    }
+
+    @FXML
+    private void changeLanguage(ActionEvent evt){
+        if (evt.getSource().equals(this.english)) {
+            this.english.setDisable(true);
+            this.german.setDisable(false);
+            Constants.LANGUAGE = new Locale("en", "EN");
+        } else if (evt.getSource().equals(this.german)) {
+            this.english.setDisable(false);
+            this.german.setDisable(true);
+            Constants.LANGUAGE = new Locale("de", "DE");
+        }
+        this.bundle = ResourceBundle.getBundle("Language", Constants.LANGUAGE);
+        this.initializeComponents();
+    }
+
+    public void initializeComponents(){
+        this.toggleButtonSimple.setText(this.bundle.getString("key.simpleAI"));
+        this.toggleButtonMinMax.setText(this.bundle.getString("key.minMaxAI"));
+        this.playerName1.setPromptText(this.bundle.getString("key.firstPlayer"));
+        this.playerName2.setPromptText(this.bundle.getString("key.secondPlayer"));
+        this.startButton.setText(this.bundle.getString("key.startGame"));
+        this.toggleComputer.setText(this.bundle.getString("key.computer"));
+        this.togglePlayer.setText(this.bundle.getString("key.playerVsPlayer"));
+        this.toggleButtonWhite.setText(this.bundle.getString("key.white"));
+        this.toggleButtonBlack.setText(this.bundle.getString("key.black"));
+        //this.playerNameColor.setText(this.bundle.getString("key.firstPlayer"));
+        this.fileMenu.setText(this.bundle.getString("key.file"));
+        this.closeMenu.setText(this.bundle.getString("key.close"));
+        this.languageMenu.setText(this.bundle.getString("key.language"));
+        this.english.setText(this.bundle.getString("key.english"));
+        this.german.setText(this.bundle.getString("key.german"));
+        this.gameModeLabel.setText(this.bundle.getString("key.gameMode"));
+        this.playerNameLabel.setText(this.bundle.getString("key.playersName"));
+        this.choseColorLabel.setText(this.bundle.getString("key.chooseColorToPlay"));
+        this.pickAILabel.setText(this.bundle.getString("key.pickTheAI"));
+    }
+
+    @FXML
+    private void close(){
+        System.exit(1);
     }
 
 

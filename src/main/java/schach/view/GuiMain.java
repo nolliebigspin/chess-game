@@ -10,12 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import schach.model.Constants;
 import schach.model.Player;
 
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Starts the JavaFX GUI and handles transitions between scenes as well as events that cant be implemented in the
@@ -42,8 +44,9 @@ public class GuiMain extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        URL url = Paths.get("src/main/resources/startMenu.fxml").toUri().toURL();
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        //URL url = Paths.get("src/main/resources/startMenu.fxml").toUri().toURL();
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/startMenu.fxml"));
+        fxmlLoader.setResources(ResourceBundle.getBundle("Language", Constants.LANGUAGE));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -104,7 +107,7 @@ public class GuiMain extends Application {
                 centerChessBoard(factor);
                 centerLastMoves(factor);
                 centerCemetery(factor);
-          
+
 
             }
         });
@@ -143,8 +146,8 @@ public class GuiMain extends Application {
 
     // this method will align the menu bar accordingly when the window is resized
     private void setMenuBarWidth(){
-       MenuBar menuBar = (MenuBar) gameScreenContainerPane.lookup("#topMenuBar");
-       menuBar.setPrefWidth(stage.getWidth());
+        MenuBar menuBar = (MenuBar) gameScreenContainerPane.lookup("#topMenuBar");
+        menuBar.setPrefWidth(stage.getWidth());
     }
 
     private void setStageWidth(double width){
@@ -165,6 +168,7 @@ public class GuiMain extends Application {
      */
     public void loadGameScreen(Boolean vsPlayer, Boolean player1isWhite, Boolean simpleAi, List<Player> players, String[] playerNames ) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameScreen.fxml"));
+        fxmlLoader.setResources(ResourceBundle.getBundle("Language", Constants.LANGUAGE));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -200,8 +204,9 @@ public class GuiMain extends Application {
      * @throws Exception
      */
     public void loadStartScreen() throws Exception {
-        URL url = Paths.get("src/main/resources/startMenu.fxml").toUri().toURL();
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        //URL url = Paths.get("src/main/resources/startMenu.fxml").toUri().toURL();
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/startMenu.fxml"));
+        fxmlLoader.setResources(ResourceBundle.getBundle("Language", Constants.LANGUAGE));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
