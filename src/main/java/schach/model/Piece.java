@@ -103,6 +103,7 @@ public abstract class Piece {
             neverMoved = false; //TODO replace in to accept move
         } else {
             refuseMove();
+            System.out.println(print() + target.getDenotation());
         }
     }
 

@@ -49,6 +49,7 @@ public class King extends Piece {
             }
         }
         refuseMove();
+        System.out.println(print() + target.getDenotation());
     }
 
     /**

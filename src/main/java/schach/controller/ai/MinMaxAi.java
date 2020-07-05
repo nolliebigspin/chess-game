@@ -24,7 +24,7 @@ public class MinMaxAi extends AiInterface {
     @Override
     public String getNextMove(){
         BoardValueNode bvt = new BoardValueNode(board, white, null);
-        String move = bvt.bestValuedMove(white, 1).moveAsString();
+        String move = bvt.bestValuedMove(white, 2).moveAsString();
         this.nextMove = move;
         return move;
     }

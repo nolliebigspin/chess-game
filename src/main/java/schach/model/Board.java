@@ -235,7 +235,7 @@ public class Board {
         updateAllLegalSquares();
         if (squareByDenotation(targetPos).isOccupied()
                 && squareByDenotation(startingPos).getOccupier().white == squareByDenotation(targetPos).getOccupier().white) {
-            System.out.println("!Move not allowed");
+            System.out.println("!Move not allowed" + "(" + startingPos + "-" + targetPos + ")");
             return;
         }
         moveCount++;

@@ -60,7 +60,7 @@ public class BoardValueNode {
      * @return the move of the child with the best value
      */
     public Move bestValuedMove(boolean whitesTurn, int maxDepth){
-        System.out.println("\n --------------------------------------------------");
+        System.out.println("\n --------------------------------------------------" + value);
         List<Move> bestMoves = new ArrayList<>();
         Move bestMove = null;
         int bestValue;
@@ -100,6 +100,7 @@ public class BoardValueNode {
             }
         }
         int i = new Random().nextInt(bestMoves.size());
+        System.out.println("random:" + i);
         return bestMoves.get(i);
         /*Map<Integer, Move> valueMap = new HashMap<>();
         List<Integer> values = new ArrayList<>();
@@ -128,6 +129,13 @@ public class BoardValueNode {
      * @return minmax value of the current node
      */
     public int minmax(int depth){
+        if (moves.size() == 0){ //== checkmate
+            if (whitesTurn){
+                return -1000;
+            } else {
+                return 1000;
+            }
+        }
         if (depth == 0){
             return value;
         }

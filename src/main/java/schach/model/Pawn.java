@@ -47,6 +47,7 @@ public class Pawn extends Piece {
             neverMoved = false; //TODO replace in to acceptMove()
         } else {
             refuseMove();
+            System.out.println(print() + target.getDenotation());
         }
     }
 
