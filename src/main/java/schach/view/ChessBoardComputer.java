@@ -112,6 +112,7 @@ public class ChessBoardComputer extends ChessBoardController{
                 checkPane.setVisible(false);
                 printBoard();
                 updateHistory();
+                gameScreen.getCemeteryController().updateCemetery();
                 if (board.getCheck().isCheckMate(!whitesTurn)){
                     gameOver();
                 }
@@ -143,7 +144,7 @@ public class ChessBoardComputer extends ChessBoardController{
         } else {
             promHistory.add(0, false);
         }
-        gameScreen.getCemeteryController().updateCemetery(this);
+        gameScreen.getCemeteryController().updateCemetery();
         inMove = false;
         if (showIsCheck && board.getCheck().kingInCheck(!whitesTurn)) {
             checkPane.setVisible(true);

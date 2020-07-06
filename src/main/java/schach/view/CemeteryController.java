@@ -31,9 +31,8 @@ public class CemeteryController {
 
     /**
      * updates the cemetery output on the gui
-     * @param chessBoardController
      */
-    public void updateCemetery(ChessBoardController chessBoardController){
+    public void updateCemetery(){
         for (Node node: gridPane.getChildren()){
             if (node instanceof StackPane){
                 ((StackPane) node).getChildren().clear();

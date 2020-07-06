@@ -31,7 +31,7 @@ public class ChessBoardHuman extends ChessBoardController{
             rotateGame();
         }
         printBoard();
-        gameScreen.getCemeteryController().updateCemetery(this);
+        gameScreen.getCemeteryController().updateCemetery();
         inMove = false;
         if (showIsCheck && board.getCheck().kingInCheck(!whitesTurn)) {
             checkPane.setVisible(true);
