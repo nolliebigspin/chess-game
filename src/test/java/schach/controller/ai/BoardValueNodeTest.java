@@ -45,7 +45,6 @@ class BoardValueNodeTest {
         bvt1.bestValuedMove(true, 1);
         board.movePiece("b2", "b4");
         board.movePiece("b8", "c6");
-        board.printBoard();
         BoardValueNode bvt = new BoardValueNode(board, false, null);
         Piece expected = bvt.bestValuedMove(false, 1).getPiece();
         assertEquals(expected, board.squareByDenotation("c6").getOccupier());

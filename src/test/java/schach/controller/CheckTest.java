@@ -252,10 +252,8 @@ class CheckTest {
     @Test
     public void testCheckMateDoubleCheck(){
         lineUp(" white-king-a1, black-queen-e5, black-knight-d4, black-rook-b4, black-king-h8, white-bishop-a2");
-        board.printBoard();
         assertFalse(check.isCheckMate(true));
         board.movePiece("d4", "c2");
-        board.printBoard();
         assertTrue(check.isCheckMate(true));
     }
 
@@ -266,14 +264,11 @@ class CheckTest {
     public void testEnPassantInCheck(){
         lineUp(" white-king-b4, black-king-e8, white-pawn-b5, black-pawn-c7");
         Pawn whitePawn = (Pawn) board.squareByDenotation("b5").getOccupier();
-        board.printBoard();
         board.movePiece("c7", "c5");
-        board.printBoard();
         assertTrue(check.kingInCheck(true));
         whitePawn.updateLegals();
         assertEquals(board.squareByDenotation("c6"), whitePawn.checkEnPassantRight().get(0));
         board.movePiece("b5","c6");
-        board.printBoard();
     }
 
     /**
@@ -290,44 +285,4 @@ class CheckTest {
         board.updateAllLegalSquares();
     }
 
-
-    /**
-     //DEBUG TODO DELETE
-     @Test
-     public void testFindAttackerForNewLegas(){
-     lineUp(" black-pawn-a7, white-queen-d6, black-queen-d8, white-king-e1, black-king-e8");
-     Piece bQueen = board.squareByDenotation("d8").getOccupier();
-     board.printBoard();
-     board.movePiece("d6", "e7");
-     board.printBoard();
-     assertEquals(1, check.legalsToResolveCheck(bQueen).size());
-     }
-     @Test
-     public void testPawnAttackingAttacker(){
-     lineUp(" black-pawn-f7, white-queen-d6, black-queen-d8, white-king-e1, black-king-e8");
-     Piece blackPawn = board.squareByDenotation("f7").getOccupier();
-     Piece wQueen = board.squareByDenotation("d6").getOccupier();
-     Piece bQueen = board.squareByDenotation("d8").getOccupier();
-     board.printBoard();
-     blackPawn.printLegals();
-     board.movePiece("d6", "e6");
-     board.printBoard();
-     blackPawn.printLegals();
-     assertEquals(1, check.attackersSettingCheck(false).size());
-     assertEquals(wQueen, check.attackersSettingCheck(false).get(0));
-     assertTrue(check.attackingKing(wQueen));
-     assertEquals(1, check.legalsToResolveCheck(blackPawn).size());
-     }
-     @Test
-     public void testagain(){
-     lineUp(" black-pawn-c7, white-queen-d6, black-queen-d8, white-king-e1, black-king-e8, black-bishop-c8");
-     Piece bBis = board.squareByDenotation("c8").getOccupier();
-     Piece wQueen = board.squareByDenotation("d6").getOccupier();
-     Piece bQueen = board.squareByDenotation("d8").getOccupier();
-     board.printBoard();
-     board.movePiece("d6", "d7");
-     board.printBoard();
-     assertEquals(1, check.legalsToResolveCheck(bQueen).size());
-     }
-     */
 }
