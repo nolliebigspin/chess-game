@@ -27,8 +27,8 @@ public class ClockController {
     public ClockController(Pane basePane) {
         this.timerTextWhite = (Text) basePane.lookup("#whiteTimeChessClock");
         this.timerTextBlack = (Text) basePane.lookup("#blackTimeChessClock");
-        this.timeWhite = 599;
-        this.timeBlack = 599;
+        this.timeWhite = 899;
+        this.timeBlack = 899;
         this.whitesTurn = true;
         this.blacksTurn = false;
     }
@@ -47,7 +47,6 @@ public class ClockController {
     public void setWhitesTurn() {
         whitesTurn = true;
         blacksTurn = false;
-        timeBlack += 5;
         countDownRoutine();
     }
 
@@ -57,7 +56,6 @@ public class ClockController {
     public void setBlacksTurn() {
         blacksTurn = true;
         whitesTurn = false;
-        timeWhite += 5;
         countDownRoutine();
     }
 

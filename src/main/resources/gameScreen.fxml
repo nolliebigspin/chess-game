@@ -306,12 +306,12 @@
                 </Text>
                 <Button fx:id="whiteButtonChessClock" layoutX="12.0" layoutY="464.0" mnemonicParsing="false" onAction="#handlePressWhiteClock" prefHeight="229.0" prefWidth="228.0" text="%key.white" />
                 <Button fx:id="blackButtonChessClock" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" onAction="#handlePressBlackClock" prefHeight="229.0" prefWidth="228.0" text="%key.black" />
-                <Text fx:id="blackTimeChessClock" layoutX="95.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
+                <Text fx:id="blackTimeChessClock" layoutX="95.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15:00" wrappingWidth="105.0">
                     <font>
                         <Font size="32.0" />
                     </font>
                 </Text>
-                <Text fx:id="whiteTimeChessClock" layoutX="95.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" wrappingWidth="105.0">
+                <Text fx:id="whiteTimeChessClock" layoutX="95.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15:00" wrappingWidth="105.0">
                     <font>
                         <Font size="32.0" />
                     </font>
