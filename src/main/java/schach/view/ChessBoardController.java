@@ -295,7 +295,7 @@ public abstract class ChessBoardController {
         for (Piece piece: allPieces){
             Square square = piece.getPosition();
             StackPane pane = squareToPaneMap.get(square);
-            placeImageOnPane(piece, pane);
+            placeImageOnPane(piece, pane, false);
         }
     }
 
@@ -304,10 +304,15 @@ public abstract class ChessBoardController {
      * @param piece the piece the image should be drawn
      * @param pane the pane the image will be place on
      */
-    private void placeImageOnPane(Piece piece, StackPane pane){
+    public void placeImageOnPane(Piece piece, StackPane pane, boolean small){
         Image img = unicodeToImage(piece);
         ImageView imageView = new ImageView(img);
-        imageView.setRotate(boardGridPane.getRotate());
+        if (small){
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(50);
+        } else {
+            imageView.setRotate(boardGridPane.getRotate());
+        }
         pane.getChildren().add(imageView);
     }
 
@@ -607,5 +612,9 @@ public abstract class ChessBoardController {
      */
     public void setClock(ClockController clock) {
         this.clock = clock;
+    }
+
+    public Board getBoard() {
+        return board;
     }
 }

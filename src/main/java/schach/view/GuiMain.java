@@ -161,13 +161,13 @@ public class GuiMain extends Application {
         LastMoveController lastMoveController = new LastMoveController(gameScreen.getControllerContainerPane(), gameScreen);
         ClockController clockController = new ClockController((Pane) scene.lookup("#chessClockBasePane"));
         gameScreen.setLastMoveController(lastMoveController);
-        gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane()));
         gameScreen.setClockController(clockController);
         if (vsPlayer){
             boardController = new ChessBoardHuman(boardPane, gameScreen, playerNames);
         } else {
             boardController = new ChessBoardComputer(boardPane, gameScreen, playerNames, simpleAi, player1isWhite);
         }
+        gameScreen.setCemeteryController(new CemeteryController(gameScreen.getCemeteryPane(), boardController));
         lastMoveController.setBoardController(boardController);
         gameScreen.setBoardController(boardController);
         initGameScreenListener();
