@@ -2,6 +2,8 @@
 
 ## [Introduction](./docs/content/text/introduction.md)
 
+## [Architecture](./architecture.pdf)
+
 ## [Manual](./manual.pdf)
 
 ## [Storycards](./storycards.pdf)
