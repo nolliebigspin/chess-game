@@ -1,7 +1,6 @@
 package schach.controller.ai;
 
 import schach.model.Board;
-import schach.model.BoardState;
 import schach.model.Piece;
 import schach.model.Square;
 
@@ -60,9 +59,7 @@ public class BoardValueNode {
      * @return the move of the child with the best value
      */
     public Move bestValuedMove(boolean whitesTurn, int maxDepth){
-        System.out.println("\n --------------------------------------------------" + value);
         List<Move> bestMoves = new ArrayList<>();
-        Move bestMove = null;
         int bestValue;
         if (whitesTurn){
             bestValue = -1000;
@@ -71,7 +68,6 @@ public class BoardValueNode {
                 board.movePiece(denot[0], denot[1]);
                 BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
                 int minmaxValue = boardValueNode.minmax(maxDepth, -10000, 10000);
-                System.out.println(move.moveAsString() + "   " + minmaxValue);
                 if (minmaxValue >= bestValue){
                     if (minmaxValue > bestValue){
                         bestMoves.clear();
@@ -88,7 +84,6 @@ public class BoardValueNode {
                 board.movePiece(denot[0], denot[1]);
                 BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
                 int minmaxValue = boardValueNode.minmax(maxDepth, -10000, 10000);
-                System.out.println(move.moveAsString() + "   " + minmaxValue);
                 if (minmaxValue <= bestValue){
                     if (minmaxValue < bestValue){
                         bestMoves.clear();
@@ -100,26 +95,7 @@ public class BoardValueNode {
             }
         }
         int i = new Random().nextInt(bestMoves.size());
-        System.out.println("random:" + i);
         return bestMoves.get(i);
-        /*Map<Integer, Move> valueMap = new HashMap<>();
-        List<Integer> values = new ArrayList<>();
-        for (Move move: moves){
-            String[] denot = move.moveAsString().split("-");
-            board.movePiece(denot[0], denot[1]);
-            BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
-            int value = boardValueNode.minmax(maxDepth);
-            values.add(value);
-            valueMap.put(value, move);
-            board.loadState(board.getStates().size() - 2);
-        }
-        if (whitesTurn){
-            int max = Collections.max(values);
-            return valueMap.get(max);
-        } else {
-            int min = Collections.min(values);
-            return valueMap.get(min);
-        }*/
     }
 
     /**
@@ -128,7 +104,9 @@ public class BoardValueNode {
      * @param depth the maximum search depth
      * @return minmax value of the current node
      */
-    public int minmax(int depth, int alpha, int beta){
+    public int minmax(int depth, int newAlpha, int newBeta){
+        int alpha = newAlpha;
+        int beta = newBeta;
         if (moves.size() == 0){ //== checkmate
             if (whitesTurn){
                 return -1000;
@@ -149,9 +127,9 @@ public class BoardValueNode {
                 maxVal = Math.max(maxVal, val);
                 board.loadState(board.getStates().size() - 2);
                 alpha = Math.max(alpha, val);
-                /*if (beta <= alpha){
+                if (beta <= alpha){
                     break;
-                }*/
+                }
             }
             return maxVal;
         } else {
@@ -164,49 +142,11 @@ public class BoardValueNode {
                 minEval = Math.min(minEval, val);
                 board.loadState(board.getStates().size() - 2);
                 beta = Math.min(beta, val);
-                /*if (beta <= alpha){
+                if (beta <= alpha){
                     break;
-                }*/
+                }
             }
             return minEval;
-        }
-
-        /*List<Integer> values = new ArrayList<>();
-        for (Move move: moves){
-            String[] denot = move.moveAsString().split("-");
-            board.movePiece(denot[0], denot[1]);
-            BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
-            int value = boardValueNode.minmax(depth - 1);
-            values.add(value);
-            board.loadState(board.getStates().size() - 2);
-        }
-        if (whitesTurn){
-            return Collections.max(values);
-        } else {
-            return Collections.min(values);
-        }*/
-    }
-
-    /**
-     * generates the tree structure by generating children for every node
-     * @param maxDepth the current level
-     * @return List of Nodes that represent the children of the current node
-     */
-    private List<BoardValueNode> generateChild(int maxDepth){
-        if (maxDepth == 0){
-            return null;
-        } else {
-            List<BoardValueNode> children = new ArrayList<>();
-            for (Move move: moves){
-                Board nextBoard = new Board(board.getPositioning());
-                String[] denotation = move.moveAsString().split("-");
-                nextBoard.movePiece(denotation[0], denotation[1]);
-                if (lastMoved != null){
-                    nextBoard.setLastMoved(lastMoved.getPiece());
-                }
-                children.add(new BoardValueNode(nextBoard, !whitesTurn, move));
-            }
-            return children;
         }
     }
 
