@@ -103,6 +103,7 @@ public abstract class Piece {
             neverMoved = false; //TODO replace in to accept move
         } else {
             refuseMove();
+            System.out.println(print() + target.getDenotation());
         }
     }
 
@@ -139,6 +140,7 @@ public abstract class Piece {
      * Refuses invalid moves and prints Error Message
      */
     protected void refuseMove(){
+        board.printBoard();
         validMove = false;
         System.out.println("!Move not allowed");
     }

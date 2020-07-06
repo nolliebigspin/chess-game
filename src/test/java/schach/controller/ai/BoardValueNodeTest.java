@@ -25,7 +25,7 @@ class BoardValueNodeTest {
         board.movePiece("b1", "c3");
         board.movePiece("b7", "b5");
         BoardValueNode bvt = new BoardValueNode(board, true, null);
-        assertEquals(10, bvt.minmax(2));
+        assertEquals(10, bvt.minmax(2, -10000, 10000));
     }
 
     @Test

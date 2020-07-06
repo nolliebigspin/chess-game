@@ -1,12 +1,11 @@
 package schach.controller.ai;
 
 import schach.model.Board;
+import schach.model.BoardState;
 import schach.model.Piece;
 import schach.model.Square;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Class that serves as a tree structure, where every object of this class is representing the
@@ -61,27 +60,66 @@ public class BoardValueNode {
      * @return the move of the child with the best value
      */
     public Move bestValuedMove(boolean whitesTurn, int maxDepth){
-        List<BoardValueNode> children = generateChild(maxDepth);
+        System.out.println("\n --------------------------------------------------" + value);
+        List<Move> bestMoves = new ArrayList<>();
         Move bestMove = null;
-        int bestValue = 0;
+        int bestValue;
         if (whitesTurn){
-            for (BoardValueNode child: children){
-                if (child.minmax(maxDepth) > bestValue){
-                    bestMove = child.getLastMoved();
+            bestValue = -1000;
+            for (Move move: moves){
+                String[] denot = move.moveAsString().split("-");
+                board.movePiece(denot[0], denot[1]);
+                BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
+                int minmaxValue = boardValueNode.minmax(maxDepth, -10000, 10000);
+                System.out.println(move.moveAsString() + "   " + minmaxValue);
+                if (minmaxValue >= bestValue){
+                    if (minmaxValue > bestValue){
+                        bestMoves.clear();
+                        bestValue = minmaxValue;
+                    }
+                    bestMoves.add(boardValueNode.getLastMoved());
                 }
+                board.loadState(board.getStates().size() - 2);
             }
         } else {
-            for (BoardValueNode child: children){
-                if (child.minmax(maxDepth) < bestValue){
-                    bestMove = child.getLastMoved();
+            bestValue = 1000;
+            for (Move move: moves){
+                String[] denot = move.moveAsString().split("-");
+                board.movePiece(denot[0], denot[1]);
+                BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
+                int minmaxValue = boardValueNode.minmax(maxDepth, -10000, 10000);
+                System.out.println(move.moveAsString() + "   " + minmaxValue);
+                if (minmaxValue <= bestValue){
+                    if (minmaxValue < bestValue){
+                        bestMoves.clear();
+                        bestValue = minmaxValue;
+                    }
+                    bestMoves.add(boardValueNode.getLastMoved());
                 }
+                board.loadState(board.getStates().size() - 2);
             }
         }
-        if (bestMove == null){
-            int i = new Random().nextInt(children.size());
-            bestMove = children.get(i).getLastMoved();
+        int i = new Random().nextInt(bestMoves.size());
+        System.out.println("random:" + i);
+        return bestMoves.get(i);
+        /*Map<Integer, Move> valueMap = new HashMap<>();
+        List<Integer> values = new ArrayList<>();
+        for (Move move: moves){
+            String[] denot = move.moveAsString().split("-");
+            board.movePiece(denot[0], denot[1]);
+            BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
+            int value = boardValueNode.minmax(maxDepth);
+            values.add(value);
+            valueMap.put(value, move);
+            board.loadState(board.getStates().size() - 2);
         }
-        return bestMove;
+        if (whitesTurn){
+            int max = Collections.max(values);
+            return valueMap.get(max);
+        } else {
+            int min = Collections.min(values);
+            return valueMap.get(min);
+        }*/
     }
 
     /**
@@ -90,26 +128,63 @@ public class BoardValueNode {
      * @param depth the maximum search depth
      * @return minmax value of the current node
      */
-    public int minmax(int depth){
+    public int minmax(int depth, int alpha, int beta){
+        if (moves.size() == 0){ //== checkmate
+            if (whitesTurn){
+                return -1000;
+            } else {
+                return 1000;
+            }
+        }
         if (depth == 0){
             return value;
         }
-        List<BoardValueNode> children = generateChild(depth);
         if (whitesTurn){
             int maxVal = -10000;
-            for (BoardValueNode boardValueNode : children){
-                int val = boardValueNode.minmax(depth - 1);
+            for (Move move: moves){
+                String[] denot = move.moveAsString().split("-");
+                board.movePiece(denot[0], denot[1]);
+                BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
+                int val = boardValueNode.minmax(depth - 1, alpha, beta);
                 maxVal = Math.max(maxVal, val);
+                board.loadState(board.getStates().size() - 2);
+                alpha = Math.max(alpha, val);
+                /*if (beta <= alpha){
+                    break;
+                }*/
             }
             return maxVal;
         } else {
             int minEval = 10000;
-            for (BoardValueNode boardValueNode : children){
-                int val = boardValueNode.minmax(depth - 1);
+            for (Move move: moves){
+                String[] denot = move.moveAsString().split("-");
+                board.movePiece(denot[0], denot[1]);
+                BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
+                int val = boardValueNode.minmax(depth - 1, alpha, beta);
                 minEval = Math.min(minEval, val);
+                board.loadState(board.getStates().size() - 2);
+                beta = Math.min(beta, val);
+                /*if (beta <= alpha){
+                    break;
+                }*/
             }
             return minEval;
         }
+
+        /*List<Integer> values = new ArrayList<>();
+        for (Move move: moves){
+            String[] denot = move.moveAsString().split("-");
+            board.movePiece(denot[0], denot[1]);
+            BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
+            int value = boardValueNode.minmax(depth - 1);
+            values.add(value);
+            board.loadState(board.getStates().size() - 2);
+        }
+        if (whitesTurn){
+            return Collections.max(values);
+        } else {
+            return Collections.min(values);
+        }*/
     }
 
     /**

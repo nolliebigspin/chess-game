@@ -1,11 +1,13 @@
 package schach.view;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import schach.controller.ai.AiInterface;
 import schach.controller.ai.MinMaxAi;
+import schach.controller.ai.Move;
 import schach.controller.ai.SimpleAi;
 import schach.model.Piece;
 import schach.model.Square;
@@ -83,14 +85,25 @@ public class ChessBoardComputer extends ChessBoardController{
         });
         disabledMouseOnBoard = true;
         //short delay for simpleAi in before ai makes a move
-        if (ai instanceof SimpleAi){
+        /*if (ai instanceof SimpleAi){
             try {
-                Thread.sleep(4000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         //generates ai move, can take a while: reason for the extra thread
+        /*Task<String> moveTask = new Task<String>() {
+            @Override
+            protected String call() throws Exception {
+                return ai.getNextMove();
+            }
+        };*/
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String aiMove = ai.getNextMove();
         String[] squares = aiMove.split("-");
         board.movePiece(squares[0], squares[1]);
@@ -211,6 +224,15 @@ public class ChessBoardComputer extends ChessBoardController{
             this.gameScreen.getPlayers().get(0).setActive(true);
             this.gameScreen.getPlayers().get(1).setActive(false);
         }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                updateCemetry();
+            }
+        });
+    }
+
+    private void updateCemetry(){
         gameScreen.getCemeteryController().updateCemetery(this);
     }
 
