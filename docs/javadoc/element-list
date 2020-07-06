@@ -1,4 +1,7 @@
+module:schach
 schach
 schach.controller
+schach.controller.ai
+schach.controller.interfaces
 schach.model
 schach.view

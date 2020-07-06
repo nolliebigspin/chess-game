@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"schach"},{"l":"schach.controller"},{"l":"schach.model"},{"l":"schach.view"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"schach","l":"schach"},{"m":"schach","l":"schach.controller"},{"m":"schach","l":"schach.controller.ai"},{"m":"schach","l":"schach.controller.interfaces"},{"m":"schach","l":"schach.model"},{"m":"schach","l":"schach.view"}]
