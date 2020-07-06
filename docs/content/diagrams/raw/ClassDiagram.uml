@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>schach.model</OriginalElement>
+  <nodes>
+    <node x="2454.187646262916" y="6146.0">schach.controller.interfaces.AiInteface</node>
+    <node x="644.7785146907229" y="880.0">schach.model.Knight</node>
+    <node x="2186.1959795962493" y="5382.0">schach.controller.ai.AiInterface</node>
+    <node x="1047.1561469697947" y="0.0">schach.model.Square</node>
+    <node x="890.8408193596764" y="4081.0">schach.model.Piece</node>
+    <node x="1143.4641863159559" y="3436.0">schach.model.Pawn</node>
+    <node x="3300.874631463147" y="7426.0">schach.view.StartMenu</node>
+    <node x="1645.2326671774329" y="2054.0">schach.model.Board</node>
+    <node x="327.7543332640662" y="892.0">schach.model.PieceState</node>
+    <node x="2472.062646262916" y="6518.0">schach.view.LastMoveController</node>
+    <node x="1790.7326671774329" y="5305.0">schach.controller.ai.BoardValueNode</node>
+    <node x="290.5200992555833" y="1392.0">schach.model.BoardState</node>
+    <node x="3155.656396262916" y="6725.0">schach.model.Constants</node>
+    <node x="2377.591000510766" y="5776.0">schach.controller.ai.SimpleAi</node>
+    <node x="1925.5243338440996" y="5787.0">schach.controller.ai.MinMaxAi</node>
+    <node x="1125.5946370936663" y="1480.0">schach.model.Positioning</node>
+    <node x="2830.3201194956796" y="539.0">schach.model.Rook</node>
+    <node x="3698.916973096889" y="814.0">schach.model.King</node>
+    <node x="3322.656396262916" y="6628.0">schach.model.Player</node>
+    <node x="1257.7326671774329" y="4859.0">schach.controller.interfaces.Input</node>
+    <node x="1696.34473614295" y="1359.0">schach.controller.Check</node>
+    <node x="2017.1876462629157" y="6003.0">schach.view.ChessBoardComputer</node>
+    <node x="1100.1015588138227" y="3043.0">schach.model.Queen</node>
+    <node x="1459.6136555880162" y="6573.0">schach.view.ClockController</node>
+    <node x="1531.7326671774329" y="4804.0">schach.controller.interfaces.PlayerInput</node>
+    <node x="2449.0987746356354" y="7085.0">schach.view.GameScreen</node>
+    <node x="1901.2326671774326" y="4903.0">schach.controller.ai.Move</node>
+    <node x="1899.1612746356354" y="8958.0">schach.view.ChessBoardController</node>
+    <node x="1370.4137016601915" y="924.0">schach.model.Bishop</node>
+    <node x="2849.656396262916" y="6661.0">schach.view.CemeteryController</node>
+    <node x="1679.7386555880162" y="10582.0">schach.Main</node>
+    <node x="21.5" y="6134.0">schach.view.ChessBoardHuman</node>
+    <node x="2550.5987746356354" y="10141.0">schach.view.GuiMain</node>
+    <node x="1674.7971700724395" y="6090.0">schach.controller.interfaces.HumanVsComputer</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="schach.view.CemeteryController" target="schach.view.ChessBoardController">
+      <point x="35.75" y="90.5" />
+      <point x="3028.406396262916" y="8938.0" />
+      <point x="2209.589846064207" y="8938.0" />
+      <point x="151.42857142857144" y="-541.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.Board">
+      <point x="36.0" y="222.5" />
+      <point x="1894.34473614295" y="1954.0" />
+      <point x="1828.3188740739845" y="1954.0" />
+      <point x="53.58620689655163" y="-409.5" />
+    </edge>
+    <edge source="schach.view.GameScreen" target="schach.view.ClockController">
+      <point x="-142.07142857142844" y="-871.5" />
+      <point x="2460.027346064207" y="7045.0" />
+      <point x="1601.3636555880162" y="7045.0" />
+      <point x="47.25" y="178.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.Square">
+      <point x="-40.5" y="-222.5" />
+      <point x="1817.84473614295" y="1319.0" />
+      <point x="1852.84473614295" y="1319.0" />
+      <point x="1852.84473614295" y="499.0" />
+      <point x="1161.6176854313333" y="499.0" />
+      <point x="18.461538461538566" y="189.5" />
+    </edge>
+    <edge source="schach.model.Knight" target="schach.model.Square">
+      <point x="0.0" y="-146.5" />
+      <point x="758.2785146907229" y="509.0" />
+      <point x="1132.0792238928716" y="509.0" />
+      <point x="-11.076923076923094" y="189.5" />
+    </edge>
+    <edge source="schach.model.Pawn" target="schach.model.Piece">
+      <point x="-70.5" y="222.5" />
+      <point x="1213.9641863159559" y="3931.0" />
+      <point x="1034.6634000048375" y="3931.0" />
+      <point x="23.322580645161224" y="-321.5" />
+    </edge>
+    <edge source="schach.view.GameScreen" target="schach.view.GuiMain">
+      <point x="87.42857142857133" y="871.5" />
+      <point x="2689.5273460642065" y="10111.0" />
+      <point x="2715.010539341518" y="10111.0" />
+      <point x="-50.58823529411757" y="-190.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.HumanVsComputer" target="schach.controller.interfaces.PlayerInput">
+      <point x="-38.22222222222217" y="-135.5" />
+      <point x="1722.5749478502173" y="5933.0" />
+      <point x="1639.7326671774329" y="5933.0" />
+      <point x="1639.7326671774329" y="5285.0" />
+      <point x="1588.4826671774329" y="5285.0" />
+      <point x="-56.75" y="200.5" />
+    </edge>
+    <edge source="schach.view.GameScreen" target="schach.model.Player">
+      <point x="120.21428571428578" y="-871.5" />
+      <point x="2722.313060349921" y="7055.0" />
+      <point x="3337.156396262916" y="7055.0" />
+      <point x="-72.5" y="123.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Bishop">
+      <point x="0.0" y="-409.5" />
+      <point x="1774.7326671774329" y="1854.0" />
+      <point x="1676.9137016601915" y="1854.0" />
+      <point x="1676.9137016601915" y="1299.0" />
+      <point x="1511.1994159459057" y="1299.0" />
+      <point x="31.28571428571422" y="102.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.LastMoveController">
+      <point x="0.0" y="-190.5" />
+      <point x="2765.5987746356354" y="7015.0" />
+      <point x="2713.375146262916" y="7015.0" />
+      <point x="92.8125" y="233.5" />
+    </edge>
+    <edge source="schach.model.King" target="schach.model.Rook">
+      <point x="-58.75" y="-212.5" />
+      <point x="3757.666973096889" y="764.0" />
+      <point x="3026.2576194956796" y="764.0" />
+      <point x="91.4375" y="102.5" />
+    </edge>
+    <edge source="schach.model.Knight" target="schach.model.Board">
+      <point x="18.916666666666515" y="146.5" />
+      <point x="777.1951813573894" y="1329.0" />
+      <point x="749.7834275568703" y="1329.0" />
+      <point x="749.7834275568703" y="1914.0" />
+      <point x="1721.1464602808812" y="1914.0" />
+      <point x="-53.58620689655163" y="-409.5" />
+    </edge>
+    <edge source="schach.controller.ai.Move" target="schach.model.Square">
+      <point x="20.625" y="-101.5" />
+      <point x="2004.3576671774326" y="4774.0" />
+      <point x="3969.6636574470217" y="4774.0" />
+      <point x="3969.6636574470217" y="439.0" />
+      <point x="1205.9253777390254" y="439.0" />
+      <point x="62.76923076923072" y="189.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Bishop">
+      <point x="-48.40000000000009" y="-101.5" />
+      <point x="1198.1946370936662" y="1299.0" />
+      <point x="1479.9137016601915" y="1299.0" />
+      <point x="0.0" y="102.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.model.Constants">
+      <point x="75.88235294117658" y="-190.5" />
+      <point x="2841.481127576812" y="10071.0" />
+      <point x="3229.156396262916" y="10071.0" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardComputer" target="schach.view.ChessBoardController">
+      <point x="-173.75" y="222.5" />
+      <point x="2051.9376462629157" y="6498.0" />
+      <point x="2058.1612746356354" y="6498.0" />
+      <point x="0.0" y="-541.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Rook">
+      <point x="48.40000000000009" y="-101.5" />
+      <point x="1294.9946370936664" y="1319.0" />
+      <point x="1610.9137016601915" y="1319.0" />
+      <point x="1610.9137016601915" y="764.0" />
+      <point x="2843.3826194956796" y="764.0" />
+      <point x="-91.4375" y="102.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.King">
+      <point x="121.5" y="-222.5" />
+      <point x="1979.84473614295" y="1339.0" />
+      <point x="3749.274115954032" y="1339.0" />
+      <point x="-67.14285714285711" y="212.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Piece">
+      <point x="-64.75" y="409.5" />
+      <point x="1709.9826671774329" y="2963.0" />
+      <point x="1478.105322254683" y="2963.0" />
+      <point x="1478.105322254683" y="3981.0" />
+      <point x="1065.7601741983863" y="3981.0" />
+      <point x="54.41935483870975" y="-321.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Square">
+      <point x="107.17241379310326" y="-409.5" />
+      <point x="1881.9050809705361" y="2014.0" />
+      <point x="3944.4169730968893" y="2014.0" />
+      <point x="3944.4169730968893" y="469.0" />
+      <point x="1183.7715315851792" y="469.0" />
+      <point x="40.61538461538453" y="189.5" />
+    </edge>
+    <edge source="schach.model.Pawn" target="schach.model.Bishop">
+      <point x="-51.27272727272748" y="-222.5" />
+      <point x="1233.1914590432284" y="3366.0" />
+      <point x="919.6241368105389" y="3366.0" />
+      <point x="919.6241368105389" y="1289.0" />
+      <point x="1448.6279873744772" y="1289.0" />
+      <point x="-31.28571428571422" y="102.5" />
+    </edge>
+    <edge source="schach.model.Queen" target="schach.model.Square">
+      <point x="-92.80000000000018" y="-146.5" />
+      <point x="1123.3015588138226" y="3023.0" />
+      <point x="882.2785146907229" y="3023.0" />
+      <point x="882.2785146907229" y="519.0" />
+      <point x="1139.463839277487" y="519.0" />
+      <point x="-3.6923076923076223" y="189.5" />
+    </edge>
+    <edge source="schach.model.King" target="schach.model.Square">
+      <point x="58.75" y="-212.5" />
+      <point x="3875.1669730968893" y="479.0" />
+      <point x="1176.386916200564" y="479.0" />
+      <point x="33.23076923076928" y="189.5" />
+    </edge>
+    <edge source="schach.Main" target="schach.controller.interfaces.Input">
+      <point x="-66.0" y="-37.5" />
+      <point x="1690.7386555880162" y="10562.0" />
+      <point x="1083.6265588138226" y="10562.0" />
+      <point x="1083.6265588138226" y="5973.0" />
+      <point x="1378.7326671774329" y="5973.0" />
+      <point x="1378.7326671774329" y="5285.0" />
+      <point x="1320.9826671774329" y="5285.0" />
+      <point x="-63.25" y="145.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardController" target="schach.model.BoardState">
+      <point x="-90.85714285714283" y="-541.5" />
+      <point x="1967.3041317784925" y="8898.0" />
+      <point x="418.0995340691411" y="8898.0" />
+      <point x="418.0995340691411" y="2034.0" />
+      <point x="306.6200992555832" y="2034.0" />
+      <point x="-144.9000000000001" y="189.5" />
+    </edge>
+    <edge source="schach.model.Knight" target="schach.model.Piece">
+      <point x="-56.75" y="146.5" />
+      <point x="701.5285146907229" y="1329.0" />
+      <point x="727.7834275568703" y="1329.0" />
+      <point x="727.7834275568703" y="3951.0" />
+      <point x="980.2440451661279" y="3951.0" />
+      <point x="-31.096774193548526" y="-321.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Board">
+      <point x="103.71428571428578" y="101.5" />
+      <point x="1350.308922807952" y="1864.0" />
+      <point x="1765.8016326946743" y="1864.0" />
+      <point x="-8.931034482758605" y="-409.5" />
+    </edge>
+    <edge source="schach.view.GameScreen" target="schach.view.ChessBoardController">
+      <point x="-43.71428571428578" y="871.5" />
+      <point x="2558.3844889213497" y="8898.0" />
+      <point x="2149.018417492778" y="8898.0" />
+      <point x="90.85714285714289" y="-541.5" />
+    </edge>
+    <edge source="schach.model.Piece" target="schach.model.Pawn">
+      <point x="15.54838709677415" y="-321.5" />
+      <point x="1026.8892064564507" y="3921.0" />
+      <point x="1166.9641863159559" y="3921.0" />
+      <point x="-117.5" y="222.5" />
+    </edge>
+    <edge source="schach.model.Pawn" target="schach.model.Knight">
+      <point x="-76.90909090909099" y="-222.5" />
+      <point x="1207.555095406865" y="3376.0" />
+      <point x="738.7834275568703" y="3376.0" />
+      <point x="-18.916666666666515" y="146.5" />
+    </edge>
+    <edge source="schach.controller.ai.SimpleAi" target="schach.controller.ai.AiInterface">
+      <point x="-23.375" y="-58.5" />
+      <point x="2447.716000510766" y="5746.0" />
+      <point x="2366.7793129295824" y="5746.0" />
+      <point x="82.08333333333337" y="123.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.Bishop">
+      <point x="-121.5" y="-222.5" />
+      <point x="1736.84473614295" y="1279.0" />
+      <point x="1573.7708445173341" y="1279.0" />
+      <point x="93.85714285714266" y="102.5" />
+    </edge>
+    <edge source="schach.controller.ai.MinMaxAi" target="schach.controller.ai.AiInterface">
+      <point x="39.0" y="-47.5" />
+      <point x="2062.0243338440996" y="5736.0" />
+      <point x="2202.612646262916" y="5736.0" />
+      <point x="-82.08333333333337" y="123.5" />
+    </edge>
+    <edge source="schach.model.King" target="schach.model.Piece">
+      <point x="67.14285714285734" y="212.5" />
+      <point x="3883.5598302397466" y="1329.0" />
+      <point x="3860.5323393768826" y="1329.0" />
+      <point x="3860.5323393768826" y="4051.0" />
+      <point x="1120.1795290370956" y="4051.0" />
+      <point x="108.83870967741927" y="-321.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Knight">
+      <point x="-44.655172413793025" y="-409.5" />
+      <point x="1730.0774947636398" y="1904.0" />
+      <point x="758.7144620396289" y="1904.0" />
+      <point x="758.7144620396289" y="1339.0" />
+      <point x="815.0285146907229" y="1339.0" />
+      <point x="56.75" y="146.5" />
+    </edge>
+    <edge source="schach.model.Pawn" target="schach.model.Board">
+      <point x="76.90909090909099" y="-222.5" />
+      <point x="1361.3732772250469" y="3396.0" />
+      <point x="1415.769838383715" y="3396.0" />
+      <point x="1415.769838383715" y="2933.0" />
+      <point x="1684.0826671774328" y="2933.0" />
+      <point x="-90.65000000000009" y="409.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.HumanVsComputer" target="schach.controller.ai.MinMaxAi">
+      <point x="38.22222222222217" y="-135.5" />
+      <point x="1799.0193922946617" y="5943.0" />
+      <point x="1974.2743338440996" y="5943.0" />
+      <point x="-48.75" y="47.5" />
+    </edge>
+    <edge source="schach.view.StartMenu" target="schach.model.Player">
+      <point x="-29.75" y="-530.5" />
+      <point x="3390.124631463147" y="7065.0" />
+      <point x="3395.156396262916" y="7065.0" />
+      <point x="-14.5" y="123.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.HumanVsComputer" target="schach.model.Board">
+      <point x="19.111111111111313" y="-135.5" />
+      <point x="1780.2326671774329" y="3023.0" />
+      <point x="1779.0493338440995" y="3023.0" />
+      <point x="4.316666666666606" y="409.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardHuman" target="schach.view.ChessBoardController">
+      <point x="0.0" y="91.5" />
+      <point x="174.0" y="6498.0" />
+      <point x="129.82930218756337" y="6498.0" />
+      <point x="129.82930218756337" y="8908.0" />
+      <point x="1952.1612746356354" y="8908.0" />
+      <point x="-106.0" y="-541.5" />
+    </edge>
+    <edge source="schach.model.Piece" target="schach.model.Square">
+      <point x="-116.61290322580658" y="-321.5" />
+      <point x="894.7279161338698" y="4061.0" />
+      <point x="181.38461538461524" y="4061.0" />
+      <point x="181.38461538461524" y="429.0" />
+      <point x="1073.0023008159485" y="429.0" />
+      <point x="-70.15384615384619" y="189.5" />
+    </edge>
+    <edge source="schach.controller.ai.SimpleAi" target="schach.model.Board">
+      <point x="70.125" y="-58.5" />
+      <point x="2541.216000510766" y="5756.0" />
+      <point x="2546.152941302302" y="5756.0" />
+      <point x="2546.152941302302" y="2963.0" />
+      <point x="1839.4826671774329" y="2963.0" />
+      <point x="64.75" y="409.5" />
+    </edge>
+    <edge source="schach.controller.ai.MinMaxAi" target="schach.model.Board">
+      <point x="0.0" y="-47.5" />
+      <point x="2023.0243338440996" y="5726.0" />
+      <point x="2090.8993338440996" y="5726.0" />
+      <point x="2090.8993338440996" y="2993.0" />
+      <point x="1813.5826671774328" y="2993.0" />
+      <point x="38.84999999999991" y="409.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardComputer" target="schach.controller.ai.SimpleAi">
+      <point x="83.39999999999986" y="-222.5" />
+      <point x="2309.0876462629158" y="5973.0" />
+      <point x="2447.716000510766" y="5973.0" />
+      <point x="-23.375" y="58.5" />
+    </edge>
+    <edge source="schach.view.StartMenu" target="schach.model.Constants">
+      <point x="-89.25" y="-530.5" />
+      <point x="3330.624631463147" y="7045.0" />
+      <point x="3278.156396262916" y="7045.0" />
+      <point x="49.0" y="26.5" />
+    </edge>
+    <edge source="schach.controller.ai.MinMaxAi" target="schach.controller.ai.BoardValueNode">
+      <point x="-78.0" y="-47.5" />
+      <point x="1945.0243338440996" y="5756.0" />
+      <point x="1858.4826671774329" y="5756.0" />
+      <point x="-67.75" y="200.5" />
+    </edge>
+    <edge source="schach.model.Bishop" target="schach.model.Board">
+      <point x="62.57142857142844" y="102.5" />
+      <point x="1542.48513023162" y="1289.0" />
+      <point x="1685.84473614295" y="1289.0" />
+      <point x="1685.84473614295" y="1844.0" />
+      <point x="1783.6637016601915" y="1844.0" />
+      <point x="8.931034482758605" y="-409.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.Piece">
+      <point x="108.0" y="222.5" />
+      <point x="1966.34473614295" y="1944.0" />
+      <point x="3665.0943924517273" y="1944.0" />
+      <point x="3665.0943924517273" y="4011.0" />
+      <point x="1089.0827548435473" y="4011.0" />
+      <point x="77.74193548387098" y="-321.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.King">
+      <point x="96.80000000000018" y="-101.5" />
+      <point x="1343.3946370936665" y="1329.0" />
+      <point x="3715.7026873826035" y="1329.0" />
+      <point x="-100.71428571428578" y="212.5" />
+    </edge>
+    <edge source="schach.Main" target="schach.model.Board">
+      <point x="44.0" y="-37.5" />
+      <point x="1800.7386555880162" y="10552.0" />
+      <point x="3565.406396262916" y="10552.0" />
+      <point x="3565.406396262916" y="2903.0" />
+      <point x="1891.2826671774326" y="2903.0" />
+      <point x="116.54999999999973" y="409.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardComputer" target="schach.view.GameScreen">
+      <point x="104.24999999999989" y="222.5" />
+      <point x="2329.9376462629157" y="6498.0" />
+      <point x="2271.7590748343446" y="6498.0" />
+      <point x="2271.7590748343446" y="7005.0" />
+      <point x="2547.4559174927786" y="7005.0" />
+      <point x="-54.64285714285711" y="-871.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Queen">
+      <point x="-34.57142857142844" y="101.5" />
+      <point x="1212.0232085222378" y="2024.0" />
+      <point x="1085.2788987153006" y="2024.0" />
+      <point x="1085.2788987153006" y="3013.0" />
+      <point x="1169.7015588138227" y="3013.0" />
+      <point x="-46.40000000000009" y="-146.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.HumanVsComputer" target="schach.controller.ai.AiInterface">
+      <point x="57.333333333333485" y="-135.5" />
+      <point x="1818.130503405773" y="5953.0" />
+      <point x="2191.191000510766" y="5953.0" />
+      <point x="2191.191000510766" y="5756.0" />
+      <point x="2268.2793129295824" y="5756.0" />
+      <point x="-16.41666666666663" y="123.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardController" target="schach.model.Pawn">
+      <point x="-45.428571428571445" y="-541.5" />
+      <point x="2012.7327032070639" y="8868.0" />
+      <point x="1382.0055034057727" y="8868.0" />
+      <point x="1382.0055034057727" y="5963.0" />
+      <point x="1247.2326671774329" y="5963.0" />
+      <point x="1247.2326671774329" y="3951.0" />
+      <point x="1307.9641863159559" y="3951.0" />
+      <point x="23.5" y="222.5" />
+    </edge>
+    <edge source="schach.model.PieceState" target="schach.model.Pawn">
+      <point x="-27.14285714285711" y="134.5" />
+      <point x="395.6114761212091" y="1329.0" />
+      <point x="256.17591279688077" y="1329.0" />
+      <point x="256.17591279688077" y="3386.0" />
+      <point x="1181.9187317705014" y="3386.0" />
+      <point x="-102.5454545454545" y="-222.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.Rook">
+      <point x="40.5" y="-222.5" />
+      <point x="1898.84473614295" y="1319.0" />
+      <point x="1863.84473614295" y="1319.0" />
+      <point x="1863.84473614295" y="774.0" />
+      <point x="2869.5076194956796" y="774.0" />
+      <point x="-65.3125" y="102.5" />
+    </edge>
+    <edge source="schach.model.Queen" target="schach.model.Board">
+      <point x="46.40000000000009" y="-146.5" />
+      <point x="1262.5015588138228" y="2893.0" />
+      <point x="1649.5493338440995" y="2893.0" />
+      <point x="-125.1833333333334" y="409.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardHuman" target="schach.model.Square">
+      <point x="0.0" y="-91.5" />
+      <point x="174.0" y="419.0" />
+      <point x="1065.6176854313333" y="419.0" />
+      <point x="-77.53846153846143" y="189.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Knight">
+      <point x="-96.80000000000018" y="-101.5" />
+      <point x="1149.794637093666" y="1259.0" />
+      <point x="852.8618480240564" y="1259.0" />
+      <point x="94.58333333333348" y="146.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.ChessBoardHuman">
+      <point x="-202.35294117647072" y="-190.5" />
+      <point x="2563.2458334591647" y="10121.0" />
+      <point x="107.82930218756337" y="10121.0" />
+      <point x="107.82930218756337" y="6498.0" />
+      <point x="52.0" y="6498.0" />
+      <point x="-122.0" y="91.5" />
+    </edge>
+    <edge source="schach.model.Bishop" target="schach.model.Square">
+      <point x="0.0" y="-102.5" />
+      <point x="1479.9137016601915" y="519.0" />
+      <point x="1146.8484546621023" y="519.0" />
+      <point x="3.6923076923076223" y="189.5" />
+    </edge>
+    <edge source="schach.model.BoardState" target="schach.model.Board">
+      <point x="144.89999999999986" y="189.5" />
+      <point x="596.4200992555832" y="1944.0" />
+      <point x="1694.353356832605" y="1944.0" />
+      <point x="-80.3793103448279" y="-409.5" />
+    </edge>
+    <edge source="schach.model.Bishop" target="schach.model.Piece">
+      <point x="-62.57142857142844" y="102.5" />
+      <point x="1417.342273088763" y="1279.0" />
+      <point x="908.6241368105389" y="1279.0" />
+      <point x="908.6241368105389" y="3931.0" />
+      <point x="995.7924322629023" y="3931.0" />
+      <point x="-15.54838709677415" y="-321.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Pawn">
+      <point x="-69.14285714285734" y="101.5" />
+      <point x="1177.451779950809" y="2014.0" />
+      <point x="1022.0288987153006" y="2014.0" />
+      <point x="1022.0288987153006" y="3356.0" />
+      <point x="1258.8278226795924" y="3356.0" />
+      <point x="-25.636363636363512" y="-222.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.Input" target="schach.model.Piece">
+      <point x="-94.875" y="-145.5" />
+      <point x="1289.3576671774329" y="4784.0" />
+      <point x="1047.4908193596766" y="4784.0" />
+      <point x="36.15000000000009" y="321.5" />
+    </edge>
+    <edge source="schach.view.GameScreen" target="schach.model.Constants">
+      <point x="98.35714285714289" y="-871.5" />
+      <point x="2700.4559174927786" y="7045.0" />
+      <point x="3180.156396262916" y="7045.0" />
+      <point x="-49.0" y="26.5" />
+    </edge>
+    <edge source="schach.model.Pawn" target="schach.model.Queen">
+      <point x="0.0" y="-222.5" />
+      <point x="1284.4641863159559" y="3416.0" />
+      <point x="1293.4348921471562" y="3416.0" />
+      <point x="77.33333333333348" y="146.5" />
+    </edge>
+    <edge source="schach.controller.ai.SimpleAi" target="schach.controller.ai.Move">
+      <point x="23.375" y="-58.5" />
+      <point x="2495.145979596249" y="5225.0" />
+      <point x="2054.4469528917184" y="5225.0" />
+      <point x="70.71428571428578" y="101.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.HumanVsComputer" target="schach.model.Piece">
+      <point x="-76.44444444444434" y="-135.5" />
+      <point x="1684.3527256279951" y="5953.0" />
+      <point x="990.3908193596766" y="5953.0" />
+      <point x="990.3908193596766" y="4764.0" />
+      <point x="951.0908193596764" y="4764.0" />
+      <point x="-60.25" y="321.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.ChessBoardController">
+      <point x="-126.47058823529414" y="-190.5" />
+      <point x="2639.1281864003413" y="10091.0" />
+      <point x="2058.1612746356354" y="10091.0" />
+      <point x="0.0" y="541.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.AiInteface" target="schach.model.Board">
+      <point x="64.33333333333337" y="-79.5" />
+      <point x="2615.020979596249" y="5973.0" />
+      <point x="2585.282107968969" y="5973.0" />
+      <point x="2585.282107968969" y="2953.0" />
+      <point x="1848.116000510766" y="2953.0" />
+      <point x="73.38333333333321" y="409.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Queen">
+      <point x="-116.55000000000018" y="409.5" />
+      <point x="1658.1826671774327" y="2903.0" />
+      <point x="1308.901558813823" y="2903.0" />
+      <point x="92.80000000000018" y="-146.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.GameScreen">
+      <point x="-75.88235294117658" y="-190.5" />
+      <point x="2689.716421694459" y="10121.0" />
+      <point x="2678.5273460642065" y="10121.0" />
+      <point x="2678.5273460642065" y="8908.0" />
+      <point x="2645.813060349921" y="8908.0" />
+      <point x="43.71428571428555" y="871.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.ClockController">
+      <point x="-177.05882352941217" y="-190.5" />
+      <point x="2588.5399511062233" y="10111.0" />
+      <point x="1506.1136555880162" y="10111.0" />
+      <point x="1506.1136555880162" y="7065.0" />
+      <point x="1475.3636555880162" y="7065.0" />
+      <point x="-78.75" y="178.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.PlayerInput" target="schach.model.Board">
+      <point x="0.0" y="-200.5" />
+      <point x="1645.2326671774329" y="4784.0" />
+      <point x="1677.5660005107661" y="4784.0" />
+      <point x="1677.5660005107661" y="3013.0" />
+      <point x="1753.1493338440994" y="3013.0" />
+      <point x="-21.583333333333485" y="409.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.ChessBoardComputer">
+      <point x="-101.17647058823559" y="-190.5" />
+      <point x="2664.4223040474" y="10081.0" />
+      <point x="2227.6612746356354" y="10081.0" />
+      <point x="2227.6612746356354" y="6498.0" />
+      <point x="2190.9376462629157" y="6498.0" />
+      <point x="-34.75" y="222.5" />
+    </edge>
+    <edge source="schach.view.LastMoveController" target="schach.model.Board">
+      <point x="37.125" y="-233.5" />
+      <point x="2657.687646262916" y="2943.0" />
+      <point x="1856.7493338440993" y="2943.0" />
+      <point x="82.01666666666642" y="409.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardController" target="schach.view.ClockController">
+      <point x="-15.14285714285711" y="-541.5" />
+      <point x="2043.0184174927783" y="8848.0" />
+      <point x="1539.1136555880162" y="8848.0" />
+      <point x="1539.1136555880162" y="7065.0" />
+      <point x="1569.8636555880162" y="7065.0" />
+      <point x="15.75" y="178.5" />
+    </edge>
+    <edge source="schach.Main" target="schach.controller.interfaces.HumanVsComputer">
+      <point x="0.0" y="-37.5" />
+      <point x="1756.7386555880162" y="6498.0" />
+      <point x="1803.7971700724395" y="6498.0" />
+      <point x="43.0" y="135.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.Input" target="schach.model.Board">
+      <point x="94.875" y="-145.5" />
+      <point x="1479.1076671774329" y="4784.0" />
+      <point x="1622.2493338440995" y="4784.0" />
+      <point x="1622.2493338440995" y="3003.0" />
+      <point x="1744.5160005107662" y="3003.0" />
+      <point x="-30.216666666666697" y="409.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.Queen">
+      <point x="-144.0" y="222.5" />
+      <point x="1714.34473614295" y="2034.0" />
+      <point x="1216.1015588138227" y="2034.0" />
+      <point x="0.0" y="-146.5" />
+    </edge>
+    <edge source="schach.model.Rook" target="schach.model.Board">
+      <point x="-39.1875" y="102.5" />
+      <point x="2895.6326194956796" y="784.0" />
+      <point x="2030.84473614295" y="784.0" />
+      <point x="2030.84473614295" y="1964.0" />
+      <point x="1837.249908556743" y="1964.0" />
+      <point x="62.517241379310235" y="-409.5" />
+    </edge>
+    <edge source="schach.model.Rook" target="schach.model.Square">
+      <point x="0.0" y="-102.5" />
+      <point x="2934.8201194956796" y="489.0" />
+      <point x="1169.0023008159485" y="489.0" />
+      <point x="25.84615384615381" y="189.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.AiInteface" target="schach.controller.ai.SimpleAi">
+      <point x="-64.33333333333326" y="-79.5" />
+      <point x="2486.3543129295826" y="5973.0" />
+      <point x="2494.466000510766" y="5973.0" />
+      <point x="23.375" y="58.5" />
+    </edge>
+    <edge source="schach.view.LastMoveController" target="schach.view.GameScreen">
+      <point x="55.6875" y="233.5" />
+      <point x="2676.250146262916" y="7015.0" />
+      <point x="2634.8844889213497" y="7015.0" />
+      <point x="32.78571428571422" y="-871.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.model.Player">
+      <point x="202.3529411764706" y="-190.5" />
+      <point x="2967.951715812106" y="10121.0" />
+      <point x="3549.374631463147" y="10121.0" />
+      <point x="3549.374631463147" y="7045.0" />
+      <point x="3482.156396262916" y="7045.0" />
+      <point x="72.5" y="123.5" />
+    </edge>
+    <edge source="schach.view.GameScreen" target="schach.view.LastMoveController">
+      <point x="-10.928571428571331" y="-871.5" />
+      <point x="2591.1702032070643" y="7065.0" />
+      <point x="2602.000146262916" y="7065.0" />
+      <point x="-18.5625" y="233.5" />
+    </edge>
+    <edge source="schach.model.Queen" target="schach.model.Piece">
+      <point x="-77.33333333333348" y="146.5" />
+      <point x="1138.7682254804893" y="3406.0" />
+      <point x="1061.0770895417625" y="3406.0" />
+      <point x="1061.0770895417625" y="3901.0" />
+      <point x="1011.3408193596764" y="3901.0" />
+      <point x="0.0" y="-321.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardController" target="schach.model.Piece">
+      <point x="-60.571428571428555" y="-541.5" />
+      <point x="1997.589846064207" y="8878.0" />
+      <point x="979.3908193596766" y="8878.0" />
+      <point x="979.3908193596766" y="4774.0" />
+      <point x="926.9908193596765" y="4774.0" />
+      <point x="-84.34999999999991" y="321.5" />
+    </edge>
+    <edge source="schach.controller.ai.AiInterface" target="schach.model.Board">
+      <point x="49.250000000000114" y="-123.5" />
+      <point x="2333.9459795962493" y="5265.0" />
+      <point x="2413.6279413023026" y="5265.0" />
+      <point x="2413.6279413023026" y="2973.0" />
+      <point x="1830.8493338440996" y="2973.0" />
+      <point x="56.11666666666679" y="409.5" />
+    </edge>
+    <edge source="schach.model.BoardState" target="schach.model.Piece">
+      <point x="-48.299999999999955" y="189.5" />
+      <point x="403.22009925558336" y="2004.0" />
+      <point x="444.6479211659157" y="2004.0" />
+      <point x="444.6479211659157" y="3971.0" />
+      <point x="964.6956580693537" y="3971.0" />
+      <point x="-46.645161290322676" y="-321.5" />
+    </edge>
+    <edge source="schach.view.LastMoveController" target="schach.view.ChessBoardComputer">
+      <point x="-37.125" y="-233.5" />
+      <point x="2583.437646262916" y="6468.0" />
+      <point x="2399.4376462629157" y="6468.0" />
+      <point x="173.7499999999999" y="222.5" />
+    </edge>
+    <edge source="schach.view.LastMoveController" target="schach.view.ChessBoardController">
+      <point x="-129.9375" y="233.5" />
+      <point x="2490.625146262916" y="7055.0" />
+      <point x="2148.4112746356354" y="7055.0" />
+      <point x="2148.4112746356354" y="8858.0" />
+      <point x="2088.4469889213497" y="8858.0" />
+      <point x="30.28571428571422" y="-541.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardController" target="schach.model.Board">
+      <point x="121.14285714285711" y="-541.5" />
+      <point x="2179.304131778493" y="8918.0" />
+      <point x="2828.156396262916" y="8918.0" />
+      <point x="2828.156396262916" y="2923.0" />
+      <point x="1874.0160005107662" y="2923.0" />
+      <point x="99.2833333333333" y="409.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Pawn">
+      <point x="-107.91666666666652" y="409.5" />
+      <point x="1666.8160005107663" y="2913.0" />
+      <point x="1393.769838383715" y="2913.0" />
+      <point x="1393.769838383715" y="3376.0" />
+      <point x="1310.1005499523194" y="3376.0" />
+      <point x="25.636363636363512" y="-222.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.BoardState">
+      <point x="-98.24137931034511" y="-409.5" />
+      <point x="1676.4912878670877" y="1964.0" />
+      <point x="532.0200992555833" y="1964.0" />
+      <point x="80.5" y="189.5" />
+    </edge>
+    <edge source="schach.controller.ai.Move" target="schach.model.Piece">
+      <point x="-61.875" y="-101.5" />
+      <point x="1921.8576671774326" y="4754.0" />
+      <point x="1095.6908193596764" y="4754.0" />
+      <point x="84.34999999999991" y="321.5" />
+    </edge>
+    <edge source="schach.view.StartMenu" target="schach.view.GuiMain">
+      <point x="-29.75" y="530.5" />
+      <point x="3390.124631463147" y="8918.0" />
+      <point x="3370.906396262916" y="8918.0" />
+      <point x="3370.906396262916" y="10091.0" />
+      <point x="2892.0693628709296" y="10091.0" />
+      <point x="126.47058823529414" y="-190.5" />
+    </edge>
+    <edge source="schach.controller.ai.BoardValueNode" target="schach.model.Board">
+      <point x="-90.33333333333326" y="-200.5" />
+      <point x="1835.8993338440996" y="5285.0" />
+      <point x="1856.4904697828263" y="5285.0" />
+      <point x="1856.4904697828263" y="3023.0" />
+      <point x="1787.6826671774327" y="3023.0" />
+      <point x="12.949999999999818" y="409.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardController" target="schach.view.GameScreen">
+      <point x="75.71428571428567" y="-541.5" />
+      <point x="2133.875560349921" y="8888.0" />
+      <point x="2514.670203207064" y="8888.0" />
+      <point x="-87.42857142857156" y="871.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.CemeteryController">
+      <point x="50.58823529411757" y="-190.5" />
+      <point x="2816.187009929753" y="10061.0" />
+      <point x="3039.406396262916" y="10061.0" />
+      <point x="3039.406396262916" y="7035.0" />
+      <point x="3099.906396262916" y="7035.0" />
+      <point x="107.25" y="90.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.King">
+      <point x="80.37931034482745" y="-409.5" />
+      <point x="1855.1119775222603" y="1984.0" />
+      <point x="3831.6702704113654" y="1984.0" />
+      <point x="3831.6702704113654" y="1339.0" />
+      <point x="3782.8455445254604" y="1339.0" />
+      <point x="-33.57142857142844" y="212.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.controller.Check">
+      <point x="26.793103448275815" y="-409.5" />
+      <point x="1801.5257706257087" y="1824.0" />
+      <point x="1786.34473614295" y="1824.0" />
+      <point x="-72.0" y="222.5" />
+    </edge>
+    <edge source="schach.controller.ai.AiInterface" target="schach.controller.ai.Move">
+      <point x="-49.249999999999886" y="-123.5" />
+      <point x="2235.4459795962493" y="5245.0" />
+      <point x="2007.304095748861" y="5245.0" />
+      <point x="23.57142857142844" y="101.5" />
+    </edge>
+    <edge source="schach.model.Piece" target="schach.model.Board">
+      <point x="62.193548387096826" y="-321.5" />
+      <point x="1073.5343677467731" y="3991.0" />
+      <point x="1485.8795158030703" y="3991.0" />
+      <point x="1485.8795158030703" y="2973.0" />
+      <point x="1718.616000510766" y="2973.0" />
+      <point x="-56.11666666666679" y="409.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardComputer" target="schach.controller.ai.AiInterface">
+      <point x="-1.1368683772161603E-13" y="-222.5" />
+      <point x="2225.6876462629157" y="5953.0" />
+      <point x="2279.2793129295824" y="5953.0" />
+      <point x="2279.2793129295824" y="5756.0" />
+      <point x="2301.112646262916" y="5756.0" />
+      <point x="16.41666666666663" y="123.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardHuman" target="schach.view.GameScreen">
+      <point x="61.0" y="91.5" />
+      <point x="235.0" y="6488.0" />
+      <point x="2249.7590748343446" y="6488.0" />
+      <point x="2249.7590748343446" y="7025.0" />
+      <point x="2503.741631778493" y="7025.0" />
+      <point x="-98.35714285714289" y="-871.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.PlayerInput" target="schach.model.Piece">
+      <point x="-75.66666666666652" y="-200.5" />
+      <point x="1569.5660005107663" y="4764.0" />
+      <point x="1071.5908193596765" y="4764.0" />
+      <point x="60.25" y="321.5" />
+    </edge>
+    <edge source="schach.model.Pawn" target="schach.model.Square">
+      <point x="-128.18181818181802" y="-222.5" />
+      <point x="1156.2823681341379" y="3396.0" />
+      <point x="219.86600496277902" y="3396.0" />
+      <point x="219.86600496277902" y="479.0" />
+      <point x="1109.9253777390254" y="479.0" />
+      <point x="-33.23076923076928" y="189.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardComputer" target="schach.model.Square">
+      <point x="166.79999999999984" y="-222.5" />
+      <point x="2392.4876462629154" y="5983.0" />
+      <point x="4002.8175036008674" y="5983.0" />
+      <point x="4002.8175036008674" y="399.0" />
+      <point x="1235.463839277487" y="399.0" />
+      <point x="92.30769230769238" y="189.5" />
+    </edge>
+    <edge source="schach.view.LastMoveController" target="schach.view.ChessBoardHuman">
+      <point x="-111.375" y="-233.5" />
+      <point x="2509.187646262916" y="6478.0" />
+      <point x="296.0" y="6478.0" />
+      <point x="122.0" y="91.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.HumanVsComputer" target="schach.controller.ai.SimpleAi">
+      <point x="76.44444444444434" y="-135.5" />
+      <point x="1837.2416145168838" y="5963.0" />
+      <point x="2400.966000510766" y="5963.0" />
+      <point x="-70.125" y="58.5" />
+    </edge>
+    <edge source="schach.model.Square" target="schach.model.Piece">
+      <point x="-55.38461538461547" y="189.5" />
+      <point x="1087.7715315851792" y="449.0" />
+      <point x="196.93300248138962" y="449.0" />
+      <point x="196.93300248138962" y="4041.0" />
+      <point x="910.276303230644" y="4041.0" />
+      <point x="-101.06451612903243" y="-321.5" />
+    </edge>
+    <edge source="schach.controller.Check" target="schach.model.Pawn">
+      <point x="72.0" y="222.5" />
+      <point x="1930.34473614295" y="1954.0" />
+      <point x="3588.3788752103483" y="1954.0" />
+      <point x="3588.3788752103483" y="3406.0" />
+      <point x="1387.0096408614104" y="3406.0" />
+      <point x="102.5454545454545" y="-222.5" />
+    </edge>
+    <edge source="schach.model.Rook" target="schach.model.Piece">
+      <point x="65.3125" y="102.5" />
+      <point x="3000.1326194956796" y="774.0" />
+      <point x="3688.416973096889" y="774.0" />
+      <point x="3688.416973096889" y="4041.0" />
+      <point x="1112.4053354887087" y="4041.0" />
+      <point x="101.0645161290322" y="-321.5" />
+    </edge>
+    <edge source="schach.controller.ai.BoardValueNode" target="schach.controller.ai.Move">
+      <point x="90.33333333333326" y="-200.5" />
+      <point x="2016.5660005107661" y="5265.0" />
+      <point x="1983.7326671774326" y="5265.0" />
+      <point x="0.0" y="101.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardComputer" target="schach.controller.ai.MinMaxAi">
+      <point x="-83.40000000000009" y="-222.5" />
+      <point x="2142.2876462629156" y="5943.0" />
+      <point x="2071.7743338440996" y="5943.0" />
+      <point x="48.75" y="47.5" />
+    </edge>
+    <edge source="schach.model.PieceState" target="schach.model.Square">
+      <point x="-47.5" y="-134.5" />
+      <point x="375.2543332640662" y="794.0" />
+      <point x="419.1645359204804" y="794.0" />
+      <point x="419.1645359204804" y="489.0" />
+      <point x="1117.3099931236409" y="489.0" />
+      <point x="-25.84615384615381" y="189.5" />
+    </edge>
+    <edge source="schach.view.GuiMain" target="schach.view.StartMenu">
+      <point x="177.0588235294116" y="-190.5" />
+      <point x="2942.657598165047" y="10111.0" />
+      <point x="3392.906396262916" y="10111.0" />
+      <point x="3392.906396262916" y="8938.0" />
+      <point x="3509.124631463147" y="8938.0" />
+      <point x="89.25" y="530.5" />
+    </edge>
+    <edge source="schach.model.Pawn" target="schach.model.Rook">
+      <point x="128.18181818181802" y="-222.5" />
+      <point x="1412.646004497774" y="3416.0" />
+      <point x="3654.0943924517273" y="3416.0" />
+      <point x="3654.0943924517273" y="794.0" />
+      <point x="2947.8826194956796" y="794.0" />
+      <point x="13.0625" y="102.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.Input" target="schach.model.Pawn">
+      <point x="-31.625" y="-145.5" />
+      <point x="1352.6076671774329" y="3951.0" />
+      <point x="1354.9641863159559" y="3951.0" />
+      <point x="70.5" y="222.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.PieceState">
+      <point x="-62.517241379310235" y="-409.5" />
+      <point x="1712.2154257981226" y="1924.0" />
+      <point x="631.9511337383419" y="1924.0" />
+      <point x="631.9511337383419" y="1319.0" />
+      <point x="504.18290469263775" y="1319.0" />
+      <point x="81.42857142857156" y="134.5" />
+    </edge>
+    <edge source="schach.controller.ai.AiInterface" target="schach.model.Piece">
+      <point x="-82.08333333333326" y="-123.5" />
+      <point x="2202.612646262916" y="5255.0" />
+      <point x="1023.3908193596766" y="5255.0" />
+      <point x="12.049999999999955" y="321.5" />
+    </edge>
+    <edge source="schach.controller.ai.AiInterface" target="schach.model.Square">
+      <point x="82.08333333333337" y="-123.5" />
+      <point x="2366.7793129295824" y="5285.0" />
+      <point x="3995.432888216252" y="5285.0" />
+      <point x="3995.432888216252" y="409.0" />
+      <point x="1228.0792238928716" y="409.0" />
+      <point x="84.9230769230769" y="189.5" />
+    </edge>
+    <edge source="schach.model.BoardState" target="schach.model.PieceState">
+      <point x="-80.5" y="-189.5" />
+      <point x="371.0200992555833" y="1339.0" />
+      <point x="422.7543332640662" y="1339.0" />
+      <point x="0.0" y="134.5" />
+    </edge>
+    <edge source="schach.model.PieceState" target="schach.model.Piece">
+      <point x="-54.28571428571422" y="134.5" />
+      <point x="368.46861897835197" y="1319.0" />
+      <point x="245.17591279688077" y="1319.0" />
+      <point x="245.17591279688077" y="4001.0" />
+      <point x="941.3730774241925" y="4001.0" />
+      <point x="-69.9677419354839" y="-321.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardController" target="schach.model.Square">
+      <point x="-136.28571428571433" y="-541.5" />
+      <point x="1921.8755603499212" y="8928.0" />
+      <point x="11.0" y="8928.0" />
+      <point x="11.0" y="409.0" />
+      <point x="1058.2330700467178" y="409.0" />
+      <point x="-84.9230769230769" y="189.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Piece">
+      <point x="-103.71428571428578" y="101.5" />
+      <point x="1142.8803513793805" y="2004.0" />
+      <point x="970.8084686077736" y="2004.0" />
+      <point x="970.8084686077736" y="3921.0" />
+      <point x="1003.5666258112893" y="3921.0" />
+      <point x="-7.774193548387075" y="-321.5" />
+    </edge>
+    <edge source="schach.Main" target="schach.view.GuiMain">
+      <point x="22.0" y="-37.5" />
+      <point x="1778.7386555880162" y="10542.0" />
+      <point x="2765.5987746356354" y="10542.0" />
+      <point x="0.0" y="190.5" />
+    </edge>
+    <edge source="schach.view.GameScreen" target="schach.view.CemeteryController">
+      <point x="76.5" y="-871.5" />
+      <point x="2678.5987746356354" y="7035.0" />
+      <point x="2956.906396262916" y="7035.0" />
+      <point x="-35.75" y="90.5" />
+    </edge>
+    <edge source="schach.controller.ai.BoardValueNode" target="schach.model.Square">
+      <point x="120.44444444444434" y="-200.5" />
+      <point x="2046.6771116218772" y="5275.0" />
+      <point x="3988.048272831637" y="5275.0" />
+      <point x="3988.048272831637" y="419.0" />
+      <point x="1220.6946085082564" y="419.0" />
+      <point x="77.53846153846166" y="189.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Positioning">
+      <point x="-26.793103448275815" y="-409.5" />
+      <point x="1747.939563729157" y="1884.0" />
+      <point x="1281.1660656650947" y="1884.0" />
+      <point x="34.57142857142844" y="101.5" />
+    </edge>
+    <edge source="schach.model.Board" target="schach.model.Rook">
+      <point x="71.44827586206884" y="-409.5" />
+      <point x="1846.1809430395017" y="1974.0" />
+      <point x="2039.7757706257087" y="1974.0" />
+      <point x="2039.7757706257087" y="794.0" />
+      <point x="2921.7576194956796" y="794.0" />
+      <point x="-13.0625" y="102.5" />
+    </edge>
+    <edge source="schach.model.King" target="schach.model.Board">
+      <point x="0.0" y="212.5" />
+      <point x="3816.416973096889" y="1329.0" />
+      <point x="3840.601304894124" y="1329.0" />
+      <point x="3840.601304894124" y="1994.0" />
+      <point x="1864.043012005019" y="1994.0" />
+      <point x="89.31034482758605" y="-409.5" />
+    </edge>
+    <edge source="schach.controller.interfaces.HumanVsComputer" target="schach.model.Pawn">
+      <point x="-57.333333333333485" y="-135.5" />
+      <point x="1703.463836739106" y="5943.0" />
+      <point x="1521.2326671774329" y="5943.0" />
+      <point x="1521.2326671774329" y="3951.0" />
+      <point x="1401.9641863159559" y="3951.0" />
+      <point x="117.5" y="222.5" />
+    </edge>
+    <edge source="schach.view.ChessBoardComputer" target="schach.model.Piece">
+      <point x="-166.80000000000007" y="-222.5" />
+      <point x="2058.887646262916" y="5913.0" />
+      <point x="1001.3908193596766" y="5913.0" />
+      <point x="1001.3908193596766" y="4754.0" />
+      <point x="975.1908193596763" y="4754.0" />
+      <point x="-36.15000000000009" y="321.5" />
+    </edge>
+    <edge source="schach.controller.ai.BoardValueNode" target="schach.model.Piece">
+      <point x="-120.44444444444434" y="-200.5" />
+      <point x="1805.7882227329885" y="5275.0" />
+      <point x="1012.3908193596766" y="5275.0" />
+      <point x="1012.3908193596766" y="4744.0" />
+      <point x="999.2908193596764" y="4744.0" />
+      <point x="-12.049999999999955" y="321.5" />
+    </edge>
+    <edge source="schach.model.Positioning" target="schach.model.Square">
+      <point x="0.0" y="-101.5" />
+      <point x="1246.5946370936663" y="1309.0" />
+      <point x="1599.9137016601915" y="1309.0" />
+      <point x="1599.9137016601915" y="509.0" />
+      <point x="1154.2330700467178" y="509.0" />
+      <point x="11.076923076923094" y="189.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="1844.6666666666656" y="9842.666666666666" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>project without tests</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
