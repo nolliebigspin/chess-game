@@ -70,7 +70,7 @@ public class BoardValueNode {
                 String[] denot = move.moveAsString().split("-");
                 board.movePiece(denot[0], denot[1]);
                 BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
-                int minmaxValue = boardValueNode.minmax(maxDepth);
+                int minmaxValue = boardValueNode.minmax(maxDepth, -10000, 10000);
                 System.out.println(move.moveAsString() + "   " + minmaxValue);
                 if (minmaxValue >= bestValue){
                     if (minmaxValue > bestValue){
@@ -87,7 +87,7 @@ public class BoardValueNode {
                 String[] denot = move.moveAsString().split("-");
                 board.movePiece(denot[0], denot[1]);
                 BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
-                int minmaxValue = boardValueNode.minmax(maxDepth);
+                int minmaxValue = boardValueNode.minmax(maxDepth, -10000, 10000);
                 System.out.println(move.moveAsString() + "   " + minmaxValue);
                 if (minmaxValue <= bestValue){
                     if (minmaxValue < bestValue){
@@ -128,7 +128,7 @@ public class BoardValueNode {
      * @param depth the maximum search depth
      * @return minmax value of the current node
      */
-    public int minmax(int depth){
+    public int minmax(int depth, int alpha, int beta){
         if (moves.size() == 0){ //== checkmate
             if (whitesTurn){
                 return -1000;
@@ -139,15 +139,19 @@ public class BoardValueNode {
         if (depth == 0){
             return value;
         }
-        /*if (whitesTurn){
+        if (whitesTurn){
             int maxVal = -10000;
             for (Move move: moves){
                 String[] denot = move.moveAsString().split("-");
                 board.movePiece(denot[0], denot[1]);
                 BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
-                int val = boardValueNode.minmax(depth - 1);
+                int val = boardValueNode.minmax(depth - 1, alpha, beta);
                 maxVal = Math.max(maxVal, val);
                 board.loadState(board.getStates().size() - 2);
+                alpha = Math.max(alpha, val);
+                /*if (beta <= alpha){
+                    break;
+                }*/
             }
             return maxVal;
         } else {
@@ -156,13 +160,18 @@ public class BoardValueNode {
                 String[] denot = move.moveAsString().split("-");
                 board.movePiece(denot[0], denot[1]);
                 BoardValueNode boardValueNode = new BoardValueNode(board, !whitesTurn, move);
-                int val = boardValueNode.minmax(depth - 1);
+                int val = boardValueNode.minmax(depth - 1, alpha, beta);
                 minEval = Math.min(minEval, val);
                 board.loadState(board.getStates().size() - 2);
+                beta = Math.min(beta, val);
+                /*if (beta <= alpha){
+                    break;
+                }*/
             }
             return minEval;
-        }*/
-        List<Integer> values = new ArrayList<>();
+        }
+
+        /*List<Integer> values = new ArrayList<>();
         for (Move move: moves){
             String[] denot = move.moveAsString().split("-");
             board.movePiece(denot[0], denot[1]);
@@ -175,7 +184,7 @@ public class BoardValueNode {
             return Collections.max(values);
         } else {
             return Collections.min(values);
-        }
+        }*/
     }
 
     /**

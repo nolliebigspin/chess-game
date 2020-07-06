@@ -240,7 +240,14 @@ public class Board {
         }
         moveCount++;
         Piece p = squareByDenotation(startingPos).getOccupier();
-        squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
+        try {
+            squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
+        } catch (Exception e) {
+            e.printStackTrace();
+            printBoard();
+            System.out.println(startingPos + "-" + targetPos);
+        }
+
         updateAllLegalSquares();
 
         if (p.isValidMove()){

@@ -140,6 +140,7 @@ public abstract class Piece {
      * Refuses invalid moves and prints Error Message
      */
     protected void refuseMove(){
+        board.printBoard();
         validMove = false;
         System.out.println("!Move not allowed");
     }
