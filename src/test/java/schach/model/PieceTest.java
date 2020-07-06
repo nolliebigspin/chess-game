@@ -127,26 +127,6 @@ class PieceTest {
         assertEquals(expected, actual);
     }
 
-
-    @Test
-    void refuseMoveTest() {
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outContent));
-        Board testBoard = new Board();
-        testBoard.addPiece(pawn, "a3", true);
-        testBoard.addPiece(king, "a8", true);
-        testBoard.addPiece(king, "h1", false);
-        Pawn p = new Pawn(testBoard.getSquare(1,3),true,testBoard);
-        p.updateLegals();
-
-        p.move(testBoard.getSquare(1,2));
-        //p.updateLegals();
-        assertEquals("!Move not allowed\r\n", outContent.toString());
-        System.setOut(originalOut);
-    }
-
-
     @Test
     void getPositionTest(){
          Board testBoard = new Board();
