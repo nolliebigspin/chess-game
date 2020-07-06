@@ -393,7 +393,6 @@ public class Board {
                 }
             }
         }
-        printBoard();
     }
 
     public List<Piece> getCemetery() {
