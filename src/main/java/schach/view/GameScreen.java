@@ -2,9 +2,6 @@ package schach.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -337,10 +334,12 @@ public class GameScreen {
             Constants.LANGUAGE = new Locale("de", "DE");
         }
         this.bundle = ResourceBundle.getBundle("Language", Constants.LANGUAGE);
-        //this.lastMoveController.update();
         this.initializeComponents();
     }
 
+    /**
+     * Initializes the components
+     */
     public void initializeComponents(){
         this.undo.setText(this.bundle.getString("key.undoMove"));
         this.forward.setText(this.bundle.getString("key.redoMove"));

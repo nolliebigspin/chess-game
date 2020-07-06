@@ -28,7 +28,6 @@ public class ChessBoardHuman extends ChessBoardController{
         if (isPromotion(toBeMoved)){
             showPromotion(toBeMoved.isWhite());
         } else {
-            this.togglePlayer(start.getDenotation(),target.getDenotation() );
             rotateGame();
         }
         printBoard();
@@ -51,22 +50,6 @@ public class ChessBoardHuman extends ChessBoardController{
         rotateGame();
     }
 
-    private void togglePlayer(String start, String target){
-        String playerName = "";
-        if (this.gameScreen.getPlayers().get(0).isActive()) {
-            playerName = this.gameScreen.getPlayers().get(0).getName();
-        } else {
-            playerName = this.gameScreen.getPlayers().get(1).getName();
-        }
-        this.gameScreen.getLastMoveController().saveMove(board,playerName,start+"-"+target);
-        if (this.gameScreen.getPlayers().get(0).isActive()) {
-            this.gameScreen.getPlayers().get(0).setActive(false);
-            this.gameScreen.getPlayers().get(1).setActive(true);
-        } else {
-            this.gameScreen.getPlayers().get(0).setActive(true);
-            this.gameScreen.getPlayers().get(1).setActive(false);
-        }
-    }
 
     @Override
     public void undo(int index) {

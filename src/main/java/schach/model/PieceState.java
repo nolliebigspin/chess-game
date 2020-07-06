@@ -7,8 +7,6 @@ public class PieceState {
 
     private Piece piece;
 
-    private int moveCount;
-
     private Square position;
 
     private boolean neverMoved;
@@ -22,7 +20,6 @@ public class PieceState {
      */
     public PieceState(Piece piece, int moveCount){
         this.piece = piece;
-        this.moveCount = moveCount;
         this.position = piece.getPosition();
         this.neverMoved = piece.isNeverMoved();
         if (piece instanceof Pawn){

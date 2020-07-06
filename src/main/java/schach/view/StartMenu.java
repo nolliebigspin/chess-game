@@ -8,6 +8,7 @@ import schach.model.Constants;
 import schach.model.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -65,7 +66,7 @@ public class StartMenu {
     private Boolean player1isWhite;
     private Boolean simpleAi;
     private GuiMain guiMain;
-    private ArrayList<Player> players;
+    private List<Player> players;
     /**
      * Constructor setting Game Mode Booleans true
      */
@@ -212,15 +213,16 @@ public class StartMenu {
         Player playerTwo;
         if(this.player1isWhite){
             playerOne = new Player(this.player1, "White");
-            if(this.vsPlayer)
+            if(this.vsPlayer){
                 playerTwo = new Player(this.player2, "Black");
-            else {
+            } else {
                 playerTwo = new Player("CPU", "Black");
             }
         }else{
             playerOne = new Player(this.player1, "Black");
-            if(this.vsPlayer)
+            if(this.vsPlayer){
                 playerTwo = new Player(this.player2, "White");
+            }
             else{
                 playerTwo = new Player("CPU", "White");
             }
@@ -247,6 +249,9 @@ public class StartMenu {
         this.initializeComponents();
     }
 
+    /**
+     * inits the components
+     */
     public void initializeComponents(){
         this.toggleButtonSimple.setText(this.bundle.getString("key.simpleAI"));
         this.toggleButtonMinMax.setText(this.bundle.getString("key.minMaxAI"));

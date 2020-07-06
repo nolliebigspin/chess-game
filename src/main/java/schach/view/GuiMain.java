@@ -3,7 +3,6 @@ package schach.view;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,9 +12,6 @@ import javafx.stage.Stage;
 import schach.model.Constants;
 import schach.model.Player;
 
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -69,7 +65,6 @@ public class GuiMain extends Application {
         stage.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                double factor = stage.getWidth()/initWidth;
                 setStageHeight(initHeight*(stage.getWidth()/initWidth));
             }
         });
@@ -89,7 +84,7 @@ public class GuiMain extends Application {
     }
 
     // initialize the game screen listener for window resizing
-    private void initGameScreenListener(Pane container){
+    private void initGameScreenListener(){
         double initWidth = 1160;
         double initHeight = 800;
         stage.widthProperty().addListener(new ChangeListener<Number>() {
@@ -134,10 +129,6 @@ public class GuiMain extends Application {
         menuBar.setPrefWidth(stage.getWidth());
     }
 
-    private void setStageWidth(double width){
-        stage.setWidth(width);
-    }
-
     private void setStageHeight(double height){
         stage.setHeight(height);
     }
@@ -179,7 +170,7 @@ public class GuiMain extends Application {
         }
         lastMoveController.setBoardController(boardController);
         gameScreen.setBoardController(boardController);
-        initGameScreenListener(new Pane());
+        initGameScreenListener();
         boardController.setClock(clockController);
     }
 
