@@ -1,7 +1,6 @@
 package schach.controller.ai;
 
 import schach.model.Board;
-import schach.model.BoardState;
 
 /**
  * AI that generates its next move by using the min max algorithm

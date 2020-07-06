@@ -1,56 +1,34 @@
 package schach.view;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
-import schach.model.Board;
 
-import java.util.ArrayList;
 
+/**
+ * Class to control the list of moves on the gui
+ */
 public class LastMoveController {
 
-    private Pane containerPane;
-    private TableView<Step> lastMoveTable;
-    private ArrayList<Board> boards;
     private TableColumn playerColumn;
     private TableColumn moveCollumn;
     private TableColumn timeCollumn;
-    private Timeline timeline;
-    private static final Integer STARTTIME = 15;
-    private Integer timeSeconds = STARTTIME;
-    ObservableList<Step> data = FXCollections.observableArrayList();
-    ObservableList<Step> storedData = FXCollections.observableArrayList();
 
     private ListView historyList;
     private GameScreen gameScreen;
     private ChessBoardController boardController;
 
-
+    /**
+     * Constructor initializing the fields
+     * @param containerPane the Pane containing all gui elements
+     * @param gameScreen the fxml controller for the scene
+     */
     public LastMoveController(Pane containerPane, GameScreen gameScreen){
-        this.containerPane = containerPane;
-        this.boards = new ArrayList<>();
-
-
-
         this.historyList = (ListView) containerPane.lookup("#historyList");
         this.gameScreen = gameScreen;
         this.historyList.setOnMouseClicked(listViewHandler());
-
-        this.lastMoveTable = (TableView)this.containerPane.lookup("#lasMoveTable");
-        Button undo = (Button)this.containerPane.lookup("#undo");
-        Button forward = (Button)this.containerPane.lookup("#forward");
-        //undo.setOnAction(undoHandler());
-        //forward.setOnAction(forwardHandler());
         this.playerColumn =new TableColumn("Player");
         this.moveCollumn =new TableColumn("Move");
         this.timeCollumn =new TableColumn("Timer");
@@ -60,8 +38,6 @@ public class LastMoveController {
                 new PropertyValueFactory<>("move"));
         this.timeCollumn.setCellValueFactory(
                 new PropertyValueFactory<>("time"));
-        this.lastMoveTable.getColumns().addAll(this.playerColumn,this.moveCollumn, this.timeCollumn);
-        this.lastMoveTable.setItems(this.data);
 
     }
 
@@ -99,49 +75,7 @@ public class LastMoveController {
 
 
 
-    public void saveMove(Board board,String playerName, String move){
-        Step step = new Step(playerName, move, "00,00");
-        this.data.add(step);
-        this.boards.add(board);
-    }
 
-
-    public static class Step {
-
-        private final SimpleStringProperty playerName;
-        private final SimpleStringProperty move;
-        private final SimpleStringProperty time;
-        private Step(String playerName,  String  move, String time) {
-            this.playerName = new SimpleStringProperty(playerName);
-            this.move = new SimpleStringProperty(move);
-            this.time = new SimpleStringProperty(time);
-        }
-
-        public String getPlayerName() {
-            return playerName.get();
-        }
-
-        public void setPlayerName(String name) {
-            playerName.set(name);
-        }
-
-        public String getMove() {
-            return move.get();
-        }
-
-        public void setMove(String step) {
-            move.set(step);
-        }
-
-        public void setTime(String t){
-            time.set(t);
-        }
-
-        public String getTime(){
-            return time.get();
-        }
-
-    }
 
 
 

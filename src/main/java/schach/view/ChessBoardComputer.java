@@ -1,13 +1,11 @@
 package schach.view;
 
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import schach.controller.ai.AiInterface;
 import schach.controller.ai.MinMaxAi;
-import schach.controller.ai.Move;
 import schach.controller.ai.SimpleAi;
 import schach.model.Piece;
 import schach.model.Square;
@@ -107,7 +105,6 @@ public class ChessBoardComputer extends ChessBoardController{
         String aiMove = ai.getNextMove();
         String[] squares = aiMove.split("-");
         board.movePiece(squares[0], squares[1]);
-        this.togglePlayer(squares[0], squares[1]);
         //runLater to address JavaFX application Thread
         Platform.runLater(new Runnable() {
             @Override
@@ -146,7 +143,6 @@ public class ChessBoardComputer extends ChessBoardController{
         } else {
             promHistory.add(0, false);
         }
-        this.togglePlayer(start.getDenotation(),target.getDenotation() );
         gameScreen.getCemeteryController().updateCemetery(this);
         inMove = false;
         if (showIsCheck && board.getCheck().kingInCheck(!whitesTurn)) {
@@ -207,33 +203,6 @@ public class ChessBoardComputer extends ChessBoardController{
     @Override
     protected boolean correctTurn(Piece clickedPiece) {
         return clickedPiece.isWhite() == whitesTurn && clickedPiece.isWhite() == playerIsWhite;
-    }
-
-    private void togglePlayer(String start,String target){
-        String playerName = "";
-        if(this.gameScreen.getPlayers().get(0).isActive())
-            playerName = this.gameScreen.getPlayers().get(0).getName();
-        else{
-            playerName = this.gameScreen.getPlayers().get(1).getName();
-        }
-        this.gameScreen.getLastMoveController().saveMove(board,playerName,start+"-"+target);
-        if(this.gameScreen.getPlayers().get(0).isActive()){
-            this.gameScreen.getPlayers().get(0).setActive(false);
-            this.gameScreen.getPlayers().get(1).setActive(true);
-        }else{
-            this.gameScreen.getPlayers().get(0).setActive(true);
-            this.gameScreen.getPlayers().get(1).setActive(false);
-        }
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                updateCemetry();
-            }
-        });
-    }
-
-    private void updateCemetry(){
-        gameScreen.getCemeteryController().updateCemetery(this);
     }
 
     @Override

@@ -4,7 +4,6 @@ import schach.controller.Check;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Class Board representing the chess board
@@ -241,13 +240,7 @@ public class Board {
         }
         moveCount++;
         Piece p = squareByDenotation(startingPos).getOccupier();
-        try {
-            squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
-        } catch (Exception e) {
-            e.printStackTrace();
-            printBoard();
-            System.out.println(startingPos + "-" + targetPos);
-        }
+        squareByDenotation(startingPos).getOccupier().move(squareByDenotation(targetPos));
 
         updateAllLegalSquares();
 

@@ -11,13 +11,22 @@ import javafx.scene.text.Font;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
+
+/**
+ * Class to control the cemetery output on gui
+ */
 public class CemeteryController {
 
     private final GridPane gridPane;
 
-    private ArrayList<Label> deadPieces;
+    private List<Label> deadPieces;
 
+    /**
+     * Constructor initializing the fields
+     * @param containerPane
+     */
     public CemeteryController(Pane containerPane){
         this.deadPieces = new ArrayList<>();
         this.gridPane = (GridPane) containerPane.lookup("#cemeteryGridPane");
@@ -43,6 +52,10 @@ public class CemeteryController {
         }
     }
 
+    /**
+     * updates the cemetery output on the gui
+     * @param chessBoardController
+     */
     public void updateCemetery(ChessBoardController chessBoardController){
         for(int i = 0; i<chessBoardController.board.getCemetery().size();i++){
             Image image = chessBoardController.unicodeToImage(chessBoardController.board.getCemetery().get(i));
