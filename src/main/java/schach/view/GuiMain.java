@@ -111,7 +111,7 @@ public class GuiMain extends Application {
     // this method will align the lastMove pane accordingly when the window is resized
     private void centerLastMoves(double ratio){
         Pane chessBoardPane = (Pane) gameScreenContainerPane.lookup("#controllerContainerPane");
-        double initXpos = 834;
+        double initXpos = 864;
         chessBoardPane.setLayoutX(initXpos*ratio);
     }
 

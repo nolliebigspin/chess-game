@@ -255,7 +255,7 @@
                 </Text>
             </children>
         </Pane>
-        <Pane fx:id="controllerContainerPane" layoutX="834.0" layoutY="113.0" prefHeight="506.0" prefWidth="264.0" style="-fx-border-insets: 2,2,2,2; -fx-border-style: solid; -fx-border-radius: 20;">
+        <Pane fx:id="controllerContainerPane" layoutX="864.0" layoutY="113.0" prefHeight="506.0" prefWidth="264.0" style="-fx-border-insets: 2,2,2,2; -fx-border-style: solid; -fx-border-radius: 20;">
             <children>
                 <Label fx:id="lastMoveLabel" alignment="CENTER" layoutX="27.0" layoutY="27.0" prefHeight="39.0" prefWidth="193.0" text="%key.lastMoves" textAlignment="CENTER">
                     <font>
