@@ -149,9 +149,9 @@ public class BoardValueNode {
                 maxVal = Math.max(maxVal, val);
                 board.loadState(board.getStates().size() - 2);
                 alpha = Math.max(alpha, val);
-                /*if (beta <= alpha){
+                if (beta <= alpha){
                     break;
-                }*/
+                }
             }
             return maxVal;
         } else {
@@ -164,9 +164,9 @@ public class BoardValueNode {
                 minEval = Math.min(minEval, val);
                 board.loadState(board.getStates().size() - 2);
                 beta = Math.min(beta, val);
-                /*if (beta <= alpha){
+                if (beta <= alpha){
                     break;
-                }*/
+                }
             }
             return minEval;
         }
